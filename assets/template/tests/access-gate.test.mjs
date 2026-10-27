@@ -20,7 +20,7 @@ test('anonymous visitors see the PIN page and cannot access scripts or protected
     assert.ok(!html.includes(env.ACCESS_PIN));
     assert.equal(response.headers.get('Cache-Control'), 'no-store');
   }
-  assert.equal((await worker.fetch(new Request(origin + '/api/maas', {method:'POST'}), env)).status, 401);
+  assert.equal((await worker.fetch(new Request(origin + '/api/example', {method:'POST'}), env)).status, 401);
 });
 
 test('PIN login rejects wrong credentials and foreign origins, then issues a signed HttpOnly cookie', async () => {

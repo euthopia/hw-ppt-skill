@@ -53,9 +53,13 @@ npm run export:html
 npm run export:pdf -- --lang zh
 npm run export:pdf -- --lang en
 npm run export -- --lang both
+npm run export:html -- --slides "1,3-5,thank-you"
+npm run export:pdf -- --lang en --slides "1,3-5,thank-you"
 # 可选输出目录或已有浏览器，路径含空格时加引号
 npm run export -- --lang both --output-dir "dist/my exports" --browser-executable /usr/bin/chromium
 node tools/export.cjs --help
 ```
 
 命令会重新读取 deck.json 并生成页面，再导出。HTML 始终保留中英切换与交互，PDF 为指定语言的完整静态页面，不保留交互；致谢页等设计为双语的内容保留其双语版式；`--lang` 只控制 PDF。CLI 使用独立浏览器上下文，导出 deck.json 中的全部页面，不受日常浏览器屏蔽设置影响。PDF 临时本地服务自动启动和关闭，不需要手动起服务器，也不读取或修改任何托管配置。可通过 BROWSER_EXECUTABLE、PYTHON_EXECUTABLE 指定本机可执行文件。中文 PDF 需要系统有可用中文字体。
+
+`--slides` 可混用 1 起始页码、升序范围和稳定页面 ID，按填写顺序输出，重复项只保留第一次；空选项、越界和未知 ID 会报错。选页在临时副本中生成独立项目，未选页面从输出中移除，页码重新连续编号；原 deck.json 和预览网页不变。未指定时仍导出全稿。

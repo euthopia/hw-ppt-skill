@@ -2,6 +2,7 @@
 const {chromium}=require('playwright');
 const assert=require('node:assert/strict');
 const fs=require('node:fs');
+const {contactSheet}=require('../tools/contact-sheet.cjs');
 (async()=>{
  const browser=await chromium.launch({headless:true,...(process.env.BROWSER_EXECUTABLE?{executablePath:process.env.BROWSER_EXECUTABLE}:{})});
  const page=await browser.newPage({viewport:{width:1600,height:1000}});const errors=[];
@@ -22,7 +23,8 @@ const fs=require('node:fs');
      if(footer&&body&&body.getBoundingClientRect().bottom>footer.getBoundingClientRect().top-8*scale)bad.push('body overlaps footer');
      for(const el of slide.querySelectorAll('h1,h2,h3,p,.kit-layer span,.kit-table td,.kit-table th,.kit-metrics b,.kit-note')){
       if(!el.getClientRects().length)continue;
-      if(el.scrollWidth>el.clientWidth+2||el.scrollHeight>el.clientHeight+2)bad.push('text overflow: '+el.textContent);
+      // Font ascenders can exceed a tight line box when overflow is visible, without clipping.
+      if(el.scrollWidth>el.clientWidth+2||(el.scrollHeight>el.clientHeight+2&&getComputedStyle(el).overflowY!=='visible'))bad.push('text overflow: '+el.textContent);
       const range=document.createRange();range.selectNodeContents(el);if(range.getBoundingClientRect().right>edge+2)bad.push('outside slide: '+el.textContent);
       if(footer&&!el.closest('.slide-header')&&range.getBoundingClientRect().bottom>footer.getBoundingClientRect().top-8*scale)bad.push('text crosses footer: '+el.textContent);
      }
@@ -64,10 +66,19 @@ const fs=require('node:fs');
   await page.locator('#deck > .slide.active [data-flow-replay]').click();
   await page.keyboard.press('Home');await page.waitForTimeout(2500);assert.equal(await workflow.locator('.flow-current').count(),0);
  }
+ await page.setViewportSize({width:1600,height:1000});
+ await page.emulateMedia({reducedMotion:'reduce'});
+ await page.addStyleTag({content:'#controls,dialog,.toast{visibility:hidden!important}'});
+ fs.mkdirSync('qa/slides',{recursive:true});
  for(const lang of ['zh','en']){
   await page.evaluate(lang=>DeckI18n.setLanguage(lang),lang);
-  await page.evaluate(()=>{location.hash='#slide=2'});await page.waitForTimeout(60);
-  await page.screenshot({path:`qa/template-${lang}.png`});
+  const shots=[];
+  for(let i=1;i<=count;i++){
+   await page.evaluate(i=>{location.hash='#slide='+i},i);await page.waitForTimeout(60);
+   const image=await page.locator('#deck').screenshot({path:`qa/slides/${lang}-${String(i).padStart(2,'0')}.png`});
+   shots.push({image,title:await page.locator('#deck>.active').evaluate(s=>window.DeckI18n?.t(s.dataset.title)||s.dataset.title)});
+  }
+  await contactSheet(browser,shots,`qa/contact-${lang}.png`);
  }
  await page.emulateMedia({media:'print'});await page.waitForTimeout(100);
  assert.equal(await page.locator('#deck .flow-current').count(),0);

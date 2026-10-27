@@ -34,7 +34,7 @@ npx playwright install chromium
 DECK_URL=http://127.0.0.1:8798/index.html npm run test:browser
 ```
 
-可设置 `BROWSER_EXECUTABLE` 指向已有 Chromium。浏览器检查覆盖双语、三种视口、目录、翻页、动效暂停/完整展示、离页停止、减少动态效果和打印。截图输出到 `qa/`；浏览器检查验证打印样式但不生成 PDF。
+可设置 `BROWSER_EXECUTABLE` 指向已有 Chromium。浏览器检查覆盖双语、三种视口、目录、翻页、动效暂停/完整展示、离页停止、减少动态效果和打印。逐页中英截图输出到 `qa/slides/`，全稿总览为 `qa/contact-zh.png` 和 `qa/contact-en.png`；浏览器检查验证打印样式但不生成 PDF。
 
 ## 一键导出
 
@@ -46,6 +46,8 @@ npm run export:pdf -- --lang zh
 npm run export:pdf -- --lang en
 npm run export -- --lang both
 ```
+
+加 `--slides "1,3-5,thank-you"` 可按页码、范围或稳定 ID 选页，按参数顺序去重输出且不改原稿，HTML/PDF 都支持。
 
 文件写入 dist/exports/；`--output-dir "目标目录"` 可改变位置。HTML 保留交互与双语切换；PDF 是指定语言的静态全页内容，忽略日常浏览器中的屏蔽设置。PDF 首次需安装 Playwright 与 Chromium（同浏览器检查），脚本自动启动并关闭本地预览服务，无需 Agent 重写代码。`node tools/export.cjs --help` 查看参数；可使用 BROWSER_EXECUTABLE 指定已有 Chromium，PYTHON_EXECUTABLE 指定 Python。
 

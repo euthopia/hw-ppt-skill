@@ -16,5 +16,13 @@ try{
   assert.equal(pdf.subarray(0,5).toString(),'%PDF-');
   assert.equal([...pdf.toString('latin1').matchAll(/\/Type\s*\/Page\b/g)].length,deck.slides.length,'PDF page count must match deck');
  }
+ const selected=path.join(directory,'selected');
+ const before=fs.readFileSync('content/deck.json','utf8');
+ const spec=deck.slides.length>1?`${deck.slides.length},1`:'1';
+ execFileSync(process.execPath,['tools/export.cjs','all','--lang','en','--slides',spec,'--output-dir',selected],{stdio:'inherit'});
+ const expected=Math.min(2,deck.slides.length);
+ assert.equal([...fs.readFileSync(path.join(selected,'presentation.html'),'utf8').matchAll(/<section class="slide /g)].length,expected);
+ assert.equal([...fs.readFileSync(path.join(selected,'presentation-en.pdf')).toString('latin1').matchAll(/\/Type\s*\/Page\b/g)].length,expected);
+ assert.equal(fs.readFileSync('content/deck.json','utf8'),before);
  console.log('PASS: CLI exports one self-contained HTML and both PDFs with the expected page count.');
 }finally{fs.rmSync(directory,{recursive:true,force:true});}

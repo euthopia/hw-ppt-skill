@@ -27,3 +27,5 @@ DECK_URL=http://127.0.0.1:8798/index.html node tests/browser-check.cjs
 页面选择检查：`npm run test:visibility`，同样需要 Playwright、本地 HTTP 服务和 DECK_URL。覆盖本地保存、刷新、双语往返、手机控件、取消与恢复、最少一页、目录/章节/直接链接、打印及同源项目隔离。
 
 仅在明确要求导出或验证导出能力时，运行 `npm run test:export:html` 检查 HTML；需要 PDF 时安装 Playwright 和 Chromium 并执行 `npm run test:export`，验证单文件 HTML、中文和英文 PDF 页数与内容配置一致。不需要人工修改导出脚本，也不生成 Cloudflare 产物。
+
+浏览器检查会保存 `qa/slides/zh-01.png`、`qa/slides/en-01.png` 等逐页截图，以及 `qa/contact-zh.png`、`qa/contact-en.png` 全稿总览图。截图使用完整静态状态，隐藏浮动控件；不因此生成 HTML 或 PDF 导出文件。

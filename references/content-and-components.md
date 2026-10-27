@@ -70,9 +70,8 @@
 - scene-controller.js：步骤高亮、暂停、重播、完整显示、离页停止、减少动态效果和打印完整展示。与模板 js/scenes.js 使用相同契约，只加载其中一个。可用于代码检索、知识检索、角色协作和双列案例，具体步骤来自当前内容。
 - scenario-switcher.js：按 data-ops-choice/data-ops-panel 对应值手动切换场景，不自动轮换；流程动效另用 scene-controller.js。
 - recipes.css：通用价格表和场景切换样式；基础流程样式仍来自模板 components.css。
-- maas-stream.js / maas-console.js / deploy/shared/maas-proxy.mjs：可选的华为云 OpenAI 兼容流式 API 集成。没有默认模型、价格或 API Key；保留官方端点白名单。纯内容演示无需加载。启用时补全控制台 DOM、双语文字，并在 Worker 中经 PIN 检查后接入代理。
 
-真实 API Key 由演示者输入，不写入源码、内容、离线文件或部署配置。内部来源与核对记录写入新项目 docs/content-sources.md。
+特定业务的 API 交互由项目按需独立实现，不作为通用 Skill 的内置组件。内部来源与核对记录写入新项目 docs/content-sources.md。
 
 ## 可选封面背景
 

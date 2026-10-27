@@ -31,3 +31,17 @@ test('HTML export CLI accepts output paths with spaces and embeds every page',as
  }finally{await rm(directory,{recursive:true,force:true});}
 });
 
+test('selected HTML removes other slides and leaves source content and preview unchanged',async()=>{
+ const directory=await mkdtemp(path.join(tmpdir(),'selected-html-'));
+ try{
+  const source=await readFile('content/deck.json','utf8'),preview=await readFile('index.html','utf8');
+  const deck=JSON.parse(source),last=deck.slides.length;
+  execFileSync(process.execPath,['tools/export.cjs','html','--slides',`${last},1,${last}`,'--output-dir',directory]);
+  const html=await readFile(path.join(directory,'presentation.html'),'utf8');
+  const ids=[...html.matchAll(/<section class="slide [^>]*data-slide-id="([^"]+)"/g)].map(m=>m[1]);
+  assert.deepEqual(ids,[...new Set([deck.slides[last-1].id,deck.slides[0].id])]);
+  assert.equal(await readFile('content/deck.json','utf8'),source);
+  assert.equal(await readFile('index.html','utf8'),preview);
+ }finally{await rm(directory,{recursive:true,force:true});}
+});
+
