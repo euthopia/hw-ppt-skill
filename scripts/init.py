@@ -1,7 +1,7 @@
 """Copy a standalone starter into a new folder without touching another deck."""
 from pathlib import Path
 import argparse,json,re,shutil,subprocess,sys
-p=argparse.ArgumentParser();p.add_argument('destination',type=Path);p.add_argument('--id',required=True);p.add_argument('--title',default='产品介绍');p.add_argument('--title-en',default='Product presentation');p.add_argument('--starter',choices=['examples','blank'],default='examples');args=p.parse_args()
+p=argparse.ArgumentParser();p.add_argument('destination',type=Path);p.add_argument('--id',required=True);p.add_argument('--title',default='产品介绍');p.add_argument('--title-en',default='Product presentation');p.add_argument('--starter',choices=['examples','blank'],default='blank');args=p.parse_args()
 if not re.fullmatch(r'[a-z][a-z0-9-]{2,62}',args.id):p.error('--id must be a unique lowercase slug, 3–63 characters')
 target=args.destination.resolve()
 if target.exists():p.error('Destination already exists; choose a new folder')

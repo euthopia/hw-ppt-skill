@@ -1,5 +1,6 @@
 {
   "id": "blank-product-deck",
+  "runtimeVersion": "1.1.0",
   "title": {
     "zh": "产品名称",
     "en": "Product name"
@@ -8,49 +9,99 @@
   "footer": "HUAWEI CLOUD",
   "chapters": [
     {
-      "label": {
-        "zh": "概览",
-        "en": "Overview"
-      },
-      "section": {
-        "zh": "产品概览",
-        "en": "Product overview"
-      }
+      "label": { "zh": "概览", "en": "Overview" },
+      "section": { "zh": "产品概览", "en": "Product overview" }
+    },
+    {
+      "label": { "zh": "能力", "en": "Capabilities" },
+      "section": { "zh": "产品能力", "en": "Product capabilities" }
     }
   ],
   "slides": [
     {
       "type": "cover",
-      "title": {
-        "zh": "产品名称",
-        "en": "Product name"
-      },
-      "eyebrow": {
-        "zh": "企业产品介绍",
-        "en": "Enterprise product briefing"
-      },
+      "id": "cover",
+      "title": { "zh": "产品名称", "en": "Product name" },
+      "eyebrow": { "zh": "企业产品介绍", "en": "Enterprise product briefing" },
       "subtitle": {
-        "zh": "一句话介绍你的产品",
-        "en": "Introduce your product in one sentence"
+        "zh": "一句话说明面向谁、解决什么问题",
+        "en": "Who it serves and which problem it solves"
       },
       "tagline": "HUAWEI CLOUD",
-      "background": "云山",
-      "id": "cover"
+      "background": "云山"
     },
     {
-      "type": "custom",
-      "section": {
-        "zh": "产品概览",
-        "en": "Product overview"
+      "type": "cards",
+      "id": "value",
+      "section": { "zh": "产品概览", "en": "Product overview" },
+      "title": { "zh": "为什么选择它", "en": "Why choose it" },
+      "subtitle": {
+        "zh": "用客户能理解的结果组织价值",
+        "en": "Frame value in customer outcomes"
       },
-      "title": {
-        "zh": "页面标题",
-        "en": "Slide title"
+      "eyebrow": "PRODUCT VALUE",
+      "cards": [
+        {
+          "title": { "zh": "价值一", "en": "Value one" },
+          "body": { "zh": "待填写的客户结果", "en": "Customer outcome to supply" }
+        },
+        {
+          "title": { "zh": "价值二", "en": "Value two" },
+          "body": { "zh": "待填写的客户结果", "en": "Customer outcome to supply" }
+        },
+        {
+          "title": { "zh": "价值三", "en": "Value three" },
+          "body": { "zh": "待填写的客户结果", "en": "Customer outcome to supply" }
+        }
+      ]
+    },
+    {
+      "type": "architecture",
+      "id": "architecture",
+      "section": { "zh": "产品能力", "en": "Product capabilities" },
+      "title": { "zh": "能力分层", "en": "Capability layers" },
+      "subtitle": {
+        "zh": "用三到五层说明系统如何协作",
+        "en": "Explain how layers work together"
       },
-      "subtitle": "",
-      "eyebrow": "PRODUCT BRIEFING",
-      "fragment": "content/blank.html",
-      "id": "content"
+      "eyebrow": "ARCHITECTURE",
+      "layers": [
+        {
+          "label": { "zh": "体验层", "en": "Experience" },
+          "items": [
+            { "zh": "模块一", "en": "Module one" },
+            { "zh": "模块二", "en": "Module two" }
+          ]
+        },
+        {
+          "label": { "zh": "服务层", "en": "Services" },
+          "items": [
+            { "zh": "服务一", "en": "Service one" },
+            { "zh": "服务二", "en": "Service two" }
+          ]
+        },
+        {
+          "label": { "zh": "数据与基础设施", "en": "Data & infrastructure" },
+          "items": [
+            { "zh": "数据能力", "en": "Data capability" },
+            { "zh": "基础设施", "en": "Infrastructure" }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "closing",
+      "id": "thank-you",
+      "section": { "zh": "结束", "en": "Closing" },
+      "title": { "zh": "致谢", "en": "Thank You" },
+      "thanks": { "zh": "", "en": "Thank You" },
+      "visionLabel": "",
+      "vision": {
+        "zh": "把数字世界带入每个人、每个家庭、\n每个组织，构建万物互联的智能世界。",
+        "en": "Bring digital to every person, home and organization\nfor a fully connected, intelligent world."
+      },
+      "logo": "assets/huawei-logo.png",
+      "motion": "fade"
     }
   ]
 }

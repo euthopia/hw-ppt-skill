@@ -7,3 +7,7 @@ deploy/chatgpt-sites/dist/
 .env*
 .dev.vars*
 __pycache__/
+index.html
+js/config.js
+js/translations.js
+asset-manifest.json

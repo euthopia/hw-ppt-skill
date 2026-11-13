@@ -1,16 +1,17 @@
 {
   "name": "huawei-product-presentation",
-  "version": "1.0.0",
+  "version": "1.1.0",
+  "deckRuntime": "1.1.0",
   "private": true,
   "engines": {
     "node": ">=20"
   },
   "scripts": {
-    "generate": "python3 tools/render.py",
+    "generate": "node tools/python-cmd.cjs tools/render.py",
     "build": "npm run generate",
     "build:cloudflare": "npm run generate && node deploy/cloudflare/build.mjs",
-    "build:offline": "npm run generate && python3 tools/build.py",
-    "build:sites": "npm run generate && python3 deploy/chatgpt-sites/build.py",
+    "build:offline": "npm run generate && node tools/python-cmd.cjs tools/build.py",
+    "build:sites": "npm run generate && node tools/python-cmd.cjs deploy/chatgpt-sites/build.py",
     "dev:cloudflare": "npm run build:cloudflare && npx wrangler dev --config deploy/cloudflare/wrangler.json",
     "deploy:cloudflare": "npm run build:cloudflare && npx wrangler deploy --config deploy/cloudflare/wrangler.json",
     "test": "node --test tests/navigation.test.cjs tests/access-gate.test.mjs tests/build.test.mjs tests/selection.test.cjs",

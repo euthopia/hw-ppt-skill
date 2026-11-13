@@ -47,7 +47,11 @@
 | table | headers: [文字], rows: [[文字]], note | 2–6 列、1–6 行；套餐、容量、价格或对照 |
 | workflow | steps: [{title, body}], result | 3–5 步，自动轻量高亮 |
 | image | image, alt, caption, body | 本地 assets 图片 + 说明；不裁切产品图 |
-| custom | fragment, translations | content/name.html 片段，扩展架构或互动页面 |
+| custom | fragment, translations | content/name.html 片段，扩展架构或互动页面；禁止 `<script>`、内联事件与 `javascript:` |
+| pricing | rows, labels | 一等公民价格表；自动注入 pricing 脚本与 recipes.css |
+| scenarios | scenarios: [{id,label,body,bullets?}] | 一等公民手动场景切换；自动注入 scenario-switcher |
+
+可选 `cuts`：命名演示裁剪，例如 `"cuts": { "cio": { "label": {"zh":"CIO精简","en":"CIO cut"}, "hidden": ["price"] } }`，分享链接使用 `?cut=cio`。
 
 数据大小上限用于控制信息密度；短文本可使用上限，长文本仍需要拆页和实测。所有普通文本经过 HTML 转义，不会作为代码执行。
 
@@ -67,7 +71,7 @@
 
 - examples.html：通用定价容器、步骤流程和手动场景切换的 DOM 示例；所有正文都是占位文字。
 - pricing-table.js：调用 `DeckPricing.render(container, rows, labels)`。rows 使用 name/input/cacheInput/output；有缓存输入时在 input 右侧增加同字号列，没有缓存输入时省略该列。数值和单位由调用者提供，缺失值显示破折号。
-- scene-controller.js：步骤高亮、暂停、重播、完整显示、离页停止、减少动态效果和打印完整展示。与模板 js/scenes.js 使用相同契约，只加载其中一个。可用于代码检索、知识检索、角色协作和双列案例，具体步骤来自当前内容。
+- scene-controller.js：步骤高亮、暂停、重播、完整显示、离页停止、减少动态效果和打印完整展示。**规范源**是模板 `js/scenes.js`；本文件由 `python scripts/sync_scene_controller.py` 同步，契约相同，**只加载其中一个**。可用于代码检索、知识检索、角色协作和双列案例，具体步骤来自当前内容。
 - scenario-switcher.js：按 data-ops-choice/data-ops-panel 对应值手动切换场景，不自动轮换；流程动效另用 scene-controller.js。
 - recipes.css：通用价格表和场景切换样式；基础流程样式仍来自模板 components.css。
 

@@ -1,3 +1,4 @@
+/* Canonical scene controller for the sales briefing runtime. Sync to recipes via scripts/sync_scene_controller.py. Load this OR recipes/scene-controller.js — never both. */
 /* Content remains readable throughout. Only the active page animates. */
 (function () {
  'use strict';

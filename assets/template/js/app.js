@@ -4,6 +4,7 @@
   const slideKeys = slides.map(slide => slide.dataset.slideId || slide.dataset.title);
   const slideSections = slides.map(slide => slide.dataset.section);
   const visibilityKey = window.DeckConfig.id + '-hidden-pages-v1';
+  const hintKey = window.DeckConfig.id + '-presenter-hint-v1';
   let hiddenKeys = readHiddenKeys(), draftHidden = null;
   const hiddenIndices = keys => slideKeys.flatMap((key, index) => keys.has(key) ? [index] : []);
   const state = DeckNavigation.create(slides.map(s => Number(s.dataset.steps || 0)), hiddenIndices(hiddenKeys));
@@ -14,7 +15,19 @@
   let idleTimer, toastTimer, returnFocus;
   let pointerAtBottom = false, keyboardControls = false;
 
+  function cutHiddenKeys() {
+    try {
+      const cut = new URLSearchParams(location.search).get('cut');
+      const preset = cut && window.DeckConfig.cuts?.[cut];
+      if (!preset || !Array.isArray(preset.hidden)) return null;
+      const keys = new Set(preset.hidden.filter(key => slideKeys.includes(key)));
+      return keys.size && keys.size < slides.length ? keys : null;
+    } catch { return null; }
+  }
+
   function readHiddenKeys() {
+    const fromCut = cutHiddenKeys();
+    if (fromCut) return fromCut;
     try {
       const saved = JSON.parse(localStorage.getItem(visibilityKey));
       if (saved?.version !== 1 || !Array.isArray(saved.hidden)) return new Set();
@@ -123,7 +136,11 @@
       button.append(preview);
       const caption = document.createElement('div');
       caption.className = 'thumbnail-caption';
-      caption.innerHTML = `<b>${String(index + 1).padStart(2, '0')}</b><span>${slide.dataset.title}</span>`;
+      const indexEl = document.createElement('b');
+      indexEl.textContent = String(index + 1).padStart(2, '0');
+      const titleEl = document.createElement('span');
+      titleEl.textContent = slide.dataset.title || '';
+      caption.append(indexEl, titleEl);
       button.append(caption);
       if (editing || skipped) {
         const badge = document.createElement('span'); badge.className = 'thumbnail-selection'; badge.setAttribute('aria-hidden', 'true');
@@ -165,7 +182,11 @@
     });
     const slide = slides[state.index];
     byId('section-label').textContent = slide.dataset.section;
-    byId('page-counter').innerHTML = `${String(state.index + 1).padStart(2, '0')} <span>/ ${slides.length}</span>`;
+    const counter = byId('page-counter');
+    counter.replaceChildren(
+      document.createTextNode(`${String(visible.indexOf(state.index) + 1).padStart(2, '0')} `),
+      Object.assign(document.createElement('span'), { textContent: `/ ${visible.length}` })
+    );
     byId('progress').style.width = `${(visible.indexOf(state.index) + 1) / visible.length * 100}%`;
     byId('previous').disabled = !state.canPrevious();
     byId('next').disabled = !state.canNext();
@@ -183,7 +204,7 @@
     const hash = `#slide=${state.index + 1}`;
     try { if (location.hash !== hash) history.replaceState(null, '', hash); } catch { location.hash = hash; }
     try { localStorage.setItem(storageKey, JSON.stringify({ index: state.index, step: state.step })); } catch { /* Private browsers can still present. */ }
-    refreshThumbnails();
+    if (dialog.open) refreshThumbnails();
     document.dispatchEvent(new CustomEvent('deckpagechange', { detail: { index: state.index } }));
   }
   function move(direction) { direction > 0 ? state.next() : state.previous(); render(); wake(); }
@@ -251,7 +272,10 @@
     if (event.key !== visibilityKey && event.key !== null) return;
     hiddenKeys = readHiddenKeys(); state.setHidden(hiddenIndices(hiddenKeys)); render();
   });
-  document.addEventListener('decklanguagechange', refreshOverviewSettings);
+  document.addEventListener('decklanguagechange', () => {
+    if (dialog.open) refreshThumbnails();
+    else refreshOverviewSettings();
+  });
   document.addEventListener('keydown', event => {
     if (event.key === 'Tab' && !document.querySelector('dialog[open]')) {
       const wasHidden = !document.body.classList.contains('controls-visible');
@@ -286,4 +310,10 @@
   }
   render(); fit(); wake();
   document.fonts.ready.then(fit);
+  try {
+    if (!localStorage.getItem(hintKey)) {
+      localStorage.setItem(hintKey, '1');
+      toast('快捷键：← → 翻页 · G 目录 · F 全屏 · EN 语言');
+    }
+  } catch { /* ignore private mode */ }
 })();

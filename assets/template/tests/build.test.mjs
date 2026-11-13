@@ -4,8 +4,8 @@ import {readFile,writeFile,access,mkdtemp,mkdir,rm} from 'node:fs/promises';
 import {execFileSync} from 'node:child_process';
 import path from 'node:path';
 import {tmpdir} from 'node:os';
-const python=process.env.PYTHON_EXECUTABLE||'python3';
-execFileSync(python,['tools/render.py']);
+const pythonRunner=process.execPath;
+execFileSync(pythonRunner,['tools/python-cmd.cjs','tools/render.py']);
 test('local build includes page content and isolated storage without deployment output',async()=>{
  const data=JSON.parse(await readFile('content/deck.json','utf8'));
  const html=await readFile('index.html','utf8');
@@ -26,7 +26,8 @@ async function identityFixture() {
  await writeFile(path.join(root,'content/shell.html'),await readFile('content/shell.html'));
  const data={id:'identity-check',title:{zh:'标识检查',en:'Identity check'},slides:[{type:'cover',title:{zh:'页面一',en:'Page one'}},{type:'cover',title:{zh:'页面二',en:'Page two'}}]};
  await writeFile(path.join(root,'content/deck.json'),JSON.stringify(data));
- return {root,run:()=>execFileSync(python,['tools/render.py'],{cwd:root,stdio:'pipe'})};
+ await writeFile(path.join(root,'tools/python-cmd.cjs'),await readFile('tools/python-cmd.cjs'));
+ return {root,run:()=>execFileSync(pythonRunner,['tools/python-cmd.cjs','tools/render.py'],{cwd:root,stdio:'pipe'})};
 }
 test('generated page identities survive title changes, reordering and insertion',async()=>{
  const fixture=await identityFixture();

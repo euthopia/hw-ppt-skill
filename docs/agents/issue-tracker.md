@@ -2,7 +2,7 @@
 
 Issues and specs for this repo live as markdown files in `.scratch/`.
 
-GitHub Issues are **not** the active tracker until the public repo at `https://github.com/euthopia/huawei-product-slides` is created with a token that can push (no PATs in repo or chat).
+Public repo: `https://github.com/euthopia/hw-ppt-skill`. Prefer GitHub Issues there once publish auth is stable; until then keep local markdown under `.scratch/` (never store PATs in the repo or chat).
 
 ## Conventions
 

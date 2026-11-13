@@ -39,7 +39,7 @@
 Codex 用户级安装示例：
 
 ```sh
-git clone https://github.com/euthopia/huawei-product-slides.git ~/.agents/skills/huawei-product-slides
+git clone https://github.com/euthopia/hw-ppt-skill.git ~/.agents/skills/huawei-product-slides
 ```
 
 也可安装到项目的 `.agents/skills/huawei-product-slides/`。重新载入会话后，确认 `$huawei-product-slides` 可见。
@@ -72,10 +72,10 @@ npm test
 
 | 起始模板 | 内容 |
 | --- | --- |
-| `--starter blank` | 封面＋空白内容页，适合从自己的内容开始 |
+| `--starter blank` | 销售简报弧线：封面→价值卡片→能力指标→致谢 |
 | `--starter examples` | 六页组件示例，适合了解布局与流程组件 |
 
-主要编辑 `content/deck.json`，填入页面标题、正文及双语文本；自定义页面使用 `content/*.html`。生成器负责页码、目录、语言字典和页面骨架。字段与组件示例见 [内容与组件](references/content-and-components.md)。
+主要编辑 `content/deck.json`（JSON Schema：`assets/template/schemas/deck.schema.json`），填入页面标题、正文及双语文本；自定义页面使用 `content/*.html`。生成器负责页码、目录、语言字典、`runtimeVersion` 和页面骨架。字段与组件示例见 [内容与组件](references/content-and-components.md)。
 
 本地预览：
 

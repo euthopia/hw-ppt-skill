@@ -11,8 +11,8 @@ description: Create or update Huawei-branded bilingual HTML product presentation
 
 1. 第一次使用时告诉用户正在使用本 skill。读取 [设计规范](references/design.md)、[内容与组件](references/content-and-components.md)。需要发布时再读 [部署流程](references/deployment.md)。
 2. 从上下文获取产品名、受众、核心信息、语言和现有素材。能合理推断就继续，不要要求用户配置 CSS、组件或构建。内容不完整时先做明确占位的草稿，不编造价格、指标、可用性或功能。
-3. 新产品使用独立目录和唯一项目 ID。执行 `python3 <skill根目录>/scripts/init.py <新项目目录> --id <唯一slug> --title <产品标题> --starter blank`。`--starter blank` 提供封面＋空白内容页；需要组件示例时用 `--starter examples`。脚本复制完整可运行基础代码；不从原演示仓库动态下载依赖。更新已使用该 skill 的项目时继续其目录，不重新初始化覆盖文件。
-4. 主要修改新项目 `content/deck.json`。以受众任务和客户价值组织内容，每页一个重点；选择合适的布局。生成文件 `index.html`、`js/config.js`、`js/translations.js` 会重建，业务内容不能直接写在它们里面。
+3. 新产品使用独立目录和唯一项目 ID。执行 `python3 <skill根目录>/scripts/init.py <新项目目录> --id <唯一slug> --title <产品标题> --starter blank`。`--starter blank` 提供销售简报弧线（封面→价值卡片→能力指标→致谢）；需要组件示例时用 `--starter examples`。脚本复制完整可运行基础代码；不从原演示仓库动态下载依赖。更新已使用该 skill 的项目时继续其目录，不重新初始化覆盖文件。
+4. 主要修改新项目 `content/deck.json`（契约见 `assets/template/schemas/deck.schema.json`）。以受众任务和客户价值组织内容，每页一个重点；选择合适的布局。生成文件 `index.html`、`js/config.js`、`js/translations.js` 会重建，业务内容不能直接写在它们里面。`js/config.js` 含 `runtimeVersion`，用于日后模板同步（见 `docs/adr/0002-runtime-version-and-template-sync.md`）。
 5. 中英文用 `{ "zh": "中文", "en": "English" }`；英文表达允许调整句式以便阅读。公共骨架一致，英文样式在 `css/english.css` 单独适配。长文案先精简或拆页，不用过小字号压入方框。
 6. 从模板现有组件开始；自定义内容使用 `custom` 片段。复杂交互需要时参考 `assets/recipes/`，示例仅包含通用占位内容。价格、指标、套餐容量和案例使用当前项目资料。按需引入控制器。
 7. 执行 `npm run build` 和 `npm test`，通过本地 HTTP 服务运行 `npm run test:browser`。默认 build/test 只生成和检查多文件网页，不生成离线单文件、PDF 或部署目录。只有用户明确要求导出时才使用 `npm run export:html`、`npm run export:pdf -- --lang zh` 或 `npm run export -- --lang both`；只有缺少浏览器依赖时按说明安装一次，后续不需 Agent 修改代码。参考 [检查与交付](references/validation.md)，查看 qa/contact-zh.png、qa/contact-en.png 全稿总览和 qa/slides/ 中的逐页双语截图，修复文本超出、组件重叠和页脚距离。目录支持选择屏蔽页面并保存到当前浏览器，按项目 ID 隔离；所有翻页和章节跳转跳过屏蔽页，至少保留一页。页面 id 保持稳定，已有页面改标题或排序时不要修改 id。默认流程动效在进入页时运行，支持暂停、重播、完整显示；离页停止，目录与打印显示完整内容，尊重减少动态效果设置。
