@@ -39,7 +39,7 @@
 Codex 用户级安装示例：
 
 ```sh
-git clone https://github.com/Leon00x/huawei-product-slides.git ~/.agents/skills/huawei-product-slides
+git clone https://github.com/euthopia/huawei-product-slides.git ~/.agents/skills/huawei-product-slides
 ```
 
 也可安装到项目的 `.agents/skills/huawei-product-slides/`。重新载入会话后，确认 `$huawei-product-slides` 可见。
