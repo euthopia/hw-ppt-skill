@@ -20,7 +20,7 @@ Built for product introductions, architecture briefings, comparisons, packaging,
 ## Features
 
 - **Brand & layout** — Huawei logo, white stage, red accent `#c7000b`, 16:9 canvas, shared header/footer; Yunshan / Jinsha / mountain covers.
-- **Layout kit** — cover, cards, metrics, architecture, comparison, **scrollable tables**, workflow, image, pricing, scenarios, timeline, callouts, **agenda**, **quote**, **tabs**, custom, closing.
+- **Layout kit** — cover, cards, metrics, architecture, comparison, **before-after**, **scrollable tables**, workflow, image, pricing, scenarios, timeline, callouts, **agenda**, **quote**, **tabs**, custom, closing.
 - **Bilingual** — one-click ZH/EN, English typography sheet, remembered preference, bilingual TOC/controls.
 - **Presenter tools** — keyboard/touch nav, fullscreen, chapter jump, thumbnail TOC, position memory, **presenter notes** (`N` / `?presenter=1`), **shortcut cheat sheet** (`?`), **named sales cuts** (`?cut=cio`; unknown slide ids fail at generate).
 - **Slide hide** — TOC “hide slides” saved per project in the current browser; navigation skips hidden pages.

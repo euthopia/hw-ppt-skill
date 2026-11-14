@@ -84,6 +84,31 @@ test('agenda quote and tabs layouts render branded markup',()=>{
  }finally{rmSync(root,{recursive:true,force:true});}
 });
 
+test('before-after layout renders dual panels',()=>{
+ const {root,html,css}=renderFixture([{
+  type:'before-after',
+  title:bilingual('前后','Before after'),
+  before:{
+   label:bilingual('之前','Before'),
+   title:bilingual('旧态','Old state'),
+   body:bilingual('痛点说明','Pain body'),
+   bullets:[bilingual('痛点一','Pain one')]
+  },
+  after:{
+   label:bilingual('之后','After'),
+   title:bilingual('新态','New state'),
+   body:bilingual('收益说明','Gain body'),
+   bullets:[bilingual('收益一','Gain one')]
+  }
+ }]);
+ try{
+  assert.match(html,/class="kit-before-after"/);
+  assert.match(html,/data-ba-side="before"/);
+  assert.match(html,/data-ba-side="after"/);
+  assert.match(css,/kit-before-after/);
+ }finally{rmSync(root,{recursive:true,force:true});}
+});
+
 test('timeline and callouts layouts render branded markup',()=>{
  const {root,html}=renderFixture([
   {

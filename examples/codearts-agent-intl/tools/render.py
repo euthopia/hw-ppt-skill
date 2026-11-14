@@ -258,6 +258,28 @@ def layout_tabs(slide):
   '<div class="kit-tabs-panels">'+''.join(panels)+'</div></div>'
  )
 
+def layout_before_after_panel(panel,side,default_label):
+ label=text(panel.get('label',default_label))
+ body_html=f'<p>{text(panel["body"])}</p>' if panel.get('body') else ''
+ bullets_html=''
+ if panel.get('bullets'):
+  bullets_html='<ul>'+items(bounded(panel['bullets'],1,4,side+' bullets'),'li')+'</ul>'
+ return (
+  f'<article class="kit-ba-{side}" data-ba-side="{side}">'
+  f'<span class="kit-ba-label">{label}</span>'
+  f'<h3>{text(panel["title"])}</h3>{body_html}{bullets_html}</article>'
+ )
+
+def layout_before_after(slide):
+ before=slide['before']; after=slide['after']
+ return (
+  '<div class="kit-before-after" data-controller="before-after">'
+  +layout_before_after_panel(before,'before',{'zh':'之前','en':'Before'})
+  +'<div class="kit-ba-divider" aria-hidden="true"><span>→</span></div>'
+  +layout_before_after_panel(after,'after',{'zh':'之后','en':'After'})
+  +'</div>'
+ )
+
 def layout_cover(slide):
  backgrounds={'原山景':'assets/mountains.jpg','云山':'assets/yunshan.png','金沙':'assets/jinsha.png'}
  background=slide.get('background','原山景')
@@ -311,6 +333,7 @@ for _kind,_fn in (
  ('agenda',layout_agenda),
  ('quote',layout_quote),
  ('tabs',layout_tabs),
+ ('before-after',layout_before_after),
 ):
  register_layout(_kind,_fn)
 

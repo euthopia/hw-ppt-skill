@@ -55,6 +55,7 @@
 | agenda | items: [{label, time?}] | 2–8 条议程；可选时长 |
 | quote | quote, attribution, role? | 客户证言 / 证明页 |
 | tabs | tabs: [{id?, label, body, bullets?}] | 2–5 个页签；一等公民手动切换（自动注入 tabs.js） |
+| before-after | before / after: {label?, title, body?, bullets?} | 静态前后对照；打印与 PPTX 友好（区别于 comparison / tabs） |
 
 可选 `cuts`：命名演示裁剪，例如 `"cuts": { "cio": { "label": {"zh":"CIO精简","en":"CIO cut"}, "hidden": ["price"] } }`，分享链接使用 `?cut=cio`。生成器会校验 `hidden` 中的 slide id 必须存在；未知 id 直接失败，避免静默丢页。
 

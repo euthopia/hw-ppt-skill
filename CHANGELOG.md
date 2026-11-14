@@ -3,6 +3,16 @@
 All notable changes to the Huawei product briefing runtime are documented here.
 Format follows a lightweight Keep-a-Changelog style. HTML remains the system of record; PPTX is Office interop.
 
+## 1.3.1 — 2026-11-14
+
+### Added
+
+- Layout: first-class `before-after` (static Before → After panels; schema + CSS + PPTX + tests). Complements `comparison` and interactive `tabs`.
+
+### Skipped (intentional)
+
+- GitHub Issues migration blocked until euthopia publish auth is safe (see `AGENTS.md`).
+
 ## 1.3.0 — 2026-11-14
 
 ### Added
@@ -28,7 +38,7 @@ Format follows a lightweight Keep-a-Changelog style. HTML remains the system of 
 
 ### Skipped (intentional)
 
-- `before-after` layout deferred in favor of `tabs`.
+- `before-after` layout was deferred in 1.3.0 (shipped in 1.3.1).
 - GitHub Issues migration blocked until euthopia publish auth is safe (see `AGENTS.md`).
 
 ## 1.2.1 — 2026-11-14

@@ -228,6 +228,15 @@ def slide_lines(slide: dict, lang: str) -> list[str]:
             lines.append(f'{pick(tab.get("label"), lang)} — {pick(tab.get("body"), lang)}')
             for b in tab.get('bullets') or []:
                 lines.append(f'  • {pick(b, lang)}')
+    elif kind == 'before-after':
+        for side, default in (('before', 'Before'), ('after', 'After')):
+            panel = slide.get(side) or {}
+            label = pick(panel.get('label'), lang) or default
+            lines.append(f'{label}: {pick(panel.get("title"), lang)}')
+            if panel.get('body'):
+                lines.append(pick(panel['body'], lang))
+            for b in panel.get('bullets') or []:
+                lines.append(f'  • {pick(b, lang)}')
     elif kind == 'closing':
         return lines
     elif kind == 'custom':

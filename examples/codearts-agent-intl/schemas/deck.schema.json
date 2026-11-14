@@ -105,6 +105,29 @@
       "type": "string",
       "pattern": "^[a-z][a-z0-9-]{0,62}$"
     },
+    "beforeAfterPanel": {
+      "type": "object",
+      "required": [
+        "title"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "label": {
+          "$ref": "#/$defs/text"
+        },
+        "title": {
+          "$ref": "#/$defs/text"
+        },
+        "body": {
+          "$ref": "#/$defs/text"
+        },
+        "bullets": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 4
+        }
+      }
+    },
     "slideBase": {
       "type": "object",
       "required": [
@@ -719,6 +742,30 @@
                       }
                     }
                   }
+                }
+              }
+            }
+          ]
+        },
+        {
+          "allOf": [
+            {
+              "$ref": "#/$defs/slideBase"
+            },
+            {
+              "required": [
+                "before",
+                "after"
+              ],
+              "properties": {
+                "type": {
+                  "const": "before-after"
+                },
+                "before": {
+                  "$ref": "#/$defs/beforeAfterPanel"
+                },
+                "after": {
+                  "$ref": "#/$defs/beforeAfterPanel"
                 }
               }
             }
