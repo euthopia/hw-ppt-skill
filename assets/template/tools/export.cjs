@@ -8,6 +8,7 @@ const os=require('node:os');
 const crypto=require('node:crypto');
 const {selectSlides}=require('./slide-selection.cjs');
 const root=path.resolve(__dirname,'..');
+const pythonCmd=path.join(__dirname,'python-cmd.cjs');
 
 function options(args){
  const out={format:'all',lang:'zh',directory:path.join(root,'dist/exports'),browser:process.env.BROWSER_EXECUTABLE};
@@ -18,15 +19,16 @@ function options(args){
   if(!key||!args[i+1]||args[i+1].startsWith('--'))throw Error('Invalid option: '+args[i]+'. Use --help.');
   out[key]=args[++i];
  }
- if(!['html','pdf','all'].includes(out.format))throw Error('Format must be html, pdf or all.');
+ if(!['html','pdf','pptx','all'].includes(out.format))throw Error('Format must be html, pdf, pptx or all.');
  if(!['zh','en','both'].includes(out.lang))throw Error('--lang must be zh, en or both.');
  out.directory=path.resolve(out.directory);return out;
 }
-function run(script,project=root){
- const result=spawnSync(process.env.PYTHON_EXECUTABLE||'python3',[script],{cwd:project,stdio:'inherit'});
+function runPython(scriptArgs,project=root){
+ const result=spawnSync(process.execPath,[pythonCmd,...scriptArgs],{cwd:project,stdio:'inherit'});
  if(result.error)throw Error('Cannot run Python. Set PYTHON_EXECUTABLE to your Python 3 executable.');
- if(result.status!==0)throw Error('Build failed: '+script);
+ if(result.status!==0)throw Error('Build failed: '+scriptArgs.join(' '));
 }
+function run(script,project=root){runPython([script],project);}
 async function pdfs(html,opt){
  let chromium;
  try{({chromium}=require('playwright'));}
@@ -65,9 +67,23 @@ async function pdfs(html,opt){
   finally{await new Promise(resolve=>server.close(resolve));}
  }
 }
+function pptx(project,opt){
+ const langs=opt.lang==='both'?['zh','en']:[opt.lang];
+ for(const lang of langs){
+  const file=path.join(opt.directory,`presentation-${lang}.pptx`);
+  runPython(['tools/export_pptx.py','--lang',lang,'--output',file,'--deck',path.join(project,'content/deck.json')],project);
+ }
+}
 async function main(){
  const opt=options(process.argv.slice(2));
- if(!opt){process.stdout.write('Usage: node tools/export.cjs [html|pdf|all] [--lang zh|en|both] [--slides 1,3-5,thank-you] [--output-dir DIR] [--browser-executable PATH]\nHTML keeps both languages; --lang selects PDF language(s). Default: all pages, all formats, zh, dist/exports.\n');return;}
+ if(!opt){
+  process.stdout.write(
+   'Usage: node tools/export.cjs [html|pdf|pptx|all] [--lang zh|en|both] [--slides 1,3-5,thank-you] [--output-dir DIR] [--browser-executable PATH]\n'+
+   'HTML keeps both languages; --lang selects PDF/PPTX language(s). Default: all pages, html+pdf, zh, dist/exports.\n'+
+   'PPTX needs python-pptx (pip install python-pptx). HTML remains the interactive system of record.\n'
+  );
+  return;
+ }
  let project=root,temporary;
  try{
  if(opt.slides!==undefined){
@@ -80,8 +96,12 @@ async function main(){
   for(const dir of ['tools','content','js','css','assets'])fs.cpSync(path.join(root,dir),path.join(project,dir),{recursive:true});
   fs.writeFileSync(path.join(project,'content/deck.json'),JSON.stringify(deck,null,2));
  }
- run('tools/render.py',project);run('tools/build.py',project);
  fs.mkdirSync(opt.directory,{recursive:true});
+ if(opt.format==='pptx'){
+  pptx(project,opt);
+  return;
+ }
+ run('tools/render.py',project);run('tools/build.py',project);
  const source=path.join(project,'dist/offline/presentation.html');
  if(opt.format!=='pdf'){
   const file=path.join(opt.directory,'presentation.html');

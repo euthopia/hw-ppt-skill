@@ -11,7 +11,8 @@
 | Cloudflare Worker | npm run build:cloudflare → deploy/cloudflare/dist/public | 受 PIN 保护的在线网页 |
 | Sites ESM Worker | npm run build:sites → deploy/chatgpt-sites/dist/server/index.js | 支持 ESM Worker/Secret 的 Sites 宿主 |
 | PDF | npm run export:pdf -- --lang en → dist/exports/presentation-en.pdf | 静态阅读，所有动效节点完整显示 |
-| HTML + 双语 PDF | npm run export -- --lang both → dist/exports/ | 一次执行，不需要修改脚本 |
+| 可编辑 PPTX | npm run export:pptx -- --lang zh → dist/exports/presentation-zh.pptx | Office 互通；需 `pip install python-pptx`；HTML 仍是交互 SoR |
+| HTML + 双语 PDF | npm run export -- --lang both → dist/exports/ | 一次执行，不需要修改脚本（默认不含 PPTX） |
 
 ## Cloudflare 操作
 
@@ -52,6 +53,7 @@ npx playwright install chromium
 npm run export:html
 npm run export:pdf -- --lang zh
 npm run export:pdf -- --lang en
+npm run export:pptx -- --lang zh
 npm run export -- --lang both
 npm run export:html -- --slides "1,3-5,thank-you"
 npm run export:pdf -- --lang en --slides "1,3-5,thank-you"
@@ -60,6 +62,6 @@ npm run export -- --lang both --output-dir "dist/my exports" --browser-executabl
 node tools/export.cjs --help
 ```
 
-命令会重新读取 deck.json 并生成页面，再导出。HTML 始终保留中英切换与交互，PDF 为指定语言的完整静态页面，不保留交互；致谢页等设计为双语的内容保留其双语版式；`--lang` 只控制 PDF。CLI 使用独立浏览器上下文，导出 deck.json 中的全部页面，不受日常浏览器屏蔽设置影响。PDF 临时本地服务自动启动和关闭，不需要手动起服务器，也不读取或修改任何托管配置。可通过 BROWSER_EXECUTABLE、PYTHON_EXECUTABLE 指定本机可执行文件。中文 PDF 需要系统有可用中文字体。
+PPTX 为软依赖：`pip install python-pptx`。命令会重新读取 deck.json；HTML/PDF 先渲染页面再导出，PPTX 直接从 deck.json 生成可编辑稿。HTML 始终保留中英切换与交互，PDF 为指定语言的完整静态页面，不保留交互；致谢页等设计为双语的内容保留其双语版式；`--lang` 控制 PDF/PPTX。CLI 使用独立浏览器上下文，导出 deck.json 中的全部页面，不受日常浏览器屏蔽设置影响。PDF 临时本地服务自动启动和关闭，不需要手动起服务器，也不读取或修改任何托管配置。可通过 BROWSER_EXECUTABLE、PYTHON_EXECUTABLE 指定本机可执行文件。中文 PDF 需要系统有可用中文字体。
 
 `--slides` 可混用 1 起始页码、升序范围和稳定页面 ID，按填写顺序输出，重复项只保留第一次；空选项、越界和未知 ID 会报错。选页在临时副本中生成独立项目，未选页面从输出中移除，页码重新连续编号；原 deck.json 和预览网页不变。未指定时仍导出全稿。

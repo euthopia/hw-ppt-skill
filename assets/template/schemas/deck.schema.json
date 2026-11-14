@@ -307,10 +307,96 @@
                 "rows": {
                   "type": "array",
                   "minItems": 1,
-                  "maxItems": 6
+                  "maxItems": 12
                 },
                 "note": {
                   "$ref": "#/$defs/text"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "allOf": [
+            {
+              "$ref": "#/$defs/slideBase"
+            },
+            {
+              "required": [
+                "events"
+              ],
+              "properties": {
+                "type": {
+                  "const": "timeline"
+                },
+                "events": {
+                  "type": "array",
+                  "minItems": 2,
+                  "maxItems": 8,
+                  "items": {
+                    "type": "object",
+                    "required": [
+                      "when",
+                      "title"
+                    ],
+                    "additionalProperties": false,
+                    "properties": {
+                      "when": {
+                        "$ref": "#/$defs/text"
+                      },
+                      "title": {
+                        "$ref": "#/$defs/text"
+                      },
+                      "body": {
+                        "$ref": "#/$defs/text"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        },
+        {
+          "allOf": [
+            {
+              "$ref": "#/$defs/slideBase"
+            },
+            {
+              "required": [
+                "items"
+              ],
+              "properties": {
+                "type": {
+                  "const": "callouts"
+                },
+                "items": {
+                  "type": "array",
+                  "minItems": 2,
+                  "maxItems": 4,
+                  "items": {
+                    "type": "object",
+                    "required": [
+                      "title",
+                      "body"
+                    ],
+                    "additionalProperties": false,
+                    "properties": {
+                      "tone": {
+                        "enum": [
+                          "info",
+                          "warn",
+                          "accent"
+                        ]
+                      },
+                      "title": {
+                        "$ref": "#/$defs/text"
+                      },
+                      "body": {
+                        "$ref": "#/$defs/text"
+                      }
+                    }
+                  }
                 }
               }
             }

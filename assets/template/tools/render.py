@@ -76,11 +76,36 @@ def layout_comparison(slide):
  return '<div class="kit-compare">'+''.join('<article><span class="kit-index">'+text(c.get('kicker',''))+'</span><h3>'+text(c['title'])+'</h3><p>'+text(c['summary'])+'</p><ul>'+items(bounded(c['bullets'],1,4,'comparison bullets'),'li')+'</ul></article>' for c in columns)+'</div>'
 
 def layout_table(slide):
- headers=bounded(slide['headers'],2,6,'table columns'); rows=bounded(slide['rows'],1,6,'table rows')
+ headers=bounded(slide['headers'],2,6,'table columns'); rows=bounded(slide['rows'],1,12,'table rows')
  for row in rows:
   if len(row)!=len(headers):raise ValueError('Every table row must match the header count')
  note=('<div class="kit-note">'+text(slide['note'])+'</div>') if slide.get('note') else ''
- return '<table class="kit-table"><thead><tr>'+items(headers,'th')+'</tr></thead><tbody>'+''.join('<tr>'+items(row,'td')+'</tr>' for row in rows)+'</tbody></table>'+note
+ table=('<div class="kit-table-scroll"><table class="kit-table"><thead><tr>'+items(headers,'th')+'</tr></thead><tbody>'
+  +''.join('<tr>'+items(row,'td')+'</tr>' for row in rows)+'</tbody></table></div>')
+ return table+note
+
+def layout_timeline(slide):
+ events=bounded(slide['events'],2,8,'timeline events')
+ parts=[]
+ for i,event in enumerate(events):
+  parts.append(
+   f'<article data-timeline-step="{i}"><div class="kit-timeline-when">{text(event["when"])}</div>'
+   f'<div><h3>{text(event["title"])}</h3><p>{text(event.get("body",""))}</p></div></article>'
+  )
+ return '<div class="kit-timeline">'+''.join(parts)+'</div>'
+
+def layout_callouts(slide):
+ items_data=bounded(slide['items'],2,4,'callouts')
+ tones={'info','warn','accent'}
+ parts=[]
+ for i,item in enumerate(items_data):
+  tone=item.get('tone','info')
+  if tone not in tones:raise ValueError('Callout tone must be info, warn, or accent')
+  parts.append(
+   f'<article class="kit-callout" data-callout-tone="{tone}"><span class="kit-index">{i+1:02}</span>'
+   f'<h3>{text(item["title"])}</h3><p>{text(item["body"])}</p></article>'
+  )
+ return '<div class="kit-callouts">'+''.join(parts)+'</div>'
 
 def layout_workflow(slide):
  steps=bounded(slide['steps'],3,5,'workflow steps')
@@ -139,6 +164,8 @@ for _kind,_fn in (
  ('architecture',layout_architecture),
  ('comparison',layout_comparison),
  ('table',layout_table),
+ ('timeline',layout_timeline),
+ ('callouts',layout_callouts),
  ('workflow',layout_workflow),
  ('image',layout_image),
  ('custom',layout_custom),

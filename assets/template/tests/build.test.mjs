@@ -15,7 +15,7 @@ test('local build includes page content and isolated storage without deployment 
 });
 test('export CLI offers help and rejects unsupported languages',()=>{
  const help=execFileSync(process.execPath,['tools/export.cjs','--help'],{encoding:'utf8'});
- assert.match(help,/html\|pdf\|all/);
+ assert.match(help,/html\|pdf\|pptx\|all/);
  assert.throws(()=>execFileSync(process.execPath,['tools/export.cjs','pdf','--lang','invalid'],{stdio:'pipe'}),error=>/--lang must be/.test(String(error.stderr)));
 });
 

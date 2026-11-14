@@ -44,7 +44,9 @@
 | metrics | metrics: [{value, label, body}] | 2–4 个面向客户的指标，写明单位和条件 |
 | architecture | layers: [{label, items: [文字]}] | 3–5 层，每层 1–4 个模块 |
 | comparison | columns: [{kicker, title, summary, bullets}] | 2 列，每列 1–4 项，比较相同维度 |
-| table | headers: [文字], rows: [[文字]], note | 2–6 列、1–6 行；套餐、容量、价格或对照 |
+| table | headers: [文字], rows: [[文字]], note | 2–6 列、1–12 行；可滚动粘性表头；套餐、容量、价格或对照 |
+| timeline | events: [{when, title, body}] | 2–8 个里程碑；销售节奏 / 落地路径 |
+| callouts | items: [{tone, title, body}] | 2–4 个要点；tone 为 info / warn / accent |
 | workflow | steps: [{title, body}], result | 3–5 步，自动轻量高亮 |
 | image | image, alt, caption, body | 本地 assets 图片 + 说明；不裁切产品图 |
 | custom | fragment, translations | content/name.html 片段，扩展架构或互动页面；禁止 `<script>`、内联事件与 `javascript:` |

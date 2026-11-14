@@ -386,6 +386,121 @@
         "en": "Task → Workflow → Outcome: connect capabilities with customer value through one example."
       },
       "id": "workflow"
+    },
+    {
+      "type": "timeline",
+      "section": {
+        "zh": "方案与套餐",
+        "en": "Solutions & plans"
+      },
+      "title": {
+        "zh": "落地节奏示例",
+        "en": "Sample delivery timeline"
+      },
+      "subtitle": {
+        "zh": "用里程碑说明发现 → 方案 → 交付",
+        "en": "Milestones from discovery to delivery"
+      },
+      "events": [
+        {
+          "when": {
+            "zh": "第 1 周",
+            "en": "Week 1"
+          },
+          "title": {
+            "zh": "发现与对齐",
+            "en": "Discover & align"
+          },
+          "body": {
+            "zh": "确认场景、干系人与成功标准。",
+            "en": "Confirm scenarios, stakeholders and success criteria."
+          }
+        },
+        {
+          "when": {
+            "zh": "第 2–3 周",
+            "en": "Weeks 2–3"
+          },
+          "title": {
+            "zh": "方案设计",
+            "en": "Solution design"
+          },
+          "body": {
+            "zh": "完成架构、集成与验收要点。",
+            "en": "Lock architecture, integrations and acceptance points."
+          }
+        },
+        {
+          "when": {
+            "zh": "第 4 周",
+            "en": "Week 4"
+          },
+          "title": {
+            "zh": "试点交付",
+            "en": "Pilot delivery"
+          },
+          "body": {
+            "zh": "上线试点并复盘可复制能力。",
+            "en": "Ship the pilot and capture reusable outcomes."
+          }
+        }
+      ],
+      "notes": {
+        "zh": "按客户实际节奏改写周次；保持 3–5 个里程碑。",
+        "en": "Rewrite week numbers for the account; keep 3–5 milestones."
+      },
+      "id": "timeline"
+    },
+    {
+      "type": "callouts",
+      "section": {
+        "zh": "方案与套餐",
+        "en": "Solutions & plans"
+      },
+      "title": {
+        "zh": "会前需要记住的三点",
+        "en": "Three points to remember before the meeting"
+      },
+      "subtitle": {
+        "zh": "信息 / 注意 / 行动，避免堆砌口号",
+        "en": "Info / caution / action — no slogan stacking"
+      },
+      "items": [
+        {
+          "tone": "info",
+          "title": {
+            "zh": "客户现状",
+            "en": "Customer context"
+          },
+          "body": {
+            "zh": "用一句话说明当前流程与痛点。",
+            "en": "State the current workflow and pain in one sentence."
+          }
+        },
+        {
+          "tone": "warn",
+          "title": {
+            "zh": "风险边界",
+            "en": "Risk boundary"
+          },
+          "body": {
+            "zh": "只承诺已确认的能力与交付范围。",
+            "en": "Commit only to confirmed capabilities and scope."
+          }
+        },
+        {
+          "tone": "accent",
+          "title": {
+            "zh": "下一步",
+            "en": "Next step"
+          },
+          "body": {
+            "zh": "约定试点场景、责任人与复盘时间。",
+            "en": "Agree the pilot scenario, owner and review date."
+          }
+        }
+      ],
+      "id": "callouts"
     }
   ]
 }
