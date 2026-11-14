@@ -1,0 +1,196 @@
+{
+  "id": "codearts-agent-intl",
+  "runtimeVersion": "1.3.0",
+  "title": {
+    "zh": "CodeArts Agent",
+    "en": "CodeArts Agent"
+  },
+  "brandLabel": "HUAWEI CLOUD",
+  "footer": {
+    "zh": "CodeArts Agent · 国际简介",
+    "en": "CodeArts Agent · International briefing"
+  },
+  "chapters": [
+    {
+      "label": { "zh": "定位", "en": "Positioning" },
+      "section": { "zh": "产品定位", "en": "Product positioning" }
+    },
+    {
+      "label": { "zh": "价值", "en": "Value" },
+      "section": { "zh": "客户价值", "en": "Customer value" }
+    },
+    {
+      "label": { "zh": "方式", "en": "How" },
+      "section": { "zh": "工作方式", "en": "How it works" }
+    }
+  ],
+  "cuts": {
+    "exec": {
+      "label": { "zh": "高管精简", "en": "Executive cut" },
+      "hidden": ["workflow"]
+    }
+  },
+  "slides": [
+    {
+      "type": "cover",
+      "id": "cover",
+      "section": { "zh": "产品定位", "en": "Product positioning" },
+      "title": {
+        "zh": "CodeArts Agent",
+        "en": "CodeArts Agent"
+      },
+      "eyebrow": {
+        "zh": "华为云 · 国际产品简介",
+        "en": "HUAWEI CLOUD · International product briefing"
+      },
+      "subtitle": {
+        "zh": "面向全球研发团队的 AI 软件交付助手：从意图到可合并变更，缩短交付路径。",
+        "en": "An AI software-delivery assistant for global engineering teams—from intent to merge-ready change, with less friction in the SDLC."
+      },
+      "tagline": "HUAWEI CLOUD · CODEARTS",
+      "background": "云山",
+      "notes": {
+        "zh": "开场强调国际买家语境：研发效能、工具链协同、企业可控，不谈未核实的价格与 SLA。",
+        "en": "Open on overseas buyer context: engineering productivity, toolchain fit, and enterprise control—no unverified price or SLA claims."
+      }
+    },
+    {
+      "type": "cards",
+      "id": "value",
+      "section": { "zh": "客户价值", "en": "Customer value" },
+      "title": {
+        "zh": "国际买家为何关注",
+        "en": "Why international buyers care"
+      },
+      "subtitle": {
+        "zh": "用可验证的交付结果说话；具体区域合规与容量请以正式材料为准。",
+        "en": "Speak in verifiable delivery outcomes; treat region-specific compliance and capacity as confirm-with-marketing."
+      },
+      "eyebrow": "PRODUCT VALUE",
+      "notes": {
+        "zh": "三张卡片分别对应速度、在岗体验、治理姿态；避免承诺具体加速百分比。",
+        "en": "Three cards map to speed, in-flow experience, and governance posture; avoid inventing acceleration percentages."
+      },
+      "cards": [
+        {
+          "title": {
+            "zh": "缩短交付路径",
+            "en": "Shorten the path to merge"
+          },
+          "body": {
+            "zh": "在需求澄清、实现与评审环节提供 AI 辅助，帮助团队更快形成可审查、可合并的变更。",
+            "en": "Assist clarification, implementation, and review so teams reach inspectable, merge-ready changes with less thrash."
+          }
+        },
+        {
+          "title": {
+            "zh": "留在研发主路径",
+            "en": "Stay inside the engineering flow"
+          },
+          "body": {
+            "zh": "围绕编码、评审与文档协同提供协助，减少在工具之间来回切换造成的上下文丢失。",
+            "en": "Support coding, review, and documentation collaboration—reducing context loss from constant tool-switching."
+          }
+        },
+        {
+          "title": {
+            "zh": "面向企业治理姿态",
+            "en": "Built for enterprise posture"
+          },
+          "body": {
+            "zh": "按组织工作流与可控边界设计（权限、审计与团队协作约定以正式方案与部署区域为准）。",
+            "en": "Designed around organizational workflows and controllable boundaries (permissions, auditability, and team conventions—confirm per formal proposal and deployment region)."
+          }
+        }
+      ]
+    },
+    {
+      "type": "workflow",
+      "id": "workflow",
+      "section": { "zh": "工作方式", "en": "How it works" },
+      "title": {
+        "zh": "从意图到可交付变更",
+        "en": "From intent to shippable change"
+      },
+      "subtitle": {
+        "zh": "一条可讲解的协作闭环；具体集成清单以 PoC 范围为准。",
+        "en": "A presentable collaboration loop; treat concrete integrations as PoC-scoped."
+      },
+      "eyebrow": "HOW IT WORKS",
+      "notes": {
+        "zh": "演示时按四步走：理解 → 规划 → 生成精炼 → 评审交接；不要展开内部模型细节。",
+        "en": "Walk four beats: understand → plan → generate & refine → review & handoff; avoid internal model detail."
+      },
+      "steps": [
+        {
+          "title": {
+            "zh": "理解意图",
+            "en": "Understand intent"
+          },
+          "body": {
+            "zh": "把业务目标与约束转成可执行的研发任务描述。",
+            "en": "Turn business goals and constraints into actionable engineering task framing."
+          }
+        },
+        {
+          "title": {
+            "zh": "规划与拆解",
+            "en": "Plan & decompose"
+          },
+          "body": {
+            "zh": "形成步骤化方案，明确改动面与验收关注点。",
+            "en": "Produce a step-wise plan with change surface and acceptance focus."
+          }
+        },
+        {
+          "title": {
+            "zh": "生成与精炼",
+            "en": "Generate & refine"
+          },
+          "body": {
+            "zh": "辅助实现与迭代，保持人类在环审查。",
+            "en": "Assist implementation and iteration while keeping humans in the review loop."
+          }
+        },
+        {
+          "title": {
+            "zh": "评审与交接",
+            "en": "Review & handoff"
+          },
+          "body": {
+            "zh": "沉淀可审查结果，进入团队既有合并与发布流程。",
+            "en": "Land reviewable outcomes into the team’s existing merge and release process."
+          }
+        }
+      ],
+      "result": {
+        "zh": "结果：一条可对外讲解的 AI 辅助交付闭环——不替代研发责任，强化交付节奏。",
+        "en": "Outcome: a briefable AI-assisted delivery loop—augmenting engineers, not replacing ownership."
+      }
+    },
+    {
+      "type": "closing",
+      "id": "thank-you",
+      "section": { "zh": "结束", "en": "Closing" },
+      "title": {
+        "zh": "致谢",
+        "en": "Thank You"
+      },
+      "thanks": {
+        "zh": "",
+        "en": "Thank You"
+      },
+      "visionLabel": "",
+      "vision": {
+        "zh": "把数字世界带入每个人、每个家庭、\n每个组织，构建万物互联的智能世界。",
+        "en": "Bring digital to every person, home and organization\nfor a fully connected, intelligent world."
+      },
+      "logo": "assets/huawei-logo.png",
+      "motion": "fade",
+      "notes": {
+        "zh": "收尾邀请下一步：发现会 / PoC 范围确认；价格与 SLA 不在本页承诺。",
+        "en": "Close with next step: discovery workshop or PoC scope confirmation—no price or SLA commitments on this slide."
+      }
+    }
+  ]
+}

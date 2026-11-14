@@ -1,0 +1,13 @@
+node_modules/
+dist/
+qa/
+deploy/cloudflare/dist/
+deploy/chatgpt-sites/dist/
+.wrangler/
+.env*
+.dev.vars*
+__pycache__/
+index.html
+js/config.js
+js/translations.js
+asset-manifest.json
