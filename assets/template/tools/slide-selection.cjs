@@ -18,4 +18,25 @@ function selectSlides(slides,spec){
  }
  return indices.map(i=>slides[i]);
 }
-module.exports={selectSlides};
+
+/** Drop slides listed in cuts[cutId].hidden. Unknown cut fails. */
+function applyCut(slides,cuts,cutId){
+ if(typeof cutId!=='string'||!cutId.trim())throw Error('--cut requires a cut id.');
+ const preset=cuts&&cuts[cutId];
+ if(!preset||!Array.isArray(preset.hidden))throw Error('Unknown cut: '+cutId);
+ const hidden=new Set(preset.hidden);
+ const kept=slides.filter(s=>!hidden.has(s.id));
+ if(!kept.length)throw Error('Cut "'+cutId+'" would hide every slide.');
+ if(kept.length===slides.length)throw Error('Cut "'+cutId+'" hides no known slides.');
+ return kept;
+}
+
+/** Apply named cut first (if any), then optional --slides selection on the result. */
+function resolveExportSlides(slides,cuts,{cut,slidesSpec}={}){
+ let result=slides;
+ if(cut!==undefined)result=applyCut(result,cuts,cut);
+ if(slidesSpec!==undefined)result=selectSlides(result,slidesSpec);
+ return result;
+}
+
+module.exports={selectSlides,applyCut,resolveExportSlides};

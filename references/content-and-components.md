@@ -52,6 +52,9 @@
 | custom | fragment, translations | content/name.html 片段，扩展架构或互动页面；禁止 `<script>`、内联事件与 `javascript:` |
 | pricing | rows, labels | 一等公民价格表；自动注入 pricing 脚本与 recipes.css |
 | scenarios | scenarios: [{id,label,body,bullets?}] | 一等公民手动场景切换；自动注入 scenario-switcher |
+| agenda | items: [{label, time?}] | 2–8 条议程；可选时长 |
+| quote | quote, attribution, role? | 客户证言 / 证明页 |
+| tabs | tabs: [{id?, label, body, bullets?}] | 2–5 个页签；一等公民手动切换（自动注入 tabs.js） |
 
 可选 `cuts`：命名演示裁剪，例如 `"cuts": { "cio": { "label": {"zh":"CIO精简","en":"CIO cut"}, "hidden": ["price"] } }`，分享链接使用 `?cut=cio`。生成器会校验 `hidden` 中的 slide id 必须存在；未知 id 直接失败，避免静默丢页。
 

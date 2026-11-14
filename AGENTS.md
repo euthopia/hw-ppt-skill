@@ -6,7 +6,7 @@ North star: **Approach B — Sales briefing runtime** (keep `deck.json` + vanill
 
 ### Issue tracker
 
-Local markdown under `.scratch/` (GitHub Issues deferred until euthopia publish auth is safe). See `docs/agents/issue-tracker.md`.
+Local markdown under `.scratch/` (GitHub Issues migration intentionally skipped until euthopia publish auth is safe — P1/P2 pack out of scope). See `docs/agents/issue-tracker.md`.
 
 ### Triage labels
 

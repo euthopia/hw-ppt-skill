@@ -20,7 +20,7 @@ Built for product introductions, architecture briefings, comparisons, packaging,
 ## Features
 
 - **Brand & layout** — Huawei logo, white stage, red accent `#c7000b`, 16:9 canvas, shared header/footer; Yunshan / Jinsha / mountain covers.
-- **Layout kit** — cover, cards, metrics, architecture, comparison, **scrollable tables**, workflow, image, pricing, scenarios, timeline, callouts, custom, closing.
+- **Layout kit** — cover, cards, metrics, architecture, comparison, **scrollable tables**, workflow, image, pricing, scenarios, timeline, callouts, **agenda**, **quote**, **tabs**, custom, closing.
 - **Bilingual** — one-click ZH/EN, English typography sheet, remembered preference, bilingual TOC/controls.
 - **Presenter tools** — keyboard/touch nav, fullscreen, chapter jump, thumbnail TOC, position memory, **presenter notes** (`N` / `?presenter=1`), **shortcut cheat sheet** (`?`), **named sales cuts** (`?cut=cio`; unknown slide ids fail at generate).
 - **Slide hide** — TOC “hide slides” saved per project in the current browser; navigation skips hidden pages.
@@ -110,9 +110,9 @@ npm run export:pptx -- --lang zh    # editable PowerPoint
 npm run export -- --lang both       # HTML + ZH/EN PDF (not PPTX by default)
 ```
 
-Optional `--slides "1,3-5,thank-you"` and `--output-dir DIR`. PDF needs Playwright once; PPTX needs `pip install python-pptx` (or the skill’s documented dependency).
+Optional `--slides "1,3-5,thank-you"` and `--output-dir DIR`. Named sales cuts: `--cut cio` reads `deck.cuts.cio.hidden` and composes with `--slides` by applying the cut first, then selecting from the remaining pages. PDF needs Playwright once; PPTX needs `pip install python-pptx` (or the skill’s documented dependency).
 
-HTML stays interactive and bilingual. PDF is static. **PPTX is editable Office interop** generated from `deck.json` (system of record remains the HTML briefing runtime).
+HTML stays interactive and bilingual. PDF is static. **PPTX is editable Office interop** generated from `deck.json` (system of record remains the HTML briefing runtime). Optional generate-time schema checks: `pip install jsonschema`.
 
 ## Upgrade an existing deck
 
@@ -120,6 +120,8 @@ HTML stays interactive and bilingual. PDF is static. **PPTX is editable Office i
 python3 /path/to/hw-ppt-skill/scripts/sync_runtime.py /path/to/my-product-deck
 cd /path/to/my-product-deck && npm run build
 ```
+
+`sync_runtime.py` copies the template runtime, stamps `runtimeVersion`, and prints CHANGELOG / breaking notes for the bump.
 
 ## Repo layout
 

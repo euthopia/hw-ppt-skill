@@ -1,6 +1,6 @@
-"""Generate a bilingual deck from content/deck.json. No external dependencies."""
+"""Generate a bilingual deck from content/deck.json. Soft-dep: jsonschema (optional)."""
 from pathlib import Path
-import html,json,re,uuid
+import html,json,re,sys,uuid
 ROOT=Path(__file__).resolve().parent.parent
 def template_runtime_version():
  package=ROOT/'package.json'
@@ -10,6 +10,42 @@ def template_runtime_version():
  return '1.0.0'
 TEMPLATE_RUNTIME_VERSION=template_runtime_version()
 D=json.loads((ROOT/'content/deck.json').read_text(encoding='utf-8'))
+
+def validate_deck_schema(deck):
+ schema_path=ROOT/'schemas'/'deck.schema.json'
+ if not schema_path.is_file():return
+ try:
+  import jsonschema
+ except ImportError:
+  sys.stderr.write(
+   'Warning: jsonschema not installed; skipping deck.schema.json validation. '
+   'Install with: pip install jsonschema\n'
+  )
+  return
+ schema=json.loads(schema_path.read_text(encoding='utf-8'))
+ try:
+  validator_cls=jsonschema.validators.validator_for(schema)
+  validator_cls.check_schema(schema)
+  validator=validator_cls(schema)
+ except Exception:
+  validator=None
+ if validator is None:
+  try:
+   jsonschema.validate(instance=deck,schema=schema)
+   return
+  except jsonschema.ValidationError as err:
+   path='.'.join(str(p) for p in err.path) or '(root)'
+   raise ValueError(f'deck.json failed schema validation:\n  - {path}: {err.message}') from err
+ errors=sorted(validator.iter_errors(deck),key=lambda e:list(e.absolute_path))
+ if not errors:return
+ lines=[]
+ for err in errors[:12]:
+  path='.'.join(str(p) for p in err.absolute_path) or '(root)'
+  lines.append(f'  - {path}: {err.message}')
+ raise ValueError('deck.json failed schema validation:\n'+'\n'.join(lines))
+
+validate_deck_schema(D)
+
 translations={
  '屏蔽页面':'Hide slides',
  '恢复全部':'Restore all',
@@ -47,6 +83,11 @@ translations={
  '本对照表':'This cheat sheet',
  '关闭对话框':'Close dialog',
  'URL 参数：?cut=名称 分享切片；?presenter=1 打开备注。':'URL params: ?cut=name for a shareable cut; ?presenter=1 for notes.',
+ '激光笔':'Laser pointer',
+ '演示计时':'Elapsed timer',
+ '页签切换':'Tab panels',
+ '激光笔已开启':'Laser pointer on',
+ '激光笔已关闭':'Laser pointer off',
 }
 def source(value):
  if isinstance(value,dict):
@@ -64,9 +105,13 @@ def bounded(values,low,high,label):
  return values
 
 LAYOUTS={}
+FULL_SLIDE={}
 def register_layout(kind,fn):
  if kind in LAYOUTS:raise ValueError('Duplicate layout registration: '+kind)
  LAYOUTS[kind]=fn
+def register_full_slide(kind,css_class,fn):
+ register_layout(kind,fn)
+ FULL_SLIDE[kind]=css_class
 
 def layout_cards(slide):
  cards=bounded(slide['cards'],2,4,'cards')
@@ -167,6 +212,89 @@ def layout_scenarios(slide):
   panels.append(f'<article data-ops-panel="{html.escape(key,quote=True)}" hidden>{body_html}</article>')
  return '<div class="recipe-scenarios" data-controller="scenarios"><nav aria-label="场景切换">'+''.join(buttons)+'</nav><div>'+''.join(panels)+'</div></div>'
 
+def layout_agenda(slide):
+ agenda_items=bounded(slide['items'],2,8,'agenda items')
+ parts=[]
+ for i,item in enumerate(agenda_items):
+  time_html=f'<span class="kit-agenda-time">{text(item["time"])}</span>' if item.get('time') else ''
+  parts.append(
+   f'<li class="kit-agenda-item"><span class="kit-index">{i+1:02}</span>'
+   f'<span class="kit-agenda-label">{text(item["label"])}</span>{time_html}</li>'
+  )
+ return '<ol class="kit-agenda">'+''.join(parts)+'</ol>'
+
+def layout_quote(slide):
+ attribution=f'<footer class="kit-quote-attr"><cite>{text(slide["attribution"])}</cite>'
+ if slide.get('role'):
+  attribution+=f'<span class="kit-quote-role">{text(slide["role"])}</span>'
+ attribution+='</footer>'
+ return f'<blockquote class="kit-quote"><p>{text(slide["quote"])}</p>{attribution}</blockquote>'
+
+def layout_tabs(slide):
+ tabs=bounded(slide['tabs'],2,5,'tabs')
+ buttons,panels=[],[]
+ for i,item in enumerate(tabs):
+  key=item.get('id') or f'tab-{i+1}'
+  if not re.fullmatch(r'[a-z][a-z0-9-]{0,62}',key):raise ValueError('Tab id must be a lowercase slug')
+  label=text(item['label'])
+  selected='true' if i==0 else 'false'
+  hidden='' if i==0 else ' hidden'
+  buttons.append(
+   f'<button type="button" role="tab" id="tab-{html.escape(key,quote=True)}" '
+   f'data-tab-choice="{html.escape(key,quote=True)}" aria-selected="{selected}" '
+   f'aria-controls="panel-{html.escape(key,quote=True)}">{label}</button>'
+  )
+  body_html='<p>'+text(item['body'])+'</p>'
+  if item.get('bullets'):
+   body_html+='<ul>'+items(bounded(item['bullets'],1,4,'tab bullets'),'li')+'</ul>'
+  panels.append(
+   f'<article role="tabpanel" id="panel-{html.escape(key,quote=True)}" '
+   f'data-tab-panel="{html.escape(key,quote=True)}" aria-labelledby="tab-{html.escape(key,quote=True)}"{hidden}>'
+   f'{body_html}</article>'
+  )
+ return (
+  '<div class="kit-tabs" data-tabs-root data-controller="tabs">'
+  '<div class="kit-tabs-list" role="tablist" aria-label="页签切换">'+''.join(buttons)+'</div>'
+  '<div class="kit-tabs-panels">'+''.join(panels)+'</div></div>'
+ )
+
+def layout_cover(slide):
+ backgrounds={'原山景':'assets/mountains.jpg','云山':'assets/yunshan.png','金沙':'assets/jinsha.png'}
+ background=slide.get('background','原山景')
+ if background not in backgrounds:raise ValueError('Unknown cover background: '+background)
+ image=backgrounds[background]
+ title=text(slide['title'])
+ header=f'<header class="slide-header"><img class="brand" src="assets/huawei-logo.png" alt="HUAWEI"><span>{text(D.get("brandLabel","HUAWEI CLOUD"))}</span></header>'
+ return (
+  header+f'<div class="cover-landscape" style="background-image:linear-gradient(180deg,#f7f9fc 0%,#f7f9fcbd 18%,#f7f9fc00 43%),url(&quot;{image}&quot;)"></div>'
+  f'<div class="cover-copy"><div class="eyebrow"><span class="red-rule"></span>{text(slide.get("eyebrow","PRODUCT BRIEFING"))}</div>'
+  f'<h1>{title}</h1><p class="cover-subtitle">{text(slide.get("subtitle",""))}</p><div class="cover-line"></div>'
+  f'<p class="cover-english">{text(slide.get("tagline","HUAWEI CLOUD"))}</p></div>'
+  f'<div class="cover-bottom"><span>PRODUCT BRIEFING</span><span>{text(D.get("brandLabel","HUAWEI CLOUD"))}</span></div>'
+ )
+
+def layout_closing(slide):
+ thanks=slide.get('thanks',{'zh':'','en':'Thank You'})
+ vision=slide.get('vision',{'zh':'把数字世界带入每个人、每个家庭、\n每个组织，构建万物互联的智能世界。','en':'Bring digital to every person, home and organization\nfor a fully connected, intelligent world.'})
+ for value in [thanks,vision]:
+  if not isinstance(value,dict) or set(value)!={'zh','en'} or not all(isinstance(v,str) for v in value.values()):
+   raise ValueError('Closing copy requires simultaneous zh/en strings')
+ logo=slide.get('logo','assets/huawei-logo.png')
+ if not isinstance(logo,str) or not re.fullmatch(r'assets/[A-Za-z0-9_-]+\.(png|jpg|jpeg|svg|webp)',logo) or not (ROOT/logo).is_file():
+  raise ValueError('Closing logo must be an existing local assets/file.ext')
+ motion=slide.get('motion','fade')
+ if motion not in {'fade','none'}:raise ValueError('Closing motion must be fade or none')
+ secondary=f'<p lang="zh-CN">{text(thanks["zh"])}</p>' if thanks['zh'] else ''
+ vision_label=f'<div class="closing-vision-label">{text(slide["visionLabel"])}</div>' if slide.get('visionLabel') else ''
+ return (
+  f'<div class="closing-layout" data-no-translate data-closing-motion="{motion}">'
+  f'<div class="closing-greeting"><h1 lang="en">{text(thanks["en"])}</h1>{secondary}</div>'
+  f'<div class="closing-vision">{vision_label}'
+  f'<p class="closing-vision-zh" lang="zh-CN">{text(vision["zh"])}</p>'
+  f'<p class="closing-vision-en" lang="en">{text(vision["en"])}</p>'
+  f'<img class="closing-logo" src="{text(logo)}" alt="{text(slide.get("logoAlt","HUAWEI"))}"></div></div>'
+ )
+
 for _kind,_fn in (
  ('cards',layout_cards),
  ('metrics',layout_metrics),
@@ -180,12 +308,19 @@ for _kind,_fn in (
  ('custom',layout_custom),
  ('pricing',layout_pricing),
  ('scenarios',layout_scenarios),
+ ('agenda',layout_agenda),
+ ('quote',layout_quote),
+ ('tabs',layout_tabs),
 ):
  register_layout(_kind,_fn)
+
+register_full_slide('cover','cover',layout_cover)
+register_full_slide('closing','closing-slide',layout_closing)
 
 def body(slide):
  kind=slide['type']
  if kind not in LAYOUTS:raise ValueError('Unknown slide type: '+kind)
+ if kind in FULL_SLIDE:raise ValueError('Full-slide layout should not use kit body(): '+kind)
  return LAYOUTS[kind](slide)
 
 if not re.fullmatch(r'[a-z][a-z0-9-]{2,62}',D['id']):raise ValueError('id must be a unique lowercase project slug, 3–63 characters')
@@ -214,28 +349,13 @@ if len(chapters)>5:raise ValueError('Use at most five navigation chapters')
 slides=[]
 for i,s in enumerate(D['slides']):
  title=text(s['title']); section=text(s.get('section','开场')); n=f'{i+1:02}'
- header=f'<header class="slide-header"><img class="brand" src="assets/huawei-logo.png" alt="HUAWEI"><span>{text(D.get("brandLabel","HUAWEI CLOUD"))}</span></header>'
- if s['type']=='cover':
-  backgrounds={'原山景':'assets/mountains.jpg','云山':'assets/yunshan.png','金沙':'assets/jinsha.png'}
-  background=s.get('background','原山景')
-  if background not in backgrounds:raise ValueError('Unknown cover background: '+background)
-  image=backgrounds[background]
-  content=header+f'<div class="cover-landscape" style="background-image:linear-gradient(180deg,#f7f9fc 0%,#f7f9fcbd 18%,#f7f9fc00 43%),url(&quot;{image}&quot;)"></div><div class="cover-copy"><div class="eyebrow"><span class="red-rule"></span>{text(s.get("eyebrow","PRODUCT BRIEFING"))}</div><h1>{title}</h1><p class="cover-subtitle">{text(s.get("subtitle",""))}</p><div class="cover-line"></div><p class="cover-english">{text(s.get("tagline","HUAWEI CLOUD"))}</p></div><div class="cover-bottom"><span>PRODUCT BRIEFING</span><span>{text(D.get("brandLabel","HUAWEI CLOUD"))}</span></div>'
-  cls='cover'
- elif s['type']=='closing':
-  thanks=s.get('thanks',{'zh':'','en':'Thank You'})
-  vision=s.get('vision',{'zh':'把数字世界带入每个人、每个家庭、\n每个组织，构建万物互联的智能世界。','en':'Bring digital to every person, home and organization\nfor a fully connected, intelligent world.'})
-  for value in [thanks,vision]:
-   if not isinstance(value,dict) or set(value)!={'zh','en'} or not all(isinstance(v,str) for v in value.values()):raise ValueError('Closing copy requires simultaneous zh/en strings')
-  logo=s.get('logo','assets/huawei-logo.png')
-  if not isinstance(logo,str) or not re.fullmatch(r'assets/[A-Za-z0-9_-]+\.(png|jpg|jpeg|svg|webp)',logo) or not (ROOT/logo).is_file():raise ValueError('Closing logo must be an existing local assets/file.ext')
-  motion=s.get('motion','fade')
-  if motion not in {'fade','none'}:raise ValueError('Closing motion must be fade or none')
-  secondary=f'<p lang="zh-CN">{text(thanks["zh"])}</p>' if thanks['zh'] else ''
-  vision_label=f'<div class="closing-vision-label">{text(s["visionLabel"])}</div>' if s.get('visionLabel') else ''
-  content=f'<div class="closing-layout" data-no-translate data-closing-motion="{motion}"><div class="closing-greeting"><h1 lang="en">{text(thanks["en"])}</h1>{secondary}</div><div class="closing-vision">{vision_label}<p class="closing-vision-zh" lang="zh-CN">{text(vision["zh"])}</p><p class="closing-vision-en" lang="en">{text(vision["en"])}</p><img class="closing-logo" src="{text(logo)}" alt="{text(s.get("logoAlt","HUAWEI"))}"></div></div>'
-  cls='closing-slide'
+ kind=s['type']
+ if kind not in LAYOUTS:raise ValueError('Unknown slide type: '+kind)
+ if kind in FULL_SLIDE:
+  content=LAYOUTS[kind](s)
+  cls=FULL_SLIDE[kind]
  else:
+  header=f'<header class="slide-header"><img class="brand" src="assets/huawei-logo.png" alt="HUAWEI"><span>{text(D.get("brandLabel","HUAWEI CLOUD"))}</span></header>'
   content=header+f'<div class="heading"><div class="eyebrow">{text(s.get("eyebrow","PRODUCT CAPABILITIES"))}</div><h2>{title}</h2><p>{text(s.get("subtitle",""))}</p></div><div class="kit-body">'+body(s)+'</div>'+f'<footer class="slide-footer"><span>{text(s.get("footer",D.get("footer","HUAWEI CLOUD")))}</span><span>{n}</span></footer>'
   cls='kit-slide'
  notes_attr=(' data-notes="'+text(s['notes'])+'"') if s.get('notes') else ''
@@ -260,6 +380,9 @@ if 'pricing' in types:
  if 'css/recipes.css' not in needed_styles:needed_styles.append('css/recipes.css')
 if 'scenarios' in types:
  needed_scripts.append('js/scenario-switcher.js')
+ if 'css/recipes.css' not in needed_styles:needed_styles.append('css/recipes.css')
+if 'tabs' in types:
+ needed_scripts.append('js/tabs.js')
  if 'css/recipes.css' not in needed_styles:needed_styles.append('css/recipes.css')
 
 config={'id':D['id'],'chapters':chapters,'runtimeVersion':runtime_version,'cuts':cuts}

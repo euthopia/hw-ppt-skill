@@ -15,26 +15,36 @@
   let idleTimer, toastTimer, returnFocus;
   let pointerAtBottom = false, keyboardControls = false;
   let presenterMode = false;
+  let laserOn = false;
+  let timerStartedAt = null;
+  let timerInterval = null;
+  const prefersReducedMotion = () => {
+    try { return window.matchMedia('(prefers-reduced-motion: reduce)').matches; } catch { return false; }
+  };
   try { presenterMode = new URLSearchParams(location.search).get('presenter') === '1'; } catch { /* ignore */ }
   const notesPanel = document.createElement('aside');
   notesPanel.id = 'presenter-notes';
   notesPanel.className = 'presenter-notes';
   notesPanel.hidden = true;
+  notesPanel.setAttribute('role', 'complementary');
   notesPanel.setAttribute('aria-label', '演示备注');
   document.body.append(notesPanel);
 
   const helpDialog = document.createElement('dialog');
   helpDialog.id = 'keyboard-help';
   helpDialog.className = 'keyboard-help';
+  helpDialog.setAttribute('aria-modal', 'true');
   helpDialog.setAttribute('aria-labelledby', 'keyboard-help-title');
   helpDialog.innerHTML = [
     '<div class="dialog-header"><div><div class="eyebrow">SHORTCUTS</div>',
     '<h2 id="keyboard-help-title">快捷键对照</h2></div>',
     '<button type="button" class="icon-button" data-help-close aria-label="关闭快捷键对照">×</button></div>',
-    '<ul class="keyboard-help-list">',
+    '<ul class="keyboard-help-list" role="list">',
     '<li><kbd>←</kbd><kbd>→</kbd><span>翻页</span></li>',
     '<li><kbd>G</kbd><span>目录</span></li>',
     '<li><kbd>N</kbd><span>演示备注</span></li>',
+    '<li><kbd>L</kbd><span>激光笔</span></li>',
+    '<li><kbd>T</kbd><span>演示计时</span></li>',
     '<li><kbd>F</kbd><span>全屏</span></li>',
     '<li><kbd>?</kbd><span>本对照表</span></li>',
     '<li><kbd>Esc</kbd><span>关闭对话框</span></li>',
@@ -43,11 +53,57 @@
   ].join('');
   document.body.append(helpDialog);
   helpDialog.querySelector('[data-help-close]').addEventListener('click', () => helpDialog.close());
+  function focusableIn(el) {
+    return [...el.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])')]
+      .filter(node => !node.hasAttribute('disabled') && node.getAttribute('aria-hidden') !== 'true');
+  }
+  function trapTab(event, host) {
+    if (event.key !== 'Tab') return;
+    const nodes = focusableIn(host);
+    if (!nodes.length) return;
+    const first = nodes[0];
+    const last = nodes[nodes.length - 1];
+    if (event.shiftKey && document.activeElement === first) {
+      event.preventDefault();
+      last.focus();
+    } else if (!event.shiftKey && document.activeElement === last) {
+      event.preventDefault();
+      first.focus();
+    }
+  }
   function openKeyboardHelp() {
     if (dialog.open) return;
     returnFocus = document.activeElement;
     helpDialog.showModal();
     helpDialog.querySelector('[data-help-close]').focus();
+  }
+  function setLaser(on) {
+    laserOn = !!on && !prefersReducedMotion();
+    document.body.classList.toggle('laser-on', laserOn);
+    document.body.classList.toggle('laser-reduced', !!on && prefersReducedMotion());
+  }
+  function formatElapsed(ms) {
+    const total = Math.max(0, Math.floor(ms / 1000));
+    const m = String(Math.floor(total / 60)).padStart(2, '0');
+    const s = String(total % 60).padStart(2, '0');
+    return `${m}:${s}`;
+  }
+  function ensureTimer() {
+    if (timerStartedAt !== null) return;
+    timerStartedAt = Date.now();
+    clearInterval(timerInterval);
+    timerInterval = setInterval(() => {
+      if (presenterMode) refreshPresenterNotes();
+    }, 1000);
+  }
+  function toggleTimer() {
+    if (timerStartedAt === null) ensureTimer();
+    else {
+      timerStartedAt = null;
+      clearInterval(timerInterval);
+      timerInterval = null;
+    }
+    refreshPresenterNotes();
   }
 
   function cutHiddenKeys() {
@@ -247,12 +303,21 @@
     notesPanel.hidden = !presenterMode;
     document.body.classList.toggle('presenter-mode', presenterMode);
     if (!presenterMode) { notesPanel.replaceChildren(); return; }
+    if (timerStartedAt === null) ensureTimer();
     const slide = slides[state.index];
     const nextVisible = state.visibleIndices.find(index => index > state.index);
     const next = nextVisible === undefined ? null : slides[nextVisible];
+    const chrome = document.createElement('div');
+    chrome.className = 'presenter-notes-chrome';
     const title = document.createElement('div');
     title.className = 'presenter-notes-label';
     title.textContent = '演示备注';
+    const timer = document.createElement('div');
+    timer.className = 'presenter-timer';
+    timer.setAttribute('aria-live', 'off');
+    timer.setAttribute('aria-label', '演示计时');
+    timer.textContent = formatElapsed(Date.now() - (timerStartedAt || Date.now()));
+    chrome.append(title, timer);
     const body = document.createElement('p');
     body.textContent = slide.dataset.notes || '—';
     const upcoming = document.createElement('div');
@@ -262,8 +327,10 @@
       : '下一页预告：—';
     const tip = document.createElement('div');
     tip.className = 'presenter-notes-tip';
-    tip.textContent = '按 N 关闭备注';
-    notesPanel.replaceChildren(title, body, upcoming, tip);
+    tip.textContent = laserOn || document.body.classList.contains('laser-reduced')
+      ? '按 N 关闭备注 · L 激光 · T 重置计时'
+      : '按 N 关闭备注 · L 激光笔 · T 计时';
+    notesPanel.replaceChildren(chrome, body, upcoming, tip);
   }
   function move(direction) { direction > 0 ? state.next() : state.previous(); render(); wake(); }
   function openOverview() {
@@ -305,10 +372,20 @@
   byId('overview-save').addEventListener('click', saveVisibilityEdit);
   byId('overview-restore').addEventListener('click', () => { if (draftHidden !== null) { draftHidden.clear(); refreshThumbnails(); byId('overview-restore').focus(); } });
   dialog.addEventListener('click', event => { if (event.target === dialog) { const r = dialog.getBoundingClientRect(); if (event.clientX < r.left || event.clientX > r.right || event.clientY < r.top || event.clientY > r.bottom) dialog.close(); } });
+  dialog.addEventListener('keydown', event => trapTab(event, dialog));
+  helpDialog.addEventListener('keydown', event => trapTab(event, helpDialog));
   dialog.addEventListener('close', () => { draftHidden = null; refreshThumbnails(); if (returnFocus?.isConnected) returnFocus.focus(); wake(); });
   byId('fullscreen').addEventListener('click', toggleFullscreen);
+  byId('previous').setAttribute('aria-keyshortcuts', 'ArrowLeft');
+  byId('next').setAttribute('aria-keyshortcuts', 'ArrowRight');
+  byId('overview').setAttribute('aria-haspopup', 'dialog');
+  byId('overview').setAttribute('aria-controls', 'overview-dialog');
   document.addEventListener('fullscreenchange', () => { byId('fullscreen-label').textContent = document.fullscreenElement ? '退出全屏' : '全屏'; fit(); wake(); });
   document.addEventListener('pointermove', event => {
+    if (laserOn && !prefersReducedMotion()) {
+      document.documentElement.style.setProperty('--laser-x', `${event.clientX}px`);
+      document.documentElement.style.setProperty('--laser-y', `${event.clientY}px`);
+    }
     if (event.pointerType === 'touch') return;
     keyboardControls = false;
     const deck = byId('deck').getBoundingClientRect();
@@ -369,7 +446,29 @@
         else url.searchParams.delete('presenter');
         history.replaceState(null, '', url);
       } catch { /* ignore */ }
+      if (presenterMode) ensureTimer();
       refreshPresenterNotes();
+    }
+    else if (event.key.toLowerCase() === 'l') {
+      event.preventDefault();
+      setLaser(!(laserOn || document.body.classList.contains('laser-reduced')));
+      if (presenterMode) refreshPresenterNotes();
+      else toast(laserOn || document.body.classList.contains('laser-reduced') ? '激光笔已开启' : '激光笔已关闭');
+    }
+    else if (event.key.toLowerCase() === 't') {
+      event.preventDefault();
+      if (!presenterMode) {
+        presenterMode = true;
+        try {
+          const url = new URL(location.href);
+          url.searchParams.set('presenter', '1');
+          history.replaceState(null, '', url);
+        } catch { /* ignore */ }
+      }
+      timerStartedAt = null;
+      clearInterval(timerInterval);
+      timerInterval = null;
+      toggleTimer();
     }
   });
   helpDialog.addEventListener('close', () => {

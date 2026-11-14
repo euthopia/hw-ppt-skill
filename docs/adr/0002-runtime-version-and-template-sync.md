@@ -2,7 +2,7 @@
 
 ## Status
 
-Accepted (design for P0; upgrade CLI is P1)
+Accepted (sync CLI shipped in 1.2.x; breaking-notes surfacing + CHANGELOG discipline in 1.3.0)
 
 ## Context
 
@@ -11,14 +11,14 @@ Accepted (design for P0; upgrade CLI is P1)
 ## Decision
 
 1. Every deck may declare `runtimeVersion` (semver string). Generator defaults to the template's current pin when absent and always emits it on `window.DeckConfig.runtimeVersion`.
-2. Template pin lives in one place: `assets/template/package.json` `version` (and mirrored default in the generator).
-3. **Sync story (P0 design / P1 CLI):**
+2. Template pin lives in one place: `assets/template/package.json` `version` / `deckRuntime` (and mirrored default in the generator).
+3. **Sync story (shipped):**
    - **Pin**: deck records the runtime it was generated for
    - **Detect**: compare deck `runtimeVersion` to skill template version
-   - **Upgrade**: copy changed runtime files (`js/*`, `css/*`, `content/shell.html`) while preserving `content/deck.json` and local assets; re-run generator; surface breaking schema changes via schema + release notes
+   - **Upgrade**: `scripts/sync_runtime.py` copies changed runtime files while preserving `content/deck.json` and local assets; stamps the new pin; prints CHANGELOG / breaking notes for versions between old and new; authors re-run `npm run build`
 4. Scene controller: **one canonical source** at `assets/template/js/scenes.js`; `assets/recipes/scene-controller.js` is a synced copy for recipe docs (never load both).
 
 ## Consequences
 
-- P0 only adds the field + docs + sync script for the scene controller
-- P1 adds `scripts/upgrade_runtime.py` (or similar) and changelog discipline
+- Upgrade path is CLI + CHANGELOG, not tribal knowledge
+- Breaking schema changes surface at generate time when `jsonschema` is installed

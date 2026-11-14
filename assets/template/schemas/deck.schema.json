@@ -613,6 +613,116 @@
               }
             }
           ]
+        },
+        {
+          "allOf": [
+            {
+              "$ref": "#/$defs/slideBase"
+            },
+            {
+              "required": [
+                "items"
+              ],
+              "properties": {
+                "type": {
+                  "const": "agenda"
+                },
+                "items": {
+                  "type": "array",
+                  "minItems": 2,
+                  "maxItems": 8,
+                  "items": {
+                    "type": "object",
+                    "required": [
+                      "label"
+                    ],
+                    "additionalProperties": false,
+                    "properties": {
+                      "label": {
+                        "$ref": "#/$defs/text"
+                      },
+                      "time": {
+                        "$ref": "#/$defs/text"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        },
+        {
+          "allOf": [
+            {
+              "$ref": "#/$defs/slideBase"
+            },
+            {
+              "required": [
+                "quote",
+                "attribution"
+              ],
+              "properties": {
+                "type": {
+                  "const": "quote"
+                },
+                "quote": {
+                  "$ref": "#/$defs/text"
+                },
+                "attribution": {
+                  "$ref": "#/$defs/text"
+                },
+                "role": {
+                  "$ref": "#/$defs/text"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "allOf": [
+            {
+              "$ref": "#/$defs/slideBase"
+            },
+            {
+              "required": [
+                "tabs"
+              ],
+              "properties": {
+                "type": {
+                  "const": "tabs"
+                },
+                "tabs": {
+                  "type": "array",
+                  "minItems": 2,
+                  "maxItems": 5,
+                  "items": {
+                    "type": "object",
+                    "required": [
+                      "label",
+                      "body"
+                    ],
+                    "additionalProperties": false,
+                    "properties": {
+                      "id": {
+                        "$ref": "#/$defs/slideId"
+                      },
+                      "label": {
+                        "$ref": "#/$defs/text"
+                      },
+                      "body": {
+                        "$ref": "#/$defs/text"
+                      },
+                      "bullets": {
+                        "type": "array",
+                        "minItems": 1,
+                        "maxItems": 4
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          ]
         }
       ]
     }

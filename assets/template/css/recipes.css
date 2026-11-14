@@ -8,3 +8,4 @@
 .recipe-scenarios button[aria-pressed="true"] {border-color:var(--red);color:var(--red);background:var(--surface-accent)}
 .recipe-scenarios [hidden] {display:none}
 @media print {.recipe-scenarios {display:block}.recipe-scenarios nav {display:none}.recipe-scenarios [hidden] {display:block}}
+/* tabs layout styles live in components.css (.kit-tabs); recipe hook reserved for extensions. */

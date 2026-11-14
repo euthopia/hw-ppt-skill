@@ -20,7 +20,7 @@
 ## 功能
 
 - **品牌与排版**：华为 Logo、白底与红色强调 `#c7000b`、16:9 画布、统一页头页脚；可选择云山、金沙和山景封面。
-- **版式套件**：封面、卡片、指标、分层架构、双列对比、**可滚动粘性表头表格**、流程、图片、定价、场景、**时间线**、**要点提示**、自定义及致谢页。
+- **版式套件**：封面、卡片、指标、分层架构、双列对比、**可滚动粘性表头表格**、流程、图片、定价、场景、**时间线**、**要点提示**、**议程**、**引用证言**、**页签 tabs**、自定义及致谢页。
 - **中英双语**：一键切换、英文独立样式、语言偏好记忆，支持双语目录和控件。
 - **演示工具**：键盘/触控翻页、全屏、章节跳转、缩略图目录、位置记忆、**演示备注**（`N` / `?presenter=1`）、**快捷键对照**（`?`）、**命名销售切片**（`?cut=cio`；未知 slide id 在生成期校验失败）。
 - **屏蔽页面**：目录中选择不演示的页面并保存，翻页和章节跳转自动跳过；支持取消与恢复全部。设置按演示项目保存在当前浏览器，至少保留一页。
@@ -123,7 +123,7 @@ npm run export:pptx -- --lang zh        # 可编辑 PowerPoint（需 python-pptx
 npm run export -- --lang both           # HTML + 中文 PDF + 英文 PDF（默认不含 PPTX）
 ```
 
-选页导出可加 `--slides "1,3-5,thank-you"`，支持页码、范围和稳定页面 ID，按参数顺序输出并去重；HTML / PDF / PPTX 均适用，不改原稿。
+选页导出可加 `--slides "1,3-5,thank-you"`，支持页码、范围和稳定页面 ID，按参数顺序输出并去重；HTML / PDF / PPTX 均适用，不改原稿。命名销售切片可加 `--cut cio`（读取 `deck.json` 的 `cuts.cio.hidden`）；可与 `--slides` 组合：**先按 cut 去掉隐藏页，再在剩余页上做选页**。
 
 默认输出到 `dist/exports/`；可加 `--output-dir "目标目录"`。PDF 第一次需要安装浏览器依赖；PPTX 为可选软依赖：
 
@@ -136,6 +136,15 @@ pip install python-pptx
 后续只更新内容、执行命令即可。HTML 不需要这些 npm 依赖；PDF 导出自动起停本地服务、完整显示动效内容，并按 16:9 分页。HTML 保留双语切换与交互（交互 SoR）；PDF 是静态内容；**PPTX 从 `deck.json` 生成可编辑 Office 稿**。已有 Chromium 可用 `--browser-executable` 或 `BROWSER_EXECUTABLE` 指定。
 
 默认 `npm run build`、`npm test` 和浏览器检查只生成或检查预览网页，不导出单文件 HTML/PDF，也不生成部署产物。导出检查通过显式的 `test:export:html`、`test:export` 执行。部署模板在初始化时提供；日常内容修改无需改动 deploy/。明确需要发布时才执行对应平台的打包和部署命令。
+
+## 升级已有演示项目
+
+```sh
+python3 /path/to/hw-ppt-skill/scripts/sync_runtime.py /path/to/my-product-deck
+cd /path/to/my-product-deck && npm run build
+```
+
+脚本会同步运行时文件、写入新的 `runtimeVersion`，并打印 `CHANGELOG.md` 中的升级 / Breaking notes。生成期可选安装 `pip install jsonschema` 以启用 `deck.schema.json` 校验。
 
 ## Demo 与目录结构
 

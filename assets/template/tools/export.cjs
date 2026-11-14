@@ -6,7 +6,7 @@ const http=require('node:http');
 const {spawnSync}=require('node:child_process');
 const os=require('node:os');
 const crypto=require('node:crypto');
-const {selectSlides}=require('./slide-selection.cjs');
+const {resolveExportSlides}=require('./slide-selection.cjs');
 const root=path.resolve(__dirname,'..');
 const pythonCmd=path.join(__dirname,'python-cmd.cjs');
 
@@ -15,7 +15,7 @@ function options(args){
  if(args[0]&&!args[0].startsWith('-'))out.format=args.shift();
  for(let i=0;i<args.length;i++){
   if(args[i]==='--help'||args[i]==='-h')return null;
-  const key={'--lang':'lang','--output-dir':'directory','--browser-executable':'browser','--slides':'slides'}[args[i]];
+  const key={'--lang':'lang','--output-dir':'directory','--browser-executable':'browser','--slides':'slides','--cut':'cut'}[args[i]];
   if(!key||!args[i+1]||args[i+1].startsWith('--'))throw Error('Invalid option: '+args[i]+'. Use --help.');
   out[key]=args[++i];
  }
@@ -78,17 +78,18 @@ async function main(){
  const opt=options(process.argv.slice(2));
  if(!opt){
   process.stdout.write(
-   'Usage: node tools/export.cjs [html|pdf|pptx|all] [--lang zh|en|both] [--slides 1,3-5,thank-you] [--output-dir DIR] [--browser-executable PATH]\n'+
+   'Usage: node tools/export.cjs [html|pdf|pptx|all] [--lang zh|en|both] [--cut NAME] [--slides 1,3-5,thank-you] [--output-dir DIR] [--browser-executable PATH]\n'+
    'HTML keeps both languages; --lang selects PDF/PPTX language(s). Default: all pages, html+pdf, zh, dist/exports.\n'+
+   '--cut resolves deck.cuts[NAME].hidden (stable slide ids); compose with --slides by applying the cut first, then selecting from the remaining pages.\n'+
    'PPTX needs python-pptx (pip install python-pptx). HTML remains the interactive system of record.\n'
   );
   return;
  }
  let project=root,temporary;
  try{
- if(opt.slides!==undefined){
+ if(opt.slides!==undefined||opt.cut!==undefined){
   const deck=JSON.parse(fs.readFileSync(path.join(root,'content/deck.json'),'utf8'));
-  deck.slides=selectSlides(deck.slides,opt.slides);
+  deck.slides=resolveExportSlides(deck.slides,deck.cuts||{},{cut:opt.cut,slidesSpec:opt.slides});
   const sections=new Set(deck.slides.map(s=>typeof s.section==='object'?s.section.zh:s.section));
   deck.chapters=(deck.chapters||[]).filter(c=>sections.has(typeof c.section==='object'?c.section.zh:c.section));
   deck.id=deck.id.slice(0,45)+'-export-'+crypto.randomBytes(4).toString('hex');

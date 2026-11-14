@@ -47,6 +47,43 @@ test('table layout wraps sticky-header scroll region',()=>{
  }finally{rmSync(root,{recursive:true,force:true});}
 });
 
+test('agenda quote and tabs layouts render branded markup',()=>{
+ const {root,html,css}=renderFixture([
+  {
+   type:'agenda',
+   title:bilingual('议程','Agenda'),
+   items:[
+    {label:bilingual('价值','Value'),time:bilingual('5分','5m')},
+    {label:bilingual('能力','Capability')},
+    {label:bilingual('证明','Proof')}
+   ]
+  },
+  {
+   type:'quote',
+   title:bilingual('证言','Quote'),
+   quote:bilingual('稳定可靠。','Stable and reliable.'),
+   attribution:bilingual('某 CIO','A CIO'),
+   role:bilingual('金融','Finance')
+  },
+  {
+   type:'tabs',
+   title:bilingual('页签','Tabs'),
+   tabs:[
+    {id:'one',label:bilingual('方案甲','Plan A'),body:bilingual('说明甲','Body A')},
+    {id:'two',label:bilingual('方案乙','Plan B'),body:bilingual('说明乙','Body B'),bullets:[bilingual('点','Point')]}
+   ]
+  }
+ ]);
+ try{
+  assert.match(html,/class="kit-agenda"/);
+  assert.match(html,/class="kit-quote"/);
+  assert.match(html,/data-tabs-root/);
+  assert.match(html,/tabs\.js/);
+  assert.match(css,/kit-agenda/);
+  assert.match(css,/kit-quote/);
+ }finally{rmSync(root,{recursive:true,force:true});}
+});
+
 test('timeline and callouts layouts render branded markup',()=>{
  const {root,html}=renderFixture([
   {

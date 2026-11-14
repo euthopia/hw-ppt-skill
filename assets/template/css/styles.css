@@ -32,10 +32,19 @@
 .is-concealed{visibility:hidden;opacity:0}
 .presenter-notes{position:fixed;right:16px;bottom:72px;width:min(360px,calc(100vw - 32px));max-height:42vh;overflow:auto;z-index:6;padding:16px 18px;border:1px solid var(--line);border-radius:10px;background:#fffffff5;color:var(--ink);box-shadow:0 10px 40px #20242b18}
 .presenter-notes[hidden]{display:none}
-.presenter-notes-label{font-size:12px;letter-spacing:1px;color:var(--red);font-weight:600;margin-bottom:8px}
+.presenter-notes-chrome{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:8px}
+.presenter-notes-label{font-size:12px;letter-spacing:1px;color:var(--red);font-weight:600;margin:0}
+.presenter-timer{font:600 13px/1 Consolas,monospace;color:var(--ink);letter-spacing:.5px;padding:4px 8px;border:1px solid var(--line);border-radius:4px;background:var(--surface-3)}
 .presenter-notes p{margin:0 0 12px;font-size:15px;line-height:1.5;white-space:pre-wrap}
 .presenter-notes-next,.presenter-notes-tip{font-size:12px;color:var(--muted);line-height:1.4}
 .presenter-notes-tip{margin-top:10px}
+body.laser-on{cursor:none}
+body.laser-on::after{content:"";position:fixed;left:var(--laser-x,50%);top:var(--laser-y,50%);width:14px;height:14px;margin:-7px 0 0 -7px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#ff6b6b 0%,var(--red) 55%,#7a0006 100%);box-shadow:0 0 10px #c7000b88,0 0 2px #c7000b;pointer-events:none;z-index:20;opacity:.92;transition:opacity .15s ease}
+body.laser-reduced{cursor:crosshair}
+@media (prefers-reduced-motion:reduce){
+ body.laser-on{cursor:crosshair}
+ body.laser-on::after{display:none!important}
+}
 @media print{.presenter-notes,.keyboard-help{display:none!important}}
 .keyboard-help{width:min(420px,92vw);padding:28px 28px 24px}
 .keyboard-help .dialog-header{margin-bottom:18px}

@@ -87,14 +87,83 @@ def add_bullets(slide, lines, RGBColor, Pt, Inches, top=1.65):
         set_run(run, line, size=Pt(16), color=RGBColor(*INK))
 
 
+def add_native_table(slide, headers, rows, RGBColor, Inches, Pt):
+    cols = max(1, len(headers))
+    row_count = 1 + len(rows)
+    table_shape = slide.shapes.add_table(
+        row_count, cols, Inches(0.7), Inches(1.7), Inches(12.0), Inches(min(5.2, 0.42 * row_count + 0.6))
+    )
+    table = table_shape.table
+    for c, header in enumerate(headers):
+        cell = table.cell(0, c)
+        cell.text = header
+        for paragraph in cell.text_frame.paragraphs:
+            for run in paragraph.runs:
+                set_run(run, run.text, size=Pt(13), bold=True, color=RGBColor(*INK))
+        cell.fill.solid()
+        cell.fill.fore_color.rgb = RGBColor(243, 244, 246)
+    for r, row in enumerate(rows, start=1):
+        for c in range(cols):
+            value = row[c] if c < len(row) else ''
+            cell = table.cell(r, c)
+            cell.text = value
+            for paragraph in cell.text_frame.paragraphs:
+                for run in paragraph.runs:
+                    set_run(run, run.text, size=Pt(12), bold=(c == 0), color=RGBColor(*INK))
+
+
+def add_cover_slide(s, slide, deck, lang, RGBColor, Pt, Inches):
+    from pptx.enum.shapes import MSO_SHAPE
+    rule = s.shapes.add_shape(MSO_SHAPE.RECTANGLE, Inches(0.7), Inches(2.15), Inches(0.9), Inches(0.08))
+    rule.fill.solid()
+    rule.fill.fore_color.rgb = RGBColor(*RED)
+    rule.line.fill.background()
+    title = pick(slide.get('title'), lang) or pick(deck.get('title'), lang)
+    subtitle = pick(slide.get('subtitle'), lang)
+    tagline = pick(slide.get('tagline'), lang) or pick(deck.get('brandLabel'), lang) or 'HUAWEI CLOUD'
+    eyebrow = pick(slide.get('eyebrow'), lang) or 'PRODUCT BRIEFING'
+    add_title(s, title, subtitle, RGBColor, Pt, Inches, cover=True)
+    box = s.shapes.add_textbox(Inches(0.7), Inches(4.5), Inches(12.0), Inches(1.2))
+    tf = box.text_frame
+    tf.clear()
+    p = tf.paragraphs[0]
+    run = p.add_run()
+    set_run(run, eyebrow, size=Pt(14), bold=True, color=RGBColor(*RED))
+    p2 = tf.add_paragraph()
+    run2 = p2.add_run()
+    set_run(run2, tagline, size=Pt(18), color=RGBColor(*MUTED))
+
+
+def add_closing_slide(s, slide, lang, RGBColor, Pt, Inches):
+    from pptx.enum.shapes import MSO_SHAPE
+    thanks = slide.get('thanks') or {}
+    vision = slide.get('vision') or {}
+    title = pick(thanks, lang) or pick(thanks, 'en') or 'Thank You'
+    vision_text = pick(vision, lang)
+    left = s.shapes.add_textbox(Inches(0.7), Inches(2.2), Inches(5.5), Inches(2.5))
+    tf = left.text_frame
+    tf.clear()
+    p = tf.paragraphs[0]
+    run = p.add_run()
+    set_run(run, title, size=Pt(44), bold=True, color=RGBColor(*INK))
+    if vision_text:
+        right = s.shapes.add_textbox(Inches(6.8), Inches(2.0), Inches(5.8), Inches(3.5))
+        rtf = right.text_frame
+        rtf.word_wrap = True
+        rtf.clear()
+        p = rtf.paragraphs[0]
+        run = p.add_run()
+        set_run(run, vision_text.replace('\\n', '\n'), size=Pt(16), color=RGBColor(*MUTED))
+    accent = s.shapes.add_shape(MSO_SHAPE.RECTANGLE, Inches(6.5), Inches(2.1), Inches(0.06), Inches(3.2))
+    accent.fill.solid()
+    accent.fill.fore_color.rgb = RGBColor(*RED)
+    accent.line.fill.background()
+
+
 def slide_lines(slide: dict, lang: str) -> list[str]:
     kind = slide.get('type')
     lines: list[str] = []
     if kind == 'cover':
-        if slide.get('eyebrow'):
-            lines.append(pick(slide['eyebrow'], lang))
-        if slide.get('tagline'):
-            lines.append(pick(slide['tagline'], lang))
         return lines
     if kind == 'cards':
         for i, card in enumerate(slide.get('cards') or [], 1):
@@ -114,11 +183,6 @@ def slide_lines(slide: dict, lang: str) -> list[str]:
             for b in col.get('bullets') or []:
                 lines.append(f'  • {pick(b, lang)}')
     elif kind == 'table':
-        headers = [pick(h, lang) for h in slide.get('headers') or []]
-        if headers:
-            lines.append(' | '.join(headers))
-        for row in slide.get('rows') or []:
-            lines.append(' | '.join(pick(c, lang) for c in row))
         if slide.get('note'):
             lines.append(pick(slide['note'], lang))
     elif kind == 'timeline':
@@ -148,11 +212,24 @@ def slide_lines(slide: dict, lang: str) -> list[str]:
     elif kind == 'scenarios':
         for sc in slide.get('scenarios') or []:
             lines.append(f'{pick(sc.get("label"), lang)} — {pick(sc.get("body"), lang)}')
+    elif kind == 'agenda':
+        for i, item in enumerate(slide.get('items') or [], 1):
+            label = pick(item.get('label'), lang)
+            when = pick(item.get('time'), lang)
+            lines.append(f'{i:02}. {label}' + (f' · {when}' if when else ''))
+    elif kind == 'quote':
+        lines.append(f'“{pick(slide.get("quote"), lang)}”')
+        attr = pick(slide.get('attribution'), lang)
+        role = pick(slide.get('role'), lang)
+        if attr:
+            lines.append('— ' + attr + (f' · {role}' if role else ''))
+    elif kind == 'tabs':
+        for tab in slide.get('tabs') or []:
+            lines.append(f'{pick(tab.get("label"), lang)} — {pick(tab.get("body"), lang)}')
+            for b in tab.get('bullets') or []:
+                lines.append(f'  • {pick(b, lang)}')
     elif kind == 'closing':
-        thanks = slide.get('thanks') or {}
-        vision = slide.get('vision') or {}
-        lines.append(pick(thanks, lang) or pick(thanks, 'en'))
-        lines.append(pick(vision, lang))
+        return lines
     elif kind == 'custom':
         lines.append(f'Custom fragment: {slide.get("fragment", "")}')
     else:
@@ -170,18 +247,26 @@ def build(deck: dict, lang: str, output: Path):
         s = prs.slides.add_slide(blank)
         add_accent_bar(s, RGBColor, Inches)
         kind = slide.get('type')
-        title = pick(slide.get('title'), lang) or pick(deck.get('title'), lang)
-        subtitle = pick(slide.get('subtitle'), lang) or pick(slide.get('tagline'), lang)
-        if kind == 'closing':
-            thanks = slide.get('thanks') or {}
-            title = pick(thanks, lang) or pick(thanks, 'en') or title
-            subtitle = pick(slide.get('vision'), lang)
-        add_title(s, title, subtitle, RGBColor, Pt, Inches, cover=(kind in {'cover', 'closing'}))
-        lines = slide_lines(slide, lang)
-        if lines and kind not in {'cover', 'closing'}:
-            add_bullets(s, lines, RGBColor, Pt, Inches)
-        elif lines and kind == 'cover':
-            add_bullets(s, lines, RGBColor, Pt, Inches, top=4.2)
+        if kind == 'cover':
+            add_cover_slide(s, slide, deck, lang, RGBColor, Pt, Inches)
+        elif kind == 'closing':
+            add_closing_slide(s, slide, lang, RGBColor, Pt, Inches)
+        else:
+            title = pick(slide.get('title'), lang) or pick(deck.get('title'), lang)
+            subtitle = pick(slide.get('subtitle'), lang)
+            add_title(s, title, subtitle, RGBColor, Pt, Inches, cover=False)
+            if kind == 'table':
+                headers = [pick(h, lang) for h in slide.get('headers') or []]
+                rows = [[pick(c, lang) for c in row] for row in (slide.get('rows') or [])]
+                if headers:
+                    add_native_table(s, headers, rows, RGBColor, Inches, Pt)
+                note_lines = slide_lines(slide, lang)
+                if note_lines:
+                    add_bullets(s, note_lines, RGBColor, Pt, Inches, top=6.4)
+            else:
+                lines = slide_lines(slide, lang)
+                if lines:
+                    add_bullets(s, lines, RGBColor, Pt, Inches)
         notes = pick(slide.get('notes'), lang)
         if notes:
             s.notes_slide.notes_text_frame.text = notes
