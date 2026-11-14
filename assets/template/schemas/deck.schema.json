@@ -132,6 +132,9 @@
         },
         "footer": {
           "$ref": "#/$defs/text"
+        },
+        "notes": {
+          "$ref": "#/$defs/text"
         }
       }
     },

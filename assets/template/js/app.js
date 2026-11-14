@@ -14,6 +14,14 @@
   const byId = id => document.getElementById(id);
   let idleTimer, toastTimer, returnFocus;
   let pointerAtBottom = false, keyboardControls = false;
+  let presenterMode = false;
+  try { presenterMode = new URLSearchParams(location.search).get('presenter') === '1'; } catch { /* ignore */ }
+  const notesPanel = document.createElement('aside');
+  notesPanel.id = 'presenter-notes';
+  notesPanel.className = 'presenter-notes';
+  notesPanel.hidden = true;
+  notesPanel.setAttribute('aria-label', '演示备注');
+  document.body.append(notesPanel);
 
   function cutHiddenKeys() {
     try {
@@ -205,7 +213,30 @@
     try { if (location.hash !== hash) history.replaceState(null, '', hash); } catch { location.hash = hash; }
     try { localStorage.setItem(storageKey, JSON.stringify({ index: state.index, step: state.step })); } catch { /* Private browsers can still present. */ }
     if (dialog.open) refreshThumbnails();
+    refreshPresenterNotes();
     document.dispatchEvent(new CustomEvent('deckpagechange', { detail: { index: state.index } }));
+  }
+  function refreshPresenterNotes() {
+    notesPanel.hidden = !presenterMode;
+    document.body.classList.toggle('presenter-mode', presenterMode);
+    if (!presenterMode) { notesPanel.replaceChildren(); return; }
+    const slide = slides[state.index];
+    const nextVisible = state.visibleIndices.find(index => index > state.index);
+    const next = nextVisible === undefined ? null : slides[nextVisible];
+    const title = document.createElement('div');
+    title.className = 'presenter-notes-label';
+    title.textContent = '演示备注';
+    const body = document.createElement('p');
+    body.textContent = slide.dataset.notes || '—';
+    const upcoming = document.createElement('div');
+    upcoming.className = 'presenter-notes-next';
+    upcoming.textContent = next
+      ? `下一页预告：${String(nextVisible + 1).padStart(2, '0')} ${next.dataset.title || ''}`
+      : '下一页预告：—';
+    const tip = document.createElement('div');
+    tip.className = 'presenter-notes-tip';
+    tip.textContent = '按 N 关闭备注';
+    notesPanel.replaceChildren(title, body, upcoming, tip);
   }
   function move(direction) { direction > 0 ? state.next() : state.previous(); render(); wake(); }
   function openOverview() {
@@ -293,6 +324,17 @@
     else if (event.key === 'End') { event.preventDefault(); state.jump(state.visibleIndices.at(-1)); render(); }
     else if (event.key.toLowerCase() === 'g') { event.preventDefault(); openOverview(); }
     else if (event.key.toLowerCase() === 'f') { event.preventDefault(); toggleFullscreen(); }
+    else if (event.key.toLowerCase() === 'n') {
+      event.preventDefault();
+      presenterMode = !presenterMode;
+      try {
+        const url = new URL(location.href);
+        if (presenterMode) url.searchParams.set('presenter', '1');
+        else url.searchParams.delete('presenter');
+        history.replaceState(null, '', url);
+      } catch { /* ignore */ }
+      refreshPresenterNotes();
+    }
   });
   let touchStart = null;
   byId('viewport').addEventListener('touchstart', event => { if (!event.target.closest('button,a,input,textarea,select,[contenteditable],video,iframe')) touchStart = { x: event.changedTouches[0].clientX, y: event.changedTouches[0].clientY }; }, { passive: true });

@@ -34,7 +34,10 @@ translations={
  '场景切换':'Scenario switcher',
  '当前浏览器不支持网页全屏，可使用浏览器的全屏功能。':'Use your browser fullscreen mode.',
  '全屏未能开启，可使用浏览器的全屏功能。':'Use your browser fullscreen mode.',
- '快捷键：← → 翻页 · G 目录 · F 全屏 · EN 语言':'Shortcuts: ← → navigate · G overview · F fullscreen · EN language'
+ '快捷键：← → 翻页 · G 目录 · F 全屏 · EN 语言':'Shortcuts: ← → navigate · G overview · F fullscreen · EN language',
+ '演示备注':'Presenter notes',
+ '下一页预告':'Up next',
+ '按 N 关闭备注':'Press N to hide notes'
 }
 def source(value):
  if isinstance(value,dict):
@@ -199,7 +202,8 @@ for i,s in enumerate(D['slides']):
  else:
   content=header+f'<div class="heading"><div class="eyebrow">{text(s.get("eyebrow","PRODUCT CAPABILITIES"))}</div><h2>{title}</h2><p>{text(s.get("subtitle",""))}</p></div><div class="kit-body">'+body(s)+'</div>'+f'<footer class="slide-footer"><span>{text(s.get("footer",D.get("footer","HUAWEI CLOUD")))}</span><span>{n}</span></footer>'
   cls='kit-slide'
- slides.append(f'<section class="slide {cls}{" active" if i==0 else ""}" data-slide-id="{text(s["id"])}" data-title="{title}" data-section="{section}" aria-label="第 {i+1} 页：{title}">{content}</section>')
+ notes_attr=(' data-notes="'+text(s['notes'])+'"') if s.get('notes') else ''
+ slides.append(f'<section class="slide {cls}{" active" if i==0 else ""}" data-slide-id="{text(s["id"])}" data-title="{title}" data-section="{section}"{notes_attr} aria-label="第 {i+1} 页：{title}">{content}</section>')
 
 cuts={}
 for name,preset in (D.get('cuts') or {}).items():

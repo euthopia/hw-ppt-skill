@@ -1,0 +1,12 @@
+{
+  "name": "huawei-product-slides-skill",
+  "private": true,
+  "version": "1.1.0",
+  "description": "Agent Skill: Huawei bilingual HTML product briefing runtime",
+  "scripts": {
+    "test": "node --test tests/*.test.cjs",
+    "test:template": "npm --prefix assets/template test",
+    "audit": "node assets/template/tools/python-cmd.cjs scripts/audit.py",
+    "sync:scenes": "node assets/template/tools/python-cmd.cjs scripts/sync_scene_controller.py"
+  }
+}
