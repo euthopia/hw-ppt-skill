@@ -12,59 +12,34 @@
   },
   "chapters": [
     {
-      "label": {
-        "zh": "定位",
-        "en": "Positioning"
-      },
-      "section": {
-        "zh": "产品定位",
-        "en": "Product positioning"
-      }
+      "label": { "zh": "定位", "en": "Positioning" },
+      "section": { "zh": "产品定位", "en": "Product positioning" }
     },
     {
-      "label": {
-        "zh": "价值",
-        "en": "Value"
-      },
-      "section": {
-        "zh": "客户价值",
-        "en": "Customer value"
-      }
+      "label": { "zh": "价值", "en": "Value" },
+      "section": { "zh": "客户价值", "en": "Customer value" }
     },
     {
-      "label": {
-        "zh": "方式",
-        "en": "How"
-      },
-      "section": {
-        "zh": "工作方式",
-        "en": "How it works"
-      }
+      "label": { "zh": "方式", "en": "How" },
+      "section": { "zh": "工作方式", "en": "How it works" }
+    },
+    {
+      "label": { "zh": "证明", "en": "Proof" },
+      "section": { "zh": "对照与买家视角", "en": "Contrast & buyer lenses" }
     }
   ],
   "cuts": {
     "exec": {
-      "label": {
-        "zh": "高管精简",
-        "en": "Executive cut"
-      },
-      "hidden": [
-        "workflow"
-      ]
+      "label": { "zh": "高管精简", "en": "Executive cut" },
+      "hidden": ["agenda", "workflow", "buyer-tabs"]
     }
   },
   "slides": [
     {
       "type": "cover",
       "id": "cover",
-      "section": {
-        "zh": "产品定位",
-        "en": "Product positioning"
-      },
-      "title": {
-        "zh": "CodeArts Agent",
-        "en": "CodeArts Agent"
-      },
+      "section": { "zh": "产品定位", "en": "Product positioning" },
+      "title": { "zh": "CodeArts Agent", "en": "CodeArts Agent" },
       "eyebrow": {
         "zh": "华为云 · 国际产品简介",
         "en": "HUAWEI CLOUD · International product briefing"
@@ -76,56 +51,78 @@
       "tagline": "HUAWEI CLOUD · CODEARTS",
       "background": "云山",
       "notes": {
-        "zh": "开场强调国际买家语境：研发效能、工具链协同、企业可控，不谈未核实的价格与 SLA。",
+        "zh": "开场强调国际买家语境：研发效能、工具链协同、企业可控；不谈未核实的价格与 SLA。",
         "en": "Open on overseas buyer context: engineering productivity, toolchain fit, and enterprise control—no unverified price or SLA claims."
       }
     },
     {
+      "type": "agenda",
+      "id": "agenda",
+      "section": { "zh": "产品定位", "en": "Product positioning" },
+      "title": { "zh": "今日议程", "en": "Today's agenda" },
+      "subtitle": {
+        "zh": "一条紧凑的销售叙事：价值 → 方式 → 对照 → 下一步。",
+        "en": "A tight sales arc: value → how it works → contrast → next step."
+      },
+      "eyebrow": "AGENDA",
+      "notes": {
+        "zh": "高管精简切面会隐藏本页；完整版用于发现会开场对齐。",
+        "en": "Hidden on the executive cut; use the full deck to align discovery workshops."
+      },
+      "items": [
+        {
+          "label": { "zh": "国际买家为何关注", "en": "Why international buyers care" },
+          "time": { "zh": "价值", "en": "Value" }
+        },
+        {
+          "label": { "zh": "从意图到可交付变更", "en": "From intent to shippable change" },
+          "time": { "zh": "方式", "en": "How" }
+        },
+        {
+          "label": { "zh": "交付路径前后对照", "en": "Delivery-path before & after" },
+          "time": { "zh": "对照", "en": "Contrast" }
+        },
+        {
+          "label": { "zh": "三类买家对话要点", "en": "Three buyer conversation lenses" },
+          "time": { "zh": "视角", "en": "Lenses" }
+        },
+        {
+          "label": { "zh": "下一步：发现会 / PoC 范围", "en": "Next step: discovery / PoC scope" },
+          "time": { "zh": "行动", "en": "Action" }
+        }
+      ]
+    },
+    {
       "type": "cards",
       "id": "value",
-      "section": {
-        "zh": "客户价值",
-        "en": "Customer value"
-      },
-      "title": {
-        "zh": "国际买家为何关注",
-        "en": "Why international buyers care"
-      },
+      "section": { "zh": "客户价值", "en": "Customer value" },
+      "title": { "zh": "国际买家为何关注", "en": "Why international buyers care" },
       "subtitle": {
-        "zh": "用可验证的交付结果说话；具体区域合规与容量请以正式材料为准。",
+        "zh": "用可验证的交付结果说话；区域合规与容量请以正式材料为准。",
         "en": "Speak in verifiable delivery outcomes; treat region-specific compliance and capacity as confirm-with-marketing."
       },
       "eyebrow": "PRODUCT VALUE",
       "notes": {
-        "zh": "三张卡片分别对应速度、在岗体验、治理姿态；避免承诺具体加速百分比。",
+        "zh": "三张卡片对应速度、在岗体验、治理姿态；避免承诺具体加速百分比。",
         "en": "Three cards map to speed, in-flow experience, and governance posture; avoid inventing acceleration percentages."
       },
       "cards": [
         {
-          "title": {
-            "zh": "缩短交付路径",
-            "en": "Shorten the path to merge"
-          },
+          "title": { "zh": "缩短交付路径", "en": "Shorten the path to merge" },
           "body": {
             "zh": "在需求澄清、实现与评审环节提供 AI 辅助，帮助团队更快形成可审查、可合并的变更。",
             "en": "Assist clarification, implementation, and review so teams reach inspectable, merge-ready changes with less thrash."
           }
         },
         {
-          "title": {
-            "zh": "留在研发主路径",
-            "en": "Stay inside the engineering flow"
-          },
+          "title": { "zh": "留在研发主路径", "en": "Stay inside the engineering flow" },
           "body": {
             "zh": "围绕编码、评审与文档协同提供协助，减少在工具之间来回切换造成的上下文丢失。",
             "en": "Support coding, review, and documentation collaboration—reducing context loss from constant tool-switching."
           }
         },
         {
-          "title": {
-            "zh": "面向企业治理姿态",
-            "en": "Enterprise-ready governance"
-          },
+          "title": { "zh": "面向企业治理姿态", "en": "Enterprise-ready governance" },
           "body": {
             "zh": "按组织工作流与可控边界设计（权限、审计与团队协作约定以正式方案与部署区域为准）。",
             "en": "Designed for organizational workflows and controllable boundaries—permissions, auditability, and team conventions (confirm per formal proposal and deployment region)."
@@ -136,14 +133,8 @@
     {
       "type": "workflow",
       "id": "workflow",
-      "section": {
-        "zh": "工作方式",
-        "en": "How it works"
-      },
-      "title": {
-        "zh": "从意图到可交付变更",
-        "en": "From intent to shippable change"
-      },
+      "section": { "zh": "工作方式", "en": "How it works" },
+      "title": { "zh": "从意图到可交付变更", "en": "From intent to shippable change" },
       "subtitle": {
         "zh": "一条可讲解的协作闭环；具体集成清单以 PoC 范围为准。",
         "en": "A presentable collaboration loop; treat concrete integrations as PoC-scoped."
@@ -155,43 +146,31 @@
       },
       "steps": [
         {
-          "title": {
-            "zh": "理解意图",
-            "en": "Understand intent"
-          },
+          "title": { "zh": "理解意图", "en": "Understand intent" },
           "body": {
             "zh": "把业务目标与约束转成可执行的研发任务描述。",
             "en": "Turn business goals and constraints into actionable engineering task framing."
           }
         },
         {
-          "title": {
-            "zh": "规划与拆解",
-            "en": "Plan & decompose"
-          },
+          "title": { "zh": "规划与拆解", "en": "Plan & decompose" },
           "body": {
             "zh": "形成步骤化方案，明确改动面与验收关注点。",
             "en": "Produce a step-wise plan with change surface and acceptance focus."
           }
         },
         {
-          "title": {
-            "zh": "生成与精炼",
-            "en": "Generate & refine"
-          },
+          "title": { "zh": "生成与精炼", "en": "Generate & refine" },
           "body": {
             "zh": "辅助实现与迭代，保持人类在环审查。",
             "en": "Assist implementation and iteration while keeping humans in the review loop."
           }
         },
         {
-          "title": {
-            "zh": "评审与交接",
-            "en": "Review & handoff"
-          },
+          "title": { "zh": "评审与交接", "en": "Review & handoff" },
           "body": {
             "zh": "沉淀可审查结果，进入团队既有合并与发布流程。",
-            "en": "Land reviewable outcomes into the team’s existing merge and release process."
+            "en": "Land reviewable outcomes into the team's existing merge and release process."
           }
         }
       ],
@@ -201,20 +180,108 @@
       }
     },
     {
+      "type": "before-after",
+      "id": "contrast",
+      "section": { "zh": "对照与买家视角", "en": "Contrast & buyer lenses" },
+      "title": { "zh": "交付路径前后对照", "en": "Delivery-path before & after" },
+      "subtitle": {
+        "zh": "叙事对照，非基准测试；量化收益请在 PoC 中按客户基线测量。",
+        "en": "Narrative contrast—not a benchmark. Measure gains against the customer's baseline in a PoC."
+      },
+      "eyebrow": "BEFORE → AFTER",
+      "notes": {
+        "zh": "左侧讲碎片化与返工，右侧讲意图驱动与人类在环；不要编造加速百分比。",
+        "en": "Left = fragmentation and rework; right = intent-driven flow with humans in the loop—no invented acceleration %."
+      },
+      "before": {
+        "label": { "zh": "之前", "en": "Before" },
+        "title": { "zh": "碎片化交付", "en": "Fragmented delivery" },
+        "body": {
+          "zh": "意图、实现与评审分散在多处工具与对话里，上下文反复丢失。",
+          "en": "Intent, implementation, and review live across scattered tools and threads—context resets constantly."
+        },
+        "bullets": [
+          { "zh": "需求澄清与编码脱节，返工成本高", "en": "Clarification and coding drift apart; rework cost stays high" },
+          { "zh": "评审材料不完整，合并前反复补洞", "en": "Incomplete review artifacts force last-mile patching before merge" },
+          { "zh": "治理靠人工追问，难形成可审计闭环", "en": "Governance relies on ad-hoc chase-downs instead of an auditable loop" }
+        ]
+      },
+      "after": {
+        "label": { "zh": "之后", "en": "After" },
+        "title": { "zh": "Agent 辅助闭环", "en": "Agent-assisted loop" },
+        "body": {
+          "zh": "从意图到可审查变更保持同一条讲解路径，人类仍掌握合并决策。",
+          "en": "One briefable path from intent to inspectable change—humans keep the merge decision."
+        },
+        "bullets": [
+          { "zh": "任务框架更清晰，改动面更早对齐", "en": "Clearer task framing; change surface aligned earlier" },
+          { "zh": "生成与精炼留在研发主路径，减少切换损耗", "en": "Generate-and-refine stays in the engineering flow; less switch cost" },
+          { "zh": "可审查结果进入既有合并与发布流程", "en": "Reviewable outcomes land in existing merge and release process" }
+        ]
+      }
+    },
+    {
+      "type": "tabs",
+      "id": "buyer-tabs",
+      "section": { "zh": "对照与买家视角", "en": "Contrast & buyer lenses" },
+      "title": { "zh": "三类买家对话要点", "en": "Three buyer conversation lenses" },
+      "subtitle": {
+        "zh": "按角色切换讲法；具体区域合规、集成清单与商务条款为占位—以正式方案为准。",
+        "en": "Switch the story by role. Region compliance, integration lists, and commercial terms are placeholders—confirm in the formal proposal."
+      },
+      "eyebrow": "BUYER LENSES",
+      "notes": {
+        "zh": "用页签切换 Engineering / Platform / Governance；高管精简切面隐藏本页。",
+        "en": "Tab through Engineering / Platform / Governance; hidden on the executive cut."
+      },
+      "tabs": [
+        {
+          "id": "eng-lead",
+          "label": { "zh": "工程负责人", "en": "Engineering lead" },
+          "body": {
+            "zh": "关注交付节奏与质量门禁：更少上下文切换，更快形成可合并变更，同时保留人工评审。",
+            "en": "Care about cadence and quality gates: less context-switching, faster path to merge-ready change, humans still review."
+          },
+          "bullets": [
+            { "zh": "把业务意图转成可执行任务框架", "en": "Turn business intent into actionable task framing" },
+            { "zh": "实现与评审协助留在研发主路径", "en": "Keep implementation and review assist inside the engineering flow" },
+            { "zh": "[占位] 与现有 IDE / Git 工作流的对接范围在 PoC 中确认", "en": "[Placeholder] Confirm IDE / Git workflow fit inside PoC scope" }
+          ]
+        },
+        {
+          "id": "platform",
+          "label": { "zh": "平台与工具链", "en": "Platform & toolchain" },
+          "body": {
+            "zh": "关注可嵌入性与边界：Agent 应增强既有流水线，而不是另起一套影子流程。",
+            "en": "Care about embeddability and boundaries: the agent should reinforce the existing pipeline—not spawn a shadow process."
+          },
+          "bullets": [
+            { "zh": "围绕编码、评审与文档协同设计协助点", "en": "Assist points around coding, review, and documentation collaboration" },
+            { "zh": "结果交接回团队既有合并与发布路径", "en": "Handoff outcomes back into the team's merge and release path" },
+            { "zh": "[占位] 具体集成清单与环境拓扑以 PoC 与架构评审为准", "en": "[Placeholder] Concrete integrations and topology confirmed in PoC / architecture review" }
+          ]
+        },
+        {
+          "id": "governance",
+          "label": { "zh": "治理与采购", "en": "Governance & procurement" },
+          "body": {
+            "zh": "关注可控边界与可审计姿态：权限、协作约定与区域合规需在正式材料中落定。",
+            "en": "Care about controllable boundaries and audit posture: permissions, collaboration norms, and regional compliance land in formal materials."
+          },
+          "bullets": [
+            { "zh": "按组织工作流设计，强调人类在环决策", "en": "Designed for organizational workflow with humans-in-the-loop decisions" },
+            { "zh": "[占位] 部署区域、数据驻留与合规声明—确认产品市场与法务", "en": "[Placeholder] Deployment region, residency, and compliance statements—confirm with product marketing / legal" },
+            { "zh": "[占位] 商务条款、容量与 SLA—不以本页承诺", "en": "[Placeholder] Commercial terms, capacity, and SLAs—not committed on this slide" }
+          ]
+        }
+      ]
+    },
+    {
       "type": "closing",
       "id": "thank-you",
-      "section": {
-        "zh": "结束",
-        "en": "Closing"
-      },
-      "title": {
-        "zh": "致谢",
-        "en": "Thank You"
-      },
-      "thanks": {
-        "zh": "",
-        "en": "Thank You"
-      },
+      "section": { "zh": "结束", "en": "Closing" },
+      "title": { "zh": "致谢", "en": "Thank You" },
+      "thanks": { "zh": "", "en": "Thank You" },
       "visionLabel": "",
       "vision": {
         "zh": "把数字世界带入每个人、每个家庭、\n每个组织，构建万物互联的智能世界。",
