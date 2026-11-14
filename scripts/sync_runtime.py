@@ -7,7 +7,7 @@ RUNTIME_PATHS = [
     'js/pricing-table.js', 'js/pricing-boot.js', 'js/scenario-switcher.js',
     'css/styles.css', 'css/components.css', 'css/english.css', 'css/recipes.css',
     'content/shell.html', 'tools/render.py', 'tools/python-cmd.cjs',
-    'tools/build.py', 'tools/export.cjs', 'tools/slide-selection.cjs',
+    'tools/build.py', 'tools/export.cjs', 'tools/export_pptx.py', 'tools/slide-selection.cjs',
     'schemas/deck.schema.json', 'package.json',
 ]
 
