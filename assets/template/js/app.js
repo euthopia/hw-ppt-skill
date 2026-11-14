@@ -23,6 +23,33 @@
   notesPanel.setAttribute('aria-label', '演示备注');
   document.body.append(notesPanel);
 
+  const helpDialog = document.createElement('dialog');
+  helpDialog.id = 'keyboard-help';
+  helpDialog.className = 'keyboard-help';
+  helpDialog.setAttribute('aria-labelledby', 'keyboard-help-title');
+  helpDialog.innerHTML = [
+    '<div class="dialog-header"><div><div class="eyebrow">SHORTCUTS</div>',
+    '<h2 id="keyboard-help-title">快捷键对照</h2></div>',
+    '<button type="button" class="icon-button" data-help-close aria-label="关闭快捷键对照">×</button></div>',
+    '<ul class="keyboard-help-list">',
+    '<li><kbd>←</kbd><kbd>→</kbd><span>翻页</span></li>',
+    '<li><kbd>G</kbd><span>目录</span></li>',
+    '<li><kbd>N</kbd><span>演示备注</span></li>',
+    '<li><kbd>F</kbd><span>全屏</span></li>',
+    '<li><kbd>?</kbd><span>本对照表</span></li>',
+    '<li><kbd>Esc</kbd><span>关闭对话框</span></li>',
+    '</ul>',
+    '<p class="keyboard-help-tip">URL 参数：?cut=名称 分享切片；?presenter=1 打开备注。</p>',
+  ].join('');
+  document.body.append(helpDialog);
+  helpDialog.querySelector('[data-help-close]').addEventListener('click', () => helpDialog.close());
+  function openKeyboardHelp() {
+    if (dialog.open) return;
+    returnFocus = document.activeElement;
+    helpDialog.showModal();
+    helpDialog.querySelector('[data-help-close]').focus();
+  }
+
   function cutHiddenKeys() {
     try {
       const cut = new URLSearchParams(location.search).get('cut');
@@ -313,6 +340,11 @@
       keyboardControls = true; wake(true);
       if (wasHidden) { event.preventDefault(); controls.querySelector('button:not(:disabled)').focus(); }
     }
+    if (helpDialog.open && (event.key === '?' || event.key === '/')) {
+      event.preventDefault();
+      helpDialog.close();
+      return;
+    }
     if (document.querySelector("dialog[open]") || event.ctrlKey || event.altKey || event.metaKey || event.repeat) return;
     if (event.target.closest('input,textarea,select,[contenteditable="true"]')) return;
     if (event.key === ' ' && event.target.closest('button,a')) return;
@@ -324,6 +356,10 @@
     else if (event.key === 'End') { event.preventDefault(); state.jump(state.visibleIndices.at(-1)); render(); }
     else if (event.key.toLowerCase() === 'g') { event.preventDefault(); openOverview(); }
     else if (event.key.toLowerCase() === 'f') { event.preventDefault(); toggleFullscreen(); }
+    else if (event.key === '?' || (event.key === '/' && event.shiftKey)) {
+      event.preventDefault();
+      openKeyboardHelp();
+    }
     else if (event.key.toLowerCase() === 'n') {
       event.preventDefault();
       presenterMode = !presenterMode;
@@ -335,6 +371,10 @@
       } catch { /* ignore */ }
       refreshPresenterNotes();
     }
+  });
+  helpDialog.addEventListener('close', () => {
+    if (returnFocus?.isConnected) returnFocus.focus();
+    wake();
   });
   let touchStart = null;
   byId('viewport').addEventListener('touchstart', event => { if (!event.target.closest('button,a,input,textarea,select,[contenteditable],video,iframe')) touchStart = { x: event.changedTouches[0].clientX, y: event.changedTouches[0].clientY }; }, { passive: true });
@@ -355,7 +395,7 @@
   try {
     if (!localStorage.getItem(hintKey)) {
       localStorage.setItem(hintKey, '1');
-      toast('快捷键：← → 翻页 · G 目录 · F 全屏 · EN 语言');
+      toast('快捷键：← → 翻页 · G 目录 · N 备注 · F 全屏 · ? 对照 · EN 语言');
     }
   } catch { /* ignore private mode */ }
 })();

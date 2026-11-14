@@ -5,8 +5,8 @@ import {readFile,mkdtemp,rm} from 'node:fs/promises';
 import {execFileSync} from 'node:child_process';
 import path from 'node:path';
 import {tmpdir} from 'node:os';
-const python=process.env.PYTHON_EXECUTABLE||'python3';
-execFileSync(python,['tools/render.py']);execFileSync(python,['tools/build.py']);
+const py=(...args)=>execFileSync(process.execPath,['tools/python-cmd.cjs',...args],{stdio:'pipe'});
+py('tools/render.py');py('tools/build.py');
 test('offline bundle contains all runtime code and local images',async()=>{
  const html=await readFile('dist/offline/presentation.html','utf8');
  assert.ok(html.includes('global.DeckNavigation'));assert.ok(html.includes('window.DeckConfig'));assert.ok(html.includes('window.DeckI18n'));

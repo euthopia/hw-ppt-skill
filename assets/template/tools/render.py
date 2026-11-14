@@ -35,9 +35,18 @@ translations={
  '当前浏览器不支持网页全屏，可使用浏览器的全屏功能。':'Use your browser fullscreen mode.',
  '全屏未能开启，可使用浏览器的全屏功能。':'Use your browser fullscreen mode.',
  '快捷键：← → 翻页 · G 目录 · F 全屏 · EN 语言':'Shortcuts: ← → navigate · G overview · F fullscreen · EN language',
+ '快捷键：← → 翻页 · G 目录 · N 备注 · F 全屏 · ? 对照 · EN 语言':'Shortcuts: ← → navigate · G overview · N notes · F fullscreen · ? help · EN language',
  '演示备注':'Presenter notes',
  '下一页预告':'Up next',
- '按 N 关闭备注':'Press N to hide notes'
+ '按 N 关闭备注':'Press N to hide notes',
+ '快捷键对照':'Keyboard shortcuts',
+ '关闭快捷键对照':'Close shortcuts',
+ '翻页':'Navigate',
+ '目录':'Overview',
+ '全屏':'Fullscreen',
+ '本对照表':'This cheat sheet',
+ '关闭对话框':'Close dialog',
+ 'URL 参数：?cut=名称 分享切片；?presenter=1 打开备注。':'URL params: ?cut=name for a shareable cut; ?presenter=1 for notes.',
 }
 def source(value):
  if isinstance(value,dict):

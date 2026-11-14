@@ -1,7 +1,7 @@
 {
   "name": "huawei-product-slides-skill",
   "private": true,
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Agent Skill: Huawei bilingual HTML product briefing runtime",
   "scripts": {
     "test": "node --test tests/*.test.cjs",

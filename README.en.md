@@ -13,7 +13,7 @@ Built for product introductions, architecture briefings, comparisons, packaging,
 | Interactive HTML deck | Browser presentation with navigation, TOC, language toggle, fullscreen |
 | Offline single-file HTML | Images/CSS/JS inlined — save and open anywhere |
 | PDF | One-command Chinese, English, or both — static 16:9 pages |
-| Editable PPTX | `deck.json` → PowerPoint-friendly `.pptx` for stakeholders who need Office |
+| Editable PPTX | `deck.json` → PowerPoint-friendly `.pptx` (left Huawei-red accent + speaker notes) |
 | Editable project source | Content, components, styles, and deploy config stay separate |
 | Hosted demo site | Cloudflare Workers or Sites ESM Worker with optional PIN gate |
 
@@ -22,7 +22,7 @@ Built for product introductions, architecture briefings, comparisons, packaging,
 - **Brand & layout** — Huawei logo, white stage, red accent `#c7000b`, 16:9 canvas, shared header/footer; Yunshan / Jinsha / mountain covers.
 - **Layout kit** — cover, cards, metrics, architecture, comparison, **scrollable tables**, workflow, image, pricing, scenarios, timeline, callouts, custom, closing.
 - **Bilingual** — one-click ZH/EN, English typography sheet, remembered preference, bilingual TOC/controls.
-- **Presenter tools** — keyboard/touch nav, fullscreen, chapter jump, thumbnail TOC, position memory, **presenter notes** (`N` / `?presenter=1`), **named sales cuts** (`?cut=cio`).
+- **Presenter tools** — keyboard/touch nav, fullscreen, chapter jump, thumbnail TOC, position memory, **presenter notes** (`N` / `?presenter=1`), **shortcut cheat sheet** (`?`), **named sales cuts** (`?cut=cio`; unknown slide ids fail at generate).
 - **Slide hide** — TOC “hide slides” saved per project in the current browser; navigation skips hidden pages.
 - **Motion** — workflow auto-highlight with pause/replay/show-all; stops off-slide; full content for print and reduced-motion.
 - **Access control** — server PIN + signed cookie for hosted decks.

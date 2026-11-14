@@ -53,9 +53,9 @@
 | pricing | rows, labels | 一等公民价格表；自动注入 pricing 脚本与 recipes.css |
 | scenarios | scenarios: [{id,label,body,bullets?}] | 一等公民手动场景切换；自动注入 scenario-switcher |
 
-可选 `cuts`：命名演示裁剪，例如 `"cuts": { "cio": { "label": {"zh":"CIO精简","en":"CIO cut"}, "hidden": ["price"] } }`，分享链接使用 `?cut=cio`。
+可选 `cuts`：命名演示裁剪，例如 `"cuts": { "cio": { "label": {"zh":"CIO精简","en":"CIO cut"}, "hidden": ["price"] } }`，分享链接使用 `?cut=cio`。生成器会校验 `hidden` 中的 slide id 必须存在；未知 id 直接失败，避免静默丢页。
 
-可选 `notes`：每页演示备注（双语对象或字符串）。观众端默认不显示；`?presenter=1` 或按 `N` 打开备注与下一页预告。
+可选 `notes`：每页演示备注（双语对象或字符串）。观众端默认不显示；`?presenter=1` 或按 `N` 打开备注与下一页预告。按 `?` 打开快捷键对照（含 `?cut=` / `?presenter=1` 提示）。
 
 数据大小上限用于控制信息密度；短文本可使用上限，长文本仍需要拆页和实测。所有普通文本经过 HTML 转义，不会作为代码执行。
 

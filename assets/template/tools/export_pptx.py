@@ -43,17 +43,35 @@ def set_run(run, text: str, *, size, bold=False, color=INK):
         run.font.color.rgb = color
 
 
-def add_title(slide, title: str, subtitle: str, RGBColor, Pt, Inches):
-    box = slide.shapes.add_textbox(Inches(0.6), Inches(0.35), Inches(12.0), Inches(1.15))
+def add_accent_bar(slide, RGBColor, Inches):
+    """Thin left Huawei-red rail — brand signal without card chrome."""
+    from pptx.enum.shapes import MSO_SHAPE
+    bar = slide.shapes.add_shape(
+        MSO_SHAPE.RECTANGLE,
+        Inches(0),
+        Inches(0),
+        Inches(0.08),
+        Inches(7.5),
+    )
+    bar.fill.solid()
+    bar.fill.fore_color.rgb = RGBColor(*RED)
+    line = bar.line
+    line.fill.background()
+
+
+def add_title(slide, title: str, subtitle: str, RGBColor, Pt, Inches, *, cover=False):
+    top = Inches(2.4) if cover else Inches(0.35)
+    size = Pt(40) if cover else Pt(28)
+    box = slide.shapes.add_textbox(Inches(0.7), top, Inches(12.0), Inches(1.4 if cover else 1.15))
     tf = box.text_frame
     tf.clear()
     p = tf.paragraphs[0]
     run = p.add_run()
-    set_run(run, title, size=Pt(28), bold=True, color=RGBColor(*INK))
+    set_run(run, title, size=size, bold=True, color=RGBColor(*INK))
     if subtitle:
         p2 = tf.add_paragraph()
         run2 = p2.add_run()
-        set_run(run2, subtitle, size=Pt(14), color=RGBColor(*MUTED))
+        set_run(run2, subtitle, size=Pt(16 if cover else 14), color=RGBColor(*MUTED))
 
 
 def add_bullets(slide, lines, RGBColor, Pt, Inches, top=1.65):
@@ -150,12 +168,20 @@ def build(deck: dict, lang: str, output: Path):
     blank = prs.slide_layouts[6]
     for slide in deck.get('slides') or []:
         s = prs.slides.add_slide(blank)
+        add_accent_bar(s, RGBColor, Inches)
+        kind = slide.get('type')
         title = pick(slide.get('title'), lang) or pick(deck.get('title'), lang)
-        subtitle = pick(slide.get('subtitle'), lang)
-        add_title(s, title, subtitle, RGBColor, Pt, Inches)
+        subtitle = pick(slide.get('subtitle'), lang) or pick(slide.get('tagline'), lang)
+        if kind == 'closing':
+            thanks = slide.get('thanks') or {}
+            title = pick(thanks, lang) or pick(thanks, 'en') or title
+            subtitle = pick(slide.get('vision'), lang)
+        add_title(s, title, subtitle, RGBColor, Pt, Inches, cover=(kind in {'cover', 'closing'}))
         lines = slide_lines(slide, lang)
-        if lines:
+        if lines and kind not in {'cover', 'closing'}:
             add_bullets(s, lines, RGBColor, Pt, Inches)
+        elif lines and kind == 'cover':
+            add_bullets(s, lines, RGBColor, Pt, Inches, top=4.2)
         notes = pick(slide.get('notes'), lang)
         if notes:
             s.notes_slide.notes_text_frame.text = notes
