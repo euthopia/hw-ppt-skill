@@ -2,17 +2,23 @@
 
 7-slide Huawei Cloud sales briefing for overseas audiences. Runtime **1.3.1**. English is primary; Chinese is bilingual-ready.
 
+**Design read:** B2B Huawei sales briefing for international engineering / platform / procurement buyers. Trust-first language. Dials: VARIANCE **3** / MOTION **3** / DENSITY **6**. Accent `#c7000b` on white stage.
+
 ## Slides
 
 1. **cover** — CodeArts Agent positioning for international buyers  
-2. **agenda** — tight sales arc (value → how → contrast → lenses → action)  
-3. **value** (`cards`) — why buyers care (delivery path, engineering flow, enterprise posture)  
+2. **agenda** — briefing map (value → how → contrast → lenses → action)  
+3. **value** (`callouts`) — what keeps buyers in the room (path, flow, boundaries)  
 4. **workflow** — intent → plan → generate/refine → review/handoff  
 5. **contrast** (`before-after`) — fragmented delivery → agent-assisted loop  
-6. **buyer-tabs** (`tabs`) — Engineering lead / Platform / Governance conversation lenses  
-7. **thank-you** (`closing`) — Huawei vision close  
+6. **buyer-tabs** (`tabs`) — Engineering lead / Platform / Governance talk tracks  
+7. **thank-you** (`closing`) — next-step label + Huawei vision close  
 
 Named cut: `?cut=exec` hides **agenda**, **workflow**, and **buyer-tabs** (keeps cover → value → contrast → thank-you).
+
+## Example-local CSS
+
+Visual upgrades for this deck live in `css/deck-intl.css` (loaded last by `tools/render.py` when present). `body.deck-intl` scopes the pass so shared template CSS stays untouched. EN type fit remains in `css/english.css`.
 
 ## Open locally
 
