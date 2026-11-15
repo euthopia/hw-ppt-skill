@@ -12,7 +12,7 @@
 4. **workflow** — intent → plan → generate/refine → review/handoff  
 5. **contrast** (`before-after`) — fragmented delivery → agent-assisted loop  
 6. **buyer-tabs** (`tabs`) — Engineering lead / Platform / Governance talk tracks  
-7. **thank-you** (`closing`) — next-step label + Huawei vision close  
+7. **thank-you** (`closing`) — canonical Huawei Thank You + bilingual vision close  
 
 Named cut: `?cut=exec` hides **agenda**, **workflow**, and **buyer-tabs** (keeps cover → value → contrast → thank-you).
 
