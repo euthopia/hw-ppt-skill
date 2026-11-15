@@ -1,0 +1,777 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/euthopia/hw-ppt-skill/schemas/deck.schema.json",
+  "title": "Huawei product briefing deck",
+  "type": "object",
+  "required": [
+    "id",
+    "title",
+    "slides"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9-]{2,62}$",
+      "description": "Unique lowercase project slug"
+    },
+    "title": {
+      "$ref": "#/$defs/text"
+    },
+    "brandLabel": {
+      "$ref": "#/$defs/text"
+    },
+    "footer": {
+      "$ref": "#/$defs/text"
+    },
+    "runtimeVersion": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+[a-zA-Z0-9.+-]*$",
+      "description": "Pinned sales-briefing runtime semver; generator stamps template version when omitted"
+    },
+    "chapters": {
+      "type": "array",
+      "maxItems": 5,
+      "items": {
+        "type": "object",
+        "required": [
+          "label",
+          "section"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "label": {
+            "$ref": "#/$defs/text"
+          },
+          "section": {
+            "$ref": "#/$defs/text"
+          }
+        }
+      }
+    },
+    "slides": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/slide"
+      }
+    },
+    "cuts": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "required": [
+          "hidden"
+        ],
+        "properties": {
+          "hidden": {
+            "type": "array",
+            "items": {
+              "$ref": "#/$defs/slideId"
+            }
+          },
+          "label": {
+            "$ref": "#/$defs/text"
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "text": {
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "object",
+          "required": [
+            "zh",
+            "en"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "zh": {
+              "type": "string"
+            },
+            "en": {
+              "type": "string"
+            }
+          }
+        }
+      ]
+    },
+    "slideId": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9-]{0,62}$"
+    },
+    "beforeAfterPanel": {
+      "type": "object",
+      "required": [
+        "title"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "label": {
+          "$ref": "#/$defs/text"
+        },
+        "title": {
+          "$ref": "#/$defs/text"
+        },
+        "body": {
+          "$ref": "#/$defs/text"
+        },
+        "bullets": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 4
+        }
+      }
+    },
+    "slideBase": {
+      "type": "object",
+      "required": [
+        "type",
+        "title"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/slideId"
+        },
+        "type": {
+          "type": "string"
+        },
+        "title": {
+          "$ref": "#/$defs/text"
+        },
+        "section": {
+          "$ref": "#/$defs/text"
+        },
+        "subtitle": {
+          "$ref": "#/$defs/text"
+        },
+        "eyebrow": {
+          "$ref": "#/$defs/text"
+        },
+        "footer": {
+          "$ref": "#/$defs/text"
+        },
+        "notes": {
+          "$ref": "#/$defs/text"
+        }
+      }
+    },
+    "slide": {
+      "oneOf": [
+        {
+          "allOf": [
+            {
+              "$ref": "#/$defs/slideBase"
+            },
+            {
+              "properties": {
+                "type": {
+                  "const": "cover"
+                },
+                "tagline": {
+                  "$ref": "#/$defs/text"
+                },
+                "background": {
+                  "enum": [
+                    "原山景",
+                    "云山",
+                    "金沙"
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "allOf": [
+            {
+              "$ref": "#/$defs/slideBase"
+            },
+            {
+              "required": [
+                "cards"
+              ],
+              "properties": {
+                "type": {
+                  "const": "cards"
+                },
+                "cards": {
+                  "type": "array",
+                  "minItems": 2,
+                  "maxItems": 4,
+                  "items": {
+                    "type": "object",
+                    "required": [
+                      "title",
+                      "body"
+                    ],
+                    "properties": {
+                      "title": {
+                        "$ref": "#/$defs/text"
+                      },
+                      "body": {
+                        "$ref": "#/$defs/text"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        },
+        {
+          "allOf": [
+            {
+              "$ref": "#/$defs/slideBase"
+            },
+            {
+              "required": [
+                "metrics"
+              ],
+              "properties": {
+                "type": {
+                  "const": "metrics"
+                },
+                "metrics": {
+                  "type": "array",
+                  "minItems": 2,
+                  "maxItems": 4,
+                  "items": {
+                    "type": "object",
+                    "required": [
+                      "value",
+                      "label"
+                    ],
+                    "properties": {
+                      "value": {
+                        "$ref": "#/$defs/text"
+                      },
+                      "label": {
+                        "$ref": "#/$defs/text"
+                      },
+                      "body": {
+                        "$ref": "#/$defs/text"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        },
+        {
+          "allOf": [
+            {
+              "$ref": "#/$defs/slideBase"
+            },
+            {
+              "required": [
+                "layers"
+              ],
+              "properties": {
+                "type": {
+                  "const": "architecture"
+                },
+                "layers": {
+                  "type": "array",
+                  "minItems": 3,
+                  "maxItems": 5
+                }
+              }
+            }
+          ]
+        },
+        {
+          "allOf": [
+            {
+              "$ref": "#/$defs/slideBase"
+            },
+            {
+              "required": [
+                "columns"
+              ],
+              "properties": {
+                "type": {
+                  "const": "comparison"
+                },
+                "columns": {
+                  "type": "array",
+                  "minItems": 2,
+                  "maxItems": 2
+                }
+              }
+            }
+          ]
+        },
+        {
+          "allOf": [
+            {
+              "$ref": "#/$defs/slideBase"
+            },
+            {
+              "required": [
+                "headers",
+                "rows"
+              ],
+              "properties": {
+                "type": {
+                  "const": "table"
+                },
+                "headers": {
+                  "type": "array",
+                  "minItems": 2,
+                  "maxItems": 6
+                },
+                "rows": {
+                  "type": "array",
+                  "minItems": 1,
+                  "maxItems": 12
+                },
+                "note": {
+                  "$ref": "#/$defs/text"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "allOf": [
+            {
+              "$ref": "#/$defs/slideBase"
+            },
+            {
+              "required": [
+                "events"
+              ],
+              "properties": {
+                "type": {
+                  "const": "timeline"
+                },
+                "events": {
+                  "type": "array",
+                  "minItems": 2,
+                  "maxItems": 8,
+                  "items": {
+                    "type": "object",
+                    "required": [
+                      "when",
+                      "title"
+                    ],
+                    "additionalProperties": false,
+                    "properties": {
+                      "when": {
+                        "$ref": "#/$defs/text"
+                      },
+                      "title": {
+                        "$ref": "#/$defs/text"
+                      },
+                      "body": {
+                        "$ref": "#/$defs/text"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        },
+        {
+          "allOf": [
+            {
+              "$ref": "#/$defs/slideBase"
+            },
+            {
+              "required": [
+                "items"
+              ],
+              "properties": {
+                "type": {
+                  "const": "callouts"
+                },
+                "items": {
+                  "type": "array",
+                  "minItems": 2,
+                  "maxItems": 4,
+                  "items": {
+                    "type": "object",
+                    "required": [
+                      "title",
+                      "body"
+                    ],
+                    "additionalProperties": false,
+                    "properties": {
+                      "tone": {
+                        "enum": [
+                          "info",
+                          "warn",
+                          "accent"
+                        ]
+                      },
+                      "title": {
+                        "$ref": "#/$defs/text"
+                      },
+                      "body": {
+                        "$ref": "#/$defs/text"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        },
+        {
+          "allOf": [
+            {
+              "$ref": "#/$defs/slideBase"
+            },
+            {
+              "required": [
+                "steps"
+              ],
+              "properties": {
+                "type": {
+                  "const": "workflow"
+                },
+                "steps": {
+                  "type": "array",
+                  "minItems": 3,
+                  "maxItems": 5
+                },
+                "result": {
+                  "$ref": "#/$defs/text"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "allOf": [
+            {
+              "$ref": "#/$defs/slideBase"
+            },
+            {
+              "required": [
+                "image",
+                "caption"
+              ],
+              "properties": {
+                "type": {
+                  "const": "image"
+                },
+                "image": {
+                  "type": "string",
+                  "pattern": "^assets/[A-Za-z0-9_-]+\\.(png|jpg|jpeg|svg|webp)$"
+                },
+                "caption": {
+                  "$ref": "#/$defs/text"
+                },
+                "alt": {
+                  "$ref": "#/$defs/text"
+                },
+                "body": {
+                  "$ref": "#/$defs/text"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "allOf": [
+            {
+              "$ref": "#/$defs/slideBase"
+            },
+            {
+              "required": [
+                "fragment"
+              ],
+              "properties": {
+                "type": {
+                  "const": "custom"
+                },
+                "fragment": {
+                  "type": "string",
+                  "pattern": "^content/[A-Za-z0-9_-]+\\.html$"
+                },
+                "translations": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          ]
+        },
+        {
+          "allOf": [
+            {
+              "$ref": "#/$defs/slideBase"
+            },
+            {
+              "required": [
+                "rows"
+              ],
+              "properties": {
+                "type": {
+                  "const": "pricing"
+                },
+                "rows": {
+                  "type": "array",
+                  "minItems": 1,
+                  "maxItems": 8
+                },
+                "labels": {
+                  "type": "object"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "allOf": [
+            {
+              "$ref": "#/$defs/slideBase"
+            },
+            {
+              "required": [
+                "scenarios"
+              ],
+              "properties": {
+                "type": {
+                  "const": "scenarios"
+                },
+                "scenarios": {
+                  "type": "array",
+                  "minItems": 2,
+                  "maxItems": 6,
+                  "items": {
+                    "type": "object",
+                    "required": [
+                      "label",
+                      "body"
+                    ],
+                    "properties": {
+                      "id": {
+                        "$ref": "#/$defs/slideId"
+                      },
+                      "label": {
+                        "$ref": "#/$defs/text"
+                      },
+                      "body": {
+                        "$ref": "#/$defs/text"
+                      },
+                      "bullets": {
+                        "type": "array",
+                        "minItems": 1,
+                        "maxItems": 4
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        },
+        {
+          "allOf": [
+            {
+              "$ref": "#/$defs/slideBase"
+            },
+            {
+              "properties": {
+                "type": {
+                  "const": "closing"
+                },
+                "thanks": {
+                  "type": "object",
+                  "required": [
+                    "zh",
+                    "en"
+                  ],
+                  "properties": {
+                    "zh": {
+                      "type": "string"
+                    },
+                    "en": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "vision": {
+                  "type": "object",
+                  "required": [
+                    "zh",
+                    "en"
+                  ],
+                  "properties": {
+                    "zh": {
+                      "type": "string"
+                    },
+                    "en": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "visionLabel": {
+                  "$ref": "#/$defs/text"
+                },
+                "logo": {
+                  "type": "string"
+                },
+                "logoAlt": {
+                  "$ref": "#/$defs/text"
+                },
+                "motion": {
+                  "enum": [
+                    "fade",
+                    "none"
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "allOf": [
+            {
+              "$ref": "#/$defs/slideBase"
+            },
+            {
+              "required": [
+                "items"
+              ],
+              "properties": {
+                "type": {
+                  "const": "agenda"
+                },
+                "items": {
+                  "type": "array",
+                  "minItems": 2,
+                  "maxItems": 8,
+                  "items": {
+                    "type": "object",
+                    "required": [
+                      "label"
+                    ],
+                    "additionalProperties": false,
+                    "properties": {
+                      "label": {
+                        "$ref": "#/$defs/text"
+                      },
+                      "time": {
+                        "$ref": "#/$defs/text"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        },
+        {
+          "allOf": [
+            {
+              "$ref": "#/$defs/slideBase"
+            },
+            {
+              "required": [
+                "quote",
+                "attribution"
+              ],
+              "properties": {
+                "type": {
+                  "const": "quote"
+                },
+                "quote": {
+                  "$ref": "#/$defs/text"
+                },
+                "attribution": {
+                  "$ref": "#/$defs/text"
+                },
+                "role": {
+                  "$ref": "#/$defs/text"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "allOf": [
+            {
+              "$ref": "#/$defs/slideBase"
+            },
+            {
+              "required": [
+                "tabs"
+              ],
+              "properties": {
+                "type": {
+                  "const": "tabs"
+                },
+                "tabs": {
+                  "type": "array",
+                  "minItems": 2,
+                  "maxItems": 5,
+                  "items": {
+                    "type": "object",
+                    "required": [
+                      "label",
+                      "body"
+                    ],
+                    "additionalProperties": false,
+                    "properties": {
+                      "id": {
+                        "$ref": "#/$defs/slideId"
+                      },
+                      "label": {
+                        "$ref": "#/$defs/text"
+                      },
+                      "body": {
+                        "$ref": "#/$defs/text"
+                      },
+                      "bullets": {
+                        "type": "array",
+                        "minItems": 1,
+                        "maxItems": 4
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        },
+        {
+          "allOf": [
+            {
+              "$ref": "#/$defs/slideBase"
+            },
+            {
+              "required": [
+                "before",
+                "after"
+              ],
+              "properties": {
+                "type": {
+                  "const": "before-after"
+                },
+                "before": {
+                  "$ref": "#/$defs/beforeAfterPanel"
+                },
+                "after": {
+                  "$ref": "#/$defs/beforeAfterPanel"
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

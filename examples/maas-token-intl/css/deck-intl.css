@@ -1,0 +1,12 @@
+/* MaaS Tokens intl-only tweaks. Shared chrome/motion/density live in template CSS (1.4.0+).
+   Keep this file thin: locale/font + example-specific cover art only. */
+
+.deck-intl{
+  /* Soft bottom wash under overseas briefing photography; stage stays paper white */
+  --cover-wash:var(--paper);
+}
+
+.deck-intl .cover{background:var(--cover-wash)}
+
+/* EN primary audience: slightly tighter chapter labels on long bilingual titles */
+.deck-intl.english-deck .chapter-nav a{font-size:12.5px;letter-spacing:.15px}

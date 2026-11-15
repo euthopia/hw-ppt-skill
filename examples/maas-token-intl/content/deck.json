@@ -1,0 +1,534 @@
+{
+  "id": "maas-token-intl",
+  "runtimeVersion": "1.4.0",
+  "title": {
+    "zh": "MaaS 代币",
+    "en": "MaaS Tokens"
+  },
+  "brandLabel": "HUAWEI CLOUD",
+  "footer": {
+    "zh": "MaaS 代币 · 国际简介",
+    "en": "MaaS Tokens · International briefing"
+  },
+  "chapters": [
+    {
+      "label": {
+        "zh": "定位",
+        "en": "Positioning"
+      },
+      "section": {
+        "zh": "产品定位",
+        "en": "Product positioning"
+      }
+    },
+    {
+      "label": {
+        "zh": "价值",
+        "en": "Value"
+      },
+      "section": {
+        "zh": "客户价值",
+        "en": "Customer value"
+      }
+    },
+    {
+      "label": {
+        "zh": "计量",
+        "en": "Metering"
+      },
+      "section": {
+        "zh": "计量与结算",
+        "en": "Metering & settlement"
+      }
+    },
+    {
+      "label": {
+        "zh": "买家",
+        "en": "Buyers"
+      },
+      "section": {
+        "zh": "买家对话",
+        "en": "Buyer conversations"
+      }
+    }
+  ],
+  "cuts": {
+    "exec": {
+      "label": {
+        "zh": "高管精简",
+        "en": "Executive cut"
+      },
+      "hidden": [
+        "agenda",
+        "workflow",
+        "buyer-tabs"
+      ]
+    }
+  },
+  "slides": [
+    {
+      "type": "cover",
+      "id": "cover",
+      "section": {
+        "zh": "产品定位",
+        "en": "Product positioning"
+      },
+      "title": {
+        "zh": "MaaS 代币",
+        "en": "MaaS Tokens"
+      },
+      "eyebrow": {
+        "zh": "华为云 · 国际产品简介",
+        "en": "HUAWEI CLOUD · International product briefing"
+      },
+      "subtitle": {
+        "zh": "面向企业 AI 的 Model-as-a-Service 代币消费：可预期计量、可治理用量、可扩展结算。",
+        "en": "Model-as-a-Service token consumption for enterprise AI — predictable metering, governed usage, and scalable settlement."
+      },
+      "tagline": "HUAWEI CLOUD · MAAS",
+      "background": "云山",
+      "notes": {
+        "zh": "开场对准海外平台、采购与 AI 工程买家：强调计量透明与治理，不承诺未核实的单价或 SLA。",
+        "en": "Open for overseas platform, procurement, and AI engineering buyers. Lead with metering clarity and governance — no unverified unit prices or SLAs."
+      }
+    },
+    {
+      "type": "agenda",
+      "id": "agenda",
+      "section": {
+        "zh": "产品定位",
+        "en": "Product positioning"
+      },
+      "title": {
+        "zh": "今日议程",
+        "en": "Briefing agenda"
+      },
+      "subtitle": {
+        "zh": "价值、计量闭环、单位结构、买家视角，再到下一步行动。",
+        "en": "Value, metering loop, unit structure, buyer lenses, then next steps."
+      },
+      "eyebrow": "AGENDA",
+      "notes": {
+        "zh": "高管精简切面会隐藏本页；完整版用于发现会对齐。",
+        "en": "Hidden on the executive cut. Use the full deck to align discovery workshops."
+      },
+      "items": [
+        {
+          "label": {
+            "zh": "企业为何按代币消费模型服务",
+            "en": "Why enterprises buy model access by token"
+          },
+          "time": {
+            "zh": "价值",
+            "en": "Value"
+          }
+        },
+        {
+          "label": {
+            "zh": "请求 → 计量 → 结算闭环",
+            "en": "Request → meter → settle loop"
+          },
+          "time": {
+            "zh": "方式",
+            "en": "How"
+          }
+        },
+        {
+          "label": {
+            "zh": "计费单位与结构占位（非官方价）",
+            "en": "Billing units & structure placeholders (not list price)"
+          },
+          "time": {
+            "zh": "结构",
+            "en": "Structure"
+          }
+        },
+        {
+          "label": {
+            "zh": "平台 / 采购 / AI 工程讲法",
+            "en": "Platform, procurement, and AI engineering tracks"
+          },
+          "time": {
+            "zh": "视角",
+            "en": "Lenses"
+          }
+        },
+        {
+          "label": {
+            "zh": "发现会或用量估算范围确认",
+            "en": "Discovery workshop or usage-estimate scope"
+          },
+          "time": {
+            "zh": "行动",
+            "en": "Action"
+          }
+        }
+      ]
+    },
+    {
+      "type": "callouts",
+      "id": "value",
+      "section": {
+        "zh": "客户价值",
+        "en": "Customer value"
+      },
+      "title": {
+        "zh": "国际买家为何关注",
+        "en": "What buyers care about"
+      },
+      "subtitle": {
+        "zh": "用可讲解的计量与治理结果说话；区域价目与 SLA 以正式商务材料为准。",
+        "en": "Lead with briefable metering and governance outcomes. Regional list prices and SLAs stay in formal commercial materials."
+      },
+      "eyebrow": "PRODUCT VALUE",
+      "notes": {
+        "zh": "三块：可预期计量、企业治理、规模扩展；不要编造节省百分比或官方单价。",
+        "en": "Three beats: predictable metering, enterprise governance, scale. Do not invent savings % or official unit prices."
+      },
+      "items": [
+        {
+          "tone": "accent",
+          "title": {
+            "zh": "可预期的计量",
+            "en": "Predictable metering"
+          },
+          "body": {
+            "zh": "按输入 / 输出代币等可观测单位计量，便于预算、对账与用量趋势沟通。",
+            "en": "Meter against observable units such as input and output tokens — clearer budgets, reconciliation, and usage trends."
+          }
+        },
+        {
+          "tone": "info",
+          "title": {
+            "zh": "企业级治理姿态",
+            "en": "Enterprise governance posture"
+          },
+          "body": {
+            "zh": "围绕账号、配额、审计与结算边界组织用量，支持组织级管控对话。",
+            "en": "Organize usage around accounts, quotas, auditability, and settlement boundaries for org-level control conversations."
+          }
+        },
+        {
+          "tone": "accent",
+          "title": {
+            "zh": "随业务扩展",
+            "en": "Scale with the workload"
+          },
+          "body": {
+            "zh": "同一计量叙事可覆盖试点到量产；容量与区域可用性以正式方案确认为准。",
+            "en": "One metering narrative from pilot to production. Capacity and regional availability confirm in the formal proposal."
+          }
+        }
+      ]
+    },
+    {
+      "type": "workflow",
+      "id": "workflow",
+      "section": {
+        "zh": "计量与结算",
+        "en": "Metering & settlement"
+      },
+      "title": {
+        "zh": "从请求到结算",
+        "en": "From request to settlement"
+      },
+      "subtitle": {
+        "zh": "对外可讲解的计量闭环；具体计费字段与账期以正式产品说明为准。",
+        "en": "A briefable metering loop. Exact billable fields and billing cycles confirm in formal product documentation."
+      },
+      "eyebrow": "HOW IT WORKS",
+      "notes": {
+        "zh": "四步：调用请求 → 代币计量 → 账目汇总 → 账单结算；不要展开内部计费引擎细节。",
+        "en": "Walk four beats: invoke, meter tokens, aggregate, settle. Skip internal billing-engine detail."
+      },
+      "steps": [
+        {
+          "title": {
+            "zh": "发起模型请求",
+            "en": "Invoke the model"
+          },
+          "body": {
+            "zh": "应用或工作流调用 MaaS 端点，携带组织与项目上下文。",
+            "en": "Apps or workflows call a MaaS endpoint with org and project context."
+          }
+        },
+        {
+          "title": {
+            "zh": "代币计量",
+            "en": "Meter tokens"
+          },
+          "body": {
+            "zh": "按约定单位记录输入 / 输出等可计费用量。",
+            "en": "Record billable usage in agreed units such as input and output tokens."
+          }
+        },
+        {
+          "title": {
+            "zh": "账目汇总",
+            "en": "Aggregate accounts"
+          },
+          "body": {
+            "zh": "按账号、项目或成本中心汇总用量，支持对账与配额审视。",
+            "en": "Roll up usage by account, project, or cost center for reconciliation and quota review."
+          }
+        },
+        {
+          "title": {
+            "zh": "账单与结算",
+            "en": "Bill and settle"
+          },
+          "body": {
+            "zh": "进入组织约定的结算路径；商务条款以合同与价目表为准。",
+            "en": "Enter the org's agreed settlement path. Commercial terms follow contract and price sheet."
+          }
+        }
+      ],
+      "result": {
+        "zh": "结果：一条可讲解的代币消费闭环——请求可观测、用量可对账、结算可治理。",
+        "en": "Outcome: a briefable token-consumption loop — observable requests, reconcilable usage, governable settlement."
+      }
+    },
+    {
+      "type": "table",
+      "id": "metering-table",
+      "section": {
+        "zh": "计量与结算",
+        "en": "Metering & settlement"
+      },
+      "title": {
+        "zh": "计费单位结构（示意）",
+        "en": "Billing unit structure (illustrative)"
+      },
+      "subtitle": {
+        "zh": "说明计量维度与单位，非官方华为价目。正式单价请以区域价目表 / 报价为准。",
+        "en": "Explains metering dimensions and units — not an official Huawei price list. Confirm unit rates on the regional price sheet / quote."
+      },
+      "eyebrow": "UNITS & STRUCTURE",
+      "notes": {
+        "zh": "所有金额单元格均为 [占位]；演示时强调结构，引导客户走正式报价。",
+        "en": "All amount cells are [Placeholder]. Brief the structure; route customers to a formal quote."
+      },
+      "headers": [
+        {
+          "zh": "计量维度",
+          "en": "Metering dimension"
+        },
+        {
+          "zh": "单位",
+          "en": "Unit"
+        },
+        {
+          "zh": "典型用途",
+          "en": "Typical use"
+        },
+        {
+          "zh": "参考费率",
+          "en": "Reference rate"
+        }
+      ],
+      "rows": [
+        [
+          {
+            "zh": "输入代币",
+            "en": "Input tokens"
+          },
+          {
+            "zh": "每 1K tokens",
+            "en": "Per 1K tokens"
+          },
+          {
+            "zh": "提示词 / 上下文消耗",
+            "en": "Prompt / context consumption"
+          },
+          {
+            "zh": "[占位] 区域价目",
+            "en": "[Placeholder] Regional price sheet"
+          }
+        ],
+        [
+          {
+            "zh": "输出代币",
+            "en": "Output tokens"
+          },
+          {
+            "zh": "每 1K tokens",
+            "en": "Per 1K tokens"
+          },
+          {
+            "zh": "生成结果消耗",
+            "en": "Generation consumption"
+          },
+          {
+            "zh": "[占位] 区域价目",
+            "en": "[Placeholder] Regional price sheet"
+          }
+        ],
+        [
+          {
+            "zh": "缓存输入（如适用）",
+            "en": "Cached input (if offered)"
+          },
+          {
+            "zh": "每 1K tokens",
+            "en": "Per 1K tokens"
+          },
+          {
+            "zh": "可复用上下文的计量档位",
+            "en": "Metering tier for reusable context"
+          },
+          {
+            "zh": "[占位] 以产品说明为准",
+            "en": "[Placeholder] Confirm in product docs"
+          }
+        ],
+        [
+          {
+            "zh": "结算周期",
+            "en": "Settlement cycle"
+          },
+          {
+            "zh": "账期 / 合约",
+            "en": "Billing period / contract"
+          },
+          {
+            "zh": "组织级对账与开票",
+            "en": "Org-level reconciliation and invoicing"
+          },
+          {
+            "zh": "[占位] 合同条款",
+            "en": "[Placeholder] Contract terms"
+          }
+        ]
+      ],
+      "note": {
+        "zh": "本表仅展示计量结构。任何数字费率、折扣与 SLA 均须经产品市场 / 商务正式确认后方可对外。",
+        "en": "Structure only. Any numeric rates, discounts, or SLAs require product marketing / commercial confirmation before customer use."
+      }
+    },
+    {
+      "type": "tabs",
+      "id": "buyer-tabs",
+      "section": {
+        "zh": "买家对话",
+        "en": "Buyer conversations"
+      },
+      "title": {
+        "zh": "三类买家对话要点",
+        "en": "Three buyer talk tracks"
+      },
+      "subtitle": {
+        "zh": "按角色切换讲法；区域价目、合规与合同条款以正式方案为准。",
+        "en": "Switch the story by role. Regional price sheets, compliance, and contract terms confirm in the formal proposal."
+      },
+      "eyebrow": "BUYER LENSES",
+      "notes": {
+        "zh": "用页签切换 Platform / Procurement / AI Engineering；高管精简切面隐藏本页。",
+        "en": "Tab through Platform / Procurement / AI Engineering. Hidden on the executive cut."
+      },
+      "tabs": [
+        {
+          "id": "platform",
+          "label": {
+            "zh": "平台负责人",
+            "en": "Platform lead"
+          },
+          "body": {
+            "zh": "关心可嵌入性与可观测用量：代币应进入现有成本与配额体系，而不是另起影子账本。",
+            "en": "Embeddability and observable usage matter: tokens should land in existing cost and quota systems, not a shadow ledger."
+          },
+          "bullets": [
+            {
+              "zh": "按项目 / 账号汇总用量，便于平台对账",
+              "en": "Roll up usage by project / account for platform reconciliation"
+            },
+            {
+              "zh": "计量事件可对齐现有观测与配额策略",
+              "en": "Align metering events with existing observability and quota policy"
+            },
+            {
+              "zh": "[占位] 集成清单与区域端点以架构评审为准",
+              "en": "[Placeholder] Integrations and regional endpoints confirm in architecture review"
+            }
+          ]
+        },
+        {
+          "id": "procurement",
+          "label": {
+            "zh": "采购与财务",
+            "en": "Procurement & finance"
+          },
+          "body": {
+            "zh": "关心单位清晰、账期可预期、合同可审计：先对齐计量结构，再谈正式报价。",
+            "en": "Clear units, predictable billing cycles, and auditable contracts matter. Align metering structure before formal quotes."
+          },
+          "bullets": [
+            {
+              "zh": "输入 / 输出等单位可讲解、可对账",
+              "en": "Input / output units stay briefable and reconcilable"
+            },
+            {
+              "zh": "[占位] 单价、折扣与币种：区域价目表 / 报价",
+              "en": "[Placeholder] Unit rates, discounts, and currency: regional price sheet / quote"
+            },
+            {
+              "zh": "[占位] 账期、开票与 SLA：不以本页承诺",
+              "en": "[Placeholder] Billing cycle, invoicing, and SLAs: not committed on this slide"
+            }
+          ]
+        },
+        {
+          "id": "ai-eng",
+          "label": {
+            "zh": "AI 工程",
+            "en": "AI engineering"
+          },
+          "body": {
+            "zh": "关心提示成本可控与实验到量产路径：同一计量叙事覆盖试点与生产。",
+            "en": "Controllable prompt cost and a pilot-to-production path matter. One metering narrative covers both."
+          },
+          "bullets": [
+            {
+              "zh": "按请求观测输入 / 输出消耗，支撑提示优化",
+              "en": "Observe input / output per request to support prompt optimization"
+            },
+            {
+              "zh": "试点配额与生产配额可用同一套单位沟通",
+              "en": "Pilot and production quotas share the same unit language"
+            },
+            {
+              "zh": "[占位] 模型目录与上下文上限：确认产品说明",
+              "en": "[Placeholder] Model catalog and context limits: confirm in product docs"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "closing",
+      "id": "thank-you",
+      "section": {
+        "zh": "结束",
+        "en": "Closing"
+      },
+      "title": {
+        "zh": "致谢",
+        "en": "Thank You"
+      },
+      "thanks": {
+        "zh": "",
+        "en": "Thank You"
+      },
+      "visionLabel": "",
+      "vision": {
+        "zh": "把数字世界带入每个人、每个家庭、\n每个组织，构建万物互联的智能世界。",
+        "en": "Bring digital to every person, home and organization\nfor a fully connected, intelligent world."
+      },
+      "logo": "assets/huawei-logo.png",
+      "motion": "fade",
+      "notes": {
+        "zh": "收尾邀请下一步：发现会 / 用量估算范围确认；单价与 SLA 不在本页承诺。",
+        "en": "Close with next step: discovery workshop or usage-estimate scope. No unit-price or SLA commitments on this slide."
+      }
+    }
+  ]
+}

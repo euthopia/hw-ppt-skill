@@ -1,0 +1,79 @@
+/* Recipe geometry aligned to kit chrome (pricing / scenarios). */
+.recipe-pricing{
+ width:100%;
+ border-collapse:separate;
+ border-spacing:0;
+ table-layout:fixed;
+ font-size:var(--type-table);
+ line-height:1.4;
+ border:1px solid var(--line);
+ box-shadow:var(--shadow-soft);
+ background:var(--paper);
+}
+.recipe-pricing th,.recipe-pricing td{
+ padding:var(--table-cell-y) var(--table-cell-x);
+ text-align:left;
+ overflow-wrap:anywhere;
+ border-bottom:1px solid var(--line);
+ vertical-align:top;
+}
+.recipe-pricing thead th{
+ background:linear-gradient(180deg,#fff 0%,var(--table-head-bg) 100%);
+ font-size:var(--type-table-head);
+ font-weight:600;
+ letter-spacing:.04em;
+ color:var(--ink);
+ border-bottom:1px solid var(--border-warm);
+ box-shadow:inset 0 var(--rail) 0 var(--red);
+}
+.recipe-pricing thead th+th{border-left:1px solid var(--border-warm)}
+.recipe-pricing tbody th{font-weight:600;color:var(--ink);background:var(--paper)}
+.recipe-pricing tbody tr:nth-child(even) td,
+.recipe-pricing tbody tr:nth-child(even) th{background:var(--surface-warm)}
+.recipe-pricing tbody tr:last-child :is(td,th){border-bottom:0}
+.recipe-pricing tbody tr:hover :is(td,th){background:var(--table-row-hover)}
+
+.recipe-scenarios{display:grid;grid-template-columns:min(240px,28%) minmax(0,1fr);gap:14px;align-items:start}
+.recipe-scenarios nav{border:1px solid var(--line);background:var(--surface);padding:4px;box-shadow:var(--shadow-soft)}
+.recipe-scenarios button{
+ display:block;width:100%;
+ padding:12px 14px;
+ border:1px solid transparent;
+ background:transparent;
+ color:var(--ink);
+ font:inherit;
+ font-size:var(--type-card-body);
+ line-height:var(--lh-scan);
+ text-align:left;
+ cursor:pointer;
+ transition:border-color .18s ease,color .18s ease,background .18s ease,box-shadow .18s ease;
+}
+.recipe-scenarios button[aria-pressed="true"]{
+ border-color:var(--border-accent);
+ color:var(--red);
+ background:var(--paper);
+ box-shadow:inset var(--rail) 0 0 var(--red);
+ font-weight:600;
+}
+.recipe-scenarios button:hover{color:var(--red)}
+.recipe-scenarios [data-scenario-panel]{
+ padding:16px 18px;
+ border:1px solid var(--line);
+ background:var(--paper);
+ box-shadow:var(--shadow-soft);
+ min-height:220px;
+}
+.recipe-scenarios [data-scenario-panel] h3{font-size:var(--type-card-title);margin:0 0 10px;line-height:1.32}
+.recipe-scenarios [data-scenario-panel] p{font-size:var(--type-card-body);line-height:var(--lh-body);color:var(--muted);margin:0}
+.recipe-scenarios [hidden]{display:none}
+
+@media print{
+ .recipe-scenarios{display:block}
+ .recipe-scenarios nav{display:none}
+ .recipe-scenarios [hidden]{display:block;margin-top:16px}
+ .recipe-pricing thead th{box-shadow:inset 0 var(--rail) 0 var(--red)}
+}
+@media (prefers-reduced-motion:reduce){
+ .recipe-scenarios button{transition:none}
+}
+/* tabs layout styles live in components.css (.kit-tabs). */
