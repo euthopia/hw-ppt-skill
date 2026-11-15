@@ -7,8 +7,8 @@ const path = require('node:path');
 const ROOT = path.join(__dirname, '..');
 const read = (...parts) => fs.readFileSync(path.join(ROOT, ...parts), 'utf8');
 
-test('starters exist for status-report and design-review with deck.kind', () => {
-  for (const name of ['status-report', 'design-review']) {
+test('starters exist for all deck.kind archetypes', () => {
+  for (const name of ['status-report', 'design-review', 'project-report', 'workshop']) {
     const deck = JSON.parse(read('assets', 'starters', `${name}.json`));
     assert.equal(deck.kind, name);
     assert.ok(Array.isArray(deck.slides) && deck.slides.length >= 4);
@@ -28,6 +28,8 @@ test('init.py exposes multi-purpose starters', () => {
   const init = read('scripts', 'init.py');
   assert.match(init, /status-report/);
   assert.match(init, /design-review/);
+  assert.match(init, /project-report/);
+  assert.match(init, /workshop/);
 });
 
 test('runtime wires presenter-ink before app and sync copies it', () => {

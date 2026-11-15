@@ -1,0 +1,184 @@
+{
+  "id": "workshop-deck",
+  "kind": "workshop",
+  "runtimeVersion": "1.5.3",
+  "meta": {
+    "purpose": {
+      "zh": "工作坊 / 培训引导",
+      "en": "Workshop or training facilitation"
+    }
+  },
+  "title": {
+    "zh": "工作坊引导",
+    "en": "Workshop guide"
+  },
+  "brandLabel": "HUAWEI CLOUD",
+  "footer": "HUAWEI CLOUD",
+  "chapters": [
+    {
+      "label": { "zh": "议程", "en": "Agenda" },
+      "section": { "zh": "目标与议程", "en": "Goals & agenda" }
+    },
+    {
+      "label": { "zh": "练习", "en": "Practice" },
+      "section": { "zh": "流程与练习", "en": "Flow & practice" }
+    }
+  ],
+  "slides": [
+    {
+      "type": "cover",
+      "id": "cover",
+      "title": { "zh": "工作坊引导", "en": "Workshop guide" },
+      "eyebrow": { "zh": "工作坊", "en": "Workshop" },
+      "subtitle": {
+        "zh": "目标 · 议程 · 流程 · 练习 · 收获",
+        "en": "Goals · agenda · flow · practice · takeaways"
+      },
+      "tagline": "HUAWEI CLOUD",
+      "background": "云山"
+    },
+    {
+      "type": "agenda",
+      "id": "agenda",
+      "section": { "zh": "目标与议程", "en": "Goals & agenda" },
+      "title": { "zh": "今日议程", "en": "Today’s agenda" },
+      "subtitle": {
+        "zh": "用时间盒对齐全场节奏",
+        "en": "Time-box the room"
+      },
+      "eyebrow": "AGENDA",
+      "items": [
+        { "label": { "zh": "目标对齐", "en": "Align goals" }, "time": { "zh": "10 分钟", "en": "10 min" } },
+        { "label": { "zh": "讲解与示范", "en": "Teach & demo" }, "time": { "zh": "20 分钟", "en": "20 min" } },
+        { "label": { "zh": "分组练习", "en": "Breakout practice" }, "time": { "zh": "25 分钟", "en": "25 min" } },
+        { "label": { "zh": "复盘与行动", "en": "Debrief & actions" }, "time": { "zh": "15 分钟", "en": "15 min" } }
+      ]
+    },
+    {
+      "type": "cards",
+      "id": "outcomes",
+      "section": { "zh": "目标与议程", "en": "Goals & agenda" },
+      "title": { "zh": "学习目标", "en": "Learning outcomes" },
+      "subtitle": {
+        "zh": "结束后参与者应能做到什么",
+        "en": "What participants should be able to do afterward"
+      },
+      "eyebrow": "OUTCOMES",
+      "cards": [
+        {
+          "title": { "zh": "理解", "en": "Understand" },
+          "body": { "zh": "待填写的核心概念", "en": "Core concept to supply" }
+        },
+        {
+          "title": { "zh": "操作", "en": "Do" },
+          "body": { "zh": "待填写的动手步骤", "en": "Hands-on step to supply" }
+        },
+        {
+          "title": { "zh": "带走", "en": "Take away" },
+          "body": { "zh": "待填写的可落地产物", "en": "Portable artifact to supply" }
+        }
+      ]
+    },
+    {
+      "type": "workflow",
+      "id": "flow",
+      "section": { "zh": "流程与练习", "en": "Flow & practice" },
+      "title": { "zh": "引导流程", "en": "Facilitation flow" },
+      "subtitle": {
+        "zh": "引入 → 示范 → 练习 → 复盘",
+        "en": "Intro → demo → practice → debrief"
+      },
+      "eyebrow": "FLOW",
+      "steps": [
+        {
+          "title": { "zh": "引入", "en": "Intro" },
+          "body": { "zh": "问题与场景", "en": "Problem and scenario" }
+        },
+        {
+          "title": { "zh": "示范", "en": "Demo" },
+          "body": { "zh": "关键路径演示", "en": "Critical path walkthrough" }
+        },
+        {
+          "title": { "zh": "练习", "en": "Practice" },
+          "body": { "zh": "分组任务与时限", "en": "Breakout task and timebox" }
+        },
+        {
+          "title": { "zh": "复盘", "en": "Debrief" },
+          "body": { "zh": "分享与纠偏", "en": "Share and correct" }
+        }
+      ]
+    },
+    {
+      "type": "tabs",
+      "id": "roles",
+      "section": { "zh": "流程与练习", "en": "Flow & practice" },
+      "title": { "zh": "角色视角", "en": "Role lenses" },
+      "subtitle": {
+        "zh": "主持 / 参与者 / 观察员",
+        "en": "Facilitator / participant / observer"
+      },
+      "eyebrow": "ROLES",
+      "tabs": [
+        {
+          "id": "facilitator",
+          "label": { "zh": "主持", "en": "Facilitator" },
+          "body": { "zh": "控场、提问、时间盒", "en": "Hold the room, ask, time-box" },
+          "bullets": [
+            { "zh": "每段给出明确指令", "en": "Give a clear instruction each beat" },
+            { "zh": "超时先收口再展开", "en": "Close on time, then expand" }
+          ]
+        },
+        {
+          "id": "participant",
+          "label": { "zh": "参与者", "en": "Participant" },
+          "body": { "zh": "产出、协作、提问", "en": "Produce, collaborate, ask" },
+          "bullets": [
+            { "zh": "按时提交练习产物", "en": "Submit the practice artifact on time" },
+            { "zh": "一人主讲，他人补充", "en": "One speaker, others add" }
+          ]
+        },
+        {
+          "id": "observer",
+          "label": { "zh": "观察员", "en": "Observer" },
+          "body": { "zh": "记录卡点与亮点", "en": "Capture friction and bright spots" },
+          "bullets": [
+            { "zh": "记录阻塞点", "en": "Note blockers" },
+            { "zh": "复盘时反馈一条建议", "en": "Offer one suggestion in debrief" }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "quote",
+      "id": "prompt",
+      "section": { "zh": "流程与练习", "en": "Flow & practice" },
+      "title": { "zh": "讨论提示", "en": "Discussion prompt" },
+      "subtitle": {
+        "zh": "用一句话打开下一轮对话",
+        "en": "One line to open the next conversation"
+      },
+      "eyebrow": "PROMPT",
+      "quote": {
+        "zh": "如果明天就要落地，我们缺的最小一步是什么？",
+        "en": "If we had to land this tomorrow, what is the smallest missing step?"
+      },
+      "attribution": {
+        "zh": "工作坊提问",
+        "en": "Workshop prompt"
+      }
+    },
+    {
+      "type": "closing",
+      "id": "thank-you",
+      "section": { "zh": "结束", "en": "Closing" },
+      "title": { "zh": "致谢", "en": "Thank You" },
+      "thanks": { "zh": "", "en": "Thank You" },
+      "vision": {
+        "zh": "把数字世界带入每个人、每个家庭、\n每个组织，构建万物互联的智能世界。",
+        "en": "Bring digital to every person, home and organization\nfor a fully connected, intelligent world."
+      },
+      "logo": "assets/huawei-logo.png",
+      "motion": "fade"
+    }
+  ]
+}

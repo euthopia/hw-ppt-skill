@@ -3,6 +3,17 @@
 All notable changes to the Huawei HTML→PPT deck runtime are documented here.
 Format follows a lightweight Keep-a-Changelog style. HTML remains the system of record; PPTX is Office interop.
 
+## 1.5.4 — 2026-11-15
+
+### Added
+
+- Starters **`project-report`** and **`workshop`** (`assets/starters/*.json`) wired into `scripts/init.py` so all five `deck.kind` values have a one-command arc (plus `blank` / `examples`).
+
+### Changed
+
+- Docs: SKILL / README / README.en / archetype guide list the new starters.
+- `status-report` starter: disambiguate bilingual pairs (`推进中` / In flight vs `进行中` / In progress; TOC `风险项` / Risks vs callout `风险` / Risk) so generate-time translation checks pass.
+
 ## 1.5.3 — 2026-11-15
 
 ### Changed

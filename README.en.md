@@ -71,6 +71,8 @@ npm test
 | `--starter blank` | Product briefing arc (`kind: product-briefing`) |
 | `--starter status-report` | Weekly/status: agenda → metrics → timeline → risks → actions |
 | `--starter design-review` | Design review: context → architecture → before/after → options → opens |
+| `--starter project-report` | Project stage: metrics → milestones → delivery → risks → actions |
+| `--starter workshop` | Workshop: agenda → outcomes → flow → role tabs → prompt |
 | `--starter examples` | Template component sample (layouts + workflow) |
 
 Layout guidance by archetype: [`assets/recipes/deck-archetypes/README.md`](assets/recipes/deck-archetypes/README.md).
@@ -146,7 +148,7 @@ hw-ppt-skill/
 ├── scripts/               init, demo build, audit, runtime sync
 ├── assets/
 │   ├── template/          Full presentation project template
-│   ├── starters/          blank / status-report / design-review / thank-you
+│   ├── starters/          blank / status / design / project / workshop / thank-you
 │   └── recipes/           Optional interactive refs + deck-archetypes guide
 └── demo/                  Offline demos
 ```

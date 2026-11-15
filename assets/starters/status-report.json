@@ -20,7 +20,7 @@
       "section": { "zh": "本周进展", "en": "This week" }
     },
     {
-      "label": { "zh": "风险", "en": "Risks" },
+      "label": { "zh": "风险项", "en": "Risks" },
       "section": { "zh": "风险与下一步", "en": "Risks & next" }
     }
   ],
@@ -103,7 +103,7 @@
         },
         {
           "when": { "zh": "本周", "en": "This week" },
-          "title": { "zh": "进行中", "en": "In flight" },
+          "title": { "zh": "推进中", "en": "In flight" },
           "body": { "zh": "待填写的关键工作", "en": "Key work in flight" }
         },
         {
@@ -179,11 +179,15 @@
     {
       "type": "closing",
       "id": "thank-you",
-      "thanks": { "zh": "谢谢", "en": "Thank You" },
+      "section": { "zh": "结束", "en": "Closing" },
+      "title": { "zh": "致谢", "en": "Thank You" },
+      "thanks": { "zh": "", "en": "Thank You" },
       "vision": {
-        "zh": "对齐事实，推动下一步。",
-        "en": "Align on facts. Drive the next step."
-      }
+        "zh": "把数字世界带入每个人、每个家庭、\n每个组织，构建万物互联的智能世界。",
+        "en": "Bring digital to every person, home and organization\nfor a fully connected, intelligent world."
+      },
+      "logo": "assets/huawei-logo.png",
+      "motion": "fade"
     }
   ]
 }

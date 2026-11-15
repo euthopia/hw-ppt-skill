@@ -67,9 +67,8 @@ python3 scripts/init.py /path/to/my-product-deck \
   --title-en 'Product X briefing' \
   --starter blank
 
-# 周报 / 设计评审示例：
-#   --starter status-report
-#   --starter design-review
+# 其他文稿类型：
+#   --starter status-report | design-review | project-report | workshop
 
 cd /path/to/my-product-deck
 npm run build
@@ -81,6 +80,8 @@ npm test
 | `--starter blank` | 产品简报弧线：封面→价值卡片→能力分层→致谢（`kind: product-briefing`） |
 | `--starter status-report` | 状态周报：议程→指标→时间线→风险→行动表→致谢 |
 | `--starter design-review` | 设计评审：背景→架构→前后对照→取舍→待确认项→致谢 |
+| `--starter project-report` | 项目阶段汇报：指标→里程碑→交付节奏→风险→行动→致谢 |
+| `--starter workshop` | 工作坊：议程→学习目标→引导流程→角色页签→讨论提示→致谢 |
 | `--starter examples` | 模板组件示例，适合了解布局与流程组件 |
 
 布局与文稿类型对照见 [`assets/recipes/deck-archetypes/README.md`](assets/recipes/deck-archetypes/README.md)。

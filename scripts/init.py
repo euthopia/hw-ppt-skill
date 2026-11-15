@@ -7,6 +7,8 @@ STARTERS = {
     'examples': None,  # uses template content/deck.json after copy
     'status-report': 'status-report.json',
     'design-review': 'design-review.json',
+    'project-report': 'project-report.json',
+    'workshop': 'workshop.json',
 }
 
 p = argparse.ArgumentParser(
@@ -20,7 +22,7 @@ p.add_argument(
     '--starter',
     choices=sorted(STARTERS),
     default='blank',
-    help='blank=product briefing; status-report; design-review; examples=template sample deck',
+    help='blank|status-report|design-review|project-report|workshop|examples',
 )
 args = p.parse_args()
 if not re.fullmatch(r'[a-z][a-z0-9-]{2,62}', args.id):

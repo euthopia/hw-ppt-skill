@@ -185,11 +185,15 @@
     {
       "type": "closing",
       "id": "thank-you",
-      "thanks": { "zh": "谢谢", "en": "Thank You" },
+      "section": { "zh": "结束", "en": "Closing" },
+      "title": { "zh": "致谢", "en": "Thank You" },
+      "thanks": { "zh": "", "en": "Thank You" },
       "vision": {
-        "zh": "用清晰决策推进可靠交付。",
-        "en": "Clear decisions. Reliable delivery."
-      }
+        "zh": "把数字世界带入每个人、每个家庭、\n每个组织，构建万物互联的智能世界。",
+        "en": "Bring digital to every person, home and organization\nfor a fully connected, intelligent world."
+      },
+      "logo": "assets/huawei-logo.png",
+      "motion": "fade"
     }
   ]
 }
