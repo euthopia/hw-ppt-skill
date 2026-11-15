@@ -1,8 +1,8 @@
 # Huawei Product Slides
 
-**An Agent Skill for Huawei-branded bilingual HTML product briefings.** You supply product content; the agent organizes chapters, picks layouts, generates Chinese/English pages, wires light motion, runs layout checks, and builds deliverables.
+**An Agent Skill for Huawei-branded bilingual HTML→PPT decks.** You supply content; the agent picks a deck archetype, organizes chapters, picks layouts, generates Chinese/English pages, wires light motion, runs layout checks, and builds deliverables — including **editable PPTX** when asked.
 
-Built for product introductions, architecture briefings, comparisons, packaging, customer cases, and live demos.
+Built for product briefings, weekly/status reports, architecture design reviews, project milestone decks, workshops, comparisons, packaging, customer cases, and live demos.
 
 [Live demo: cover + blank](https://huawei-product-slides-demo.leonguo08.workers.dev/) · [Thank-you preview](demo/thank-you-preview.png) · [中文 README](README.md)
 
@@ -22,7 +22,8 @@ Built for product introductions, architecture briefings, comparisons, packaging,
 - **Brand & layout** — Huawei logo, white stage, red accent `#c7000b`, 16:9 canvas, shared header/footer; Yunshan / Jinsha / mountain covers.
 - **Layout kit** — cover, cards, metrics, architecture, comparison, **before-after**, **scrollable tables**, workflow, image, pricing, scenarios, timeline, callouts, **agenda**, **quote**, **tabs**, custom, closing.
 - **Bilingual** — one-click ZH/EN, English typography sheet, remembered preference, bilingual TOC/controls.
-- **Presenter tools** — keyboard/touch nav, fullscreen, chapter jump, thumbnail TOC, position memory, **presenter notes** (`N` / `?presenter=1`), **shortcut cheat sheet** (`?`), **named sales cuts** (`?cut=cio`; unknown slide ids fail at generate).
+- **Multi-purpose archetypes** — optional `deck.kind` (`product-briefing` / `status-report` / `design-review` / `project-report` / `workshop`) plus `meta.purpose`; see starters below.
+- **Presenter tools** — keyboard/touch nav, fullscreen, chapter jump, thumbnail TOC, position memory, **presenter notes** (`N` / `?presenter=1`), **laser** (`L`), **marker/eraser** (`P`/`D`/`E`, `⇧E` clears slide), **shortcut cheat sheet** (`?`), **named sales cuts** (`?cut=cio`).
 - **Slide hide** — TOC “hide slides” saved per project in the current browser; navigation skips hidden pages.
 - **Motion** — workflow auto-highlight with pause/replay/show-all; stops off-slide; full content for print and reduced-motion.
 - **Access control** — server PIN + signed cookie for hosted decks.
@@ -67,8 +68,12 @@ npm test
 
 | Starter | Contents |
 | --- | --- |
-| `--starter blank` | Sales arc: cover → value cards → architecture → thank-you |
-| `--starter examples` | Six-page component sample (layouts + workflow) |
+| `--starter blank` | Product briefing arc (`kind: product-briefing`) |
+| `--starter status-report` | Weekly/status: agenda → metrics → timeline → risks → actions |
+| `--starter design-review` | Design review: context → architecture → before/after → options → opens |
+| `--starter examples` | Template component sample (layouts + workflow) |
+
+Layout guidance by archetype: [`assets/recipes/deck-archetypes/README.md`](assets/recipes/deck-archetypes/README.md).
 
 Edit `content/deck.json` (schema: `assets/template/schemas/deck.schema.json`). Custom pages use `content/*.html`. See [content & components](references/content-and-components.md).
 
@@ -106,13 +111,20 @@ Cloudflare needs platform auth and `ACCESS_PIN`. Details: [deployment](reference
 npm run export:html                 # offline HTML
 npm run export:pdf -- --lang zh     # Chinese PDF
 npm run export:pdf -- --lang en     # English PDF
-npm run export:pptx -- --lang zh    # editable PowerPoint
+npm run export:pptx -- --lang zh    # editable PowerPoint (first-class option)
 npm run export -- --lang both       # HTML + ZH/EN PDF (not PPTX by default)
 ```
 
-Optional `--slides "1,3-5,thank-you"` and `--output-dir DIR`. Named sales cuts: `--cut cio` reads `deck.cuts.cio.hidden` and composes with `--slides` by applying the cut first, then selecting from the remaining pages. PDF needs Playwright once; PPTX needs `pip install python-pptx` (or the skill’s documented dependency).
+**Editable PPTX for stakeholders who need to revise in Office:**
 
-HTML stays interactive and bilingual. PDF is static. **PPTX is editable Office interop** generated from `deck.json` (system of record remains the HTML briefing runtime). Optional generate-time schema checks: `pip install jsonschema`.
+```sh
+pip install python-pptx
+npm run export:pptx -- --lang zh
+```
+
+Builds from `deck.json` with a left Huawei-red rail, titles/subtitles/eyebrows, native tables, and speaker notes. Interactive stage + marker ink stay HTML-only.
+
+Optional `--slides "1,3-5,thank-you"` and `--output-dir DIR`. Named sales cuts: `--cut cio` applies cut first, then `--slides`. PDF needs Playwright once. Optional generate-time schema checks: `pip install jsonschema`.
 
 ## Upgrade an existing deck
 
@@ -134,8 +146,8 @@ hw-ppt-skill/
 ├── scripts/               init, demo build, audit, runtime sync
 ├── assets/
 │   ├── template/          Full presentation project template
-│   ├── starters/          blank / thank-you starters
-│   └── recipes/           Optional interactive references
+│   ├── starters/          blank / status-report / design-review / thank-you
+│   └── recipes/           Optional interactive refs + deck-archetypes guide
 └── demo/                  Offline demos
 ```
 

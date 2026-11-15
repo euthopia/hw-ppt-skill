@@ -1,6 +1,8 @@
 # Agent notes — huawei-product-slides
 
-North star: **Approach B — Sales briefing runtime** (keep `deck.json` + vanilla 16:9 HTML stage + agent skill packaging; evolve schema, layout registry, runtime versioning, recipes). Do **not** rewrite as React/Slidev. Never store GitHub PATs or secrets in the repo.
+North star: **Approach B — Huawei HTML→PPT deck runtime** (keep `deck.json` + vanilla 16:9 HTML stage + agent skill packaging; evolve schema, layout registry, runtime versioning, recipes, multi-purpose archetypes). Not briefing-only: product briefing, status/weekly, design review, project report, workshop. Do **not** rewrite as React/Slidev. Never store GitHub PATs or secrets in the repo.
+
+HTML is the interactive system of record; **editable PPTX** (`npm run export:pptx`, soft-dep `python-pptx`) is first-class Office interop.
 
 ## Agent skills
 
@@ -14,7 +16,7 @@ Default Matt Pocock roles via `Status:` lines. See `docs/agents/triage-labels.md
 
 ### Domain docs
 
-Single-context: root `GLOSSARY.md` + `docs/adr/`. See `docs/agents/domain.md`.
+Single-context: root `GLOSSARY.md` + `docs/adr/`. Archetype layout hints: `assets/recipes/deck-archetypes/README.md`. See `docs/agents/domain.md`.
 
 ### Engineering workflow
 

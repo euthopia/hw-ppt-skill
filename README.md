@@ -1,8 +1,8 @@
 # Huawei Product Slides
 
-**制作华为风格 HTML 产品演示的 Agent Skill。** 你提供产品内容，Agent 负责组织章节、选择版式、生成中英双语页面、配置轻量动效、检查排版并构建交付文件。
+**制作华为风格 HTML→PPT 文稿的 Agent Skill。** 你提供内容，Agent 负责选择文稿类型、组织章节、选择版式、生成中英双语页面、配置轻量动效、检查排版并构建交付文件；需要时导出**可编辑 PPTX**。
 
-适用于产品介绍、技术架构、方案对比、套餐说明、业务案例和 Demo 分享。
+适用于产品简报、周报/状态同步、架构设计评审、项目里程碑汇报、培训工作坊，以及方案对比、套餐说明、业务案例和 Demo。
 
 [在线体验：封面＋空白页](https://huawei-product-slides-demo.leonguo08.workers.dev/) · [致谢页预览图](demo/thank-you-preview.png) · [English README](README.en.md)
 
@@ -22,7 +22,8 @@
 - **品牌与排版**：华为 Logo、白底与红色强调 `#c7000b`、16:9 画布、统一页头页脚；可选择云山、金沙和山景封面。
 - **版式套件**：封面、卡片、指标、分层架构、双列对比、**前后对照 before-after**、**可滚动粘性表头表格**、流程、图片、定价、场景、**时间线**、**要点提示**、**议程**、**引用证言**、**页签 tabs**、自定义及致谢页。
 - **中英双语**：一键切换、英文独立样式、语言偏好记忆，支持双语目录和控件。
-- **演示工具**：键盘/触控翻页、全屏、章节跳转、缩略图目录、位置记忆、**演示备注**（`N` / `?presenter=1`）、**快捷键对照**（`?`）、**命名销售切片**（`?cut=cio`；未知 slide id 在生成期校验失败）。
+- **多文稿类型**：可选 `deck.kind`（`product-briefing` / `status-report` / `design-review` / `project-report` / `workshop`）与 `meta.purpose`；起始模板见下方。
+- **演示工具**：键盘/触控翻页、全屏、章节跳转、缩略图目录、位置记忆、**演示备注**（`N` / `?presenter=1`）、**激光笔**（`L`）、**马克笔/橡皮**（`P`/`D`/`E`，`⇧E` 清本页）、**快捷键对照**（`?`）、**命名销售切片**（`?cut=cio`）。
 - **屏蔽页面**：目录中选择不演示的页面并保存，翻页和章节跳转自动跳过；支持取消与恢复全部。设置按演示项目保存在当前浏览器，至少保留一页。
 - **轻量动效**：流程自动高亮、暂停、重播和完整显示；离页停止，打印与减少动态效果时完整展示。
 - **可选交互组件**：手动场景切换、输入/缓存输入/输出价格表等通用组件。
@@ -66,6 +67,10 @@ python3 scripts/init.py /path/to/my-product-deck \
   --title-en 'Product X briefing' \
   --starter blank
 
+# 周报 / 设计评审示例：
+#   --starter status-report
+#   --starter design-review
+
 cd /path/to/my-product-deck
 npm run build
 npm test
@@ -73,8 +78,12 @@ npm test
 
 | 起始模板 | 内容 |
 | --- | --- |
-| `--starter blank` | 销售简报弧线：封面→价值卡片→能力指标→致谢 |
-| `--starter examples` | 六页组件示例，适合了解布局与流程组件 |
+| `--starter blank` | 产品简报弧线：封面→价值卡片→能力分层→致谢（`kind: product-briefing`） |
+| `--starter status-report` | 状态周报：议程→指标→时间线→风险→行动表→致谢 |
+| `--starter design-review` | 设计评审：背景→架构→前后对照→取舍→待确认项→致谢 |
+| `--starter examples` | 模板组件示例，适合了解布局与流程组件 |
+
+布局与文稿类型对照见 [`assets/recipes/deck-archetypes/README.md`](assets/recipes/deck-archetypes/README.md)。
 
 主要编辑 `content/deck.json`（JSON Schema：`assets/template/schemas/deck.schema.json`），填入页面标题、正文及双语文本；自定义页面使用 `content/*.html`。生成器负责页码、目录、语言字典、`runtimeVersion` 和页面骨架。字段与组件示例见 [内容与组件](references/content-and-components.md)。
 
@@ -119,9 +128,19 @@ Cloudflare 项目需要配置平台授权和 `ACCESS_PIN`。离线文件与纯�
 npm run export:html                    # 单个可离线打开的 HTML
 npm run export:pdf -- --lang zh         # 中文 PDF
 npm run export:pdf -- --lang en         # 英文 PDF
-npm run export:pptx -- --lang zh        # 可编辑 PowerPoint（需 python-pptx）
+npm run export:pptx -- --lang zh        # 可编辑 PowerPoint（一等公民选项；需 python-pptx）
 npm run export -- --lang both           # HTML + 中文 PDF + 英文 PDF（默认不含 PPTX）
 ```
+
+**可编辑 PPTX（推荐给需要改稿的干系人）：**
+
+```sh
+pip install python-pptx
+npm run export:pptx -- --lang zh
+# 或：npm run export:pptx -- --lang en --output-dir dist/exports
+```
+
+从 `deck.json` 生成左侧华为红强调条、标题/副标题、表格、备注页；交互与马克笔墨迹仍以 HTML 为准。
 
 选页导出可加 `--slides "1,3-5,thank-you"`，支持页码、范围和稳定页面 ID，按参数顺序输出并去重；HTML / PDF / PPTX 均适用，不改原稿。命名销售切片可加 `--cut cio`（读取 `deck.json` 的 `cuts.cio.hidden`）；可与 `--slides` 组合：**先按 cut 去掉隐藏页，再在剩余页上做选页**。
 

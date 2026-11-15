@@ -1,0 +1,189 @@
+{
+  "id": "status-report-deck",
+  "kind": "status-report",
+  "runtimeVersion": "1.5.0",
+  "meta": {
+    "purpose": {
+      "zh": "周报 / 项目状态同步",
+      "en": "Weekly or project status sync"
+    }
+  },
+  "title": {
+    "zh": "项目状态周报",
+    "en": "Project status report"
+  },
+  "brandLabel": "HUAWEI CLOUD",
+  "footer": "HUAWEI CLOUD",
+  "chapters": [
+    {
+      "label": { "zh": "进展", "en": "Progress" },
+      "section": { "zh": "本周进展", "en": "This week" }
+    },
+    {
+      "label": { "zh": "风险", "en": "Risks" },
+      "section": { "zh": "风险与下一步", "en": "Risks & next" }
+    }
+  ],
+  "slides": [
+    {
+      "type": "cover",
+      "id": "cover",
+      "title": { "zh": "项目状态周报", "en": "Project status report" },
+      "eyebrow": { "zh": "状态同步", "en": "Status sync" },
+      "subtitle": {
+        "zh": "本周进展 · 指标 · 风险 · 下一步",
+        "en": "Progress · metrics · risks · next steps"
+      },
+      "tagline": "HUAWEI CLOUD",
+      "background": "云山"
+    },
+    {
+      "type": "agenda",
+      "id": "agenda",
+      "section": { "zh": "本周进展", "en": "This week" },
+      "title": { "zh": "议程", "en": "Agenda" },
+      "subtitle": {
+        "zh": "用三到五个议题对齐会议节奏",
+        "en": "Three to five topics to pace the sync"
+      },
+      "eyebrow": "AGENDA",
+      "items": [
+        { "label": { "zh": "关键进展", "en": "Key progress" }, "time": { "zh": "5 分钟", "en": "5 min" } },
+        { "label": { "zh": "指标与质量", "en": "Metrics & quality" }, "time": { "zh": "5 分钟", "en": "5 min" } },
+        { "label": { "zh": "风险与求助", "en": "Risks & asks" }, "time": { "zh": "10 分钟", "en": "10 min" } }
+      ]
+    },
+    {
+      "type": "metrics",
+      "id": "metrics",
+      "section": { "zh": "本周进展", "en": "This week" },
+      "title": { "zh": "本周关键指标", "en": "Key metrics this week" },
+      "subtitle": {
+        "zh": "只放已核实的数字；未核实时用占位",
+        "en": "Verified numbers only; use placeholders when unchecked"
+      },
+      "eyebrow": "METRICS",
+      "metrics": [
+        {
+          "value": { "zh": "—", "en": "—" },
+          "label": { "zh": "完成项", "en": "Done" },
+          "body": { "zh": "待填写", "en": "To fill" }
+        },
+        {
+          "value": { "zh": "—", "en": "—" },
+          "label": { "zh": "进行中", "en": "In progress" },
+          "body": { "zh": "待填写", "en": "To fill" }
+        },
+        {
+          "value": { "zh": "—", "en": "—" },
+          "label": { "zh": "阻塞", "en": "Blocked" },
+          "body": { "zh": "待填写", "en": "To fill" }
+        }
+      ]
+    },
+    {
+      "type": "timeline",
+      "id": "milestones",
+      "section": { "zh": "本周进展", "en": "This week" },
+      "title": { "zh": "里程碑节奏", "en": "Milestone cadence" },
+      "subtitle": {
+        "zh": "过去 → 现在 → 下一拍",
+        "en": "Past → now → next beat"
+      },
+      "eyebrow": "TIMELINE",
+      "notes": {
+        "zh": "按真实节奏改写周次；保持 3–5 个节点。",
+        "en": "Rewrite weeks to the real cadence; keep 3–5 beats."
+      },
+      "events": [
+        {
+          "when": { "zh": "上周", "en": "Last week" },
+          "title": { "zh": "已交付", "en": "Delivered" },
+          "body": { "zh": "待填写的完成事项", "en": "Completed items to supply" }
+        },
+        {
+          "when": { "zh": "本周", "en": "This week" },
+          "title": { "zh": "进行中", "en": "In flight" },
+          "body": { "zh": "待填写的关键工作", "en": "Key work in flight" }
+        },
+        {
+          "when": { "zh": "下周", "en": "Next week" },
+          "title": { "zh": "计划", "en": "Planned" },
+          "body": { "zh": "待填写的下一目标", "en": "Next target to supply" }
+        }
+      ]
+    },
+    {
+      "type": "callouts",
+      "id": "risks",
+      "section": { "zh": "风险与下一步", "en": "Risks & next" },
+      "title": { "zh": "风险与需要的支持", "en": "Risks and asks" },
+      "subtitle": {
+        "zh": "信息 / 注意 / 行动，避免口号",
+        "en": "Info / caution / action — no slogans"
+      },
+      "eyebrow": "RISKS",
+      "items": [
+        {
+          "tone": "info",
+          "title": { "zh": "现状", "en": "Context" },
+          "body": { "zh": "一句话说明当前状态", "en": "One sentence on current state" }
+        },
+        {
+          "tone": "warn",
+          "title": { "zh": "风险", "en": "Risk" },
+          "body": { "zh": "只写已确认的风险边界", "en": "Confirmed risk boundaries only" }
+        },
+        {
+          "tone": "accent",
+          "title": { "zh": "需要的决策", "en": "Decision needed" },
+          "body": { "zh": "明确责任人与时间点", "en": "Owner and timing" }
+        }
+      ]
+    },
+    {
+      "type": "table",
+      "id": "actions",
+      "section": { "zh": "风险与下一步", "en": "Risks & next" },
+      "title": { "zh": "行动项", "en": "Action items" },
+      "subtitle": {
+        "zh": "责任人 · 截止 · 状态",
+        "en": "Owner · due · status"
+      },
+      "eyebrow": "ACTIONS",
+      "headers": [
+        { "zh": "事项", "en": "Item" },
+        { "zh": "责任人", "en": "Owner" },
+        { "zh": "截止", "en": "Due" },
+        { "zh": "状态", "en": "Status" }
+      ],
+      "rows": [
+        [
+          { "zh": "待填写", "en": "To fill" },
+          { "zh": "—", "en": "—" },
+          { "zh": "—", "en": "—" },
+          { "zh": "进行中", "en": "In progress" }
+        ],
+        [
+          { "zh": "待填写", "en": "To fill" },
+          { "zh": "—", "en": "—" },
+          { "zh": "—", "en": "—" },
+          { "zh": "未开始", "en": "Not started" }
+        ]
+      ],
+      "note": {
+        "zh": "只保留会后仍需跟踪的行动项。",
+        "en": "Keep only actions that must be tracked after the meeting."
+      }
+    },
+    {
+      "type": "closing",
+      "id": "thank-you",
+      "thanks": { "zh": "谢谢", "en": "Thank You" },
+      "vision": {
+        "zh": "对齐事实，推动下一步。",
+        "en": "Align on facts. Drive the next step."
+      }
+    }
+  ]
+}

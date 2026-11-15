@@ -1,6 +1,13 @@
 {
   "id": "blank-product-deck",
-  "runtimeVersion": "1.4.0",
+  "kind": "product-briefing",
+  "runtimeVersion": "1.5.0",
+  "meta": {
+    "purpose": {
+      "zh": "产品销售简报",
+      "en": "Product sales briefing"
+    }
+  },
   "title": {
     "zh": "产品名称",
     "en": "Product name"

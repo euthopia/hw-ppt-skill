@@ -1,22 +1,24 @@
 ---
 name: huawei-product-slides
-description: Create or update Huawei-branded bilingual HTML product presentations using the bundled reusable canvas, Huawei logo, layouts, lightweight animations, presentation controls, PIN-protected hosting and Cloudflare deployment code. Use when the user wants slides matching this style, a new Huawei product deck, or reuse of the presentation template.
+description: Create or update Huawei-branded bilingual HTML decks (product briefing, status/weekly report, design review, project report, workshop) using the bundled 16:9 canvas, layouts, presenter tools (laser/marker), PIN hosting and Cloudflare deploy. Use for Huawei-style slides or editable PPTX export from deck.json.
 ---
 
-# 华为产品演示制作
+# 华为 HTML→PPT 演示制作
 
-用户提供产品内容，你负责组织页面、填充组件、检查双语排版、构建交付和按用户授权发布。默认复用这里的设计和基础代码。产物是可交互 HTML 演示、单文件离线 HTML、可打印 PDF、可部署项目；用户明确要求时可用 `npm run export:pptx` 从 `deck.json` 生成可编辑 `.pptx`（需 `python-pptx`；交互 SoR 仍是 HTML）。
+用户提供内容，你负责选择**文稿类型（archetype）**、组织页面、填充组件、检查双语排版、构建交付和按用户授权发布。默认复用这里的设计和基础代码。产物是可交互 HTML 演示、单文件离线 HTML、可打印 PDF、可部署项目；**可编辑 PPTX** 是一等公民导出选项：`npm run export:pptx -- --lang zh`（软依赖 `pip install python-pptx`；**交互 SoR 仍是 HTML**）。
+
+支持的文稿类型（`deck.kind`，可省略，默认按产品简报姿态）：`product-briefing` · `status-report` · `design-review` · `project-report` · `workshop`。布局选用见 [archetype 指南](assets/recipes/deck-archetypes/README.md)。
 
 ## 工作方式
 
 1. 第一次使用时告诉用户正在使用本 skill。读取 [设计规范](references/design.md)、[内容与组件](references/content-and-components.md)。需要发布时再读 [部署流程](references/deployment.md)。
-2. 从上下文获取产品名、受众、核心信息、语言和现有素材。能合理推断就继续，不要要求用户配置 CSS、组件或构建。内容不完整时先做明确占位的草稿，不编造价格、指标、可用性或功能。
-3. 新产品使用独立目录和唯一项目 ID。执行 `python3 <skill根目录>/scripts/init.py <新项目目录> --id <唯一slug> --title <产品标题> --starter blank`。`--starter blank` 提供销售简报弧线（封面→价值卡片→架构分层→致谢）；需要组件示例时用 `--starter examples`。脚本复制完整可运行基础代码；不从原演示仓库动态下载依赖。更新已使用该 skill 的项目时继续其目录，可用 `python3 <skill根目录>/scripts/sync_runtime.py <项目目录>` 同步运行时。
-4. 主要修改新项目 `content/deck.json`（契约见 `assets/template/schemas/deck.schema.json`）。以受众任务和客户价值组织内容，每页一个重点；选择合适的布局（含一等公民 `pricing` / `scenarios`，以及 `timeline` / `callouts` / `before-after` / 可滚动 `table`）。生成文件 `index.html`、`js/config.js`、`js/translations.js`、`asset-manifest.json` 会重建，业务内容不能直接写在它们里面。`js/config.js` 含 `runtimeVersion` 与可选 `cuts`（见 `docs/adr/0002-runtime-version-and-template-sync.md`、`docs/adr/0003-sales-cuts-and-presenter-notes.md`）。
-5. 中英文用 `{ "zh": "中文", "en": "English" }`；英文表达允许调整句式以便阅读。公共骨架一致，英文样式在 `css/english.css` 单独适配。长文案先精简或拆页，不用过小字号压入方框。可选 `notes` 字段供演示备注；`?presenter=1` 或按 `N` 打开。
-6. 从模板现有组件开始；优先用 `pricing` / `scenarios` 等一等公民类型。自定义内容使用 `custom` 片段（禁止 script/内联事件）。`cuts` 中的 slide id 必须存在（生成期校验）。价格、指标、套餐容量和案例使用当前项目资料，并写入 `docs/content-sources.md`。
-7. 执行 `npm run build` 和 `npm test`，通过本地 HTTP 服务运行 `npm run test:browser`。默认 build/test 只生成和检查多文件网页，不生成离线单文件、PDF、PPTX 或部署目录。只有用户明确要求导出时才使用 `npm run export:html`、`npm run export:pdf -- --lang zh`、`npm run export:pptx -- --lang zh` 或 `npm run export -- --lang both`；只有缺少浏览器 / python-pptx 依赖时按说明安装一次，后续不需 Agent 修改代码。参考 [检查与交付](references/validation.md)，查看 qa/contact-zh.png、qa/contact-en.png 全稿总览和 qa/slides/ 中的逐页双语截图，修复文本超出、组件重叠和页脚距离。目录支持选择屏蔽页面并保存到当前浏览器，按项目 ID 隔离；所有翻页和章节跳转跳过屏蔽页，至少保留一页。页面 id 保持稳定，已有页面改标题或排序时不要修改 id。默认流程动效在进入页时运行，支持暂停、重播、完整显示；离页停止，目录与打印显示完整内容，尊重减少动态效果设置。
-8. 默认交付可预览网页和项目源文件。制作与检查完成后，在交付说明末尾简短提示：“如需便于转发或留档，也可以导出单文件 HTML、PDF 或可编辑 PPTX。”此提示不是导出指令；没有用户明确要求时，不运行 build:offline、export*、test:export* 或其他打包/打印导出操作，也不为导出安装浏览器依赖。用户明确要求后只导出指定格式；用户指定页面时使用 --slides 按页码、范围或稳定 ID 导出，不为选页临时改原稿。仅要求 HTML 时不顺带生成 PDF/PPTX，反之亦然；明确需要多种格式时才组合导出。没有明确要求本任务发布时，不部署 Cloudflare/Sites、不生成其部署产物，不把历史发布记录当作本次内容修改的自动发布要求。只有部署参数、域名、认证或服务端接口需求变化时才修改 deploy/；日常内容与样式只维护一份前端源码，明确发布时由适配器读取最新源码打包。用户明确要求发布且已有授权时，执行对应平台构建和发布并验证访问页，无需重复询问已有授权。复用已有认证，不复制账号配置、OAuth、访问 PIN 或 API Key 到包内。
+2. 从上下文推断文稿类型、受众、核心信息、语言和现有素材。能合理推断就继续，不要要求用户配置 CSS、组件或构建。内容不完整时先做明确占位的草稿，不编造价格、指标、可用性或功能。
+3. 新项目使用独立目录和唯一项目 ID。执行 `python3 <skill根目录>/scripts/init.py <新项目目录> --id <唯一slug> --title <标题> --starter blank|status-report|design-review|examples`。`blank`＝产品简报弧线；`status-report`＝周报/状态；`design-review`＝方案评审；`examples`＝模板组件样例。更新已有项目用 `python3 <skill根目录>/scripts/sync_runtime.py <项目目录>`。
+4. 主要修改 `content/deck.json`（契约见 `assets/template/schemas/deck.schema.json`）。可设 `kind` 与 `meta.purpose`；每页一个重点；按 archetype 选布局（`timeline` / `callouts` / `before-after` / `agenda` / `table` / `pricing` / `scenarios` 等）。生成文件 `index.html`、`js/config.js`、`js/translations.js`、`asset-manifest.json` 会重建，业务内容不要写进去。
+5. 中英文用 `{ "zh": "中文", "en": "English" }`。可选 `notes`；`?presenter=1` 或 `N` 打开备注。演示笔：`L` 激光、`P`/`D` 马克笔、`E` 橡皮、`⇧E` 清除本页、`Esc` 退出工具（`?` 对照表）。
+6. 从模板组件开始；`custom` 片段禁止 script/内联事件。价格与指标写入 `docs/content-sources.md`。
+7. 执行 `npm run build` 和 `npm test`；需要时 `npm run test:browser`。默认不导出。用户明确要求时：`npm run export:html`、`npm run export:pdf -- --lang zh`、**`npm run export:pptx -- --lang zh`**（缺 `python-pptx` 时按提示安装一次）。
+8. 交付末尾可提示可再导出单文件 HTML / PDF / **可编辑 PPTX**；无明确要求不自动导出或部署。
 
 ## 设计默认值
 

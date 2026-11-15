@@ -1,7 +1,22 @@
 # Changelog
 
-All notable changes to the Huawei product briefing runtime are documented here.
+All notable changes to the Huawei HTML→PPT deck runtime are documented here.
 Format follows a lightweight Keep-a-Changelog style. HTML remains the system of record; PPTX is Office interop.
+
+## 1.5.0 — 2026-11-15
+
+### Added
+
+- **Multi-purpose archetypes**: optional `deck.kind` (`product-briefing` | `status-report` | `design-review` | `project-report` | `workshop`) and `meta.purpose`; layout guidance in `assets/recipes/deck-archetypes/README.md`.
+- Starters: `assets/starters/status-report.json`, `assets/starters/design-review.json`; `init.py --starter status-report|design-review`.
+- **Presenter marker pen**: freehand ink on the scaled 16:9 stage (`P`/`D`), Huawei red + black (`C`), width (`[`/`]`), eraser (`E`), clear slide (`⇧E`), `Esc` exits tool; per-slide ink (optional `presenterInk.clearOnLeave`); hidden in print/export/thumbnails.
+- Extends existing laser (`L`); cheat sheet + i18n updated; `js/presenter-ink.js` seam + tests.
+- PPTX export: eyebrow titles, indented bullets, deck `kind` stamp on cover; READMEs/SKILL document `npm run export:pptx` as a first-class option.
+
+### Changed
+
+- Skill/AGENTS/glossary repositioned from briefing-only to Huawei HTML→PPT multi-purpose decks (Approach B unchanged: no React/Slidev).
+- Runtime pin **1.5.0**.
 
 ## 1.4.0 — 2026-11-15
 

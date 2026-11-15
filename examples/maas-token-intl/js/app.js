@@ -15,7 +15,6 @@
   let idleTimer, toastTimer, returnFocus;
   let pointerAtBottom = false, keyboardControls = false;
   let presenterMode = false;
-  let laserOn = false;
   let timerStartedAt = null;
   let timerInterval = null;
   let lastSlideIndex = state.index;
@@ -23,6 +22,52 @@
   const prefersReducedMotion = () => {
     try { return window.matchMedia('(prefers-reduced-motion: reduce)').matches; } catch { return false; }
   };
+  const inkClearOnLeave = !!(window.DeckConfig && window.DeckConfig.presenterInk && window.DeckConfig.presenterInk.clearOnLeave);
+  const ink = window.PresenterInk
+    ? window.PresenterInk.create({
+      slideKey: slideKeys[state.index] || String(state.index),
+      clearOnLeave: inkClearOnLeave,
+    })
+    : null;
+  const inkHost = document.createElement('div');
+  inkHost.id = 'presenter-ink';
+  inkHost.className = 'presenter-ink';
+  inkHost.setAttribute('aria-hidden', 'true');
+  const inkCanvas = document.createElement('canvas');
+  inkCanvas.width = 1600;
+  inkCanvas.height = 900;
+  inkHost.append(inkCanvas);
+  if (deckEl) deckEl.append(inkHost);
+  const inkCtx = inkCanvas.getContext('2d');
+  function redrawInk() {
+    if (!ink || !inkCtx) return;
+    inkCtx.clearRect(0, 0, inkCanvas.width, inkCanvas.height);
+    window.PresenterInk.paintStrokes(inkCtx, ink.getStrokes());
+  }
+  function syncInkChrome() {
+    if (!ink) return;
+    const mode = ink.getMode();
+    const laserActive = mode === 'laser';
+    const laserDot = laserActive && !prefersReducedMotion();
+    document.body.classList.toggle('laser-on', laserDot);
+    document.body.classList.toggle('laser-reduced', laserActive && prefersReducedMotion());
+    document.body.classList.toggle('ink-pen', mode === 'pen');
+    document.body.classList.toggle('ink-eraser', mode === 'eraser');
+    inkHost.classList.toggle('is-drawing', mode === 'pen' || mode === 'eraser');
+  }
+  function toolToast(mode) {
+    if (mode === 'laser') toast('激光笔已开启');
+    else if (mode === 'pen') toast('马克笔已开启');
+    else if (mode === 'eraser') toast('橡皮已开启');
+    else toast('已退出演示笔');
+  }
+  function applyToolMode(mode) {
+    if (!ink) return;
+    ink.setMode(mode);
+    syncInkChrome();
+    if (presenterMode) refreshPresenterNotes();
+    else toolToast(mode);
+  }
   try { presenterMode = new URLSearchParams(location.search).get('presenter') === '1'; } catch { /* ignore */ }
   const notesPanel = document.createElement('aside');
   notesPanel.id = 'presenter-notes';
@@ -46,12 +91,17 @@
     '<li><kbd>G</kbd><span>目录</span></li>',
     '<li><kbd>N</kbd><span>演示备注</span></li>',
     '<li><kbd>L</kbd><span>激光笔</span></li>',
+    '<li><kbd>P</kbd><kbd>D</kbd><span>马克笔</span></li>',
+    '<li><kbd>E</kbd><span>橡皮</span></li>',
+    '<li><kbd>⇧E</kbd><span>清除本页墨迹</span></li>',
+    '<li><kbd>C</kbd><span>笔色红/黑</span></li>',
+    '<li><kbd>[</kbd><kbd>]</kbd><span>笔粗细</span></li>',
     '<li><kbd>T</kbd><span>演示计时</span></li>',
     '<li><kbd>F</kbd><span>全屏</span></li>',
     '<li><kbd>?</kbd><span>本对照表</span></li>',
-    '<li><kbd>Esc</kbd><span>关闭对话框</span></li>',
+    '<li><kbd>Esc</kbd><span>退出笔工具 / 关闭对话框</span></li>',
     '</ul>',
-    '<p class="keyboard-help-tip">URL 参数：?cut=名称 分享切片；?presenter=1 打开备注。</p>',
+    '<p class="keyboard-help-tip">URL 参数：?cut=名称 分享切片；?presenter=1 打开备注。墨迹按页保存；打印/导出不显示。</p>',
   ].join('');
   document.body.append(helpDialog);
   helpDialog.querySelector('[data-help-close]').addEventListener('click', () => helpDialog.close());
@@ -78,11 +128,6 @@
     returnFocus = document.activeElement;
     helpDialog.showModal();
     helpDialog.querySelector('[data-help-close]').focus();
-  }
-  function setLaser(on) {
-    laserOn = !!on && !prefersReducedMotion();
-    document.body.classList.toggle('laser-on', laserOn);
-    document.body.classList.toggle('laser-reduced', !!on && prefersReducedMotion());
   }
   function formatElapsed(ms) {
     const total = Math.max(0, Math.floor(ms / 1000));
@@ -304,6 +349,13 @@
     try { if (location.hash !== hash) history.replaceState(null, '', hash); } catch { location.hash = hash; }
     try { localStorage.setItem(storageKey, JSON.stringify({ index: state.index, step: state.step })); } catch { /* Private browsers can still present. */ }
     if (dialog.open) refreshThumbnails();
+    if (ink) {
+      const key = slideKeys[state.index] || String(state.index);
+      if (key !== ink.getSlideKey()) {
+        ink.onSlideChange(key);
+        redrawInk();
+      }
+    }
     refreshPresenterNotes();
     document.dispatchEvent(new CustomEvent('deckpagechange', { detail: { index: state.index } }));
   }
@@ -335,9 +387,14 @@
       : '下一页预告：—';
     const tip = document.createElement('div');
     tip.className = 'presenter-notes-tip';
-    tip.textContent = laserOn || document.body.classList.contains('laser-reduced')
-      ? '按 N 关闭备注 · L 激光 · T 重置计时'
-      : '按 N 关闭备注 · L 激光笔 · T 计时';
+    const mode = ink ? ink.getMode() : 'off';
+    tip.textContent = mode === 'off'
+      ? '按 N 关闭备注 · L 激光 · P 马克笔 · T 计时'
+      : mode === 'laser'
+        ? '激光中 · Esc 退出 · P 马克笔 · T 计时'
+        : mode === 'eraser'
+          ? '橡皮中 · Esc 退出 · ⇧E 清除本页'
+          : '马克笔中 · Esc 退出 · C 换色 · E 橡皮';
     notesPanel.replaceChildren(chrome, body, upcoming, tip);
   }
   function move(direction) { direction > 0 ? state.next() : state.previous(); render(); wake(); }
@@ -390,9 +447,13 @@
   byId('overview').setAttribute('aria-controls', 'overview-dialog');
   document.addEventListener('fullscreenchange', () => { byId('fullscreen-label').textContent = document.fullscreenElement ? '退出全屏' : '全屏'; fit(); wake(); });
   document.addEventListener('pointermove', event => {
-    if (laserOn && !prefersReducedMotion()) {
+    if (ink && ink.getMode() === 'laser' && !prefersReducedMotion()) {
       document.documentElement.style.setProperty('--laser-x', `${event.clientX}px`);
       document.documentElement.style.setProperty('--laser-y', `${event.clientY}px`);
+    }
+    if (ink && ink.isDrawing() && deckEl) {
+      const point = window.PresenterInk.mapPoint(event.clientX, event.clientY, deckEl.getBoundingClientRect());
+      if (point && ink.extendStroke(point)) redrawInk();
     }
     if (event.pointerType === 'touch') return;
     keyboardControls = false;
@@ -403,6 +464,24 @@
   document.documentElement.addEventListener('pointerleave', () => { pointerAtBottom = false; wake(); });
   document.addEventListener('pointerdown', event => {
     if (event.pointerType === 'touch' && event.clientY >= innerHeight - 100) wake(true);
+    if (!ink || !deckEl) return;
+    const mode = ink.getMode();
+    if (mode !== 'pen' && mode !== 'eraser') return;
+    if (event.target.closest('button,a,input,textarea,select,dialog,.controls,.presenter-notes,.keyboard-help')) return;
+    const point = window.PresenterInk.mapPoint(event.clientX, event.clientY, deckEl.getBoundingClientRect());
+    if (!point) return;
+    event.preventDefault();
+    ink.beginStroke(point);
+    redrawInk();
+    try { inkCanvas.setPointerCapture(event.pointerId); } catch { /* ignore */ }
+  });
+  document.addEventListener('pointerup', event => {
+    if (!ink || !ink.isDrawing()) return;
+    ink.endStroke();
+    try { inkCanvas.releasePointerCapture(event.pointerId); } catch { /* ignore */ }
+  });
+  document.addEventListener('pointercancel', () => {
+    if (ink && ink.isDrawing()) ink.endStroke();
   });
   document.addEventListener('focusin', () => wake());
   document.addEventListener('focusout', () => setTimeout(() => wake(), 0));
@@ -428,6 +507,11 @@
     if (helpDialog.open && (event.key === '?' || event.key === '/')) {
       event.preventDefault();
       helpDialog.close();
+      return;
+    }
+    if (event.key === 'Escape' && !document.querySelector('dialog[open]') && ink && ink.getMode() !== 'off') {
+      event.preventDefault();
+      applyToolMode('off');
       return;
     }
     if (document.querySelector("dialog[open]") || event.ctrlKey || event.altKey || event.metaKey || event.repeat) return;
@@ -459,9 +543,35 @@
     }
     else if (event.key.toLowerCase() === 'l') {
       event.preventDefault();
-      setLaser(!(laserOn || document.body.classList.contains('laser-reduced')));
-      if (presenterMode) refreshPresenterNotes();
-      else toast(laserOn || document.body.classList.contains('laser-reduced') ? '激光笔已开启' : '激光笔已关闭');
+      if (!ink) return;
+      applyToolMode(ink.getMode() === 'laser' ? 'off' : 'laser');
+    }
+    else if (event.key.toLowerCase() === 'p' || event.key.toLowerCase() === 'd') {
+      event.preventDefault();
+      if (!ink) return;
+      applyToolMode(ink.getMode() === 'pen' ? 'off' : 'pen');
+    }
+    else if (event.key.toLowerCase() === 'e') {
+      event.preventDefault();
+      if (!ink) return;
+      if (event.shiftKey) {
+        ink.clearCurrent();
+        redrawInk();
+        toast('已清除本页墨迹');
+        if (presenterMode) refreshPresenterNotes();
+      } else {
+        applyToolMode(ink.getMode() === 'eraser' ? 'off' : 'eraser');
+      }
+    }
+    else if (event.key.toLowerCase() === 'c' && ink && (ink.getMode() === 'pen' || ink.getMode() === 'eraser')) {
+      event.preventDefault();
+      const next = ink.cycleColor();
+      toast(next === window.PresenterInk.COLORS.black ? '笔色：黑' : '笔色：红');
+    }
+    else if ((event.key === '[' || event.key === ']') && ink && (ink.getMode() === 'pen' || ink.getMode() === 'eraser')) {
+      event.preventDefault();
+      const width = ink.nudgePenWidth(event.key === ']' ? 1 : -1);
+      toast(`笔粗：${width.toFixed(1)}`);
     }
     else if (event.key.toLowerCase() === 't') {
       event.preventDefault();
@@ -484,8 +594,21 @@
     wake();
   });
   let touchStart = null;
-  byId('viewport').addEventListener('touchstart', event => { if (!event.target.closest('button,a,input,textarea,select,[contenteditable],video,iframe')) touchStart = { x: event.changedTouches[0].clientX, y: event.changedTouches[0].clientY }; }, { passive: true });
-  byId('viewport').addEventListener('touchend', event => { if (!touchStart) return; const dx = event.changedTouches[0].clientX - touchStart.x; const dy = event.changedTouches[0].clientY - touchStart.y; if (Math.abs(dx) > 55 && Math.abs(dx) > Math.abs(dy) * 1.5) move(dx < 0 ? 1 : -1); touchStart = null; }, { passive: true });
+  byId('viewport').addEventListener('touchstart', event => {
+    if (ink && (ink.getMode() === 'pen' || ink.getMode() === 'eraser')) { touchStart = null; return; }
+    if (!event.target.closest('button,a,input,textarea,select,[contenteditable],video,iframe')) {
+      touchStart = { x: event.changedTouches[0].clientX, y: event.changedTouches[0].clientY };
+    }
+  }, { passive: true });
+  byId('viewport').addEventListener('touchend', event => {
+    if (!touchStart) return;
+    const dx = event.changedTouches[0].clientX - touchStart.x;
+    const dy = event.changedTouches[0].clientY - touchStart.y;
+    if (Math.abs(dx) > 55 && Math.abs(dx) > Math.abs(dy) * 1.5) move(dx < 0 ? 1 : -1);
+    touchStart = null;
+  }, { passive: true });
+  syncInkChrome();
+  redrawInk();
 
   const linkedPage = DeckNavigation.parseHash(location.hash, slides.length);
   let saved;

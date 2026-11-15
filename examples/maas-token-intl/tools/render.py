@@ -83,11 +83,28 @@ translations={
  '本对照表':'This cheat sheet',
  '关闭对话框':'Close dialog',
  'URL 参数：?cut=名称 分享切片；?presenter=1 打开备注。':'URL params: ?cut=name for a shareable cut; ?presenter=1 for notes.',
+ 'URL 参数：?cut=名称 分享切片；?presenter=1 打开备注。墨迹按页保存；打印/导出不显示。':'URL params: ?cut=name for a shareable cut; ?presenter=1 for notes. Ink is per-slide; hidden in print/export.',
  '激光笔':'Laser pointer',
+ '马克笔':'Marker pen',
+ '橡皮':'Eraser',
+ '清除本页墨迹':'Clear ink on this slide',
+ '笔色红/黑':'Pen color red/black',
+ '笔粗细':'Pen thickness',
+ '退出笔工具 / 关闭对话框':'Exit pen tool / close dialog',
  '演示计时':'Elapsed timer',
  '页签切换':'Tab panels',
  '激光笔已开启':'Laser pointer on',
  '激光笔已关闭':'Laser pointer off',
+ '马克笔已开启':'Marker pen on',
+ '橡皮已开启':'Eraser on',
+ '已退出演示笔':'Presenter tool off',
+ '已清除本页墨迹':'Cleared ink on this slide',
+ '笔色：红':'Pen color: red',
+ '笔色：黑':'Pen color: black',
+ '按 N 关闭备注 · L 激光 · P 马克笔 · T 计时':'Press N to hide notes · L laser · P marker · T timer',
+ '激光中 · Esc 退出 · P 马克笔 · T 计时':'Laser on · Esc exit · P marker · T timer',
+ '橡皮中 · Esc 退出 · ⇧E 清除本页':'Eraser on · Esc exit · ⇧E clear slide',
+ '马克笔中 · Esc 退出 · C 换色 · E 橡皮':'Marker on · Esc exit · C color · E eraser',
 }
 def source(value):
  if isinstance(value,dict):
@@ -396,7 +413,7 @@ for name,preset in (D.get('cuts') or {}).items():
   hidden.append(slide_id)
  cuts[name]={'hidden':hidden,'label':source(preset['label']) if 'label' in preset else name}
 
-needed_scripts=['js/config.js','js/navigation.js','js/app.js','js/translations.js','js/language.js','js/scenes.js']
+needed_scripts=['js/config.js','js/navigation.js','js/presenter-ink.js','js/app.js','js/translations.js','js/language.js','js/scenes.js']
 needed_styles=['css/styles.css','css/components.css','css/english.css']
 types={s['type'] for s in D['slides']}
 if 'pricing' in types:
@@ -410,6 +427,8 @@ if 'tabs' in types:
  if 'css/recipes.css' not in needed_styles:needed_styles.append('css/recipes.css')
 
 config={'id':D['id'],'chapters':chapters,'runtimeVersion':runtime_version,'cuts':cuts}
+if D.get('kind'): config['kind']=D['kind']
+if isinstance(D.get('presenterInk'),dict): config['presenterInk']=D['presenterInk']
 (ROOT/'js/config.js').write_text('window.DeckConfig = '+json.dumps(config,ensure_ascii=False)+';\n',encoding='utf-8')
 manifest={'runtimeVersion':runtime_version,'css':needed_styles,'js':needed_scripts}
 (ROOT/'asset-manifest.json').write_text(json.dumps(manifest,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')

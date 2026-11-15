@@ -95,13 +95,18 @@
 .presenter-notes-next,.presenter-notes-tip{font-size:12px;color:var(--muted);line-height:1.4}
 .presenter-notes-tip{margin-top:10px}
 body.laser-on{cursor:none}
-body.laser-on::after{content:"";position:fixed;left:var(--laser-x,50%);top:var(--laser-y,50%);width:14px;height:14px;margin:-7px 0 0 -7px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#ff6b6b 0%,var(--red) 55%,#7a0006 100%);box-shadow:0 0 10px #c7000b88,0 0 2px #c7000b;pointer-events:none;z-index:20;opacity:.92;transition:opacity .15s ease}
+body.laser-on::after{content:"";position:fixed;left:var(--laser-x,50%);top:var(--laser-y,50%);width:14px;height:14px;margin:-7px 0 0 -7px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#ff8a8a 0%,var(--red) 58%,#7a0006 100%);box-shadow:0 0 6px #c7000b55;pointer-events:none;z-index:20;opacity:.94}
 body.laser-reduced{cursor:crosshair}
+body.ink-pen{cursor:crosshair}
+body.ink-eraser{cursor:cell}
+.presenter-ink{position:absolute;inset:0;width:1600px;height:900px;z-index:3;pointer-events:none}
+.presenter-ink.is-drawing{pointer-events:auto}
+.presenter-ink canvas{display:block;width:1600px;height:900px}
 @media (prefers-reduced-motion:reduce){
  body.laser-on{cursor:crosshair}
  body.laser-on::after{display:none!important}
 }
-@media print{.presenter-notes,.keyboard-help{display:none!important}}
+@media print{.presenter-notes,.keyboard-help,.presenter-ink{display:none!important}}
 .keyboard-help{width:min(420px,92vw);padding:28px 28px 24px}
 .keyboard-help .dialog-header{margin-bottom:18px}
 .keyboard-help-list{list-style:none;margin:0;padding:0;display:grid;gap:10px}

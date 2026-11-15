@@ -59,10 +59,18 @@ def add_accent_bar(slide, RGBColor, Inches):
     line.fill.background()
 
 
-def add_title(slide, title: str, subtitle: str, RGBColor, Pt, Inches, *, cover=False):
-    top = Inches(2.4) if cover else Inches(0.35)
-    size = Pt(40) if cover else Pt(28)
-    box = slide.shapes.add_textbox(Inches(0.7), top, Inches(12.0), Inches(1.4 if cover else 1.15))
+def add_title(slide, title: str, subtitle: str, RGBColor, Pt, Inches, *, cover=False, eyebrow=''):
+    top = Inches(2.4) if cover else Inches(0.28)
+    size = Pt(40) if cover else Pt(26)
+    if eyebrow and not cover:
+        eye = slide.shapes.add_textbox(Inches(0.7), Inches(0.22), Inches(12.0), Inches(0.35))
+        etf = eye.text_frame
+        etf.clear()
+        ep = etf.paragraphs[0]
+        er = ep.add_run()
+        set_run(er, eyebrow, size=Pt(11), bold=True, color=RGBColor(*RED))
+        top = Inches(0.48)
+    box = slide.shapes.add_textbox(Inches(0.7), top, Inches(12.0), Inches(1.4 if cover else 1.05))
     tf = box.text_frame
     tf.clear()
     p = tf.paragraphs[0]
@@ -71,7 +79,7 @@ def add_title(slide, title: str, subtitle: str, RGBColor, Pt, Inches, *, cover=F
     if subtitle:
         p2 = tf.add_paragraph()
         run2 = p2.add_run()
-        set_run(run2, subtitle, size=Pt(16 if cover else 14), color=RGBColor(*MUTED))
+        set_run(run2, subtitle, size=Pt(16 if cover else 13), color=RGBColor(*MUTED))
 
 
 def add_bullets(slide, lines, RGBColor, Pt, Inches, top=1.65):
@@ -82,9 +90,11 @@ def add_bullets(slide, lines, RGBColor, Pt, Inches, top=1.65):
     for line in lines:
         p = tf.paragraphs[0] if first else tf.add_paragraph()
         first = False
-        p.level = 0
+        indented = str(line).startswith('  •') or str(line).startswith('  -')
+        p.level = 1 if indented else 0
         run = p.add_run()
-        set_run(run, line, size=Pt(16), color=RGBColor(*INK))
+        text = str(line).lstrip() if indented else str(line)
+        set_run(run, text, size=Pt(15 if indented else 16), color=RGBColor(*INK))
 
 
 def add_native_table(slide, headers, rows, RGBColor, Inches, Pt):
@@ -252,18 +262,28 @@ def build(deck: dict, lang: str, output: Path):
     prs.slide_width = Inches(13.333)
     prs.slide_height = Inches(7.5)
     blank = prs.slide_layouts[6]
+    deck_kind = deck.get('kind') or ''
     for slide in deck.get('slides') or []:
         s = prs.slides.add_slide(blank)
         add_accent_bar(s, RGBColor, Inches)
         kind = slide.get('type')
         if kind == 'cover':
             add_cover_slide(s, slide, deck, lang, RGBColor, Pt, Inches)
+            if deck_kind:
+                meta = s.shapes.add_textbox(Inches(0.7), Inches(6.7), Inches(12.0), Inches(0.4))
+                mtf = meta.text_frame
+                mtf.clear()
+                mp = mtf.paragraphs[0]
+                mr = mp.add_run()
+                set_run(mr, f'kind: {deck_kind}', size=Pt(11), color=RGBColor(*MUTED))
         elif kind == 'closing':
             add_closing_slide(s, slide, lang, RGBColor, Pt, Inches)
         else:
             title = pick(slide.get('title'), lang) or pick(deck.get('title'), lang)
             subtitle = pick(slide.get('subtitle'), lang)
-            add_title(s, title, subtitle, RGBColor, Pt, Inches, cover=False)
+            eyebrow = pick(slide.get('eyebrow'), lang)
+            add_title(s, title, subtitle, RGBColor, Pt, Inches, cover=False, eyebrow=eyebrow)
+            bullet_top = 1.55 if eyebrow else 1.45
             if kind == 'table':
                 headers = [pick(h, lang) for h in slide.get('headers') or []]
                 rows = [[pick(c, lang) for c in row] for row in (slide.get('rows') or [])]
@@ -271,11 +291,16 @@ def build(deck: dict, lang: str, output: Path):
                     add_native_table(s, headers, rows, RGBColor, Inches, Pt)
                 note_lines = slide_lines(slide, lang)
                 if note_lines:
-                    add_bullets(s, note_lines, RGBColor, Pt, Inches, top=6.4)
+                    add_bullets(s, note_lines, RGBColor, Pt, Inches, top=6.35)
+            elif kind == 'metrics':
+                # Keep metrics scannable as short labeled lines (report-friendly).
+                lines = slide_lines(slide, lang)
+                if lines:
+                    add_bullets(s, lines, RGBColor, Pt, Inches, top=bullet_top)
             else:
                 lines = slide_lines(slide, lang)
                 if lines:
-                    add_bullets(s, lines, RGBColor, Pt, Inches)
+                    add_bullets(s, lines, RGBColor, Pt, Inches, top=bullet_top)
         notes = pick(slide.get('notes'), lang)
         if notes:
             s.notes_slide.notes_text_frame.text = notes
