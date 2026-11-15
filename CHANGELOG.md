@@ -3,6 +3,17 @@
 All notable changes to the Huawei HTML→PPT deck runtime are documented here.
 Format follows a lightweight Keep-a-Changelog style. HTML remains the system of record; PPTX is Office interop.
 
+## 1.5.2 — 2026-11-15
+
+### Added
+
+- **Numbering marks**: stamp sequential red badges (`1`, `2`, `3`…) on the 16:9 stage; rail tool + keyboard `B` (does not steal presenter notes `N`); per-slide counter; cleared with clear-slide (`⇧E` / rail); bilingual tooltips; cheat sheet `?` updated.
+- PresenterInk `stamp` mode + `placeStamp`; DeckTools `stamp` registry entry.
+
+### Changed
+
+- Runtime pin **1.5.2**.
+
 ## 1.5.1 — 2026-11-15
 
 ### Added

@@ -1,12 +1,13 @@
 (function (global) {
   'use strict';
 
-  const MODES = Object.freeze(['off', 'laser', 'pen', 'eraser']);
+  const MODES = Object.freeze(['off', 'laser', 'pen', 'eraser', 'stamp']);
   const COLORS = Object.freeze({ red: '#C7000B', black: '#1A1A1A' });
   const WIDTH_MIN = 1.5;
   const WIDTH_MAX = 16;
   const WIDTH_DEFAULT = 3.5;
   const ERASER_DEFAULT = 28;
+  const STAMP_DEFAULT = 40;
 
   function clamp(n, min, max) {
     return Math.min(max, Math.max(min, n));
@@ -30,6 +31,7 @@
     let eraserWidth = Math.max(8, Number(opts.eraserWidth) || ERASER_DEFAULT);
     const clearOnLeave = !!opts.clearOnLeave;
     const strokesBySlide = new Map();
+    const stampCountBySlide = new Map();
     let currentSlideKey = opts.slideKey || '';
     let drawing = false;
     let currentStroke = null;
@@ -38,6 +40,15 @@
       const k = key == null ? currentSlideKey : key;
       if (!strokesBySlide.has(k)) strokesBySlide.set(k, []);
       return strokesBySlide.get(k);
+    }
+
+    function stampCount(key) {
+      const k = key == null ? currentSlideKey : key;
+      return stampCountBySlide.get(k) || 0;
+    }
+
+    function setStampCount(key, value) {
+      stampCountBySlide.set(key == null ? currentSlideKey : key, Math.max(0, Number(value) || 0));
     }
 
     function getMode() { return mode; }
@@ -55,6 +66,7 @@
     function toggleLaser() { return setMode(mode === 'laser' ? 'off' : 'laser'); }
     function togglePen() { return setMode(mode === 'pen' ? 'off' : 'pen'); }
     function toggleEraser() { return setMode(mode === 'eraser' ? 'off' : 'eraser'); }
+    function toggleStamp() { return setMode(mode === 'stamp' ? 'off' : 'stamp'); }
     function exitTool() { return setMode('off'); }
 
     function getColor() { return color; }
@@ -85,6 +97,7 @@
 
     function clearCurrent() {
       strokesBySlide.set(currentSlideKey, []);
+      setStampCount(currentSlideKey, 0);
       drawing = false;
       currentStroke = null;
       return true;
@@ -92,17 +105,41 @@
 
     function clearAll() {
       strokesBySlide.clear();
+      stampCountBySlide.clear();
       drawing = false;
       currentStroke = null;
       return true;
     }
 
     function onSlideChange(nextKey) {
-      if (clearOnLeave && currentSlideKey) strokesBySlide.set(currentSlideKey, []);
+      if (clearOnLeave && currentSlideKey) {
+        strokesBySlide.set(currentSlideKey, []);
+        setStampCount(currentSlideKey, 0);
+      }
       currentSlideKey = nextKey == null ? '' : String(nextKey);
       drawing = false;
       currentStroke = null;
       return currentSlideKey;
+    }
+
+    function placeStamp(point) {
+      if (mode !== 'stamp') return null;
+      if (!point || !Number.isFinite(point.x) || !Number.isFinite(point.y)) return null;
+      const next = stampCount(currentSlideKey) + 1;
+      setStampCount(currentSlideKey, next);
+      const stamp = {
+        tool: 'stamp',
+        color: COLORS.red,
+        width: STAMP_DEFAULT,
+        number: next,
+        points: [{ x: point.x, y: point.y }],
+      };
+      ensure().push(stamp);
+      return stamp;
+    }
+
+    function getStampCount(key) {
+      return stampCount(key);
     }
 
     function beginStroke(point) {
@@ -137,13 +174,47 @@
     function getSlideKey() { return currentSlideKey; }
 
     return {
-      getMode, setMode, toggleLaser, togglePen, toggleEraser, exitTool,
+      getMode, setMode, toggleLaser, togglePen, toggleEraser, toggleStamp, exitTool,
       getColor, setColor, cycleColor,
       getPenWidth, setPenWidth, nudgePenWidth, getEraserWidth,
       getStrokes, clearCurrent, clearAll, onSlideChange,
-      beginStroke, extendStroke, endStroke, isDrawing, getSlideKey,
+      beginStroke, extendStroke, endStroke, placeStamp, getStampCount,
+      isDrawing, getSlideKey,
       clearOnLeave,
     };
+  }
+
+  function paintStamp(ctx, stroke) {
+    const pts = stroke.points || [];
+    if (!pts.length) return;
+    const p = pts[0];
+    const diameter = stroke.width || STAMP_DEFAULT;
+    const r = diameter / 2;
+    ctx.save();
+    ctx.globalCompositeOperation = 'source-over';
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, r, 0, Math.PI * 2);
+    ctx.fillStyle = stroke.color || COLORS.red;
+    ctx.shadowColor = 'rgba(122, 0, 6, 0.28)';
+    ctx.shadowBlur = 8;
+    ctx.shadowOffsetY = 2;
+    ctx.fill();
+    ctx.shadowColor = 'transparent';
+    ctx.shadowBlur = 0;
+    ctx.shadowOffsetY = 0;
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, r - 1.5, 0, Math.PI * 2);
+    ctx.strokeStyle = 'rgba(255,255,255,0.42)';
+    ctx.lineWidth = 1.5;
+    ctx.stroke();
+    const label = String(stroke.number == null ? '' : stroke.number);
+    const fontSize = label.length > 2 ? Math.round(r * 0.92) : Math.round(r * 1.12);
+    ctx.fillStyle = '#FFFFFF';
+    ctx.font = `700 ${fontSize}px "HarmonyOS Sans", "Segoe UI", system-ui, sans-serif`;
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText(label, p.x, p.y + 0.5);
+    ctx.restore();
   }
 
   function paintStrokes(ctx, strokes) {
@@ -152,6 +223,10 @@
     ctx.lineCap = 'round';
     ctx.lineJoin = 'round';
     for (const stroke of strokes) {
+      if (stroke.tool === 'stamp') {
+        paintStamp(ctx, stroke);
+        continue;
+      }
       const pts = stroke.points || [];
       if (!pts.length) continue;
       ctx.beginPath();
@@ -175,7 +250,7 @@
   }
 
   global.PresenterInk = {
-    MODES, COLORS, WIDTH_MIN, WIDTH_MAX, WIDTH_DEFAULT, ERASER_DEFAULT,
+    MODES, COLORS, WIDTH_MIN, WIDTH_MAX, WIDTH_DEFAULT, ERASER_DEFAULT, STAMP_DEFAULT,
     mapPoint, create, paintStrokes,
   };
 })(globalThis);

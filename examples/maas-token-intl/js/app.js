@@ -54,13 +54,15 @@
     document.body.classList.toggle('laser-reduced', laserActive && prefersReducedMotion());
     document.body.classList.toggle('ink-pen', mode === 'pen');
     document.body.classList.toggle('ink-eraser', mode === 'eraser');
-    inkHost.classList.toggle('is-drawing', mode === 'pen' || mode === 'eraser');
+    document.body.classList.toggle('ink-stamp', mode === 'stamp');
+    inkHost.classList.toggle('is-drawing', mode === 'pen' || mode === 'eraser' || mode === 'stamp');
     if (toolRail) toolRail.refresh();
   }
   function toolToast(mode) {
     if (mode === 'laser') toast('激光笔已开启');
     else if (mode === 'pen') toast('马克笔已开启');
     else if (mode === 'eraser') toast('橡皮已开启');
+    else if (mode === 'stamp') toast('编号标记已开启');
     else toast('已退出演示笔');
   }
   function applyToolMode(mode) {
@@ -94,6 +96,7 @@
     '<li><kbd>N</kbd><span>演示备注</span></li>',
     '<li><kbd>L</kbd><span>激光笔</span></li>',
     '<li><kbd>P</kbd><kbd>D</kbd><span>马克笔</span></li>',
+    '<li><kbd>B</kbd><span>编号标记</span></li>',
     '<li><kbd>E</kbd><span>橡皮</span></li>',
     '<li><kbd>⇧E</kbd><span>清除本页墨迹</span></li>',
     '<li><kbd>C</kbd><span>笔色红/黑</span></li>',
@@ -103,7 +106,7 @@
     '<li><kbd>?</kbd><span>本对照表</span></li>',
     '<li><kbd>Esc</kbd><span>退出笔工具 / 关闭对话框</span></li>',
     '</ul>',
-    '<p class="keyboard-help-tip">URL 参数：?cut=名称 分享切片；?presenter=1 打开备注。墨迹按页保存；打印/导出不显示。</p>',
+    '<p class="keyboard-help-tip">URL 参数：?cut=名称 分享切片；?presenter=1 打开备注。墨迹与编号按页保存；打印/导出不显示。</p>',
   ].join('');
   document.body.append(helpDialog);
   helpDialog.querySelector('[data-help-close]').addEventListener('click', () => helpDialog.close());
@@ -391,12 +394,14 @@
     tip.className = 'presenter-notes-tip';
     const mode = ink ? ink.getMode() : 'off';
     tip.textContent = mode === 'off'
-      ? '按 N 关闭备注 · L 激光 · P 马克笔 · T 计时'
+      ? '按 N 关闭备注 · L 激光 · P 马克笔 · B 编号 · T 计时'
       : mode === 'laser'
-        ? '激光中 · Esc 退出 · P 马克笔 · T 计时'
-        : mode === 'eraser'
-          ? '橡皮中 · Esc 退出 · ⇧E 清除本页'
-          : '马克笔中 · Esc 退出 · C 换色 · E 橡皮';
+        ? '激光中 · Esc 退出 · P 马克笔 · B 编号 · T 计时'
+        : mode === 'stamp'
+          ? '编号中 · 点击盖章 · Esc 退出 · ⇧E 清除本页'
+          : mode === 'eraser'
+            ? '橡皮中 · Esc 退出 · ⇧E 清除本页'
+            : '马克笔中 · Esc 退出 · C 换色 · E 橡皮';
     notesPanel.replaceChildren(chrome, body, upcoming, tip);
   }
   function move(direction) { direction > 0 ? state.next() : state.previous(); render(); wake(); }
@@ -468,11 +473,16 @@
     if (event.pointerType === 'touch' && event.clientY >= innerHeight - 100) wake(true);
     if (!ink || !deckEl) return;
     const mode = ink.getMode();
-    if (mode !== 'pen' && mode !== 'eraser') return;
+    if (mode !== 'pen' && mode !== 'eraser' && mode !== 'stamp') return;
     if (event.target.closest('button,a,input,textarea,select,dialog,.controls,.presenter-notes,.keyboard-help,.deck-tool-rail')) return;
     const point = window.PresenterInk.mapPoint(event.clientX, event.clientY, deckEl.getBoundingClientRect());
     if (!point) return;
     event.preventDefault();
+    if (mode === 'stamp') {
+      ink.placeStamp(point);
+      redrawInk();
+      return;
+    }
     ink.beginStroke(point);
     redrawInk();
     try { inkCanvas.setPointerCapture(event.pointerId); } catch { /* ignore */ }
@@ -553,6 +563,11 @@
       if (!ink) return;
       applyToolMode(ink.getMode() === 'pen' ? 'off' : 'pen');
     }
+    else if (event.key.toLowerCase() === 'b') {
+      event.preventDefault();
+      if (!ink) return;
+      applyToolMode(ink.getMode() === 'stamp' ? 'off' : 'stamp');
+    }
     else if (event.key.toLowerCase() === 'e') {
       event.preventDefault();
       if (!ink) return;
@@ -599,7 +614,7 @@
   });
   let touchStart = null;
   byId('viewport').addEventListener('touchstart', event => {
-    if (ink && (ink.getMode() === 'pen' || ink.getMode() === 'eraser')) { touchStart = null; return; }
+    if (ink && (ink.getMode() === 'pen' || ink.getMode() === 'eraser' || ink.getMode() === 'stamp')) { touchStart = null; return; }
     if (!event.target.closest('button,a,input,textarea,select,[contenteditable],video,iframe')) {
       touchStart = { x: event.changedTouches[0].clientX, y: event.changedTouches[0].clientY };
     }

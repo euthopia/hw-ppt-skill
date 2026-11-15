@@ -23,7 +23,7 @@ Built for product briefings, weekly/status reports, architecture design reviews,
 - **Layout kit** — cover, cards, metrics, architecture, comparison, **before-after**, **scrollable tables**, workflow, image, pricing, scenarios, timeline, callouts, **agenda**, **quote**, **tabs**, custom, closing.
 - **Bilingual** — one-click ZH/EN, English typography sheet, remembered preference, bilingual TOC/controls.
 - **Multi-purpose archetypes** — optional `deck.kind` (`product-briefing` / `status-report` / `design-review` / `project-report` / `workshop`) plus `meta.purpose`; see starters below.
-- **Presenter tools** — keyboard/touch nav, fullscreen, chapter jump, thumbnail TOC, position memory, **presenter notes** (`N` / `?presenter=1`), **laser** (`L`), **marker/eraser** (`P`/`D`/`E`, `⇧E` clears slide), **hover tool rail** (right edge; parallel to keys), **shortcut cheat sheet** (`?`), **named sales cuts** (`?cut=cio`).
+- **Presenter tools** — keyboard/touch nav, fullscreen, chapter jump, thumbnail TOC, position memory, **presenter notes** (`N` / `?presenter=1`), **laser** (`L`), **marker/eraser** (`P`/`D`/`E`, `⇧E` clears slide), **numbering marks** (`B`, click to stamp 1/2/3…), **hover tool rail** (right edge; parallel to keys), **shortcut cheat sheet** (`?`), **named sales cuts** (`?cut=cio`).
 - **Slide hide** — TOC “hide slides” saved per project in the current browser; navigation skips hidden pages.
 - **Motion** — workflow auto-highlight with pause/replay/show-all; stops off-slide; full content for print and reduced-motion.
 - **Access control** — server PIN + signed cookie for hosted decks.

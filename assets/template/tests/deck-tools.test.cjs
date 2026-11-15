@@ -28,8 +28,12 @@ test('registry lists defaults and accepts custom tools', () => {
   ctx.DeckTools.registerDefaults();
   // Map through String() so vm-realm primitives compare cleanly under deepStrictEqual.
   const ids = ctx.DeckTools.list().map((t) => String(t.id));
-  assert.equal(ids.slice(0, 5).join(','), 'laser,pen,eraser,clear,color');
+  assert.equal(ids.slice(0, 6).join(','), 'laser,pen,stamp,eraser,clear,color');
   assert.ok(ids.includes('more'));
+  const stamp = ctx.DeckTools.list().find((t) => t.id === 'stamp');
+  assert.ok(stamp);
+  assert.match(String(stamp.title), /B/);
+  assert.equal(/\bN\b/.test(String(stamp.title)), false);
   ctx.DeckTools.register({
     id: 'spotlight',
     order: 85,
@@ -110,7 +114,12 @@ test('app and render wire deck-tools before app.js', () => {
   assert.match(app, /classList\.toggle\('laser-on'/);
   assert.match(app, /classList\.toggle\('ink-pen'/);
   assert.match(app, /classList\.toggle\('ink-eraser'/);
+  assert.match(app, /classList\.toggle\('ink-stamp'/);
+  assert.match(app, /toLowerCase\(\) === 'b'/);
+  assert.match(app, /placeStamp/);
+  assert.match(app, /编号标记/);
   const css = fs.readFileSync(path.join(__dirname, '..', 'css', 'styles.css'), 'utf8');
   assert.match(css, /\.deck-tool-rail/);
   assert.match(css, /@media print[\s\S]*deck-tool-rail/);
+  assert.match(css, /body\.ink-stamp/);
 });

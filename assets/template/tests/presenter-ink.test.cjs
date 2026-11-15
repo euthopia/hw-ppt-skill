@@ -26,17 +26,41 @@ test('mapPoint maps client coords into 1600×900 deck space via scaled rect', ()
   assert.equal(ctx.PresenterInk.mapPoint(0, 0, { left: 0, top: 0, width: 0, height: 0 }), null);
 });
 
-test('modes are mutually exclusive: laser, pen, eraser, off', () => {
+test('modes are mutually exclusive: laser, pen, eraser, stamp, off', () => {
   const ink = ctx.PresenterInk.create({ slideKey: 'a' });
   assert.equal(ink.getMode(), 'off');
   assert.equal(ink.toggleLaser(), 'laser');
   assert.equal(ink.togglePen(), 'pen');
   assert.equal(ink.getMode(), 'pen');
   assert.equal(ink.toggleEraser(), 'eraser');
+  assert.equal(ink.toggleStamp(), 'stamp');
   assert.equal(ink.toggleLaser(), 'laser');
   assert.equal(ink.exitTool(), 'off');
   assert.equal(ink.togglePen(), 'pen');
   assert.equal(ink.togglePen(), 'off');
+});
+
+test('stamp places sequential red badges per slide and clear resets counter', () => {
+  const ink = ctx.PresenterInk.create({ slideKey: 'cover' });
+  ink.setMode('stamp');
+  const a = ink.placeStamp({ x: 100, y: 120 });
+  const b = ink.placeStamp({ x: 200, y: 220 });
+  assert.equal(a.tool, 'stamp');
+  assert.equal(a.number, 1);
+  assert.equal(b.number, 2);
+  assert.equal(a.color, ctx.PresenterInk.COLORS.red);
+  assert.equal(ink.getStampCount('cover'), 2);
+  assert.equal(ink.getStrokes('cover').length, 2);
+  ink.onSlideChange('values');
+  ink.placeStamp({ x: 10, y: 10 });
+  assert.equal(ink.getStampCount('values'), 1);
+  assert.equal(ink.getStampCount('cover'), 2);
+  ink.onSlideChange('cover');
+  ink.clearCurrent();
+  assert.equal(ink.getStrokes('cover').length, 0);
+  assert.equal(ink.getStampCount('cover'), 0);
+  const again = ink.placeStamp({ x: 50, y: 50 });
+  assert.equal(again.number, 1);
 });
 
 test('strokes are stored per slide and clearCurrent only wipes the active slide', () => {

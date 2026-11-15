@@ -1,7 +1,7 @@
 {
   "name": "huawei-product-presentation",
-  "version": "1.5.1",
-  "deckRuntime": "1.5.1",
+  "version": "1.5.2",
+  "deckRuntime": "1.5.2",
   "private": true,
   "engines": {
     "node": ">=20"

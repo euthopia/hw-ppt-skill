@@ -13,6 +13,7 @@
     eraser: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.2 14.2l5.6-5.6 5.8 5.8-3.4 3.4H8.2L6.2 14.2z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M4.5 19.2h15" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>',
     clear: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7l10 10M17 7L7 17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>',
     color: '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="7.2" fill="currentColor" opacity=".92"/><circle cx="12" cy="12" r="7.2" fill="none" stroke="currentColor" stroke-width="1.4"/></svg>',
+    stamp: '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="7.4" fill="currentColor"/><text x="12" y="12.6" text-anchor="middle" dominant-baseline="middle" fill="#fff" font-size="9" font-weight="700" font-family="system-ui,sans-serif">1</text></svg>',
     plus: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 6.5v11M6.5 12h11" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>',
   });
 
@@ -83,6 +84,18 @@
       invoke: (ctx) => {
         if (!ctx || !ctx.applyMode) return;
         ctx.applyMode(ctx.mode === 'pen' ? 'off' : 'pen');
+      },
+    });
+    register({
+      id: 'stamp',
+      order: 25,
+      label: '编号标记',
+      title: '编号标记 · B',
+      icon: 'stamp',
+      active: (ctx) => ctx && ctx.mode === 'stamp',
+      invoke: (ctx) => {
+        if (!ctx || !ctx.applyMode) return;
+        ctx.applyMode(ctx.mode === 'stamp' ? 'off' : 'stamp');
       },
     });
     register({

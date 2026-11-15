@@ -99,6 +99,7 @@ body.laser-on::after{content:"";position:fixed;left:var(--laser-x,50%);top:var(-
 body.laser-reduced{cursor:crosshair}
 body.ink-pen{cursor:crosshair}
 body.ink-eraser{cursor:cell}
+body.ink-stamp{cursor:cell}
 .presenter-ink{position:absolute;inset:0;width:1600px;height:900px;z-index:3;pointer-events:none}
 .presenter-ink.is-drawing{pointer-events:auto}
 .presenter-ink canvas{display:block;width:1600px;height:900px}
