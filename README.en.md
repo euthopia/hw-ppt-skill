@@ -2,9 +2,11 @@
 
 **An Agent Skill for Huawei-branded bilingual HTML→PPT decks.** You supply content; the agent picks a deck archetype, organizes chapters, picks layouts, generates Chinese/English pages, wires light motion, runs layout checks, and builds deliverables — including **editable PPTX** when asked.
 
+Skill **1.5.4** · canvas runtime **1.5.3** · see [CHANGELOG.md](CHANGELOG.md)
+
 Built for product briefings, weekly/status reports, architecture design reviews, project milestone decks, workshops, comparisons, packaging, customer cases, and live demos.
 
-[Live demo: cover + blank](https://huawei-product-slides-demo.leonguo08.workers.dev/) · [Thank-you preview](demo/thank-you-preview.png) · [中文 README](README.md)
+[Live demo: cover + blank](https://huawei-product-slides-demo.leonguo08.workers.dev/) · [Thank-you preview](demo/thank-you-preview.png) · [Changelog](CHANGELOG.md) · [中文 README](README.md)
 
 ## What you get
 
@@ -25,7 +27,7 @@ Built for product briefings, weekly/status reports, architecture design reviews,
 - **Multi-purpose archetypes** — optional `deck.kind` (`product-briefing` / `status-report` / `design-review` / `project-report` / `workshop`) plus `meta.purpose`; see starters below.
 - **Presenter tools** — keyboard/touch nav, fullscreen, chapter jump, thumbnail TOC, position memory, **presenter notes** (`N` / `?presenter=1`), **laser** (`L`), **marker/eraser** (`P`/`D`/`E`, `⇧E` clears slide), **numbering marks** (`B`, click to stamp 1/2/3…), **hover tool rail** (right edge; parallel to keys), **shortcut cheat sheet** (`?`), **named sales cuts** (`?cut=cio`).
 - **Slide hide** — TOC “hide slides” saved per project in the current browser; navigation skips hidden pages.
-- **Motion** — workflow auto-highlight with pause/replay/show-all; stops off-slide; full content for print and reduced-motion.
+- **Motion** — direction-aware page enter/exit (soft clip + micro-scale + restrained red-rule flash); workflow auto-highlight with pause/replay/show-all; stops off-slide; instant / undecorated for `prefers-reduced-motion`, print, and thumbnails.
 - **Access control** — server PIN + signed cookie for hosted decks.
 - **Exports** — CLI for offline HTML, PDF, and **editable PPTX** without rewriting scripts.
 - **QA** — bilingual overflow checks, contact sheets, PIN/deploy tests.
@@ -61,6 +63,9 @@ python3 scripts/init.py /path/to/my-product-deck \
   --title-en 'Product X briefing' \
   --starter blank
 
+# Other archetypes:
+#   --starter status-report | design-review | project-report | workshop
+
 cd /path/to/my-product-deck
 npm run build
 npm test
@@ -68,11 +73,11 @@ npm test
 
 | Starter | Contents |
 | --- | --- |
-| `--starter blank` | Product briefing arc (`kind: product-briefing`) |
-| `--starter status-report` | Weekly/status: agenda → metrics → timeline → risks → actions |
-| `--starter design-review` | Design review: context → architecture → before/after → options → opens |
-| `--starter project-report` | Project stage: metrics → milestones → delivery → risks → actions |
-| `--starter workshop` | Workshop: agenda → outcomes → flow → role tabs → prompt |
+| `--starter blank` | Product briefing arc: cover → value → layers → thank-you (`kind: product-briefing`) |
+| `--starter status-report` | Weekly/status: agenda → metrics → timeline → risks → actions → thank-you |
+| `--starter design-review` | Design review: context → architecture → before/after → options → opens → thank-you |
+| `--starter project-report` | Project stage: metrics → milestones → delivery → risks → actions → thank-you |
+| `--starter workshop` | Workshop: agenda → outcomes → flow → role tabs → prompt → thank-you |
 | `--starter examples` | Template component sample (layouts + workflow) |
 
 Layout guidance by archetype: [`assets/recipes/deck-archetypes/README.md`](assets/recipes/deck-archetypes/README.md).
@@ -139,16 +144,21 @@ cd /path/to/my-product-deck && npm run build
 
 ## Repo layout
 
+Bundled overseas sales samples: `examples/codearts-agent-intl/`, `examples/maas-token-intl/` (`npm run build` to preview).
+
 ```text
 hw-ppt-skill/
 ├── SKILL.md               Agent workflow
 ├── README.md              Chinese guide
 ├── README.en.md           English guide
+├── CHANGELOG.md           Skill / runtime version notes
 ├── references/            Design, content, deploy, validation
 ├── scripts/               init, demo build, audit, runtime sync
+├── examples/              Full sample decks (CodeArts, MaaS, …)
 ├── assets/
-│   ├── template/          Full presentation project template
-│   ├── starters/          blank / status / design / project / workshop / thank-you
+│   ├── template/          Full presentation project template (runtime 1.5.3)
+│   ├── starters/          blank · status-report · design-review ·
+│   │                      project-report · workshop · thank-you
 │   └── recipes/           Optional interactive refs + deck-archetypes guide
 └── demo/                  Offline demos
 ```

@@ -2,9 +2,9 @@
 
 **制作华为风格 HTML→PPT 文稿的 Agent Skill。** 你提供内容，Agent 负责选择文稿类型、组织章节、选择版式、生成中英双语页面、配置轻量动效、检查排版并构建交付文件；需要时导出**可编辑 PPTX**。
 
-适用于产品简报、周报/状态同步、架构设计评审、项目里程碑汇报、培训工作坊，以及方案对比、套餐说明、业务案例和 Demo。
+当前技能包 **1.5.4**（HTML 运行时 **1.5.3**）。适用于产品简报、周报/状态同步、架构设计评审、项目里程碑汇报、培训工作坊，以及方案对比、套餐说明、业务案例和 Demo。
 
-[在线体验：封面＋空白页](https://huawei-product-slides-demo.leonguo08.workers.dev/) · [致谢页预览图](demo/thank-you-preview.png) · [English README](README.en.md)
+[在线体验：封面＋空白页](https://huawei-product-slides-demo.leonguo08.workers.dev/) · [致谢页预览图](demo/thank-you-preview.png) · [变更记录](CHANGELOG.md) · [English README](README.en.md)
 
 ## 能做出什么
 
@@ -25,7 +25,7 @@
 - **多文稿类型**：可选 `deck.kind`（`product-briefing` / `status-report` / `design-review` / `project-report` / `workshop`）与 `meta.purpose`；起始模板见下方。
 - **演示工具**：键盘/触控翻页、全屏、章节跳转、缩略图目录、位置记忆、**演示备注**（`N` / `?presenter=1`）、**激光笔**（`L`）、**马克笔/橡皮**（`P`/`D`/`E`，`⇧E` 清本页）、**编号标记**（`B`，点击盖 1/2/3…）、**悬停工具栏**（右侧边缘，与快捷键并行）、**快捷键对照**（`?`）、**命名销售切片**（`?cut=cio`）。
 - **屏蔽页面**：目录中选择不演示的页面并保存，翻页和章节跳转自动跳过；支持取消与恢复全部。设置按演示项目保存在当前浏览器，至少保留一页。
-- **轻量动效**：流程自动高亮、暂停、重播和完整显示；离页停止，打印与减少动态效果时完整展示。
+- **轻量动效**：方向感知翻页过渡（软裁切 + 微缩放、页头/标题分层落位、克制红线闪一下）、流程自动高亮 / 暂停 / 重播 / 完整显示；离页停止；打印、缩略图与 `prefers-reduced-motion` 下瞬时完整展示。
 - **可选交互组件**：手动场景切换、输入/缓存输入/输出价格表等通用组件。
 - **访问保护**：在线产品项目使用服务端 PIN 校验与登录 Cookie，保护网页和静态资源。
 - **一键导出**：CLI 生成单文件 HTML、中英 PDF 与 **可编辑 PPTX**；支持指定输出目录，无需改脚本。
@@ -174,16 +174,21 @@ cd /path/to/my-product-deck && npm run build
 python3 scripts/build-demo.py
 ```
 
+内置海外销售样例：`examples/codearts-agent-intl/`、`examples/maas-token-intl/`（可直接 `npm run build` 预览）。
+
 ```text
 hw-ppt-skill/
 ├── SKILL.md               Agent 制作流程
 ├── README.md              中文指南
 ├── README.en.md           English guide
+├── CHANGELOG.md           运行时 / Skill 版本说明
 ├── references/            设计、内容、部署与验证说明
 ├── scripts/               项目初始化、Demo 构建、运行时同步
+├── examples/              CodeArts / MaaS 等完整样例稿
 ├── assets/
-│   ├── template/          完整演示项目模板
-│   ├── starters/          起始页面配置
-│   └── recipes/           可选交互组件
+│   ├── template/          完整演示项目模板（runtime 1.5.3）
+│   ├── starters/          blank · status-report · design-review ·
+│   │                      project-report · workshop · thank-you
+│   └── recipes/           可选交互组件 + deck-archetypes 指南
 └── demo/                  可直接打开的演示与预览部署配置
 ```
