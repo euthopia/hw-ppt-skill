@@ -9,4 +9,4 @@
 | Buyer tabs | Positioning + placeholders | IDE/Git fit, integrations, residency, commercial terms marked `[Placeholder]` |
 | Compliance / regions | Placeholder | Confirm with product marketing / legal per target market before customer use |
 
-Last reviewed: 2026-11-15 (example deck for skill runtime 1.3.1; taste pass VARIANCE 3 / MOTION 3 / DENSITY 6).
+Last reviewed: 2026-11-15 (example deck for skill runtime 1.3.2; taste pass VARIANCE 3 / MOTION 3 / DENSITY 6).

@@ -1,6 +1,6 @@
 # CodeArts Agent — international briefing (example)
 
-7-slide Huawei Cloud sales briefing for overseas audiences. Runtime **1.3.1**. English is primary; Chinese is bilingual-ready.
+7-slide Huawei Cloud sales briefing for overseas audiences. Runtime **1.3.2**. English is primary; Chinese is bilingual-ready.
 
 **Design read:** B2B Huawei sales briefing for international engineering / platform / procurement buyers. Trust-first language. Dials: VARIANCE **3** / MOTION **3** / DENSITY **6**. Accent `#c7000b` on white stage.
 
@@ -18,7 +18,7 @@ Named cut: `?cut=exec` hides **agenda**, **workflow**, and **buyer-tabs** (keeps
 
 ## Example-local CSS
 
-Visual upgrades for this deck live in `css/deck-intl.css` (loaded last by `tools/render.py` when present). `body.deck-intl` scopes the pass so shared template CSS stays untouched. EN type fit remains in `css/english.css`.
+Shared chrome, motion, and density live in template `css/` (synced via `sync_runtime.py`). `css/deck-intl.css` is thin intl-only tweaks (cover wash, EN chapter labels, agenda cue) loaded last when present.
 
 ## Open locally
 

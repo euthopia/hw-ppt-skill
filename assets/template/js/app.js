@@ -18,6 +18,8 @@
   let laserOn = false;
   let timerStartedAt = null;
   let timerInterval = null;
+  let lastSlideIndex = state.index;
+  const deckEl = document.getElementById('deck');
   const prefersReducedMotion = () => {
     try { return window.matchMedia('(prefers-reduced-motion: reduce)').matches; } catch { return false; }
   };
@@ -258,6 +260,12 @@
   }
   function render() {
     const visible = state.visibleIndices;
+    if (deckEl) {
+      const dir = state.index > lastSlideIndex ? 'forward'
+        : state.index < lastSlideIndex ? 'back' : 'none';
+      deckEl.dataset.navDir = dir;
+      lastSlideIndex = state.index;
+    }
     slides.forEach((slide, index) => {
       const active = index === state.index;
       slide.classList.toggle('active', active);

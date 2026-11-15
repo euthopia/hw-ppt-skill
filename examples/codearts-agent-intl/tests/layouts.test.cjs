@@ -43,7 +43,12 @@ test('table layout wraps sticky-header scroll region',()=>{
   assert.match(html,/class="kit-table"/);
   assert.match(css,/kit-table-scroll/);
   assert.match(css,/position:\s*sticky/);
-  assert.match(css,/var\(--surface\)/);
+  assert.match(css,/--table-scroll-max|var\(--table-scroll-max\)/);
+  assert.match(css,/inset 0 (?:3px|var\(--rail\)) 0 var\(--red\)/);
+  assert.match(css,/scrollbar-color/);
+  assert.match(css,/thumbnail-preview[\s\S]*kit-table-scroll[\s\S]*overflow:\s*visible/);
+  assert.match(css,/@media print[\s\S]*kit-table-scroll[\s\S]*overflow:\s*visible/);
+  assert.match(css,/prefers-reduced-motion:reduce[\s\S]*kit-table tbody tr/);
  }finally{rmSync(root,{recursive:true,force:true});}
 });
 

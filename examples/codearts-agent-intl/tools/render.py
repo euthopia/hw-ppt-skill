@@ -397,9 +397,6 @@ for name,preset in (D.get('cuts') or {}).items():
 
 needed_scripts=['js/config.js','js/navigation.js','js/app.js','js/translations.js','js/language.js','js/scenes.js']
 needed_styles=['css/styles.css','css/components.css','css/english.css']
-# Example-local visual pass (taste dials); keep out of shared template.
-if (ROOT/'css'/'deck-intl.css').is_file():
- needed_styles.append('css/deck-intl.css')
 types={s['type'] for s in D['slides']}
 if 'pricing' in types:
  needed_scripts.append('js/pricing-table.js'); needed_scripts.append('js/pricing-boot.js')
@@ -410,7 +407,6 @@ if 'scenarios' in types:
 if 'tabs' in types:
  needed_scripts.append('js/tabs.js')
  if 'css/recipes.css' not in needed_styles:needed_styles.append('css/recipes.css')
-
 
 config={'id':D['id'],'chapters':chapters,'runtimeVersion':runtime_version,'cuts':cuts}
 (ROOT/'js/config.js').write_text('window.DeckConfig = '+json.dumps(config,ensure_ascii=False)+';\n',encoding='utf-8')

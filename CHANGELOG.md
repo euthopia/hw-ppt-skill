@@ -3,6 +3,17 @@
 All notable changes to the Huawei product briefing runtime are documented here.
 Format follows a lightweight Keep-a-Changelog style. HTML remains the system of record; PPTX is Office interop.
 
+## 1.3.2 — 2026-11-15
+
+### Changed
+
+- Slide transitions: direction-aware enter (opacity + subtle translate) via `#deck[data-nav-dir]`; print / thumbnail / `prefers-reduced-motion` stay instant.
+- Default kit chrome densified (DENSITY 6): tokenized type scale, red accent rhythm, surfaces for cards / callouts / metrics / layers / comparison / table / timeline / agenda / quote / workflow / tabs / before-after / cover / closing.
+- Scrollable table redesign: branded sticky header (red rail + soft edge), thin Huawei scrollbar, density tokens for ZH/EN, restrained row enter; thumbnail/print keep overflow visible and non-sticky.
+- Deep template polish (ZH-first + EN parallel): CJK-safe tracking/line-height defaults; Latin uppercase/negative tracking only under `.english-deck`; tokenized layers/quote/closing/image/nav; pricing/scenarios aligned to kit chrome; footer red rail; cover/agenda/tabs/BA/workflow density rhythm.
+- Local kit enters delayed after page motion so workflow / tabs / before-after do not fight page transitions.
+- CodeArts `deck-intl.css` thinned to intl-only tweaks; shared look inherits template defaults.
+
 ## 1.3.1 — 2026-11-14
 
 ### Added
