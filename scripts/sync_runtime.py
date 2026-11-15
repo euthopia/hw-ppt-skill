@@ -3,7 +3,7 @@ from pathlib import Path
 import argparse, json, re, shutil
 
 RUNTIME_PATHS = [
-    'js/app.js', 'js/navigation.js', 'js/presenter-ink.js', 'js/language.js', 'js/scenes.js',
+    'js/app.js', 'js/navigation.js', 'js/presenter-ink.js', 'js/deck-tools.js', 'js/language.js', 'js/scenes.js',
     'js/pricing-table.js', 'js/pricing-boot.js', 'js/scenario-switcher.js', 'js/tabs.js',
     'css/styles.css', 'css/components.css', 'css/english.css', 'css/recipes.css',
     'content/shell.html', 'tools/render.py', 'tools/python-cmd.cjs',

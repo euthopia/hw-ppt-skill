@@ -105,6 +105,14 @@ translations={
  '激光中 · Esc 退出 · P 马克笔 · T 计时':'Laser on · Esc exit · P marker · T timer',
  '橡皮中 · Esc 退出 · ⇧E 清除本页':'Eraser on · Esc exit · ⇧E clear slide',
  '马克笔中 · Esc 退出 · C 换色 · E 橡皮':'Marker on · Esc exit · C color · E eraser',
+ '演示工具':'Presenter tools',
+ '激光笔 · L':'Laser pointer · L',
+ '马克笔 · P':'Marker pen · P',
+ '橡皮 · E':'Eraser · E',
+ '清除本页墨迹 · ⇧E':'Clear ink on this slide · ⇧E',
+ '笔色红/黑 · C':'Pen color red/black · C',
+ '更多工具':'More tools',
+ '更多工具 · 即将推出':'More tools · Coming soon',
 }
 def source(value):
  if isinstance(value,dict):
@@ -413,7 +421,7 @@ for name,preset in (D.get('cuts') or {}).items():
   hidden.append(slide_id)
  cuts[name]={'hidden':hidden,'label':source(preset['label']) if 'label' in preset else name}
 
-needed_scripts=['js/config.js','js/navigation.js','js/presenter-ink.js','js/app.js','js/translations.js','js/language.js','js/scenes.js']
+needed_scripts=['js/config.js','js/navigation.js','js/presenter-ink.js','js/deck-tools.js','js/app.js','js/translations.js','js/language.js','js/scenes.js']
 needed_styles=['css/styles.css','css/components.css','css/english.css']
 types={s['type'] for s in D['slides']}
 if 'pricing' in types:

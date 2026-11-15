@@ -44,6 +44,7 @@
     inkCtx.clearRect(0, 0, inkCanvas.width, inkCanvas.height);
     window.PresenterInk.paintStrokes(inkCtx, ink.getStrokes());
   }
+  let toolRail = null;
   function syncInkChrome() {
     if (!ink) return;
     const mode = ink.getMode();
@@ -54,6 +55,7 @@
     document.body.classList.toggle('ink-pen', mode === 'pen');
     document.body.classList.toggle('ink-eraser', mode === 'eraser');
     inkHost.classList.toggle('is-drawing', mode === 'pen' || mode === 'eraser');
+    if (toolRail) toolRail.refresh();
   }
   function toolToast(mode) {
     if (mode === 'laser') toast('激光笔已开启');
@@ -467,7 +469,7 @@
     if (!ink || !deckEl) return;
     const mode = ink.getMode();
     if (mode !== 'pen' && mode !== 'eraser') return;
-    if (event.target.closest('button,a,input,textarea,select,dialog,.controls,.presenter-notes,.keyboard-help')) return;
+    if (event.target.closest('button,a,input,textarea,select,dialog,.controls,.presenter-notes,.keyboard-help,.deck-tool-rail')) return;
     const point = window.PresenterInk.mapPoint(event.clientX, event.clientY, deckEl.getBoundingClientRect());
     if (!point) return;
     event.preventDefault();
@@ -559,6 +561,7 @@
         redrawInk();
         toast('已清除本页墨迹');
         if (presenterMode) refreshPresenterNotes();
+        if (toolRail) toolRail.refresh();
       } else {
         applyToolMode(ink.getMode() === 'eraser' ? 'off' : 'eraser');
       }
@@ -567,6 +570,7 @@
       event.preventDefault();
       const next = ink.cycleColor();
       toast(next === window.PresenterInk.COLORS.black ? '笔色：黑' : '笔色：红');
+      if (toolRail) toolRail.refresh();
     }
     else if ((event.key === '[' || event.key === ']') && ink && (ink.getMode() === 'pen' || ink.getMode() === 'eraser')) {
       event.preventDefault();
@@ -607,6 +611,32 @@
     if (Math.abs(dx) > 55 && Math.abs(dx) > Math.abs(dy) * 1.5) move(dx < 0 ? 1 : -1);
     touchStart = null;
   }, { passive: true });
+  if (window.DeckTools) {
+    if (!window.DeckTools.list().length) window.DeckTools.registerDefaults();
+    toolRail = window.DeckTools.mount({
+      getContext: () => ({
+        mode: ink ? ink.getMode() : 'off',
+        color: ink ? ink.getColor() : (window.PresenterInk && window.PresenterInk.COLORS.red),
+        isDrawing: !!(ink && ink.isDrawing()),
+        applyMode: (mode) => applyToolMode(mode),
+        cycleColor: () => {
+          if (!ink) return;
+          const next = ink.cycleColor();
+          toast(next === window.PresenterInk.COLORS.black ? '笔色：黑' : '笔色：红');
+          if (toolRail) toolRail.refresh();
+        },
+        clearSlide: () => {
+          if (!ink) return;
+          ink.clearCurrent();
+          redrawInk();
+          toast('已清除本页墨迹');
+          if (presenterMode) refreshPresenterNotes();
+          if (toolRail) toolRail.refresh();
+        },
+      }),
+    });
+  }
+
   syncInkChrome();
   redrawInk();
 

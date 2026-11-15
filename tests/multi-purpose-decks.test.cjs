@@ -33,10 +33,13 @@ test('init.py exposes multi-purpose starters', () => {
 test('runtime wires presenter-ink before app and sync copies it', () => {
   const render = read('assets', 'template', 'tools', 'render.py');
   assert.match(render, /presenter-ink\.js/);
+  assert.match(render, /deck-tools\.js/);
   const sync = read('scripts', 'sync_runtime.py');
   assert.match(sync, /presenter-ink\.js/);
+  assert.match(sync, /deck-tools\.js/);
   const app = read('assets', 'template', 'js', 'app.js');
   assert.match(app, /PresenterInk/);
+  assert.match(app, /DeckTools/);
   assert.match(app, /马克笔|togglePen|setMode/);
 });
 

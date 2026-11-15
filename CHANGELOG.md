@@ -3,6 +3,18 @@
 All notable changes to the Huawei HTML→PPT deck runtime are documented here.
 Format follows a lightweight Keep-a-Changelog style. HTML remains the system of record; PPTX is Office interop.
 
+## 1.5.1 — 2026-11-15
+
+### Added
+
+- **Presenter tool rail**: hover/focus vertical side panel (right edge) for laser, marker, eraser, clear slide, color toggle; slim peek collapsed by default; touch tap pins open; scrollable when tools overflow; bilingual tooltips.
+- Extensible `DeckTools` registry (`js/deck-tools.js`) so upcoming tools register with `{ id, label, icon, invoke, active }`; placeholder “更多工具” slot included.
+- Tests for registry presence / tool activate; print/thumbnail hide; keyboard shortcuts unchanged (`L`/`P`/`D`/`E`/`⇧E`/`C`/`Esc`).
+
+### Changed
+
+- Runtime pin **1.5.1**; `sync_runtime.py` copies `js/deck-tools.js`.
+
 ## 1.5.0 — 2026-11-15
 
 ### Added

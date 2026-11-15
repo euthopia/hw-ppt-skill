@@ -106,7 +106,157 @@ body.ink-eraser{cursor:cell}
  body.laser-on{cursor:crosshair}
  body.laser-on::after{display:none!important}
 }
-@media print{.presenter-notes,.keyboard-help,.presenter-ink{display:none!important}}
+@media print{.presenter-notes,.keyboard-help,.presenter-ink,.deck-tool-rail{display:none!important}}
+
+/* Presenter tool rail — VARIANCE 3 / MOTION 3 / DENSITY 6 */
+.deck-tool-rail{
+  --rail-w-peek:14px;
+  --rail-w-open:52px;
+  --rail-pad:6px;
+  position:fixed;
+  top:50%;
+  right:0;
+  z-index:5;
+  display:flex;
+  flex-direction:row-reverse;
+  align-items:stretch;
+  transform:translateY(-50%);
+  max-height:min(68vh,520px);
+  pointer-events:auto;
+  isolation:isolate;
+}
+.deck-tool-rail__handle{
+  width:var(--rail-w-peek);
+  min-height:72px;
+  margin:0;
+  padding:0;
+  border:1px solid #e4e6eb;
+  border-right:0;
+  border-radius:8px 0 0 8px;
+  background:linear-gradient(180deg,#fffffff5,#f7f8faee);
+  box-shadow:-4px 0 18px #1a1a1a0f, inset 1px 0 0 #ffffffcc;
+  color:var(--muted);
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  transition:background .2s ease,border-color .2s ease,color .2s ease;
+}
+.deck-tool-rail__handle:hover,
+.deck-tool-rail.is-expanded .deck-tool-rail__handle{
+  background:#fffffff8;
+  border-color:#d7dae0;
+  color:var(--red);
+}
+.deck-tool-rail__grip{
+  width:3px;
+  height:22px;
+  border-radius:2px;
+  background:currentColor;
+  opacity:.55;
+  box-shadow:0 0 0 1px transparent;
+}
+.deck-tool-rail__panel{
+  width:0;
+  overflow:hidden;
+  opacity:0;
+  transform:translateX(8px);
+  pointer-events:none;
+  transition:width .22s cubic-bezier(.16,1,.3,1),opacity .18s ease,transform .22s cubic-bezier(.16,1,.3,1);
+}
+.deck-tool-rail.is-expanded .deck-tool-rail__panel,
+.deck-tool-rail.is-pinned .deck-tool-rail__panel{
+  width:var(--rail-w-open);
+  opacity:1;
+  transform:translateX(0);
+  pointer-events:auto;
+}
+.deck-tool-rail__scroll{
+  position:relative;
+  display:flex;
+  flex-direction:column;
+  gap:4px;
+  max-height:min(68vh,520px);
+  overflow-y:auto;
+  overflow-x:hidden;
+  padding:var(--rail-pad);
+  margin-right:0;
+  border:1px solid #e4e6eb;
+  border-right:0;
+  border-radius:10px 0 0 10px;
+  background:linear-gradient(165deg,#fffffff8 0%,#f5f6f8f0 100%);
+  box-shadow:-8px 0 28px #1a1a1a12, inset 1px 0 0 #ffffffd9;
+  scrollbar-width:thin;
+  scrollbar-color:#c9ccd3 transparent;
+}
+.deck-tool-rail__scroll::-webkit-scrollbar{width:4px}
+.deck-tool-rail__scroll::-webkit-scrollbar-thumb{background:#c9ccd3;border-radius:4px}
+.deck-tool-rail__fade{
+  display:none;
+  position:absolute;
+  left:0;right:4px;
+  height:18px;
+  z-index:1;
+  pointer-events:none;
+}
+.deck-tool-rail.has-overflow .deck-tool-rail__fade{display:block}
+.deck-tool-rail__fade--top{top:0;background:linear-gradient(180deg,#fffffff5,transparent)}
+.deck-tool-rail__fade--bottom{bottom:0;background:linear-gradient(0deg,#f5f6f8f0,transparent)}
+.deck-tool-rail__panel{position:relative}
+.deck-tool-btn{
+  width:38px;
+  height:38px;
+  margin:0;
+  padding:0;
+  border:1px solid transparent;
+  border-radius:8px;
+  background:transparent;
+  color:#5f6570;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  flex:0 0 auto;
+  transition:background .16s ease,color .16s ease,border-color .16s ease,transform .12s ease;
+}
+.deck-tool-btn:hover:not(:disabled){
+  background:#faf5f5;
+  color:var(--red);
+  border-color:#f0d6d8;
+}
+.deck-tool-btn:active:not(:disabled){transform:scale(.96)}
+.deck-tool-btn.is-active{
+  background:var(--surface-accent,#faf5f5);
+  color:var(--red);
+  border-color:#e8b4b8;
+  box-shadow:inset 3px 0 0 var(--red);
+}
+.deck-tool-btn.is-placeholder,
+.deck-tool-btn:disabled{
+  opacity:.38;
+  cursor:default;
+}
+.deck-tool-btn__icon{
+  width:20px;
+  height:20px;
+  display:block;
+}
+.deck-tool-btn__icon svg{width:100%;height:100%;display:block}
+.deck-tool-btn--swatch .deck-tool-btn__icon{color:var(--tool-swatch,var(--red))}
+.deck-tool-rail.is-pinned .deck-tool-rail__handle{
+  background:var(--surface-accent,#faf5f5);
+  color:var(--red);
+  border-color:#e8b4b8;
+}
+@media (prefers-reduced-motion:reduce){
+  .deck-tool-rail__panel,
+  .deck-tool-rail__handle,
+  .deck-tool-btn{transition:none}
+}
+@media (prefers-reduced-transparency:reduce){
+  .deck-tool-rail__handle,
+  .deck-tool-rail__scroll{background:#fff;backdrop-filter:none}
+}
+.thumbnail-preview .deck-tool-rail{display:none!important}
 .keyboard-help{width:min(420px,92vw);padding:28px 28px 24px}
 .keyboard-help .dialog-header{margin-bottom:18px}
 .keyboard-help-list{list-style:none;margin:0;padding:0;display:grid;gap:10px}
