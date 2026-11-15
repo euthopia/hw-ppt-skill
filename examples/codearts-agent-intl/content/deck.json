@@ -45,7 +45,7 @@
         "en": "HUAWEI CLOUD · International product briefing"
       },
       "subtitle": {
-        "zh": "面向全球研发团队的 AI 软件交付助手：把意图推进到可合并变更，减少跨工具摩擦。",
+        "zh": "面向全球研发团队的 AI 软件交付助手。把意图推进到可合并变更，减少跨工具摩擦。",
         "en": "AI software delivery for global engineering teams. Move intent to merge-ready change with less toolchain friction."
       },
       "tagline": "HUAWEI CLOUD · CODEARTS",
@@ -59,10 +59,10 @@
       "type": "agenda",
       "id": "agenda",
       "section": { "zh": "产品定位", "en": "Product positioning" },
-      "title": { "zh": "今日议程", "en": "Briefing map" },
+      "title": { "zh": "今日议程", "en": "Briefing agenda" },
       "subtitle": {
-        "zh": "价值 → 方式 → 对照 → 买家视角 → 下一步。",
-        "en": "Value, method, contrast, buyer lenses, then the next conversation."
+        "zh": "价值、方式、对照、买家视角，再到下一步行动。",
+        "en": "Value, method, contrast, buyer lenses, then next steps."
       },
       "eyebrow": "AGENDA",
       "notes": {
@@ -71,11 +71,11 @@
       },
       "items": [
         {
-          "label": { "zh": "买家真正在买什么", "en": "What international buyers are buying" },
+          "label": { "zh": "买家真正在买什么", "en": "What buyers are buying" },
           "time": { "zh": "价值", "en": "Value" }
         },
         {
-          "label": { "zh": "意图到可交付变更的闭环", "en": "Intent to shippable change, in four beats" },
+          "label": { "zh": "意图到可交付变更的闭环", "en": "Intent to shippable change" },
           "time": { "zh": "方式", "en": "How" }
         },
         {
@@ -83,7 +83,7 @@
           "time": { "zh": "对照", "en": "Contrast" }
         },
         {
-          "label": { "zh": "工程 / 平台 / 治理怎么讲", "en": "Engineering, platform, and governance talk tracks" },
+          "label": { "zh": "工程 / 平台 / 治理怎么讲", "en": "Engineering, platform, and governance tracks" },
           "time": { "zh": "视角", "en": "Lenses" }
         },
         {
@@ -96,7 +96,7 @@
       "type": "callouts",
       "id": "value",
       "section": { "zh": "客户价值", "en": "Customer value" },
-      "title": { "zh": "国际买家为何关注", "en": "What keeps buyers in the room" },
+      "title": { "zh": "国际买家为何关注", "en": "What buyers care about" },
       "subtitle": {
         "zh": "用可验证的交付结果说话；区域合规与容量以正式材料为准。",
         "en": "Lead with delivery outcomes you can defend. Region compliance and capacity stay confirm-with-marketing."
@@ -109,15 +109,15 @@
       "items": [
         {
           "tone": "accent",
-          "title": { "zh": "缩短到合并的路径", "en": "Shorter path to merge" },
+          "title": { "zh": "缩短到合并的路径", "en": "Shorten the path to merge" },
           "body": {
-            "zh": "在澄清、实现与评审处给 AI 协助，更快形成可审查、可合并的变更。",
-            "en": "AI assist on clarification, implementation, and review so teams reach inspectable, merge-ready change sooner."
+            "zh": "在澄清、实现与评审处提供 AI 协助，更快形成可审查、可合并的变更。",
+            "en": "Assist clarification, implementation, and review so teams reach inspectable, merge-ready change sooner."
           }
         },
         {
           "tone": "info",
-          "title": { "zh": "留在研发主路径", "en": "Stay inside the engineering flow" },
+          "title": { "zh": "留在研发主路径", "en": "Stay in the engineering flow" },
           "body": {
             "zh": "围绕编码、评审与文档协同，减少工具切换造成的上下文丢失。",
             "en": "Assist coding, review, and docs in place. Cut context loss from constant tool switching."
@@ -125,10 +125,10 @@
         },
         {
           "tone": "accent",
-          "title": { "zh": "企业可控边界", "en": "Controllable enterprise boundaries" },
+          "title": { "zh": "企业可控边界", "en": "Keep enterprise boundaries controllable" },
           "body": {
             "zh": "按组织工作流设计；权限、审计与协作约定以正式方案和部署区域为准。",
-            "en": "Built for organizational workflow. Permissions, auditability, and team norms confirm per proposal and region."
+            "en": "Designed for organizational workflow. Permissions, auditability, and team norms confirm per proposal and region."
           }
         }
       ]
@@ -152,7 +152,7 @@
           "title": { "zh": "理解意图", "en": "Understand intent" },
           "body": {
             "zh": "把业务目标与约束转成可执行的研发任务描述。",
-            "en": "Turn goals and constraints into actionable engineering task framing."
+            "en": "Turn goals and constraints into actionable engineering tasks."
           }
         },
         {
@@ -166,14 +166,14 @@
           "title": { "zh": "生成与精炼", "en": "Generate and refine" },
           "body": {
             "zh": "辅助实现与迭代，保持人类在环审查。",
-            "en": "Assist implementation and iteration while humans stay in the review loop."
+            "en": "Assist implementation and iteration while humans stay in review."
           }
         },
         {
           "title": { "zh": "评审与交接", "en": "Review and handoff" },
           "body": {
             "zh": "沉淀可审查结果，进入团队既有合并与发布流程。",
-            "en": "Land reviewable outcomes into the team's existing merge and release process."
+            "en": "Land reviewable outcomes in the team's merge and release process."
           }
         }
       ],
@@ -201,7 +201,7 @@
         "title": { "zh": "碎片化交付", "en": "Fragmented delivery" },
         "body": {
           "zh": "意图、实现与评审散落在多处工具与对话里，上下文反复丢失。",
-          "en": "Intent, implementation, and review live across scattered tools and threads. Context resets constantly."
+          "en": "Intent, implementation, and review scatter across tools and threads. Context resets constantly."
         },
         "bullets": [
           { "zh": "需求澄清与编码脱节，返工成本高", "en": "Clarification and coding drift apart; rework stays expensive" },
@@ -259,8 +259,8 @@
             "en": "Embeddability and boundaries matter: reinforce the existing pipeline, do not spawn a shadow process."
           },
           "bullets": [
-            { "zh": "围绕编码、评审与文档协同设计协助点", "en": "Assist points around coding, review, and documentation collaboration" },
-            { "zh": "结果交接回团队既有合并与发布路径", "en": "Handoff outcomes back into the team's merge and release path" },
+            { "zh": "围绕编码、评审与文档协同设计协助点", "en": "Place assist points around coding, review, and docs" },
+            { "zh": "结果交接回团队既有合并与发布路径", "en": "Hand outcomes back into the team's merge and release path" },
             { "zh": "[占位] 集成清单与环境拓扑以 PoC / 架构评审为准", "en": "[Placeholder] Integrations and topology confirmed in PoC / architecture review" }
           ]
         },
