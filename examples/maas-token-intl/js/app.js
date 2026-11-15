@@ -18,10 +18,15 @@
   let timerStartedAt = null;
   let timerInterval = null;
   let lastSlideIndex = state.index;
+  let leaveTimer = 0;
   const deckEl = document.getElementById('deck');
   const prefersReducedMotion = () => {
     try { return window.matchMedia('(prefers-reduced-motion: reduce)').matches; } catch { return false; }
   };
+  function clearLeaving(slide) {
+    if (!slide) return;
+    slide.classList.remove('is-leaving', 'leave-forward', 'leave-back');
+  }
   const inkClearOnLeave = !!(window.DeckConfig && window.DeckConfig.presenterInk && window.DeckConfig.presenterInk.clearOnLeave);
   const ink = window.PresenterInk
     ? window.PresenterInk.create({
@@ -311,8 +316,18 @@
   function render() {
     const visible = state.visibleIndices;
     if (deckEl) {
-      const dir = state.index > lastSlideIndex ? 'forward'
-        : state.index < lastSlideIndex ? 'back' : 'none';
+      const prevIndex = lastSlideIndex;
+      const dir = state.index > prevIndex ? 'forward'
+        : state.index < prevIndex ? 'back' : 'none';
+      if (dir !== 'none' && !prefersReducedMotion()) {
+        slides.forEach(clearLeaving);
+        const leaving = slides[prevIndex];
+        if (leaving) {
+          leaving.classList.add('is-leaving', dir === 'forward' ? 'leave-forward' : 'leave-back');
+          clearTimeout(leaveTimer);
+          leaveTimer = setTimeout(() => clearLeaving(leaving), 360);
+        }
+      }
       deckEl.dataset.navDir = dir;
       lastSlideIndex = state.index;
     }
@@ -665,6 +680,8 @@
     state.jump(saved.index);
     if (state.index === saved.index) state.step = Number.isInteger(saved.step) ? Math.max(0, Math.min(saved.step, Number(slides[saved.index].dataset.steps || 0))) : 0;
   }
+  /* Bootstrap: no leave/enter on first paint after hash or session restore */
+  lastSlideIndex = state.index;
   render(); fit(); wake();
   document.fonts.ready.then(fit);
   try {

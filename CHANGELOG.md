@@ -3,6 +3,13 @@
 All notable changes to the Huawei HTML→PPT deck runtime are documented here.
 Format follows a lightweight Keep-a-Changelog style. HTML remains the system of record; PPTX is Office interop.
 
+## 1.5.3 — 2026-11-15
+
+### Changed
+
+- **Page transitions**: premium briefing choreography replaces mild fade+12px slide — direction-aware enter/exit (soft clip + scale 0.985→1), layered chrome vs heading settle, restrained `#c7000b` rule flash; kit enters delayed to land after page settle; `prefers-reduced-motion` instant; print/thumbnail silent.
+- Runtime pin **1.5.3**.
+
 ## 1.5.2 — 2026-11-15
 
 ### Added

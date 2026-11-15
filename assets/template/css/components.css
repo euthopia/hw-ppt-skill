@@ -106,13 +106,13 @@
 .kit-table tbody tr:hover td:first-child{border-left-color:var(--red)}
 @media (prefers-reduced-motion:no-preference){
  .slide.active .kit-table tbody tr{animation:kit-enter .32s var(--ease-brief) backwards}
- .slide.active .kit-table tbody tr:nth-child(1){animation-delay:.1s}
- .slide.active .kit-table tbody tr:nth-child(2){animation-delay:.13s}
- .slide.active .kit-table tbody tr:nth-child(3){animation-delay:.16s}
- .slide.active .kit-table tbody tr:nth-child(4){animation-delay:.19s}
- .slide.active .kit-table tbody tr:nth-child(5){animation-delay:.22s}
- .slide.active .kit-table tbody tr:nth-child(6){animation-delay:.25s}
- .slide.active .kit-table tbody tr:nth-child(n+7){animation-delay:.28s}
+ .slide.active .kit-table tbody tr:nth-child(1){animation-delay:.18s}
+ .slide.active .kit-table tbody tr:nth-child(2){animation-delay:.21s}
+ .slide.active .kit-table tbody tr:nth-child(3){animation-delay:.24s}
+ .slide.active .kit-table tbody tr:nth-child(4){animation-delay:.27s}
+ .slide.active .kit-table tbody tr:nth-child(5){animation-delay:.3s}
+ .slide.active .kit-table tbody tr:nth-child(6){animation-delay:.33s}
+ .slide.active .kit-table tbody tr:nth-child(n+7){animation-delay:.36s}
 }
 
 /* ── Note / toolbar / workflow ── */
@@ -208,51 +208,51 @@
 /* ── Pricing mount ── */
 .kit-pricing{margin-top:4px}
 
-/* Local enter: delayed after page transition; gated; no bounce */
+/* Local enter: after page settle (~.16s+); gated; no bounce — do not fight heading-settle */
 @media (prefers-reduced-motion:no-preference){
- .slide.active .kit-before-after .kit-ba-before{animation:kit-enter var(--motion-local) .08s var(--ease-brief) backwards}
- .slide.active .kit-before-after .kit-ba-after{animation:kit-enter var(--motion-local) .16s var(--ease-brief) backwards}
+ .slide.active .kit-before-after .kit-ba-before{animation:kit-enter var(--motion-local) .18s var(--ease-brief) backwards}
+ .slide.active .kit-before-after .kit-ba-after{animation:kit-enter var(--motion-local) .24s var(--ease-brief) backwards}
  .slide.active .kit-agenda-item{animation:kit-enter .42s var(--ease-brief) backwards}
- .slide.active .kit-agenda-item:nth-child(1){animation-delay:.06s}
- .slide.active .kit-agenda-item:nth-child(2){animation-delay:.1s}
- .slide.active .kit-agenda-item:nth-child(3){animation-delay:.14s}
- .slide.active .kit-agenda-item:nth-child(4){animation-delay:.18s}
- .slide.active .kit-agenda-item:nth-child(5){animation-delay:.22s}
+ .slide.active .kit-agenda-item:nth-child(1){animation-delay:.16s}
+ .slide.active .kit-agenda-item:nth-child(2){animation-delay:.2s}
+ .slide.active .kit-agenda-item:nth-child(3){animation-delay:.24s}
+ .slide.active .kit-agenda-item:nth-child(4){animation-delay:.28s}
+ .slide.active .kit-agenda-item:nth-child(5){animation-delay:.32s}
  .slide.active .kit-callout,.slide.active .kit-card{animation:kit-enter .42s var(--ease-brief) backwards}
- .slide.active .kit-callout:nth-child(1),.slide.active .kit-card:nth-child(1){animation-delay:.08s}
- .slide.active .kit-callout:nth-child(2),.slide.active .kit-card:nth-child(2){animation-delay:.14s}
- .slide.active .kit-callout:nth-child(3),.slide.active .kit-card:nth-child(3){animation-delay:.2s}
+ .slide.active .kit-callout:nth-child(1),.slide.active .kit-card:nth-child(1){animation-delay:.18s}
+ .slide.active .kit-callout:nth-child(2),.slide.active .kit-card:nth-child(2){animation-delay:.24s}
+ .slide.active .kit-callout:nth-child(3),.slide.active .kit-card:nth-child(3){animation-delay:.3s}
  .slide.active .kit-flow article{animation:kit-enter .38s var(--ease-brief) backwards}
- .slide.active .kit-flow article:nth-child(1){animation-delay:.08s}
- .slide.active .kit-flow article:nth-child(2){animation-delay:.12s}
- .slide.active .kit-flow article:nth-child(3){animation-delay:.16s}
- .slide.active .kit-flow article:nth-child(4){animation-delay:.2s}
- .slide.active .kit-tabs-list{animation:kit-enter .32s .06s var(--ease-brief) backwards}
- .slide.active .kit-tabs-panels article:not([hidden]){animation:kit-enter .36s .12s var(--ease-brief) backwards}
+ .slide.active .kit-flow article:nth-child(1){animation-delay:.18s}
+ .slide.active .kit-flow article:nth-child(2){animation-delay:.22s}
+ .slide.active .kit-flow article:nth-child(3){animation-delay:.26s}
+ .slide.active .kit-flow article:nth-child(4){animation-delay:.3s}
+ .slide.active .kit-tabs-list{animation:kit-enter .32s .16s var(--ease-brief) backwards}
+ .slide.active .kit-tabs-panels article:not([hidden]){animation:kit-enter .36s .22s var(--ease-brief) backwards}
  .slide.active .kit-metrics article{animation:kit-enter .4s var(--ease-brief) backwards}
- .slide.active .kit-metrics article:nth-child(1){animation-delay:.08s}
- .slide.active .kit-metrics article:nth-child(2){animation-delay:.12s}
- .slide.active .kit-metrics article:nth-child(3){animation-delay:.16s}
+ .slide.active .kit-metrics article:nth-child(1){animation-delay:.18s}
+ .slide.active .kit-metrics article:nth-child(2){animation-delay:.22s}
+ .slide.active .kit-metrics article:nth-child(3){animation-delay:.26s}
  .slide.active .kit-layer{animation:kit-enter .36s var(--ease-brief) backwards}
- .slide.active .kit-layer:nth-child(1){animation-delay:.06s}
- .slide.active .kit-layer:nth-child(2){animation-delay:.1s}
- .slide.active .kit-layer:nth-child(3){animation-delay:.14s}
- .slide.active .kit-layer:nth-child(4){animation-delay:.18s}
+ .slide.active .kit-layer:nth-child(1){animation-delay:.16s}
+ .slide.active .kit-layer:nth-child(2){animation-delay:.2s}
+ .slide.active .kit-layer:nth-child(3){animation-delay:.24s}
+ .slide.active .kit-layer:nth-child(4){animation-delay:.28s}
  .slide.active .kit-compare article{animation:kit-enter .4s var(--ease-brief) backwards}
- .slide.active .kit-compare article:nth-child(1){animation-delay:.08s}
- .slide.active .kit-compare article:nth-child(2){animation-delay:.14s}
- .slide.active .kit-quote{animation:kit-enter .42s .08s var(--ease-brief) backwards}
- .slide.active .kit-image{animation:kit-enter .4s .08s var(--ease-brief) backwards}
+ .slide.active .kit-compare article:nth-child(1){animation-delay:.18s}
+ .slide.active .kit-compare article:nth-child(2){animation-delay:.24s}
+ .slide.active .kit-quote{animation:kit-enter .42s .18s var(--ease-brief) backwards}
+ .slide.active .kit-image{animation:kit-enter .4s .18s var(--ease-brief) backwards}
  .slide.active .kit-timeline article{animation:kit-enter .36s var(--ease-brief) backwards}
- .slide.active .kit-timeline article:nth-child(1){animation-delay:.06s}
- .slide.active .kit-timeline article:nth-child(2){animation-delay:.1s}
- .slide.active .kit-timeline article:nth-child(3){animation-delay:.14s}
- .slide.active .kit-timeline article:nth-child(4){animation-delay:.18s}
- .slide.active .kit-pricing .recipe-pricing{animation:kit-enter .36s .08s var(--ease-brief) backwards}
+ .slide.active .kit-timeline article:nth-child(1){animation-delay:.16s}
+ .slide.active .kit-timeline article:nth-child(2){animation-delay:.2s}
+ .slide.active .kit-timeline article:nth-child(3){animation-delay:.24s}
+ .slide.active .kit-timeline article:nth-child(4){animation-delay:.28s}
+ .slide.active .kit-pricing .recipe-pricing{animation:kit-enter .36s .18s var(--ease-brief) backwards}
 }
 @keyframes kit-enter{from{opacity:0;transform:translateY(var(--motion-y-enter))}to{opacity:1;transform:translateY(0)}}
-.slide.active .kit-quote-attr{animation:kit-enter .36s .18s var(--ease-brief) backwards}
-.slide.active .kit-ba-divider{animation:kit-enter .32s .12s var(--ease-brief) backwards}
+.slide.active .kit-quote-attr{animation:kit-enter .36s .28s var(--ease-brief) backwards}
+.slide.active .kit-ba-divider{animation:kit-enter .32s .22s var(--ease-brief) backwards}
 
 .cover h1{font-size:var(--type-cover);line-height:var(--lh-tight);max-width:1300px;overflow-wrap:break-word}
 .heading h2{overflow-wrap:break-word;line-height:var(--lh-title)}
