@@ -1,15 +1,12 @@
-/* CodeArts intl-only tweaks. Shared chrome/motion/density live in template CSS (1.3.2+).
+/* CodeArts intl-only tweaks. Shared chrome/motion/density live in template CSS (1.4.0+).
    Keep this file thin: locale/font + example-specific cover art only. */
 
 .deck-intl{
-  /* Slightly cooler cover wash for overseas briefing photography */
-  --cover-wash:#eef2f7;
+  /* Soft bottom wash under overseas briefing photography; stage stays paper white */
+  --cover-wash:var(--paper);
 }
 
 .deck-intl .cover{background:var(--cover-wash)}
 
 /* EN primary audience: slightly tighter chapter labels on long bilingual titles */
 .deck-intl.english-deck .chapter-nav a{font-size:12.5px;letter-spacing:.15px}
-
-/* Agenda first-row accent as briefing cue (presentation order, not decoration carnival) */
-.deck-intl .slide.active .kit-agenda-item:nth-child(1)::before{background:var(--red)}

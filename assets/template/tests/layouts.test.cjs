@@ -142,3 +142,29 @@ test('timeline and callouts layouts render branded markup',()=>{
   assert.match(html,/data-callout-tone="warn"/);
  }finally{rmSync(root,{recursive:true,force:true});}
 });
+
+test('ux 1.4 cluster grammar: cover bilingual, rails, quote measure, timeline scroll',()=>{
+ const {root,html,css}=renderFixture([{
+  type:'cover',
+  title:bilingual('产品','Product'),
+  subtitle:bilingual('一句话','One line'),
+  tagline:bilingual('华为云','HUAWEI CLOUD')
+ }]);
+ const styles=readFileSync(path.join(root,'css/styles.css'),'utf8');
+ const english=readFileSync(path.join(root,'css/english.css'),'utf8');
+ try{
+  assert.match(html,/class="cover-bilingual"/);
+  assert.match(html,/class="cover-subtitle"/);
+  assert.match(html,/class="cover-english"/);
+  assert.match(styles,/--border-accent/);
+  assert.match(styles,/--measure-quote/);
+  assert.match(styles,/--motion-y-enter/);
+  assert.match(styles,/\.cover\{[^}]*background:\s*var\(--paper\)/);
+  assert.match(css,/kit-agenda::before/);
+  assert.match(css,/inset var\(--rail\) 0 0 var\(--red\)/);
+  assert.match(css,/kit-tabs-list button\[aria-selected="true"\][^}]*inset var\(--rail\)/);
+  assert.match(css,/--measure-quote|var\(--measure-quote\)/);
+  assert.match(css,/kit-timeline\{[^}]*max-height:\s*var\(--table-scroll-max\)/);
+  assert.match(english,/--measure-quote:\s*42ch/);
+ }finally{rmSync(root,{recursive:true,force:true});}
+});

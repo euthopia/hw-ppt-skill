@@ -1,6 +1,6 @@
 # CodeArts Agent — international briefing (example)
 
-7-slide Huawei Cloud sales briefing for overseas audiences. Runtime **1.3.2**. English is primary; Chinese is bilingual-ready.
+7-slide Huawei Cloud sales briefing for overseas audiences. Runtime **1.4.0**. English is primary; Chinese is bilingual-ready.
 
 **Design read:** B2B Huawei sales briefing for international engineering / platform / procurement buyers. Trust-first language. Dials: VARIANCE **3** / MOTION **3** / DENSITY **6**. Accent `#c7000b` on white stage.
 

@@ -3,6 +3,18 @@
 All notable changes to the Huawei product briefing runtime are documented here.
 Format follows a lightweight Keep-a-Changelog style. HTML remains the system of record; PPTX is Office interop.
 
+## 1.4.0 — 2026-11-15
+
+### Changed
+
+- UX cluster depth (VARIANCE 3 / MOTION 3 / DENSITY 6): shared `--border-accent` / `--border-warm` / `--measure-quote` / `--motion-y-enter` / `--min-card` tokens; table kit stays the red-rail grammar source of truth.
+- Cover: white paper stage, left red rail on copy, red eyebrow, solid red-rule (no glow), bilingual subtitle/tagline stack via `cover-bilingual`.
+- Closing: tighter grid, tokenized greeting line, smaller logo, EN caption rail, three-beat fade enter.
+- Agenda: vertical spine + active rail presence + flatter time chips; Workflow: current/done tiers + line connectors; Before/after: contrast theater; Tabs: selected inset rail (matches scenarios) + panel top rail.
+- Callouts/cards/metrics hierarchy (accent elevation only); Layers denser enterprise map; Comparison column tension; Quote paper + attribution strip; Timeline aligned to `--table-scroll-max` / table hover grammar.
+- Chrome: header/footer density, controls/progress without lavender drift, TOC current rail, presenter notes left rail; EN parallels in `english.css`.
+- CodeArts `deck-intl.css` thinned further (template owns agenda cue); runtime pin **1.4.0**.
+
 ## 1.3.2 — 2026-11-15
 
 ### Changed

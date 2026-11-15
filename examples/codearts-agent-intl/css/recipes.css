@@ -23,10 +23,10 @@
  font-weight:600;
  letter-spacing:.04em;
  color:var(--ink);
- border-bottom:1px solid #efd5d7;
+ border-bottom:1px solid var(--border-warm);
  box-shadow:inset 0 var(--rail) 0 var(--red);
 }
-.recipe-pricing thead th+th{border-left:1px solid #ece4e6}
+.recipe-pricing thead th+th{border-left:1px solid var(--border-warm)}
 .recipe-pricing tbody th{font-weight:600;color:var(--ink);background:var(--paper)}
 .recipe-pricing tbody tr:nth-child(even) td,
 .recipe-pricing tbody tr:nth-child(even) th{background:var(--surface-warm)}
@@ -49,7 +49,7 @@
  transition:border-color .18s ease,color .18s ease,background .18s ease,box-shadow .18s ease;
 }
 .recipe-scenarios button[aria-pressed="true"]{
- border-color:#ecd0d2;
+ border-color:var(--border-accent);
  color:var(--red);
  background:var(--paper);
  box-shadow:inset var(--rail) 0 0 var(--red);

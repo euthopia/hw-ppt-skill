@@ -40,16 +40,19 @@
  --lh-scan:1.42;
  --track-title:-.02em;
  --track-display:-.03em;
- --measure-subtitle:62ch;
- --measure-body:38ch;
+ --measure-subtitle:min(62ch,36em);
+ --measure-body:min(38ch,28em);
+ --measure-quote:42ch;
+ --min-card:190px;
 }
 .english-deck .eyebrow{letter-spacing:.16em}
 .english-deck .heading h2{letter-spacing:var(--track-title)}
 .english-deck .cover h1{letter-spacing:var(--track-display)}
 .english-deck .cover-copy .eyebrow{letter-spacing:.18em}
 .english-deck .cover-subtitle{max-width:860px}
-.english-deck .cover-english{letter-spacing:.2em}
-.english-deck .kit-agenda-label{font-weight:500}
+.english-deck .cover-english{letter-spacing:.2em;font-weight:500}
+.english-deck .cover-bilingual{gap:6px}
+.english-deck .kit-agenda-label{font-weight:500;letter-spacing:var(--track-title)}
 .english-deck .kit-agenda-time{text-transform:uppercase;letter-spacing:.1em}
 .english-deck .kit-ba-label{text-transform:uppercase;letter-spacing:.14em}
 .english-deck .kit-table thead th{text-transform:uppercase;letter-spacing:.08em}
@@ -59,17 +62,20 @@
 .english-deck .kit-before-after h3,
 .english-deck .kit-image aside h3{letter-spacing:var(--track-title)}
 .english-deck .kit-tabs-panels p{max-width:68ch}
-.english-deck .kit-quote p{max-width:40ch}
+.english-deck .kit-quote>p{max-width:var(--measure-quote)}
 .english-deck .closing-greeting{padding-left:24px}
+.english-deck .closing-greeting h1{letter-spacing:var(--track-display)}
 .english-deck .closing-vision-en{font-size:var(--type-closing-en);line-height:1.5}
 .english-deck .closing-vision-zh{font-size:var(--type-closing-zh);line-height:1.55;letter-spacing:0}
 .english-deck .kit-layer h3{font-size:var(--type-layer)}
 .english-deck .kit-layer>div>span{font-size:var(--type-layer-cell);line-height:1.35}
 .english-deck .kit-table{font-size:var(--type-table);line-height:1.35}
 .english-deck .kit-table thead th{font-size:var(--type-table-head)}
+.english-deck .kit-timeline .kit-timeline-when{font-size:var(--type-table-head)}
 .english-deck .recipe-pricing{font-size:var(--type-table)}
 .english-deck .recipe-scenarios button{font-size:15px;line-height:1.35}
 .english-deck .chapter-nav a{font-size:var(--type-nav)}
+.english-deck .presenter-notes p{font-size:14px;line-height:1.45}
 @media(max-width:460px){
  .english-deck .controls{padding-left:8px;padding-right:8px;gap:7px}
  .english-deck .controls .icon-button{width:25px}

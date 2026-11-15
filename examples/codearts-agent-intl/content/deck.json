@@ -1,6 +1,6 @@
 {
   "id": "codearts-agent-intl",
-  "runtimeVersion": "1.3.2",
+  "runtimeVersion": "1.4.0",
   "title": {
     "zh": "CodeArts Agent",
     "en": "CodeArts Agent"

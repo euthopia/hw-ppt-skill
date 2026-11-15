@@ -288,10 +288,11 @@ def layout_cover(slide):
  title=text(slide['title'])
  header=f'<header class="slide-header"><img class="brand" src="assets/huawei-logo.png" alt="HUAWEI"><span>{text(D.get("brandLabel","HUAWEI CLOUD"))}</span></header>'
  return (
-  header+f'<div class="cover-landscape" style="background-image:linear-gradient(180deg,#f7f9fc 0%,#f7f9fcbd 18%,#f7f9fc00 43%),url(&quot;{image}&quot;)"></div>'
+  header+f'<div class="cover-landscape" style="background-image:linear-gradient(180deg,#fff 0%,#ffffffbd 14%,#ffffff00 40%),linear-gradient(180deg,transparent 55%,#f4f5f7ee 100%),url(&quot;{image}&quot;)"></div>'
   f'<div class="cover-copy"><div class="eyebrow"><span class="red-rule"></span>{text(slide.get("eyebrow","PRODUCT BRIEFING"))}</div>'
-  f'<h1>{title}</h1><p class="cover-subtitle">{text(slide.get("subtitle",""))}</p><div class="cover-line"></div>'
-  f'<p class="cover-english">{text(slide.get("tagline","HUAWEI CLOUD"))}</p></div>'
+  f'<h1>{title}</h1><div class="cover-line"></div>'
+  f'<div class="cover-bilingual"><p class="cover-subtitle">{text(slide.get("subtitle",""))}</p>'
+  f'<p class="cover-english">{text(slide.get("tagline","HUAWEI CLOUD"))}</p></div></div>'
   f'<div class="cover-bottom"><span>PRODUCT BRIEFING</span><span>{text(D.get("brandLabel","HUAWEI CLOUD"))}</span></div>'
  )
 
