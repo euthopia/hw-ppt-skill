@@ -155,7 +155,10 @@ def layout_metrics(slide):
 
 def layout_architecture(slide):
  layers=bounded(slide['layers'],3,5,'layers')
- return '<div class="kit-layers">'+''.join('<div class="kit-layer"><h3>'+text(c['label'])+'</h3><div>'+items(bounded(c['items'],1,4,'layer items'))+'</div></div>' for c in layers)+'</div>'
+ return '<div class="kit-layers">'+''.join(
+  f'<div class="kit-layer"><h3><span class="kit-index">{i+1:02}</span>{text(c["label"])}</h3>'
+  f'<div>{items(bounded(c["items"],1,4,"layer items"))}</div></div>'
+  for i,c in enumerate(layers))+'</div>'
 
 def layout_comparison(slide):
  columns=bounded(slide['columns'],2,2,'comparison columns')

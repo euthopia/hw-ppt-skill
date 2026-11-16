@@ -1,7 +1,7 @@
 {
   "id": "blank-product-deck",
   "kind": "product-briefing",
-  "runtimeVersion": "1.5.3",
+  "runtimeVersion": "1.5.5",
   "meta": {
     "purpose": {
       "zh": "产品销售简报",
@@ -16,12 +16,20 @@
   "footer": "HUAWEI CLOUD",
   "chapters": [
     {
-      "label": { "zh": "概览", "en": "Overview" },
-      "section": { "zh": "产品概览", "en": "Product overview" }
+      "label": { "zh": "议程", "en": "Agenda" },
+      "section": { "zh": "会议议程", "en": "Meeting agenda" }
     },
     {
-      "label": { "zh": "能力", "en": "Capabilities" },
-      "section": { "zh": "产品能力", "en": "Product capabilities" }
+      "label": { "zh": "价值", "en": "Value" },
+      "section": { "zh": "客户价值", "en": "Customer value" }
+    },
+    {
+      "label": { "zh": "能力", "en": "Capability" },
+      "section": { "zh": "产品能力", "en": "Product capability" }
+    },
+    {
+      "label": { "zh": "路径", "en": "Path" },
+      "section": { "zh": "落地路径", "en": "Delivery path" }
     }
   ],
   "slides": [
@@ -31,68 +39,170 @@
       "title": { "zh": "产品名称", "en": "Product name" },
       "eyebrow": { "zh": "企业产品介绍", "en": "Enterprise product briefing" },
       "subtitle": {
-        "zh": "一句话说明面向谁、解决什么问题",
-        "en": "Who it serves and which problem it solves"
+        "zh": "一句话：面向谁、解决什么问题、带来什么结果",
+        "en": "One line: who it serves, which problem, which outcome"
       },
       "tagline": "HUAWEI CLOUD",
       "background": "云山"
     },
     {
+      "type": "agenda",
+      "id": "agenda",
+      "section": { "zh": "会议议程", "en": "Meeting agenda" },
+      "title": { "zh": "今天要对齐的四件事", "en": "Four things to align today" },
+      "subtitle": {
+        "zh": "先价值，再能力，再路径；避免一上来堆功能",
+        "en": "Value first, then capability, then path — not a feature dump"
+      },
+      "eyebrow": "AGENDA",
+      "items": [
+        { "label": { "zh": "客户结果与价值主张", "en": "Outcomes & value" }, "time": { "zh": "8 分钟", "en": "8 min" } },
+        { "label": { "zh": "关键指标与能力分层", "en": "Metrics & layers" }, "time": { "zh": "10 分钟", "en": "10 min" } },
+        { "label": { "zh": "路径对比与落地节奏", "en": "Path & cadence" }, "time": { "zh": "10 分钟", "en": "10 min" } },
+        { "label": { "zh": "下一步与责任人", "en": "Next steps & owners" }, "time": { "zh": "7 分钟", "en": "7 min" } }
+      ]
+    },
+    {
       "type": "cards",
       "id": "value",
-      "section": { "zh": "产品概览", "en": "Product overview" },
-      "title": { "zh": "为什么选择它", "en": "Why choose it" },
+      "section": { "zh": "客户价值", "en": "Customer value" },
+      "title": { "zh": "为什么现在要做", "en": "Why act now" },
       "subtitle": {
-        "zh": "用客户能理解的结果组织价值",
-        "en": "Frame value in customer outcomes"
+        "zh": "每张卡片写「结果」，不写「功能清单」",
+        "en": "Each card is an outcome — not a feature list"
       },
-      "eyebrow": "PRODUCT VALUE",
+      "eyebrow": "VALUE",
       "cards": [
         {
-          "title": { "zh": "价值一", "en": "Value one" },
-          "body": { "zh": "待填写的客户结果", "en": "Customer outcome to supply" }
+          "title": { "zh": "业务结果", "en": "Business outcome" },
+          "body": { "zh": "客户能量化的收益或风险下降（示例：缩短上线周期）", "en": "Measurable gain or risk reduction (e.g. shorter release cycle)" }
         },
         {
-          "title": { "zh": "价值二", "en": "Value two" },
-          "body": { "zh": "待填写的客户结果", "en": "Customer outcome to supply" }
+          "title": { "zh": "工作方式", "en": "Working model" },
+          "body": { "zh": "谁用、怎么用、比现状少几步（示例：一站式编排）", "en": "Who uses it, how, and fewer steps than today" }
         },
         {
-          "title": { "zh": "价值三", "en": "Value three" },
-          "body": { "zh": "待填写的客户结果", "en": "Customer outcome to supply" }
+          "title": { "zh": "企业约束", "en": "Enterprise fit" },
+          "body": { "zh": "安全、合规、集成与治理如何满足目标客户", "en": "Security, compliance, integration and governance for the account" }
+        }
+      ]
+    },
+    {
+      "type": "metrics",
+      "id": "metrics",
+      "section": { "zh": "客户价值", "en": "Customer value" },
+      "title": { "zh": "用三个数字锚定价值", "en": "Anchor value with three numbers" },
+      "subtitle": {
+        "zh": "数字须可核对；没有就写「待确认」",
+        "en": "Numbers must be checkable — else write “TBC”"
+      },
+      "eyebrow": "METRICS",
+      "metrics": [
+        {
+          "value": { "zh": "—", "en": "—" },
+          "label": { "zh": "效率", "en": "Efficiency" },
+          "body": { "zh": "待填写的单位与口径", "en": "Unit and definition to supply" }
+        },
+        {
+          "value": { "zh": "—", "en": "—" },
+          "label": { "zh": "质量", "en": "Quality" },
+          "body": { "zh": "待填写的单位与口径", "en": "Unit and definition to supply" }
+        },
+        {
+          "value": { "zh": "—", "en": "—" },
+          "label": { "zh": "成本 / 风险", "en": "Cost / risk" },
+          "body": { "zh": "待填写的单位与口径", "en": "Unit and definition to supply" }
         }
       ]
     },
     {
       "type": "architecture",
       "id": "architecture",
-      "section": { "zh": "产品能力", "en": "Product capabilities" },
-      "title": { "zh": "能力分层", "en": "Capability layers" },
+      "section": { "zh": "产品能力", "en": "Product capability" },
+      "title": { "zh": "能力如何分层协作", "en": "How capabilities stack" },
       "subtitle": {
-        "zh": "用三到五层说明系统如何协作",
-        "en": "Explain how layers work together"
+        "zh": "自上而下：场景 → 服务 → 平台；每层 2–4 个模块",
+        "en": "Top-down: scenarios → services → platform; 2–4 modules per layer"
       },
       "eyebrow": "ARCHITECTURE",
       "layers": [
         {
-          "label": { "zh": "体验层", "en": "Experience" },
+          "label": { "zh": "体验 / 场景", "en": "Experience / scenarios" },
           "items": [
-            { "zh": "模块一", "en": "Module one" },
-            { "zh": "模块二", "en": "Module two" }
+            { "zh": "场景一", "en": "Scenario one" },
+            { "zh": "场景二", "en": "Scenario two" }
           ]
         },
         {
-          "label": { "zh": "服务层", "en": "Services" },
+          "label": { "zh": "产品服务", "en": "Product services" },
           "items": [
-            { "zh": "服务一", "en": "Service one" },
-            { "zh": "服务二", "en": "Service two" }
+            { "zh": "核心服务", "en": "Core service" },
+            { "zh": "治理与运维", "en": "Governance & ops" }
           ]
         },
         {
-          "label": { "zh": "数据与基础设施", "en": "Data & infrastructure" },
+          "label": { "zh": "数据与平台", "en": "Data & platform" },
           "items": [
             { "zh": "数据能力", "en": "Data capability" },
             { "zh": "基础设施", "en": "Infrastructure" }
           ]
+        }
+      ]
+    },
+    {
+      "type": "before-after",
+      "id": "before-after",
+      "section": { "zh": "落地路径", "en": "Delivery path" },
+      "title": { "zh": "现状与目标态", "en": "As-is vs to-be" },
+      "subtitle": {
+        "zh": "左侧写痛点，右侧写可验证的改进",
+        "en": "Left = pain; right = verifiable improvement"
+      },
+      "eyebrow": "CHANGE",
+      "before": {
+        "label": { "zh": "现状", "en": "As-is" },
+        "title": { "zh": "当前方式", "en": "Current approach" },
+        "body": { "zh": "待填写的痛点与代价", "en": "Pain and cost to supply" },
+        "bullets": [
+          { "zh": "痛点一", "en": "Pain one" },
+          { "zh": "痛点二", "en": "Pain two" }
+        ]
+      },
+      "after": {
+        "label": { "zh": "目标", "en": "To-be" },
+        "title": { "zh": "目标方式", "en": "Target approach" },
+        "body": { "zh": "待填写的改进与验证点", "en": "Improvement and proof point to supply" },
+        "bullets": [
+          { "zh": "改进一", "en": "Gain one" },
+          { "zh": "改进二", "en": "Gain two" }
+        ]
+      }
+    },
+    {
+      "type": "callouts",
+      "id": "next",
+      "section": { "zh": "落地路径", "en": "Delivery path" },
+      "title": { "zh": "会后带走的三件事", "en": "Three takeaways" },
+      "subtitle": {
+        "zh": "信息 / 边界 / 行动 —— 各写一句可执行的话",
+        "en": "Context / boundary / action — one executable line each"
+      },
+      "eyebrow": "NEXT",
+      "items": [
+        {
+          "tone": "info",
+          "title": { "zh": "共识", "en": "Alignment" },
+          "body": { "zh": "今天双方同意的客户结果是什么", "en": "The customer outcome both sides agreed today" }
+        },
+        {
+          "tone": "warn",
+          "title": { "zh": "边界", "en": "Boundary" },
+          "body": { "zh": "本次不承诺的范围或待确认项", "en": "Out of scope or items still to confirm" }
+        },
+        {
+          "tone": "accent",
+          "title": { "zh": "下一步", "en": "Next step" },
+          "body": { "zh": "责任人、时间点、交付物", "en": "Owner, date, and deliverable" }
         }
       ]
     },

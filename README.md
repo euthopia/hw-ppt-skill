@@ -2,7 +2,7 @@
 
 **制作华为风格 HTML→PPT 文稿的 Agent Skill。** 你提供内容，Agent 负责选择文稿类型、组织章节、选择版式、生成中英双语页面、配置轻量动效、检查排版并构建交付文件；需要时导出**可编辑 PPTX**。
 
-当前技能包 **1.5.4**（HTML 运行时 **1.5.3**）。适用于产品简报、周报/状态同步、架构设计评审、项目里程碑汇报、培训工作坊，以及方案对比、套餐说明、业务案例和 Demo。
+当前技能包 **1.5.5**（HTML 运行时 **1.5.5**）。适用于产品简报、周报/状态同步、架构设计评审、项目里程碑汇报、培训工作坊，以及方案对比、套餐说明、业务案例和 Demo。
 
 [在线体验：封面＋空白页](https://huawei-product-slides-demo.leonguo08.workers.dev/) · [致谢页预览图](demo/thank-you-preview.png) · [变更记录](CHANGELOG.md) · [English README](README.en.md)
 
@@ -77,7 +77,7 @@ npm test
 
 | 起始模板 | 内容 |
 | --- | --- |
-| `--starter blank` | 产品简报弧线：封面→价值卡片→能力分层→致谢（`kind: product-briefing`） |
+| `--starter blank` | 产品简报弧线：封面→议程→价值→指标→分层→前后对照→下一步→致谢（`kind: product-briefing`） |
 | `--starter status-report` | 状态周报：议程→指标→时间线→风险→行动表→致谢 |
 | `--starter design-review` | 设计评审：背景→架构→前后对照→取舍→待确认项→致谢 |
 | `--starter project-report` | 项目阶段汇报：指标→里程碑→交付节奏→风险→行动→致谢 |
@@ -186,7 +186,7 @@ hw-ppt-skill/
 ├── scripts/               项目初始化、Demo 构建、运行时同步
 ├── examples/              CodeArts / MaaS 等完整样例稿
 ├── assets/
-│   ├── template/          完整演示项目模板（runtime 1.5.3）
+│   ├── template/          完整演示项目模板（runtime 1.5.5）
 │   ├── starters/          blank · status-report · design-review ·
 │   │                      project-report · workshop · thank-you
 │   └── recipes/           可选交互组件 + deck-archetypes 指南

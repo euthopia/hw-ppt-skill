@@ -1,6 +1,6 @@
 # MaaS Tokens — international briefing (example)
 
-7-slide Huawei Cloud sales briefing for overseas audiences. Runtime **1.5.3**. English is primary; Chinese is bilingual-ready.
+7-slide Huawei Cloud sales briefing for overseas audiences. Runtime **1.5.5**. English is primary; Chinese is bilingual-ready.
 
 **Design read:** B2B Huawei sales briefing for international platform / procurement / AI engineering buyers. Trust-first language on token metering. Dials: VARIANCE **3** / MOTION **3** / DENSITY **6**. Accent `#c7000b` on white stage.
 

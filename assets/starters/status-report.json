@@ -1,7 +1,7 @@
 {
   "id": "status-report-deck",
   "kind": "status-report",
-  "runtimeVersion": "1.5.3",
+  "runtimeVersion": "1.5.5",
   "meta": {
     "purpose": {
       "zh": "周报 / 项目状态同步",
@@ -191,3 +191,4 @@
     }
   ]
 }
+

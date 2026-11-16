@@ -1,506 +1,349 @@
 {
   "id": "product-deck-example",
+  "kind": "product-briefing",
+  "runtimeVersion": "1.5.5",
+  "meta": {
+    "purpose": {
+      "zh": "模板示例：企业产品简报弧线",
+      "en": "Template sample: enterprise product briefing arc"
+    }
+  },
   "title": {
     "zh": "产品介绍 · 模板",
     "en": "Product presentation · Template"
   },
   "brandLabel": "HUAWEI CLOUD",
   "footer": {
-    "zh": "产品名称 · 核心价值",
-    "en": "Product name · Core value"
+    "zh": "示例产品 · 替换为真实名称",
+    "en": "Sample product · replace with the real name"
   },
   "chapters": [
     {
-      "label": {
-        "zh": "概览",
-        "en": "Overview"
-      },
-      "section": {
-        "zh": "产品概览",
-        "en": "Product overview"
-      }
+      "label": { "zh": "议程", "en": "Agenda" },
+      "section": { "zh": "会议议程", "en": "Meeting agenda" }
     },
     {
-      "label": {
-        "zh": "能力",
-        "en": "Capabilities"
-      },
-      "section": {
-        "zh": "产品能力",
-        "en": "Product capabilities"
-      }
+      "label": { "zh": "价值", "en": "Value" },
+      "section": { "zh": "客户价值", "en": "Customer value" }
     },
     {
-      "label": {
-        "zh": "方案",
-        "en": "Solutions"
-      },
-      "section": {
-        "zh": "方案与套餐",
-        "en": "Solutions & plans"
-      }
+      "label": { "zh": "能力", "en": "Capability" },
+      "section": { "zh": "产品能力", "en": "Product capability" }
     },
     {
-      "label": {
-        "zh": "演示",
-        "en": "Demo"
-      },
-      "section": "Demo"
+      "label": { "zh": "方案", "en": "Solution" },
+      "section": { "zh": "方案与套餐", "en": "Solutions & plans" }
+    },
+    {
+      "label": { "zh": "落地", "en": "Delivery" },
+      "section": { "zh": "落地与下一步", "en": "Delivery & next" }
     }
   ],
   "slides": [
     {
       "type": "cover",
-      "title": {
-        "zh": "产品名称",
-        "en": "Product name"
-      },
-      "eyebrow": {
-        "zh": "企业产品介绍",
-        "en": "Enterprise product briefing"
-      },
+      "id": "cover",
+      "title": { "zh": "示例产品", "en": "Sample product" },
+      "eyebrow": { "zh": "企业产品介绍", "en": "Enterprise product briefing" },
       "subtitle": {
-        "zh": "一句话说明面向谁、解决什么问题",
-        "en": "Describe who the product serves and which problem it solves"
+        "zh": "面向企业客户的能力说明：价值 → 分层 → 路径 → 行动",
+        "en": "Enterprise briefing arc: value → layers → path → action"
       },
       "tagline": "HUAWEI CLOUD",
-      "id": "cover"
+      "background": "云山"
+    },
+    {
+      "type": "agenda",
+      "id": "agenda",
+      "section": { "zh": "会议议程", "en": "Meeting agenda" },
+      "title": { "zh": "今天的讨论结构", "en": "Today’s discussion structure" },
+      "subtitle": {
+        "zh": "先对齐结果，再看能力与路径，最后确认下一步",
+        "en": "Align on outcomes, then capability and path, then next steps"
+      },
+      "eyebrow": "AGENDA",
+      "items": [
+        { "label": { "zh": "价值与指标", "en": "Value & metrics" }, "time": { "zh": "10 分钟", "en": "10 min" } },
+        { "label": { "zh": "能力分层", "en": "Capability layers" }, "time": { "zh": "8 分钟", "en": "8 min" } },
+        { "label": { "zh": "方案取舍与套餐", "en": "Options & plans" }, "time": { "zh": "10 分钟", "en": "10 min" } },
+        { "label": { "zh": "落地节奏与行动", "en": "Cadence & actions" }, "time": { "zh": "7 分钟", "en": "7 min" } }
+      ]
     },
     {
       "type": "cards",
-      "section": {
-        "zh": "产品概览",
-        "en": "Product overview"
-      },
-      "title": {
-        "zh": "用三个价值说明为什么选择它",
-        "en": "Three reasons to choose the product"
-      },
+      "id": "values",
+      "section": { "zh": "客户价值", "en": "Customer value" },
+      "title": { "zh": "用三个结果说明为什么选择它", "en": "Three outcomes that justify the choice" },
       "subtitle": {
-        "zh": "用客户能理解的结果组织介绍",
-        "en": "Explain the outcomes that matter to customers"
+        "zh": "替换示例文案；保持「结果」语气，避免功能罗列",
+        "en": "Replace sample copy; keep outcome language, not feature lists"
       },
+      "eyebrow": "VALUE",
       "cards": [
         {
-          "title": {
-            "zh": "业务价值",
-            "en": "Business value"
-          },
+          "title": { "zh": "业务结果", "en": "Business outcome" },
           "body": {
-            "zh": "填写客户希望获得的结果，以及产品如何支持它。",
-            "en": "Describe the outcome customers need and how the product supports it."
+            "zh": "示例：把关键交付周期从「周」压到「天」，并保留可审计轨迹。",
+            "en": "Sample: compress critical delivery from weeks to days with an auditable trail."
           }
         },
         {
-          "title": {
-            "zh": "使用体验",
-            "en": "User experience"
-          },
+          "title": { "zh": "工作方式", "en": "Working model" },
           "body": {
-            "zh": "填写工作流程如何变得简单，并给出一个具体例子。",
-            "en": "Explain how the workflow becomes simpler, with one concrete example."
+            "zh": "示例：业务与平台共用同一编排入口，减少跨系统手工对齐。",
+            "en": "Sample: one orchestration entry for business and platform — fewer handoffs."
           }
         },
         {
-          "title": {
-            "zh": "企业能力",
-            "en": "Enterprise capabilities"
-          },
+          "title": { "zh": "企业约束", "en": "Enterprise fit" },
           "body": {
-            "zh": "填写与目标客户有关的集成、管理与治理能力。",
-            "en": "Describe integration, management and governance for your target customers."
+            "zh": "示例：权限、配额与变更审批进入同一治理面，满足目标行业要求。",
+            "en": "Sample: permissions, quotas and change control on one governance plane."
           }
         }
-      ],
-      "id": "values"
+      ]
+    },
+    {
+      "type": "metrics",
+      "id": "metrics",
+      "section": { "zh": "客户价值", "en": "Customer value" },
+      "title": { "zh": "示例指标（请替换）", "en": "Sample metrics (replace)" },
+      "subtitle": {
+        "zh": "数字仅作版式示意；正式稿必须可核对来源",
+        "en": "Figures are layout samples only — production decks need sourced numbers"
+      },
+      "eyebrow": "METRICS",
+      "metrics": [
+        {
+          "value": { "zh": "40%", "en": "40%" },
+          "label": { "zh": "流程耗时下降", "en": "Process time down" },
+          "body": { "zh": "示例口径：关键路径端到端", "en": "Sample: critical-path end-to-end" }
+        },
+        {
+          "value": { "zh": "3×", "en": "3×" },
+          "label": { "zh": "协作吞吐", "en": "Collaboration throughput" },
+          "body": { "zh": "示例口径：同编制任务量", "en": "Sample: same staffing, more tasks" }
+        },
+        {
+          "value": { "zh": "99.9%", "en": "99.9%" },
+          "label": { "zh": "可用性目标", "en": "Availability target" },
+          "body": { "zh": "示例：以正式 SLA 为准", "en": "Sample: formal SLA governs" }
+        }
+      ]
     },
     {
       "type": "architecture",
-      "section": {
-        "zh": "产品能力",
-        "en": "Product capabilities"
-      },
-      "title": {
-        "zh": "从业务场景到基础能力",
-        "en": "From business scenarios to core capabilities"
-      },
+      "id": "architecture",
+      "section": { "zh": "产品能力", "en": "Product capability" },
+      "title": { "zh": "从场景到平台的三层结构", "en": "Three layers from scenario to platform" },
       "subtitle": {
-        "zh": "每层只保留最重要的模块",
-        "en": "Keep the most important modules in each layer"
+        "zh": "顶层写场景，中层写服务，底层写平台与数据",
+        "en": "Top = scenarios, middle = services, bottom = platform & data"
       },
+      "eyebrow": "ARCHITECTURE",
       "layers": [
         {
-          "label": {
-            "zh": "业务场景",
-            "en": "Business scenarios"
-          },
+          "label": { "zh": "业务场景", "en": "Business scenarios" },
           "items": [
-            {
-              "zh": "场景一",
-              "en": "Scenario one"
-            },
-            {
-              "zh": "场景二",
-              "en": "Scenario two"
-            },
-            {
-              "zh": "场景三",
-              "en": "Scenario three"
-            }
+            { "zh": "场景 A：编排与交付", "en": "Scenario A: orchestration" },
+            { "zh": "场景 B：洞察与复盘", "en": "Scenario B: insight & review" },
+            { "zh": "场景 C：治理与审计", "en": "Scenario C: governance" }
           ]
         },
         {
-          "label": {
-            "zh": "产品服务",
-            "en": "Product services"
-          },
+          "label": { "zh": "产品服务", "en": "Product services" },
           "items": [
-            {
-              "zh": "核心服务",
-              "en": "Core service"
-            },
-            {
-              "zh": "管理与治理",
-              "en": "Management & governance"
-            }
+            { "zh": "核心服务", "en": "Core service" },
+            { "zh": "策略与配额", "en": "Policy & quota" },
+            { "zh": "集成网关", "en": "Integration gateway" }
           ]
         },
         {
-          "label": {
-            "zh": "基础资源",
-            "en": "Foundation"
-          },
+          "label": { "zh": "数据与平台", "en": "Data & platform" },
           "items": [
-            {
-              "zh": "资源与平台",
-              "en": "Resources & platform"
-            },
-            {
-              "zh": "生态与集成",
-              "en": "Ecosystem & integration"
-            }
+            { "zh": "数据平面", "en": "Data plane" },
+            { "zh": "运行时与观测", "en": "Runtime & observability" },
+            { "zh": "安全基线", "en": "Security baseline" }
           ]
         }
-      ],
-      "id": "architecture"
+      ]
     },
     {
       "type": "comparison",
-      "section": {
-        "zh": "方案与套餐",
-        "en": "Solutions & plans"
-      },
-      "title": {
-        "zh": "两种方案如何选择",
-        "en": "Choosing between two approaches"
-      },
+      "id": "comparison",
+      "section": { "zh": "方案与套餐", "en": "Solutions & plans" },
+      "title": { "zh": "两种落地路径如何选择", "en": "Choosing between two delivery paths" },
       "subtitle": {
-        "zh": "按适用场景、工作方式和交付结果比较",
-        "en": "Compare use cases, workflows and deliverables"
+        "zh": "按适用场景、工作方式与交付结果比较",
+        "en": "Compare fit, working model, and deliverables"
       },
+      "eyebrow": "OPTIONS",
       "columns": [
         {
           "kicker": "01",
-          "title": {
-            "zh": "方案 A",
-            "en": "Approach A"
-          },
-          "summary": {
-            "zh": "填写方案 A 的适用人群",
-            "en": "Describe the audience for approach A"
-          },
+          "title": { "zh": "标准路径", "en": "Standard path" },
+          "summary": { "zh": "适合已有清晰场景、希望快速试点的团队", "en": "Clear scenario, fast pilot" },
           "bullets": [
-            {
-              "zh": "适用场景：待补充",
-              "en": "Use cases: to be provided"
-            },
-            {
-              "zh": "核心方式：待补充",
-              "en": "Workflow: to be provided"
-            },
-            {
-              "zh": "交付结果：待补充",
-              "en": "Deliverables: to be provided"
-            }
+            { "zh": "适用：单场景验证", "en": "Fit: single-scenario proof" },
+            { "zh": "方式：模板 + 标准集成", "en": "Model: templates + standard integration" },
+            { "zh": "结果：可复用试点包", "en": "Outcome: reusable pilot pack" }
           ]
         },
         {
           "kicker": "02",
-          "title": {
-            "zh": "方案 B",
-            "en": "Approach B"
-          },
-          "summary": {
-            "zh": "填写方案 B 的适用人群",
-            "en": "Describe the audience for approach B"
-          },
+          "title": { "zh": "深度路径", "en": "Deep path" },
+          "summary": { "zh": "适合多系统联动与强治理要求的组织", "en": "Multi-system linkage and strong governance" },
           "bullets": [
-            {
-              "zh": "适用场景：待补充",
-              "en": "Use cases: to be provided"
-            },
-            {
-              "zh": "核心方式：待补充",
-              "en": "Workflow: to be provided"
-            },
-            {
-              "zh": "交付结果：待补充",
-              "en": "Deliverables: to be provided"
-            }
+            { "zh": "适用：多域协同", "en": "Fit: multi-domain collaboration" },
+            { "zh": "方式：定制编排 + 治理面", "en": "Model: custom orchestration + governance" },
+            { "zh": "结果：可扩展生产基线", "en": "Outcome: extensible production baseline" }
           ]
         }
-      ],
-      "id": "comparison"
+      ]
     },
     {
       "type": "table",
-      "section": {
-        "zh": "方案与套餐",
-        "en": "Solutions & plans"
-      },
-      "title": {
-        "zh": "套餐价格与容量",
-        "en": "Plan pricing and capacity"
-      },
+      "id": "plans",
+      "section": { "zh": "方案与套餐", "en": "Solutions & plans" },
+      "title": { "zh": "套餐结构示例", "en": "Sample plan structure" },
       "subtitle": {
-        "zh": "示例结构：替换为实际产品的套餐信息",
-        "en": "Example structure: replace with the actual product plans"
+        "zh": "替换价格与容量；脚注只写已确认规则",
+        "en": "Replace price/capacity; footnote only confirmed rules"
       },
+      "eyebrow": "PLANS",
       "headers": [
-        {
-          "zh": "套餐",
-          "en": "Plan"
-        },
-        {
-          "zh": "价格",
-          "en": "Price"
-        },
-        {
-          "zh": "容量",
-          "en": "Capacity"
-        },
-        {
-          "zh": "适用团队",
-          "en": "Intended team"
-        }
+        { "zh": "套餐", "en": "Plan" },
+        { "zh": "价格", "en": "Price" },
+        { "zh": "容量", "en": "Capacity" },
+        { "zh": "适用团队", "en": "Intended team" }
       ],
       "rows": [
         [
-          {
-            "zh": "基础版",
-            "en": "Basic"
-          },
-          {
-            "zh": "待填写",
-            "en": "To be provided"
-          },
-          {
-            "zh": "待填写",
-            "en": "To be provided"
-          },
-          {
-            "zh": "待填写",
-            "en": "To be provided"
-          }
+          { "zh": "基础版", "en": "Basic" },
+          { "zh": "待填写", "en": "TBC" },
+          { "zh": "待填写", "en": "TBC" },
+          { "zh": "试点小组", "en": "Pilot squad" }
         ],
         [
-          {
-            "zh": "专业版",
-            "en": "Professional"
-          },
-          {
-            "zh": "待填写",
-            "en": "To be provided"
-          },
-          {
-            "zh": "待填写",
-            "en": "To be provided"
-          },
-          {
-            "zh": "待填写",
-            "en": "To be provided"
-          }
+          { "zh": "专业版", "en": "Professional" },
+          { "zh": "待填写", "en": "TBC" },
+          { "zh": "待填写", "en": "TBC" },
+          { "zh": "业务线团队", "en": "Line-of-business team" }
+        ],
+        [
+          { "zh": "企业版", "en": "Enterprise" },
+          { "zh": "待填写", "en": "TBC" },
+          { "zh": "待填写", "en": "TBC" },
+          { "zh": "多域治理组织", "en": "Multi-domain org" }
         ]
       ],
       "note": {
-        "zh": "在这里说明用尽套餐后的处理方式；只填已确认的产品规则。",
-        "en": "Explain what happens after the allowance is used, based on confirmed product rules."
-      },
-      "id": "plans"
+        "zh": "超额与折扣规则以正式报价单为准；本页仅作结构示意。",
+        "en": "Overage and discount rules follow the formal quote; this page is structural only."
+      }
     },
     {
       "type": "workflow",
-      "section": "Demo",
-      "title": {
-        "zh": "用一个任务理解完整流程",
-        "en": "Understand the workflow with one task"
-      },
+      "id": "workflow",
+      "section": { "zh": "落地与下一步", "en": "Delivery & next" },
+      "title": { "zh": "用一个任务读懂流程", "en": "Read the flow through one task" },
       "subtitle": {
-        "zh": "轻量逐步高亮，可暂停、重播或直接显示完整流程",
-        "en": "Simple step highlights: pause, replay or show the complete workflow"
+        "zh": "可暂停 / 重播；打印与缩略图显示完整步骤",
+        "en": "Pause / replay; print and thumbnails show every step"
       },
+      "eyebrow": "WORKFLOW",
       "steps": [
         {
-          "title": {
-            "zh": "输入任务",
-            "en": "Submit a task"
-          },
-          "body": {
-            "zh": "用客户的语言描述目标和约束。",
-            "en": "Describe the goal and constraints in the customer’s language."
-          }
+          "title": { "zh": "输入任务", "en": "Frame the task" },
+          "body": { "zh": "用客户语言写清目标、约束与成功标准。", "en": "State goal, constraints and success criteria in customer language." }
         },
         {
-          "title": {
-            "zh": "组织流程",
-            "en": "Plan the workflow"
-          },
-          "body": {
-            "zh": "解释产品如何组织必要的操作。",
-            "en": "Explain how the product organizes the required actions."
-          }
+          "title": { "zh": "编排能力", "en": "Orchestrate" },
+          "body": { "zh": "选择场景模板，挂接必要服务与策略。", "en": "Pick a scenario template; attach required services and policies." }
         },
         {
-          "title": {
-            "zh": "执行与验证",
-            "en": "Execute and verify"
-          },
-          "body": {
-            "zh": "显示关键结果和验证依据。",
-            "en": "Show the key results and supporting checks."
-          }
+          "title": { "zh": "执行验证", "en": "Verify" },
+          "body": { "zh": "跑通关键路径，留下可审计结果。", "en": "Run the critical path; keep an auditable result." }
         },
         {
-          "title": {
-            "zh": "交付结果",
-            "en": "Deliver the outcome"
-          },
-          "body": {
-            "zh": "回到用户任务，说明完成了什么。",
-            "en": "Return to the user’s task and explain what was achieved."
-          }
+          "title": { "zh": "交付复盘", "en": "Deliver & review" },
+          "body": { "zh": "回到业务结果，确认可复制的下一步。", "en": "Return to the business outcome; lock a reusable next step." }
         }
       ],
       "result": {
-        "zh": "任务 → 流程 → 结果：用一个例子连接产品能力和客户价值。",
-        "en": "Task → Workflow → Outcome: connect capabilities with customer value through one example."
-      },
-      "id": "workflow"
+        "zh": "任务 → 编排 → 验证 → 复盘：用一条故事线连接能力与客户价值。",
+        "en": "Task → orchestrate → verify → review: one storyline from capability to value."
+      }
     },
     {
       "type": "timeline",
-      "section": {
-        "zh": "方案与套餐",
-        "en": "Solutions & plans"
-      },
-      "title": {
-        "zh": "落地节奏示例",
-        "en": "Sample delivery timeline"
-      },
+      "id": "timeline",
+      "section": { "zh": "落地与下一步", "en": "Delivery & next" },
+      "title": { "zh": "四周落地节奏示例", "en": "Sample four-week cadence" },
       "subtitle": {
-        "zh": "用里程碑说明发现 → 方案 → 交付",
-        "en": "Milestones from discovery to delivery"
+        "zh": "按账户实际改写周次；保持 3–5 个里程碑",
+        "en": "Rewrite weeks per account; keep 3–5 milestones"
       },
+      "eyebrow": "CADENCE",
       "events": [
         {
-          "when": {
-            "zh": "第 1 周",
-            "en": "Week 1"
-          },
-          "title": {
-            "zh": "发现与对齐",
-            "en": "Discover & align"
-          },
-          "body": {
-            "zh": "确认场景、干系人与成功标准。",
-            "en": "Confirm scenarios, stakeholders and success criteria."
-          }
+          "when": { "zh": "第 1 周", "en": "Week 1" },
+          "title": { "zh": "发现与对齐", "en": "Discover & align" },
+          "body": { "zh": "确认场景、干系人与成功标准。", "en": "Confirm scenario, stakeholders and success criteria." }
         },
         {
-          "when": {
-            "zh": "第 2–3 周",
-            "en": "Weeks 2–3"
-          },
-          "title": {
-            "zh": "方案设计",
-            "en": "Solution design"
-          },
-          "body": {
-            "zh": "完成架构、集成与验收要点。",
-            "en": "Lock architecture, integrations and acceptance points."
-          }
+          "when": { "zh": "第 2–3 周", "en": "Weeks 2–3" },
+          "title": { "zh": "方案与集成", "en": "Design & integrate" },
+          "body": { "zh": "锁定架构、集成点与验收口径。", "en": "Lock architecture, integration points and acceptance." }
         },
         {
-          "when": {
-            "zh": "第 4 周",
-            "en": "Week 4"
-          },
-          "title": {
-            "zh": "试点交付",
-            "en": "Pilot delivery"
-          },
-          "body": {
-            "zh": "上线试点并复盘可复制能力。",
-            "en": "Ship the pilot and capture reusable outcomes."
-          }
+          "when": { "zh": "第 4 周", "en": "Week 4" },
+          "title": { "zh": "试点与复盘", "en": "Pilot & review" },
+          "body": { "zh": "上线试点，沉淀可复制交付包。", "en": "Ship the pilot; capture a reusable delivery pack." }
         }
-      ],
-      "notes": {
-        "zh": "按客户实际节奏改写周次；保持 3–5 个里程碑。",
-        "en": "Rewrite week numbers for the account; keep 3–5 milestones."
-      },
-      "id": "timeline"
+      ]
     },
     {
       "type": "callouts",
-      "section": {
-        "zh": "方案与套餐",
-        "en": "Solutions & plans"
-      },
-      "title": {
-        "zh": "会前需要记住的三点",
-        "en": "Three points to remember before the meeting"
-      },
+      "id": "callouts",
+      "section": { "zh": "落地与下一步", "en": "Delivery & next" },
+      "title": { "zh": "会后需要记住的三点", "en": "Three points to remember" },
       "subtitle": {
-        "zh": "信息 / 注意 / 行动，避免堆砌口号",
-        "en": "Info / caution / action — no slogan stacking"
+        "zh": "共识 / 边界 / 行动 —— 各写一句可执行的话",
+        "en": "Alignment / boundary / action — one executable line each"
       },
+      "eyebrow": "NEXT",
       "items": [
         {
           "tone": "info",
-          "title": {
-            "zh": "客户现状",
-            "en": "Customer context"
-          },
-          "body": {
-            "zh": "用一句话说明当前流程与痛点。",
-            "en": "State the current workflow and pain in one sentence."
-          }
+          "title": { "zh": "共识", "en": "Alignment" },
+          "body": { "zh": "双方同意的试点场景与成功标准。", "en": "Agreed pilot scenario and success criteria." }
         },
         {
           "tone": "warn",
-          "title": {
-            "zh": "风险边界",
-            "en": "Risk boundary"
-          },
-          "body": {
-            "zh": "只承诺已确认的能力与交付范围。",
-            "en": "Commit only to confirmed capabilities and scope."
-          }
+          "title": { "zh": "边界", "en": "Boundary" },
+          "body": { "zh": "本次不承诺的范围与待确认项。", "en": "Out of scope and items still to confirm." }
         },
         {
           "tone": "accent",
-          "title": {
-            "zh": "下一步",
-            "en": "Next step"
-          },
-          "body": {
-            "zh": "约定试点场景、责任人与复盘时间。",
-            "en": "Agree the pilot scenario, owner and review date."
-          }
+          "title": { "zh": "下一步", "en": "Next step" },
+          "body": { "zh": "责任人、时间点与交付物。", "en": "Owner, date, and deliverable." }
         }
-      ],
-      "id": "callouts"
+      ]
+    },
+    {
+      "type": "closing",
+      "id": "thank-you",
+      "section": { "zh": "结束", "en": "Closing" },
+      "title": { "zh": "致谢", "en": "Thank You" },
+      "thanks": { "zh": "", "en": "Thank You" },
+      "visionLabel": "",
+      "vision": {
+        "zh": "把数字世界带入每个人、每个家庭、\n每个组织，构建万物互联的智能世界。",
+        "en": "Bring digital to every person, home and organization\nfor a fully connected, intelligent world."
+      },
+      "logo": "assets/huawei-logo.png",
+      "motion": "fade"
     }
   ]
 }

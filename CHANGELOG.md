@@ -3,6 +3,14 @@
 All notable changes to the Huawei HTML→PPT deck runtime are documented here.
 Format follows a lightweight Keep-a-Changelog style. HTML remains the system of record; PPTX is Office interop.
 
+## 1.5.5 — 2026-11-16
+
+### Changed
+
+- **Layout kit reinvent**: boardroom-editorial grammar — first card as root signal, numbered architecture bands with chip cells, A/B comparison theater, dual-rail callouts, sharper workflow connectors, chapter-chip tabs; architecture markup now stamps layer `01/02/…` indexes.
+- **Default content reinvent**: `blank` starter becomes a teaching briefing arc (cover → agenda → value → metrics → architecture → before/after → next → thank-you) with outcome-first placeholders; template `deck.json` is a coherent sample product story (not thin “待填写” soup).
+- Runtime pin **1.5.5**.
+
 ## 1.5.4 — 2026-11-15
 
 ### Added

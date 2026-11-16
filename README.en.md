@@ -2,7 +2,7 @@
 
 **An Agent Skill for Huawei-branded bilingual HTML→PPT decks.** You supply content; the agent picks a deck archetype, organizes chapters, picks layouts, generates Chinese/English pages, wires light motion, runs layout checks, and builds deliverables — including **editable PPTX** when asked.
 
-Skill **1.5.4** · canvas runtime **1.5.3** · see [CHANGELOG.md](CHANGELOG.md)
+Skill **1.5.5** · canvas runtime **1.5.5** · see [CHANGELOG.md](CHANGELOG.md)
 
 Built for product briefings, weekly/status reports, architecture design reviews, project milestone decks, workshops, comparisons, packaging, customer cases, and live demos.
 
@@ -73,7 +73,7 @@ npm test
 
 | Starter | Contents |
 | --- | --- |
-| `--starter blank` | Product briefing arc: cover → value → layers → thank-you (`kind: product-briefing`) |
+| `--starter blank` | Product briefing arc: cover → agenda → value → metrics → layers → before/after → next → thank-you (`kind: product-briefing`) |
 | `--starter status-report` | Weekly/status: agenda → metrics → timeline → risks → actions → thank-you |
 | `--starter design-review` | Design review: context → architecture → before/after → options → opens → thank-you |
 | `--starter project-report` | Project stage: metrics → milestones → delivery → risks → actions → thank-you |
@@ -156,7 +156,7 @@ hw-ppt-skill/
 ├── scripts/               init, demo build, audit, runtime sync
 ├── examples/              Full sample decks (CodeArts, MaaS, …)
 ├── assets/
-│   ├── template/          Full presentation project template (runtime 1.5.3)
+│   ├── template/          Full presentation project template (runtime 1.5.5)
 │   ├── starters/          blank · status-report · design-review ·
 │   │                      project-report · workshop · thank-you
 │   └── recipes/           Optional interactive refs + deck-archetypes guide
