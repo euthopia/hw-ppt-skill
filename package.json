@@ -1,7 +1,7 @@
 {
   "name": "huawei-product-slides-skill",
   "private": true,
-  "version": "1.5.6",
+  "version": "1.5.7",
   "description": "Agent Skill: Huawei bilingual HTML→PPT multi-purpose deck runtime",
   "scripts": {
     "test": "node --test tests/*.test.cjs",

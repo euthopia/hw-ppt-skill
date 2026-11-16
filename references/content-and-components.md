@@ -48,6 +48,7 @@
 | formula | parts: [{label, body?, tag?, focus?}], items?: [{title, body}] | 2–4 组成块（A + B …）+ 可选编号说明 |
 | split | left: {title?, groups: [{label, items[]}]}, right: {headers, rows} 或 marks | 左分类 / 右矩阵或对照表 |
 | panels | panels: [{title, body?, tag?, bullets?, focus?}] | 2–4 运营/看板瓷砖 |
+| compare-board | presets: [{id?, label, columns: [{title, body?, tag?, focus?, metrics?, bullets?}]}] | 2–4 预设芯片切换并排方案列；无现场计算；PPTX 导出第一预设 |
 | table | headers: [文字], rows: [[文字]], note | 2–6 列、1–12 行；可滚动粘性表头；套餐、容量、价格或对照 |
 | timeline | events: [{when, title, body}] | 2–8 个里程碑；销售节奏 / 落地路径 |
 | callouts | items: [{tone, title, body, tag?, focus?}] | 2–4 个要点；tone 为 info / warn / accent；可选 tag / focus |

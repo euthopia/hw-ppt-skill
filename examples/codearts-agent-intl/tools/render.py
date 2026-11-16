@@ -436,6 +436,50 @@ def layout_panels(slide):
   )
  return '<div class="kit-panels">'+''.join(parts)+'</div>'
 
+def layout_compare_board_column(col,index):
+ focus=' data-focus="true"' if col.get('focus') else ''
+ body=f'<p>{text(col["body"])}</p>' if col.get('body') else ''
+ metrics=''
+ if col.get('metrics'):
+  metric_items=[]
+  for metric in bounded(col['metrics'],1,3,'compare-board column metrics'):
+   metric_items.append(
+    f'<div class="kit-cb-metric"><b>{text(metric["value"])}</b>'
+    f'<span>{text(metric["label"])}</span></div>'
+   )
+  metrics='<div class="kit-cb-metrics">'+''.join(metric_items)+'</div>'
+ bullets=''
+ if col.get('bullets'):
+  bullets='<ul>'+items(bounded(col['bullets'],1,4,'compare-board column bullets'),'li')+'</ul>'
+ return (
+  f'<article class="kit-cb-column"{focus}><span class="kit-index">{index:02}</span>'
+  f'{kit_tag(col.get("tag"))}<h3>{text(col["title"])}</h3>{body}{metrics}{bullets}</article>'
+ )
+
+def layout_compare_board(slide):
+ presets=bounded(slide['presets'],2,4,'compare-board presets')
+ buttons,panels=[],[]
+ for i,preset in enumerate(presets):
+  key=preset.get('id') or f'preset-{i+1}'
+  if not re.fullmatch(r'[a-z][a-z0-9-]{0,62}',key):raise ValueError('compare-board preset id must be a lowercase slug')
+  columns=bounded(preset['columns'],2,4,'compare-board columns')
+  pressed='true' if i==0 else 'false'
+  hidden='' if i==0 else ' hidden'
+  buttons.append(
+   f'<button type="button" data-compare-choice="{html.escape(key,quote=True)}" '
+   f'aria-pressed="{pressed}">{text(preset["label"])}</button>'
+  )
+  cols=''.join(layout_compare_board_column(col,j+1) for j,col in enumerate(columns))
+  panels.append(
+   f'<div class="kit-cb-panel" data-compare-panel="{html.escape(key,quote=True)}"{hidden}>'
+   f'<div class="kit-cb-columns">{cols}</div></div>'
+  )
+ return (
+  '<div class="kit-compare-board" data-compare-board data-controller="compare-board">'
+  '<nav class="kit-cb-nav" aria-label="方案场景切换">'+''.join(buttons)+'</nav>'
+  '<div class="kit-cb-panels">'+''.join(panels)+'</div></div>'
+ )
+
 def layout_cover(slide):
  backgrounds={'原山景':'assets/mountains.jpg','云山':'assets/yunshan.png','金沙':'assets/jinsha.png'}
  background=slide.get('background','原山景')
@@ -495,6 +539,7 @@ for _kind,_fn in (
  ('formula',layout_formula),
  ('split',layout_split),
  ('panels',layout_panels),
+ ('compare-board',layout_compare_board),
 ):
  register_layout(_kind,_fn)
 
@@ -567,6 +612,9 @@ if 'scenarios' in types:
  if 'css/recipes.css' not in needed_styles:needed_styles.append('css/recipes.css')
 if 'tabs' in types:
  needed_scripts.append('js/tabs.js')
+ if 'css/recipes.css' not in needed_styles:needed_styles.append('css/recipes.css')
+if 'compare-board' in types:
+ needed_scripts.append('js/compare-board.js')
  if 'css/recipes.css' not in needed_styles:needed_styles.append('css/recipes.css')
 
 config={'id':D['id'],'chapters':chapters,'runtimeVersion':runtime_version,'cuts':cuts}

@@ -30,5 +30,6 @@
       "logo": "assets/huawei-logo.png",
       "motion": "fade"
     }
-  ]
+  ],
+  "runtimeVersion": "1.5.7"
 }

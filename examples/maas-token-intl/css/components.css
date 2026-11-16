@@ -383,6 +383,39 @@
 .kit-panel ul{margin:10px 0 0;padding-left:1.1em;font-size:var(--type-card-body);line-height:var(--lh-scan);color:var(--ink)}
 .kit-panel li+li{margin-top:6px}
 
+/* ── Compare board — declarative preset chips → plan columns ── */
+.kit-compare-board{display:grid;gap:14px}
+.kit-cb-nav{display:flex;flex-wrap:wrap;gap:6px;padding:6px;border:1px solid var(--line);background:var(--surface)}
+.kit-cb-nav button{appearance:none;border:1px solid transparent;background:transparent;padding:9px 16px;font:inherit;font-size:var(--type-tab);font-weight:500;color:var(--muted);cursor:pointer;border-radius:0;margin:0;line-height:1.3}
+.kit-cb-nav button[aria-pressed="true"]{background:var(--paper);color:var(--red);border-color:var(--border-accent);box-shadow:inset 0 calc(var(--rail) * -1) 0 var(--red);font-weight:600}
+.kit-cb-panels [hidden]{display:none}
+.kit-cb-columns{display:grid;grid-template-columns:repeat(auto-fit,minmax(0,1fr));gap:12px;align-items:stretch}
+.kit-cb-column{
+  position:relative;min-width:0;padding:18px 16px 20px;
+  border:1px solid var(--line);border-top:var(--rail) solid var(--red);
+  background:var(--paper);border-radius:6px;display:flex;flex-direction:column;
+}
+.kit-cb-column[data-focus="true"]{
+  border-color:var(--border-accent);
+  background:linear-gradient(180deg,var(--surface-accent) 0%,var(--paper) 42%);
+  box-shadow:var(--shadow-soft);
+}
+.kit-cb-column h3{margin:0 0 10px;font-size:var(--type-card-title);line-height:1.32;letter-spacing:var(--track-title)}
+.kit-cb-column>p{margin:0 0 12px;font-size:var(--type-card-body);line-height:var(--lh-body);color:var(--muted)}
+.kit-cb-metrics{display:flex;flex-wrap:wrap;gap:10px 16px;margin:0 0 12px;padding:10px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.kit-cb-metric{display:grid;gap:4px;min-width:0}
+.kit-cb-metric b{color:var(--red);font:600 22px/1.15 "Huawei Sans",Arial,sans-serif;letter-spacing:var(--track-display);font-variant-numeric:tabular-nums}
+.kit-cb-metric span{font-size:var(--type-card-body);color:var(--muted);line-height:1.3}
+.kit-cb-column ul{margin:0;padding-left:1.1em;font-size:var(--type-card-body);line-height:var(--lh-scan);color:var(--ink);flex:1}
+.kit-cb-column li+li{margin-top:6px}
+@media print{
+ .kit-cb-nav{display:none}
+ .kit-cb-panel,.kit-cb-panels [hidden]{display:block!important;margin-bottom:20px}
+ .kit-cb-panel+.kit-cb-panel{border-top:1px solid var(--line);padding-top:16px}
+}
+.thumbnail-preview .kit-cb-nav{display:none}
+.thumbnail-preview .kit-cb-panel,.thumbnail-preview .kit-cb-panels [hidden]{display:block!important}
+
 /* ── Pricing mount ── */
 .kit-pricing{margin-top:4px}
 
@@ -418,6 +451,12 @@
  .slide.active .kit-flow article:nth-child(4){animation-delay:.3s}
  .slide.active .kit-tabs-list{animation:kit-enter .32s .16s var(--ease-brief) backwards}
  .slide.active .kit-tabs-panels article:not([hidden]){animation:kit-enter .36s .22s var(--ease-brief) backwards}
+ .slide.active .kit-cb-nav{animation:kit-enter .32s .16s var(--ease-brief) backwards}
+ .slide.active .kit-cb-panel:not([hidden]) .kit-cb-column{animation:kit-enter .36s var(--ease-brief) backwards}
+ .slide.active .kit-cb-panel:not([hidden]) .kit-cb-column:nth-child(1){animation-delay:.2s}
+ .slide.active .kit-cb-panel:not([hidden]) .kit-cb-column:nth-child(2){animation-delay:.24s}
+ .slide.active .kit-cb-panel:not([hidden]) .kit-cb-column:nth-child(3){animation-delay:.28s}
+ .slide.active .kit-cb-panel:not([hidden]) .kit-cb-column:nth-child(4){animation-delay:.32s}
  .slide.active .kit-metrics article{animation:kit-enter .4s var(--ease-brief) backwards}
  .slide.active .kit-metrics article:nth-child(1){animation-delay:.18s}
  .slide.active .kit-metrics article:nth-child(2){animation-delay:.22s}
@@ -472,6 +511,8 @@
 .thumbnail-preview .kit-flow article,
 .thumbnail-preview .kit-tabs-list,
 .thumbnail-preview .kit-tabs-panels article,
+.thumbnail-preview .kit-cb-nav,
+.thumbnail-preview .kit-cb-column,
 .thumbnail-preview .kit-metrics article,
 .thumbnail-preview .kit-layer,
 .thumbnail-preview .kit-compare article,
@@ -495,6 +536,7 @@
  .controls{display:none!important}
  .kit-agenda-item,.kit-callout,.kit-card,.kit-panel,.kit-formula-item,.kit-formula-parts,.kit-tree-root,.kit-tree-branch,
  .kit-split-left,.kit-split-right,.kit-summary,.kit-flow article,.kit-tabs-list,.kit-tabs-panels article,
+ .kit-cb-nav,.kit-cb-column,
  .kit-metrics article,.kit-layer,.kit-compare article,.kit-quote,.kit-quote-attr,.kit-timeline article,
  .kit-ba-divider,.kit-before-after .kit-ba-before,.kit-before-after .kit-ba-after{animation:none!important}
 }
@@ -522,6 +564,8 @@
  .slide.active .kit-flow article,
  .slide.active .kit-tabs-list,
  .slide.active .kit-tabs-panels article,
+ .slide.active .kit-cb-nav,
+ .slide.active .kit-cb-column,
  .slide.active .kit-metrics article,
  .slide.active .kit-layer,
  .slide.active .kit-compare article,

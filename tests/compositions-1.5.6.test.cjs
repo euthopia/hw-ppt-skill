@@ -156,9 +156,9 @@ test('tree formula split panels render branded markup with summary tag focus', (
   }
 });
 
-test('blank starter pins 1.5.6 and includes new composition types', () => {
+test('blank starter includes composition types from 1.5.6+', () => {
   const blank = JSON.parse(fs.readFileSync(path.join(ROOT, 'assets', 'starters', 'blank.json'), 'utf8'));
-  assert.equal(blank.runtimeVersion, '1.5.6');
+  assert.match(String(blank.runtimeVersion), /^1\.5\.(6|7|[89]|\d{2,})$/);
   const types = new Set(blank.slides.map((s) => s.type));
   for (const t of ['tree', 'formula', 'split', 'panels']) {
     assert.ok(types.has(t), `blank missing type ${t}`);
@@ -187,7 +187,7 @@ test('blank starter init + generate stays clean', () => {
     );
     assert.equal(init.status, 0, init.stderr || init.stdout);
     const deck = JSON.parse(fs.readFileSync(path.join(tmp, 'content', 'deck.json'), 'utf8'));
-    assert.equal(deck.runtimeVersion, '1.5.6');
+    assert.match(String(deck.runtimeVersion), /^1\.5\.(6|7|[89]|\d{2,})$/);
     const html = fs.readFileSync(path.join(tmp, 'index.html'), 'utf8');
     assert.match(html, /kit-tree/);
     assert.match(html, /kit-formula/);

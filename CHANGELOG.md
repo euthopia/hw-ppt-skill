@@ -3,6 +3,18 @@
 All notable changes to the Huawei HTML→PPT deck runtime are documented here.
 Format follows a lightweight Keep-a-Changelog style. HTML remains the system of record; PPTX is Office interop.
 
+## 1.5.7 — 2026-11-16
+
+### Added
+
+- Declarative **`compare-board`** layout: preset chips switch side-by-side plan columns from `deck.json` (no live math / charts).
+- Runtime JS `compare-board.js`; PPTX exports the first preset snapshot.
+
+### Changed
+
+- `blank` + template showcase include a compare-board teaching slide; docs and archetype guidance updated.
+- Runtime pin **1.5.7**.
+
 ## 1.5.6 — 2026-11-16
 
 ### Added

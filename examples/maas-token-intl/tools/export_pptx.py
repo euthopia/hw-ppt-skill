@@ -290,6 +290,25 @@ def slide_lines(slide: dict, lang: str) -> list[str]:
                 lines.append(pick(panel['body'], lang))
             for b in panel.get('bullets') or []:
                 lines.append(f'  • {pick(b, lang)}')
+    elif kind == 'compare-board':
+        presets = slide.get('presets') or []
+        if presets:
+            first = presets[0]
+            lines.append(pick(first.get('label'), lang))
+            for i, col in enumerate(first.get('columns') or [], 1):
+                tag = pick(col.get('tag'), lang)
+                head = f'{i:02}. {pick(col.get("title"), lang)}'
+                if tag:
+                    head += f' [{tag}]'
+                lines.append(head)
+                if col.get('body'):
+                    lines.append(pick(col['body'], lang))
+                for metric in col.get('metrics') or []:
+                    lines.append(
+                        f'  {pick(metric.get("value"), lang)} · {pick(metric.get("label"), lang)}'
+                    )
+                for b in col.get('bullets') or []:
+                    lines.append(f'  • {pick(b, lang)}')
     elif kind == 'closing':
         return lines
     elif kind == 'custom':

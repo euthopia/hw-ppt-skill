@@ -1,7 +1,7 @@
 {
   "id": "product-deck-example",
   "kind": "product-briefing",
-  "runtimeVersion": "1.5.6",
+  "runtimeVersion": "1.5.7",
   "meta": {
     "purpose": {
       "zh": "模板示例：企业简报结构与版式",
@@ -19,32 +19,68 @@
   },
   "chapters": [
     {
-      "label": { "zh": "结构", "en": "Structure" },
-      "section": { "zh": "结构总览", "en": "Structure overview" }
+      "label": {
+        "zh": "结构",
+        "en": "Structure"
+      },
+      "section": {
+        "zh": "结构总览",
+        "en": "Structure overview"
+      }
     },
     {
-      "label": { "zh": "价值", "en": "Value" },
-      "section": { "zh": "客户价值", "en": "Customer value" }
+      "label": {
+        "zh": "价值",
+        "en": "Value"
+      },
+      "section": {
+        "zh": "客户价值",
+        "en": "Customer value"
+      }
     },
     {
-      "label": { "zh": "能力", "en": "Capability" },
-      "section": { "zh": "能力与路径", "en": "Capability & path" }
+      "label": {
+        "zh": "能力",
+        "en": "Capability"
+      },
+      "section": {
+        "zh": "能力与路径",
+        "en": "Capability & path"
+      }
     },
     {
-      "label": { "zh": "方案", "en": "Solution" },
-      "section": { "zh": "方案与节奏", "en": "Solution & cadence" }
+      "label": {
+        "zh": "方案",
+        "en": "Solution"
+      },
+      "section": {
+        "zh": "方案与节奏",
+        "en": "Solution & cadence"
+      }
     },
     {
-      "label": { "zh": "落地", "en": "Delivery" },
-      "section": { "zh": "落地与下一步", "en": "Delivery & next" }
+      "label": {
+        "zh": "落地",
+        "en": "Delivery"
+      },
+      "section": {
+        "zh": "落地与下一步",
+        "en": "Delivery & next"
+      }
     }
   ],
   "slides": [
     {
       "type": "cover",
       "id": "cover",
-      "title": { "zh": "示例产品", "en": "Sample product" },
-      "eyebrow": { "zh": "企业产品介绍", "en": "Enterprise product briefing" },
+      "title": {
+        "zh": "示例产品",
+        "en": "Sample product"
+      },
+      "eyebrow": {
+        "zh": "企业产品介绍",
+        "en": "Enterprise product briefing"
+      },
       "subtitle": {
         "zh": "结构先行：地图 → 价值组成 → 对照 → 面板 → 行动",
         "en": "Structure first: map → composition → matrix → panels → action"
@@ -55,61 +91,154 @@
     {
       "type": "agenda",
       "id": "agenda",
-      "section": { "zh": "结构总览", "en": "Structure overview" },
-      "title": { "zh": "演示结构", "en": "Briefing structure" },
+      "section": {
+        "zh": "结构总览",
+        "en": "Structure overview"
+      },
+      "title": {
+        "zh": "演示结构",
+        "en": "Briefing structure"
+      },
       "subtitle": {
         "zh": "每段只用一种版式完成一个论证",
         "en": "One layout per argument"
       },
       "eyebrow": "AGENDA",
       "items": [
-        { "label": { "zh": "路径地图", "en": "Path map" }, "time": { "zh": "5 分钟", "en": "5 min" } },
-        { "label": { "zh": "价值与组成", "en": "Value & composition" }, "time": { "zh": "10 分钟", "en": "10 min" } },
-        { "label": { "zh": "能力对照与面板", "en": "Matrix & panels" }, "time": { "zh": "10 分钟", "en": "10 min" } },
-        { "label": { "zh": "节奏与行动", "en": "Cadence & actions" }, "time": { "zh": "8 分钟", "en": "8 min" } }
+        {
+          "label": {
+            "zh": "路径地图",
+            "en": "Path map"
+          },
+          "time": {
+            "zh": "5 分钟",
+            "en": "5 min"
+          }
+        },
+        {
+          "label": {
+            "zh": "价值与组成",
+            "en": "Value & composition"
+          },
+          "time": {
+            "zh": "10 分钟",
+            "en": "10 min"
+          }
+        },
+        {
+          "label": {
+            "zh": "能力对照与面板",
+            "en": "Matrix & panels"
+          },
+          "time": {
+            "zh": "10 分钟",
+            "en": "10 min"
+          }
+        },
+        {
+          "label": {
+            "zh": "节奏与行动",
+            "en": "Cadence & actions"
+          },
+          "time": {
+            "zh": "8 分钟",
+            "en": "8 min"
+          }
+        }
       ]
     },
     {
       "type": "tree",
       "id": "map",
-      "section": { "zh": "结构总览", "en": "Structure overview" },
-      "title": { "zh": "四条路径覆盖完整客户旅程", "en": "Four paths cover the customer journey" },
+      "section": {
+        "zh": "结构总览",
+        "en": "Structure overview"
+      },
+      "title": {
+        "zh": "四条路径覆盖完整客户旅程",
+        "en": "Four paths cover the customer journey"
+      },
       "subtitle": {
         "zh": "根写总命题；分支写路径；详情写计费或交付规则",
         "en": "Root = thesis; branches = paths; detail = delivery rule"
       },
       "eyebrow": "OVERVIEW / MAP",
       "root": {
-        "title": { "zh": "示例产品商业化", "en": "Sample product go-to-market" }
+        "title": {
+          "zh": "示例产品商业化",
+          "en": "Sample product go-to-market"
+        }
       },
       "branches": [
         {
-          "title": { "zh": "订阅路径", "en": "Subscription path" },
-          "subtitle": { "zh": "按席位", "en": "Per seat" },
-          "detail": { "zh": "含基础用量额度", "en": "Includes base allowance" }
+          "title": {
+            "zh": "订阅路径",
+            "en": "Subscription path"
+          },
+          "subtitle": {
+            "zh": "按席位",
+            "en": "Per seat"
+          },
+          "detail": {
+            "zh": "含基础用量额度",
+            "en": "Includes base allowance"
+          }
         },
         {
-          "title": { "zh": "企业路径", "en": "Enterprise path" },
-          "subtitle": { "zh": "席位 + 用量", "en": "Seat + usage" },
-          "detail": { "zh": "两笔预算分开核算", "en": "Two budgets accounted separately" }
+          "title": {
+            "zh": "企业路径",
+            "en": "Enterprise path"
+          },
+          "subtitle": {
+            "zh": "席位 + 用量",
+            "en": "Seat + usage"
+          },
+          "detail": {
+            "zh": "两笔预算分开核算",
+            "en": "Two budgets accounted separately"
+          }
         },
         {
-          "title": { "zh": "接口路径", "en": "API path" },
-          "subtitle": { "zh": "按量", "en": "Metered" },
-          "detail": { "zh": "无席位费，按调用计费", "en": "No seat fee; pay per call" }
+          "title": {
+            "zh": "接口路径",
+            "en": "API path"
+          },
+          "subtitle": {
+            "zh": "按量",
+            "en": "Metered"
+          },
+          "detail": {
+            "zh": "无席位费，按调用计费",
+            "en": "No seat fee; pay per call"
+          }
         },
         {
-          "title": { "zh": "渠道路径", "en": "Channel path" },
-          "subtitle": { "zh": "云市场", "en": "Marketplace" },
-          "detail": { "zh": "账单主体随渠道变化", "en": "Biller changes by channel" }
+          "title": {
+            "zh": "渠道路径",
+            "en": "Channel path"
+          },
+          "subtitle": {
+            "zh": "云市场",
+            "en": "Marketplace"
+          },
+          "detail": {
+            "zh": "账单主体随渠道变化",
+            "en": "Biller changes by channel"
+          }
         }
       ]
     },
     {
       "type": "cards",
       "id": "values",
-      "section": { "zh": "客户价值", "en": "Customer value" },
-      "title": { "zh": "三个结果说明为什么选择它", "en": "Three outcomes that justify the choice" },
+      "section": {
+        "zh": "客户价值",
+        "en": "Customer value"
+      },
+      "title": {
+        "zh": "三个结果说明为什么选择它",
+        "en": "Three outcomes that justify the choice"
+      },
       "subtitle": {
         "zh": "优先卡片用 focus + tag 抬升",
         "en": "Elevate the priority card with focus + tag"
@@ -117,23 +246,35 @@
       "eyebrow": "VALUE",
       "cards": [
         {
-          "tag": { "zh": "优先", "en": "Priority" },
+          "tag": {
+            "zh": "优先",
+            "en": "Priority"
+          },
           "focus": true,
-          "title": { "zh": "业务结果", "en": "Business outcome" },
+          "title": {
+            "zh": "业务结果",
+            "en": "Business outcome"
+          },
           "body": {
             "zh": "示例：把关键交付周期压到可审计的短闭环。",
             "en": "Sample: compress critical delivery into an auditable short loop."
           }
         },
         {
-          "title": { "zh": "工作方式", "en": "Working model" },
+          "title": {
+            "zh": "工作方式",
+            "en": "Working model"
+          },
           "body": {
             "zh": "示例：业务与平台共用同一编排入口。",
             "en": "Sample: one orchestration entry for business and platform."
           }
         },
         {
-          "title": { "zh": "企业约束", "en": "Enterprise fit" },
+          "title": {
+            "zh": "企业约束",
+            "en": "Enterprise fit"
+          },
           "body": {
             "zh": "示例：权限、配额与变更进入同一治理面。",
             "en": "Sample: permissions, quotas and change control on one plane."
@@ -144,8 +285,14 @@
     {
       "type": "formula",
       "id": "composition",
-      "section": { "zh": "客户价值", "en": "Customer value" },
-      "title": { "zh": "总成本由两笔预算组成", "en": "Total cost is two budgets" },
+      "section": {
+        "zh": "客户价值",
+        "en": "Customer value"
+      },
+      "title": {
+        "zh": "总成本由两笔预算组成",
+        "en": "Total cost is two budgets"
+      },
       "subtitle": {
         "zh": "结构方程：席位 + 用量；下方解释各自买什么",
         "en": "Structure: seat + usage; explainers say what each buys"
@@ -153,40 +300,85 @@
       "eyebrow": "VALUE / COMPOSITION",
       "parts": [
         {
-          "label": { "zh": "席位费", "en": "Seat fee" },
-          "body": { "zh": "按席位采购", "en": "Purchased per seat" }
+          "label": {
+            "zh": "席位费",
+            "en": "Seat fee"
+          },
+          "body": {
+            "zh": "按席位采购",
+            "en": "Purchased per seat"
+          }
         },
         {
-          "label": { "zh": "用量费", "en": "Usage fee" },
-          "body": { "zh": "按实际消耗", "en": "Billed on consumption" },
+          "label": {
+            "zh": "用量费",
+            "en": "Usage fee"
+          },
+          "body": {
+            "zh": "按实际消耗",
+            "en": "Billed on consumption"
+          },
           "focus": true,
-          "tag": { "zh": "持续", "en": "Ongoing" }
+          "tag": {
+            "zh": "持续",
+            "en": "Ongoing"
+          }
         }
       ],
       "items": [
         {
-          "title": { "zh": "席位价值", "en": "Seat value" },
-          "body": { "zh": "统一身份、权限与审计。", "en": "Unified identity, permissions and audit." }
+          "title": {
+            "zh": "席位价值",
+            "en": "Seat value"
+          },
+          "body": {
+            "zh": "统一身份、权限与审计。",
+            "en": "Unified identity, permissions and audit."
+          }
         },
         {
-          "title": { "zh": "用量预算", "en": "Usage budget" },
-          "body": { "zh": "费用随任务强度变化，需单独跟踪。", "en": "Cost varies with intensity; track separately." }
+          "title": {
+            "zh": "用量预算",
+            "en": "Usage budget"
+          },
+          "body": {
+            "zh": "费用随任务强度变化，需单独跟踪。",
+            "en": "Cost varies with intensity; track separately."
+          }
         },
         {
-          "title": { "zh": "用量治理", "en": "Usage governance" },
-          "body": { "zh": "组织与用户级支出可控可查。", "en": "Org- and user-level spend is controllable." }
+          "title": {
+            "zh": "用量治理",
+            "en": "Usage governance"
+          },
+          "body": {
+            "zh": "组织与用户级支出可控可查。",
+            "en": "Org- and user-level spend is controllable."
+          }
         }
       ],
       "summary": {
-        "title": { "zh": "总结", "en": "Summary" },
-        "body": { "zh": "席位与用量是两笔预算，缺一笔就算不清总成本。", "en": "Seat and usage are two budgets; missing either hides total cost." }
+        "title": {
+          "zh": "总结",
+          "en": "Summary"
+        },
+        "body": {
+          "zh": "席位与用量是两笔预算，缺一笔就算不清总成本。",
+          "en": "Seat and usage are two budgets; missing either hides total cost."
+        }
       }
     },
     {
       "type": "architecture",
       "id": "architecture",
-      "section": { "zh": "能力与路径", "en": "Capability & path" },
-      "title": { "zh": "从场景到平台的三层结构", "en": "Three layers from scenario to platform" },
+      "section": {
+        "zh": "能力与路径",
+        "en": "Capability & path"
+      },
+      "title": {
+        "zh": "从场景到平台的三层结构",
+        "en": "Three layers from scenario to platform"
+      },
       "subtitle": {
         "zh": "顶层场景，中层服务，底层平台",
         "en": "Top scenarios, middle services, bottom platform"
@@ -194,27 +386,63 @@
       "eyebrow": "ARCHITECTURE",
       "layers": [
         {
-          "label": { "zh": "业务场景", "en": "Business scenarios" },
+          "label": {
+            "zh": "业务场景",
+            "en": "Business scenarios"
+          },
           "items": [
-            { "zh": "场景 A", "en": "Scenario A" },
-            { "zh": "场景 B", "en": "Scenario B" },
-            { "zh": "场景 C", "en": "Scenario C" }
+            {
+              "zh": "场景 A",
+              "en": "Scenario A"
+            },
+            {
+              "zh": "场景 B",
+              "en": "Scenario B"
+            },
+            {
+              "zh": "场景 C",
+              "en": "Scenario C"
+            }
           ]
         },
         {
-          "label": { "zh": "产品服务", "en": "Product services" },
+          "label": {
+            "zh": "产品服务",
+            "en": "Product services"
+          },
           "items": [
-            { "zh": "核心服务", "en": "Core service" },
-            { "zh": "策略与配额", "en": "Policy & quota" },
-            { "zh": "集成网关", "en": "Integration gateway" }
+            {
+              "zh": "核心服务",
+              "en": "Core service"
+            },
+            {
+              "zh": "策略与配额",
+              "en": "Policy & quota"
+            },
+            {
+              "zh": "集成网关",
+              "en": "Integration gateway"
+            }
           ]
         },
         {
-          "label": { "zh": "数据与平台", "en": "Data & platform" },
+          "label": {
+            "zh": "数据与平台",
+            "en": "Data & platform"
+          },
           "items": [
-            { "zh": "数据平面", "en": "Data plane" },
-            { "zh": "运行时与观测", "en": "Runtime & observability" },
-            { "zh": "安全基线", "en": "Security baseline" }
+            {
+              "zh": "数据平面",
+              "en": "Data plane"
+            },
+            {
+              "zh": "运行时与观测",
+              "en": "Runtime & observability"
+            },
+            {
+              "zh": "安全基线",
+              "en": "Security baseline"
+            }
           ]
         }
       ]
@@ -222,58 +450,133 @@
     {
       "type": "split",
       "id": "coverage",
-      "section": { "zh": "能力与路径", "en": "Capability & path" },
-      "title": { "zh": "能力分组与区域适用", "en": "Capability groups and regional fit" },
+      "section": {
+        "zh": "能力与路径",
+        "en": "Capability & path"
+      },
+      "title": {
+        "zh": "能力分组与区域适用",
+        "en": "Capability groups and regional fit"
+      },
       "subtitle": {
         "zh": "左侧分类；右侧 ✓ / ✗ / ? 只标已确认信息",
         "en": "Groups left; ✓ / ✗ / ? right — confirmed facts only"
       },
       "eyebrow": "CAPABILITY / MATRIX",
       "left": {
-        "title": { "zh": "官方能力面", "en": "Official capability plane" },
-        "tag": { "zh": "分类", "en": "Taxonomy" },
+        "title": {
+          "zh": "官方能力面",
+          "en": "Official capability plane"
+        },
+        "tag": {
+          "zh": "分类",
+          "en": "Taxonomy"
+        },
         "groups": [
           {
-            "label": { "zh": "接入层", "en": "Access layer" },
+            "label": {
+              "zh": "接入层",
+              "en": "Access layer"
+            },
             "items": [
-              { "zh": "控制台", "en": "Console" },
-              { "zh": "API", "en": "API" }
+              {
+                "zh": "控制台",
+                "en": "Console"
+              },
+              {
+                "zh": "API",
+                "en": "API"
+              }
             ]
           },
           {
-            "label": { "zh": "运行层", "en": "Runtime layer" },
+            "label": {
+              "zh": "运行层",
+              "en": "Runtime layer"
+            },
             "items": [
-              { "zh": "编排", "en": "Orchestration" },
-              { "zh": "观测", "en": "Observability" }
+              {
+                "zh": "编排",
+                "en": "Orchestration"
+              },
+              {
+                "zh": "观测",
+                "en": "Observability"
+              }
             ]
           },
           {
-            "label": { "zh": "治理层", "en": "Governance layer" },
+            "label": {
+              "zh": "治理层",
+              "en": "Governance layer"
+            },
             "items": [
-              { "zh": "配额", "en": "Quota" },
-              { "zh": "审计", "en": "Audit" }
+              {
+                "zh": "配额",
+                "en": "Quota"
+              },
+              {
+                "zh": "审计",
+                "en": "Audit"
+              }
             ]
           }
         ]
       },
       "right": {
         "markHeaders": [
-          { "zh": "区域", "en": "Region" },
-          { "zh": "可用", "en": "Available" }
+          {
+            "zh": "区域",
+            "en": "Region"
+          },
+          {
+            "zh": "可用",
+            "en": "Available"
+          }
         ],
         "marks": [
-          { "label": { "zh": "区域一", "en": "Region one" }, "status": "yes" },
-          { "label": { "zh": "区域二", "en": "Region two" }, "status": "yes" },
-          { "label": { "zh": "区域三", "en": "Region three" }, "status": "unknown" },
-          { "label": { "zh": "区域四", "en": "Region four" }, "status": "no" }
+          {
+            "label": {
+              "zh": "区域一",
+              "en": "Region one"
+            },
+            "status": "yes"
+          },
+          {
+            "label": {
+              "zh": "区域二",
+              "en": "Region two"
+            },
+            "status": "yes"
+          },
+          {
+            "label": {
+              "zh": "区域三",
+              "en": "Region three"
+            },
+            "status": "unknown"
+          },
+          {
+            "label": {
+              "zh": "区域四",
+              "en": "Region four"
+            },
+            "status": "no"
+          }
         ]
       }
     },
     {
       "type": "panels",
       "id": "ops",
-      "section": { "zh": "方案与节奏", "en": "Solution & cadence" },
-      "title": { "zh": "同一能力，四块运营差异", "en": "Same capability, four ops differences" },
+      "section": {
+        "zh": "方案与节奏",
+        "en": "Solution & cadence"
+      },
+      "title": {
+        "zh": "同一能力，四块运营差异",
+        "en": "Same capability, four ops differences"
+      },
       "subtitle": {
         "zh": "账单、计量、承诺与验收分面板说明",
         "en": "Billing, metering, commitment and acceptance as panels"
@@ -281,33 +584,69 @@
       "eyebrow": "OPS / PANELS",
       "panels": [
         {
-          "title": { "zh": "账单主体", "en": "Billing entity" },
-          "body": { "zh": "待填写：谁开账单", "en": "TBC: who invoices" }
+          "title": {
+            "zh": "账单主体",
+            "en": "Billing entity"
+          },
+          "body": {
+            "zh": "待填写：谁开账单",
+            "en": "TBC: who invoices"
+          }
         },
         {
-          "title": { "zh": "计量方式", "en": "Metering" },
-          "tag": { "zh": "关键", "en": "Key" },
+          "title": {
+            "zh": "计量方式",
+            "en": "Metering"
+          },
+          "tag": {
+            "zh": "关键",
+            "en": "Key"
+          },
           "focus": true,
-          "body": { "zh": "待填写：单位与周期", "en": "TBC: unit and period" }
+          "body": {
+            "zh": "待填写：单位与周期",
+            "en": "TBC: unit and period"
+          }
         },
         {
-          "title": { "zh": "承诺条款", "en": "Commitment" },
+          "title": {
+            "zh": "承诺条款",
+            "en": "Commitment"
+          },
           "bullets": [
-            { "zh": "容量", "en": "Capacity" },
-            { "zh": "SLA", "en": "SLA" }
+            {
+              "zh": "容量",
+              "en": "Capacity"
+            },
+            {
+              "zh": "SLA",
+              "en": "SLA"
+            }
           ]
         },
         {
-          "title": { "zh": "验收要点", "en": "Acceptance" },
-          "body": { "zh": "待填写：成功标准", "en": "TBC: success criteria" }
+          "title": {
+            "zh": "验收要点",
+            "en": "Acceptance"
+          },
+          "body": {
+            "zh": "待填写：成功标准",
+            "en": "TBC: success criteria"
+          }
         }
       ]
     },
     {
       "type": "comparison",
       "id": "comparison",
-      "section": { "zh": "方案与节奏", "en": "Solution & cadence" },
-      "title": { "zh": "两种落地路径如何选择", "en": "Choosing between two delivery paths" },
+      "section": {
+        "zh": "方案与节奏",
+        "en": "Solution & cadence"
+      },
+      "title": {
+        "zh": "两种落地路径如何选择",
+        "en": "Choosing between two delivery paths"
+      },
       "subtitle": {
         "zh": "按适用场景、工作方式与交付结果比较",
         "en": "Compare fit, working model, and deliverables"
@@ -316,31 +655,250 @@
       "columns": [
         {
           "kicker": "01",
-          "title": { "zh": "标准路径", "en": "Standard path" },
-          "summary": { "zh": "清晰场景、快速试点", "en": "Clear scenario, fast pilot" },
+          "title": {
+            "zh": "标准路径",
+            "en": "Standard path"
+          },
+          "summary": {
+            "zh": "清晰场景、快速试点",
+            "en": "Clear scenario, fast pilot"
+          },
           "bullets": [
-            { "zh": "适用：单场景验证", "en": "Fit: single-scenario proof" },
-            { "zh": "方式：模板 + 标准集成", "en": "Model: templates + standard integration" },
-            { "zh": "结果：可复用试点包", "en": "Outcome: reusable pilot pack" }
+            {
+              "zh": "适用：单场景验证",
+              "en": "Fit: single-scenario proof"
+            },
+            {
+              "zh": "方式：模板 + 标准集成",
+              "en": "Model: templates + standard integration"
+            },
+            {
+              "zh": "结果：可复用试点包",
+              "en": "Outcome: reusable pilot pack"
+            }
           ]
         },
         {
           "kicker": "02",
-          "title": { "zh": "深度路径", "en": "Deep path" },
-          "summary": { "zh": "多系统联动与强治理", "en": "Multi-system linkage and strong governance" },
+          "title": {
+            "zh": "深度路径",
+            "en": "Deep path"
+          },
+          "summary": {
+            "zh": "多系统联动与强治理",
+            "en": "Multi-system linkage and strong governance"
+          },
           "bullets": [
-            { "zh": "适用：多域协同", "en": "Fit: multi-domain collaboration" },
-            { "zh": "方式：定制编排 + 治理面", "en": "Model: custom orchestration + governance" },
-            { "zh": "结果：可扩展生产基线", "en": "Outcome: extensible production baseline" }
+            {
+              "zh": "适用：多域协同",
+              "en": "Fit: multi-domain collaboration"
+            },
+            {
+              "zh": "方式：定制编排 + 治理面",
+              "en": "Model: custom orchestration + governance"
+            },
+            {
+              "zh": "结果：可扩展生产基线",
+              "en": "Outcome: extensible production baseline"
+            }
           ]
         }
       ]
     },
     {
+      "type": "compare-board",
+      "id": "compare-board",
+      "section": {
+        "zh": "方案与节奏",
+        "en": "Solution & cadence"
+      },
+      "title": {
+        "zh": "按买家场景切换方案板",
+        "en": "Switch the plan board by buyer scenario"
+      },
+      "subtitle": {
+        "zh": "声明式预设；导出默认展示第一场景",
+        "en": "Declarative presets; export snapshots the first scenario"
+      },
+      "eyebrow": "COMPARE BOARD",
+      "presets": [
+        {
+          "id": "pilot",
+          "label": {
+            "zh": "试点场景",
+            "en": "Pilot scenario"
+          },
+          "columns": [
+            {
+              "title": {
+                "zh": "标准包",
+                "en": "Standard pack"
+              },
+              "tag": {
+                "zh": "默认",
+                "en": "Default"
+              },
+              "focus": true,
+              "body": {
+                "zh": "单场景验证，最快对齐成功标准。",
+                "en": "Single-scenario proof; fastest path to success criteria."
+              },
+              "metrics": [
+                {
+                  "value": {
+                    "zh": "2–4 周",
+                    "en": "2–4 wks"
+                  },
+                  "label": {
+                    "zh": "周期",
+                    "en": "Cycle"
+                  }
+                },
+                {
+                  "value": "TBC",
+                  "label": {
+                    "zh": "席位",
+                    "en": "Seats"
+                  }
+                }
+              ],
+              "bullets": [
+                {
+                  "zh": "模板化集成",
+                  "en": "Templated integration"
+                },
+                {
+                  "zh": "固定验收清单",
+                  "en": "Fixed acceptance checklist"
+                }
+              ]
+            },
+            {
+              "title": {
+                "zh": "扩展包",
+                "en": "Extended pack"
+              },
+              "body": {
+                "zh": "需要额外治理或第二系统时再升。",
+                "en": "Escalate only when governance or a second system is required."
+              },
+              "metrics": [
+                {
+                  "value": {
+                    "zh": "4–6 周",
+                    "en": "4–6 wks"
+                  },
+                  "label": {
+                    "zh": "周期",
+                    "en": "Cycle"
+                  }
+                }
+              ],
+              "bullets": [
+                {
+                  "zh": "加治理面",
+                  "en": "Adds governance plane"
+                },
+                {
+                  "zh": "可回退到标准包",
+                  "en": "Can fall back to standard"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "production",
+          "label": {
+            "zh": "生产场景",
+            "en": "Production scenario"
+          },
+          "columns": [
+            {
+              "title": {
+                "zh": "标准包",
+                "en": "Standard pack"
+              },
+              "body": {
+                "zh": "生产场景下仅覆盖主路径。",
+                "en": "Covers the primary path only in production."
+              },
+              "bullets": [
+                {
+                  "zh": "适合清晰边界",
+                  "en": "Fit for clear boundaries"
+                }
+              ]
+            },
+            {
+              "title": {
+                "zh": "扩展包",
+                "en": "Extended pack"
+              },
+              "tag": {
+                "zh": "推荐",
+                "en": "Preferred"
+              },
+              "focus": true,
+              "body": {
+                "zh": "多域联动与审计成为硬需求。",
+                "en": "Multi-domain linkage and audit become hard requirements."
+              },
+              "metrics": [
+                {
+                  "value": {
+                    "zh": "6–8 周",
+                    "en": "6–8 wks"
+                  },
+                  "label": {
+                    "zh": "周期",
+                    "en": "Cycle"
+                  }
+                },
+                {
+                  "value": "TBC",
+                  "label": {
+                    "zh": "系统数",
+                    "en": "Systems"
+                  }
+                }
+              ],
+              "bullets": [
+                {
+                  "zh": "编排 + 配额 + 审计",
+                  "en": "Orchestration + quotas + audit"
+                },
+                {
+                  "zh": "生产基线可复制",
+                  "en": "Reusable production baseline"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "summary": {
+        "title": {
+          "zh": "用法",
+          "en": "How to use"
+        },
+        "body": {
+          "zh": "现场只切换预设，不改数字；数字在 deck.json 里预先写死。",
+          "en": "Switch presets live; keep numbers pre-authored in deck.json."
+        }
+      }
+    },
+    {
       "type": "timeline",
       "id": "timeline",
-      "section": { "zh": "落地与下一步", "en": "Delivery & next" },
-      "title": { "zh": "四周落地节奏示例", "en": "Sample four-week cadence" },
+      "section": {
+        "zh": "落地与下一步",
+        "en": "Delivery & next"
+      },
+      "title": {
+        "zh": "四周落地节奏示例",
+        "en": "Sample four-week cadence"
+      },
       "subtitle": {
         "zh": "按账户改写周次；保持 3–5 个里程碑",
         "en": "Rewrite weeks per account; keep 3–5 milestones"
@@ -348,27 +906,60 @@
       "eyebrow": "CADENCE",
       "events": [
         {
-          "when": { "zh": "第 1 周", "en": "Week 1" },
-          "title": { "zh": "发现与对齐", "en": "Discover & align" },
-          "body": { "zh": "确认场景、干系人与成功标准。", "en": "Confirm scenario, stakeholders and success criteria." }
+          "when": {
+            "zh": "第 1 周",
+            "en": "Week 1"
+          },
+          "title": {
+            "zh": "发现与对齐",
+            "en": "Discover & align"
+          },
+          "body": {
+            "zh": "确认场景、干系人与成功标准。",
+            "en": "Confirm scenario, stakeholders and success criteria."
+          }
         },
         {
-          "when": { "zh": "第 2–3 周", "en": "Weeks 2–3" },
-          "title": { "zh": "方案与集成", "en": "Design & integrate" },
-          "body": { "zh": "锁定架构、集成点与验收口径。", "en": "Lock architecture, integration points and acceptance." }
+          "when": {
+            "zh": "第 2–3 周",
+            "en": "Weeks 2–3"
+          },
+          "title": {
+            "zh": "方案与集成",
+            "en": "Design & integrate"
+          },
+          "body": {
+            "zh": "锁定架构、集成点与验收口径。",
+            "en": "Lock architecture, integration points and acceptance."
+          }
         },
         {
-          "when": { "zh": "第 4 周", "en": "Week 4" },
-          "title": { "zh": "试点与复盘", "en": "Pilot & review" },
-          "body": { "zh": "上线试点，沉淀可复制交付包。", "en": "Ship the pilot; capture a reusable delivery pack." }
+          "when": {
+            "zh": "第 4 周",
+            "en": "Week 4"
+          },
+          "title": {
+            "zh": "试点与复盘",
+            "en": "Pilot & review"
+          },
+          "body": {
+            "zh": "上线试点，沉淀可复制交付包。",
+            "en": "Ship the pilot; capture a reusable delivery pack."
+          }
         }
       ]
     },
     {
       "type": "callouts",
       "id": "callouts",
-      "section": { "zh": "落地与下一步", "en": "Delivery & next" },
-      "title": { "zh": "会后需要记住的三点", "en": "Three points to remember" },
+      "section": {
+        "zh": "落地与下一步",
+        "en": "Delivery & next"
+      },
+      "title": {
+        "zh": "会后需要记住的三点",
+        "en": "Three points to remember"
+      },
       "subtitle": {
         "zh": "共识 / 边界 / 行动",
         "en": "Alignment / boundary / action"
@@ -377,33 +968,69 @@
       "items": [
         {
           "tone": "info",
-          "title": { "zh": "共识", "en": "Alignment" },
-          "body": { "zh": "双方同意的试点场景与成功标准。", "en": "Agreed pilot scenario and success criteria." }
+          "title": {
+            "zh": "共识",
+            "en": "Alignment"
+          },
+          "body": {
+            "zh": "双方同意的试点场景与成功标准。",
+            "en": "Agreed pilot scenario and success criteria."
+          }
         },
         {
           "tone": "warn",
-          "title": { "zh": "边界", "en": "Boundary" },
-          "body": { "zh": "本次不承诺的范围与待确认项。", "en": "Out of scope and items still to confirm." }
+          "title": {
+            "zh": "边界",
+            "en": "Boundary"
+          },
+          "body": {
+            "zh": "本次不承诺的范围与待确认项。",
+            "en": "Out of scope and items still to confirm."
+          }
         },
         {
           "tone": "accent",
           "focus": true,
-          "tag": { "zh": "行动", "en": "Action" },
-          "title": { "zh": "下一步", "en": "Next step" },
-          "body": { "zh": "责任人、时间点与交付物。", "en": "Owner, date, and deliverable." }
+          "tag": {
+            "zh": "行动",
+            "en": "Action"
+          },
+          "title": {
+            "zh": "下一步",
+            "en": "Next step"
+          },
+          "body": {
+            "zh": "责任人、时间点与交付物。",
+            "en": "Owner, date, and deliverable."
+          }
         }
       ],
       "summary": {
-        "title": { "zh": "收口", "en": "Close" },
-        "body": { "zh": "用可执行的下一步结束，而不是再开一页功能表。", "en": "Close with an executable next step, not another feature wall." }
+        "title": {
+          "zh": "收口",
+          "en": "Close"
+        },
+        "body": {
+          "zh": "用可执行的下一步结束，而不是再开一页功能表。",
+          "en": "Close with an executable next step, not another feature wall."
+        }
       }
     },
     {
       "type": "closing",
       "id": "thank-you",
-      "section": { "zh": "结束", "en": "Closing" },
-      "title": { "zh": "致谢", "en": "Thank You" },
-      "thanks": { "zh": "", "en": "Thank You" },
+      "section": {
+        "zh": "结束",
+        "en": "Closing"
+      },
+      "title": {
+        "zh": "致谢",
+        "en": "Thank You"
+      },
+      "thanks": {
+        "zh": "",
+        "en": "Thank You"
+      },
       "visionLabel": "",
       "vision": {
         "zh": "把数字世界带入每个人、每个家庭、\n每个组织，构建万物互联的智能世界。",
