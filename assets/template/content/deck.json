@@ -1,11 +1,11 @@
 {
   "id": "product-deck-example",
   "kind": "product-briefing",
-  "runtimeVersion": "1.5.5",
+  "runtimeVersion": "1.5.6",
   "meta": {
     "purpose": {
-      "zh": "模板示例：企业产品简报弧线",
-      "en": "Template sample: enterprise product briefing arc"
+      "zh": "模板示例：企业简报结构与版式",
+      "en": "Template sample: enterprise briefing structure"
     }
   },
   "title": {
@@ -19,8 +19,8 @@
   },
   "chapters": [
     {
-      "label": { "zh": "议程", "en": "Agenda" },
-      "section": { "zh": "会议议程", "en": "Meeting agenda" }
+      "label": { "zh": "结构", "en": "Structure" },
+      "section": { "zh": "结构总览", "en": "Structure overview" }
     },
     {
       "label": { "zh": "价值", "en": "Value" },
@@ -28,11 +28,11 @@
     },
     {
       "label": { "zh": "能力", "en": "Capability" },
-      "section": { "zh": "产品能力", "en": "Product capability" }
+      "section": { "zh": "能力与路径", "en": "Capability & path" }
     },
     {
       "label": { "zh": "方案", "en": "Solution" },
-      "section": { "zh": "方案与套餐", "en": "Solutions & plans" }
+      "section": { "zh": "方案与节奏", "en": "Solution & cadence" }
     },
     {
       "label": { "zh": "落地", "en": "Delivery" },
@@ -46,8 +46,8 @@
       "title": { "zh": "示例产品", "en": "Sample product" },
       "eyebrow": { "zh": "企业产品介绍", "en": "Enterprise product briefing" },
       "subtitle": {
-        "zh": "面向企业客户的能力说明：价值 → 分层 → 路径 → 行动",
-        "en": "Enterprise briefing arc: value → layers → path → action"
+        "zh": "结构先行：地图 → 价值组成 → 对照 → 面板 → 行动",
+        "en": "Structure first: map → composition → matrix → panels → action"
       },
       "tagline": "HUAWEI CLOUD",
       "background": "云山"
@@ -55,99 +55,150 @@
     {
       "type": "agenda",
       "id": "agenda",
-      "section": { "zh": "会议议程", "en": "Meeting agenda" },
-      "title": { "zh": "今天的讨论结构", "en": "Today’s discussion structure" },
+      "section": { "zh": "结构总览", "en": "Structure overview" },
+      "title": { "zh": "演示结构", "en": "Briefing structure" },
       "subtitle": {
-        "zh": "先对齐结果，再看能力与路径，最后确认下一步",
-        "en": "Align on outcomes, then capability and path, then next steps"
+        "zh": "每段只用一种版式完成一个论证",
+        "en": "One layout per argument"
       },
       "eyebrow": "AGENDA",
       "items": [
-        { "label": { "zh": "价值与指标", "en": "Value & metrics" }, "time": { "zh": "10 分钟", "en": "10 min" } },
-        { "label": { "zh": "能力分层", "en": "Capability layers" }, "time": { "zh": "8 分钟", "en": "8 min" } },
-        { "label": { "zh": "方案取舍与套餐", "en": "Options & plans" }, "time": { "zh": "10 分钟", "en": "10 min" } },
-        { "label": { "zh": "落地节奏与行动", "en": "Cadence & actions" }, "time": { "zh": "7 分钟", "en": "7 min" } }
+        { "label": { "zh": "路径地图", "en": "Path map" }, "time": { "zh": "5 分钟", "en": "5 min" } },
+        { "label": { "zh": "价值与组成", "en": "Value & composition" }, "time": { "zh": "10 分钟", "en": "10 min" } },
+        { "label": { "zh": "能力对照与面板", "en": "Matrix & panels" }, "time": { "zh": "10 分钟", "en": "10 min" } },
+        { "label": { "zh": "节奏与行动", "en": "Cadence & actions" }, "time": { "zh": "8 分钟", "en": "8 min" } }
+      ]
+    },
+    {
+      "type": "tree",
+      "id": "map",
+      "section": { "zh": "结构总览", "en": "Structure overview" },
+      "title": { "zh": "四条路径覆盖完整客户旅程", "en": "Four paths cover the customer journey" },
+      "subtitle": {
+        "zh": "根写总命题；分支写路径；详情写计费或交付规则",
+        "en": "Root = thesis; branches = paths; detail = delivery rule"
+      },
+      "eyebrow": "OVERVIEW / MAP",
+      "root": {
+        "title": { "zh": "示例产品商业化", "en": "Sample product go-to-market" }
+      },
+      "branches": [
+        {
+          "title": { "zh": "订阅路径", "en": "Subscription path" },
+          "subtitle": { "zh": "按席位", "en": "Per seat" },
+          "detail": { "zh": "含基础用量额度", "en": "Includes base allowance" }
+        },
+        {
+          "title": { "zh": "企业路径", "en": "Enterprise path" },
+          "subtitle": { "zh": "席位 + 用量", "en": "Seat + usage" },
+          "detail": { "zh": "两笔预算分开核算", "en": "Two budgets accounted separately" }
+        },
+        {
+          "title": { "zh": "接口路径", "en": "API path" },
+          "subtitle": { "zh": "按量", "en": "Metered" },
+          "detail": { "zh": "无席位费，按调用计费", "en": "No seat fee; pay per call" }
+        },
+        {
+          "title": { "zh": "渠道路径", "en": "Channel path" },
+          "subtitle": { "zh": "云市场", "en": "Marketplace" },
+          "detail": { "zh": "账单主体随渠道变化", "en": "Biller changes by channel" }
+        }
       ]
     },
     {
       "type": "cards",
       "id": "values",
       "section": { "zh": "客户价值", "en": "Customer value" },
-      "title": { "zh": "用三个结果说明为什么选择它", "en": "Three outcomes that justify the choice" },
+      "title": { "zh": "三个结果说明为什么选择它", "en": "Three outcomes that justify the choice" },
       "subtitle": {
-        "zh": "替换示例文案；保持「结果」语气，避免功能罗列",
-        "en": "Replace sample copy; keep outcome language, not feature lists"
+        "zh": "优先卡片用 focus + tag 抬升",
+        "en": "Elevate the priority card with focus + tag"
       },
       "eyebrow": "VALUE",
       "cards": [
         {
+          "tag": { "zh": "优先", "en": "Priority" },
+          "focus": true,
           "title": { "zh": "业务结果", "en": "Business outcome" },
           "body": {
-            "zh": "示例：把关键交付周期从「周」压到「天」，并保留可审计轨迹。",
-            "en": "Sample: compress critical delivery from weeks to days with an auditable trail."
+            "zh": "示例：把关键交付周期压到可审计的短闭环。",
+            "en": "Sample: compress critical delivery into an auditable short loop."
           }
         },
         {
           "title": { "zh": "工作方式", "en": "Working model" },
           "body": {
-            "zh": "示例：业务与平台共用同一编排入口，减少跨系统手工对齐。",
-            "en": "Sample: one orchestration entry for business and platform — fewer handoffs."
+            "zh": "示例：业务与平台共用同一编排入口。",
+            "en": "Sample: one orchestration entry for business and platform."
           }
         },
         {
           "title": { "zh": "企业约束", "en": "Enterprise fit" },
           "body": {
-            "zh": "示例：权限、配额与变更审批进入同一治理面，满足目标行业要求。",
-            "en": "Sample: permissions, quotas and change control on one governance plane."
+            "zh": "示例：权限、配额与变更进入同一治理面。",
+            "en": "Sample: permissions, quotas and change control on one plane."
           }
         }
       ]
     },
     {
-      "type": "metrics",
-      "id": "metrics",
+      "type": "formula",
+      "id": "composition",
       "section": { "zh": "客户价值", "en": "Customer value" },
-      "title": { "zh": "示例指标（请替换）", "en": "Sample metrics (replace)" },
+      "title": { "zh": "总成本由两笔预算组成", "en": "Total cost is two budgets" },
       "subtitle": {
-        "zh": "数字仅作版式示意；正式稿必须可核对来源",
-        "en": "Figures are layout samples only — production decks need sourced numbers"
+        "zh": "结构方程：席位 + 用量；下方解释各自买什么",
+        "en": "Structure: seat + usage; explainers say what each buys"
       },
-      "eyebrow": "METRICS",
-      "metrics": [
+      "eyebrow": "VALUE / COMPOSITION",
+      "parts": [
         {
-          "value": { "zh": "40%", "en": "40%" },
-          "label": { "zh": "流程耗时下降", "en": "Process time down" },
-          "body": { "zh": "示例口径：关键路径端到端", "en": "Sample: critical-path end-to-end" }
+          "label": { "zh": "席位费", "en": "Seat fee" },
+          "body": { "zh": "按席位采购", "en": "Purchased per seat" }
         },
         {
-          "value": { "zh": "3×", "en": "3×" },
-          "label": { "zh": "协作吞吐", "en": "Collaboration throughput" },
-          "body": { "zh": "示例口径：同编制任务量", "en": "Sample: same staffing, more tasks" }
-        },
-        {
-          "value": { "zh": "99.9%", "en": "99.9%" },
-          "label": { "zh": "可用性目标", "en": "Availability target" },
-          "body": { "zh": "示例：以正式 SLA 为准", "en": "Sample: formal SLA governs" }
+          "label": { "zh": "用量费", "en": "Usage fee" },
+          "body": { "zh": "按实际消耗", "en": "Billed on consumption" },
+          "focus": true,
+          "tag": { "zh": "持续", "en": "Ongoing" }
         }
-      ]
+      ],
+      "items": [
+        {
+          "title": { "zh": "席位价值", "en": "Seat value" },
+          "body": { "zh": "统一身份、权限与审计。", "en": "Unified identity, permissions and audit." }
+        },
+        {
+          "title": { "zh": "用量预算", "en": "Usage budget" },
+          "body": { "zh": "费用随任务强度变化，需单独跟踪。", "en": "Cost varies with intensity; track separately." }
+        },
+        {
+          "title": { "zh": "用量治理", "en": "Usage governance" },
+          "body": { "zh": "组织与用户级支出可控可查。", "en": "Org- and user-level spend is controllable." }
+        }
+      ],
+      "summary": {
+        "title": { "zh": "总结", "en": "Summary" },
+        "body": { "zh": "席位与用量是两笔预算，缺一笔就算不清总成本。", "en": "Seat and usage are two budgets; missing either hides total cost." }
+      }
     },
     {
       "type": "architecture",
       "id": "architecture",
-      "section": { "zh": "产品能力", "en": "Product capability" },
+      "section": { "zh": "能力与路径", "en": "Capability & path" },
       "title": { "zh": "从场景到平台的三层结构", "en": "Three layers from scenario to platform" },
       "subtitle": {
-        "zh": "顶层写场景，中层写服务，底层写平台与数据",
-        "en": "Top = scenarios, middle = services, bottom = platform & data"
+        "zh": "顶层场景，中层服务，底层平台",
+        "en": "Top scenarios, middle services, bottom platform"
       },
       "eyebrow": "ARCHITECTURE",
       "layers": [
         {
           "label": { "zh": "业务场景", "en": "Business scenarios" },
           "items": [
-            { "zh": "场景 A：编排与交付", "en": "Scenario A: orchestration" },
-            { "zh": "场景 B：洞察与复盘", "en": "Scenario B: insight & review" },
-            { "zh": "场景 C：治理与审计", "en": "Scenario C: governance" }
+            { "zh": "场景 A", "en": "Scenario A" },
+            { "zh": "场景 B", "en": "Scenario B" },
+            { "zh": "场景 C", "en": "Scenario C" }
           ]
         },
         {
@@ -169,9 +220,93 @@
       ]
     },
     {
+      "type": "split",
+      "id": "coverage",
+      "section": { "zh": "能力与路径", "en": "Capability & path" },
+      "title": { "zh": "能力分组与区域适用", "en": "Capability groups and regional fit" },
+      "subtitle": {
+        "zh": "左侧分类；右侧 ✓ / ✗ / ? 只标已确认信息",
+        "en": "Groups left; ✓ / ✗ / ? right — confirmed facts only"
+      },
+      "eyebrow": "CAPABILITY / MATRIX",
+      "left": {
+        "title": { "zh": "官方能力面", "en": "Official capability plane" },
+        "tag": { "zh": "分类", "en": "Taxonomy" },
+        "groups": [
+          {
+            "label": { "zh": "接入层", "en": "Access layer" },
+            "items": [
+              { "zh": "控制台", "en": "Console" },
+              { "zh": "API", "en": "API" }
+            ]
+          },
+          {
+            "label": { "zh": "运行层", "en": "Runtime layer" },
+            "items": [
+              { "zh": "编排", "en": "Orchestration" },
+              { "zh": "观测", "en": "Observability" }
+            ]
+          },
+          {
+            "label": { "zh": "治理层", "en": "Governance layer" },
+            "items": [
+              { "zh": "配额", "en": "Quota" },
+              { "zh": "审计", "en": "Audit" }
+            ]
+          }
+        ]
+      },
+      "right": {
+        "markHeaders": [
+          { "zh": "区域", "en": "Region" },
+          { "zh": "可用", "en": "Available" }
+        ],
+        "marks": [
+          { "label": { "zh": "区域一", "en": "Region one" }, "status": "yes" },
+          { "label": { "zh": "区域二", "en": "Region two" }, "status": "yes" },
+          { "label": { "zh": "区域三", "en": "Region three" }, "status": "unknown" },
+          { "label": { "zh": "区域四", "en": "Region four" }, "status": "no" }
+        ]
+      }
+    },
+    {
+      "type": "panels",
+      "id": "ops",
+      "section": { "zh": "方案与节奏", "en": "Solution & cadence" },
+      "title": { "zh": "同一能力，四块运营差异", "en": "Same capability, four ops differences" },
+      "subtitle": {
+        "zh": "账单、计量、承诺与验收分面板说明",
+        "en": "Billing, metering, commitment and acceptance as panels"
+      },
+      "eyebrow": "OPS / PANELS",
+      "panels": [
+        {
+          "title": { "zh": "账单主体", "en": "Billing entity" },
+          "body": { "zh": "待填写：谁开账单", "en": "TBC: who invoices" }
+        },
+        {
+          "title": { "zh": "计量方式", "en": "Metering" },
+          "tag": { "zh": "关键", "en": "Key" },
+          "focus": true,
+          "body": { "zh": "待填写：单位与周期", "en": "TBC: unit and period" }
+        },
+        {
+          "title": { "zh": "承诺条款", "en": "Commitment" },
+          "bullets": [
+            { "zh": "容量", "en": "Capacity" },
+            { "zh": "SLA", "en": "SLA" }
+          ]
+        },
+        {
+          "title": { "zh": "验收要点", "en": "Acceptance" },
+          "body": { "zh": "待填写：成功标准", "en": "TBC: success criteria" }
+        }
+      ]
+    },
+    {
       "type": "comparison",
       "id": "comparison",
-      "section": { "zh": "方案与套餐", "en": "Solutions & plans" },
+      "section": { "zh": "方案与节奏", "en": "Solution & cadence" },
       "title": { "zh": "两种落地路径如何选择", "en": "Choosing between two delivery paths" },
       "subtitle": {
         "zh": "按适用场景、工作方式与交付结果比较",
@@ -182,7 +317,7 @@
         {
           "kicker": "01",
           "title": { "zh": "标准路径", "en": "Standard path" },
-          "summary": { "zh": "适合已有清晰场景、希望快速试点的团队", "en": "Clear scenario, fast pilot" },
+          "summary": { "zh": "清晰场景、快速试点", "en": "Clear scenario, fast pilot" },
           "bullets": [
             { "zh": "适用：单场景验证", "en": "Fit: single-scenario proof" },
             { "zh": "方式：模板 + 标准集成", "en": "Model: templates + standard integration" },
@@ -192,7 +327,7 @@
         {
           "kicker": "02",
           "title": { "zh": "深度路径", "en": "Deep path" },
-          "summary": { "zh": "适合多系统联动与强治理要求的组织", "en": "Multi-system linkage and strong governance" },
+          "summary": { "zh": "多系统联动与强治理", "en": "Multi-system linkage and strong governance" },
           "bullets": [
             { "zh": "适用：多域协同", "en": "Fit: multi-domain collaboration" },
             { "zh": "方式：定制编排 + 治理面", "en": "Model: custom orchestration + governance" },
@@ -202,86 +337,12 @@
       ]
     },
     {
-      "type": "table",
-      "id": "plans",
-      "section": { "zh": "方案与套餐", "en": "Solutions & plans" },
-      "title": { "zh": "套餐结构示例", "en": "Sample plan structure" },
-      "subtitle": {
-        "zh": "替换价格与容量；脚注只写已确认规则",
-        "en": "Replace price/capacity; footnote only confirmed rules"
-      },
-      "eyebrow": "PLANS",
-      "headers": [
-        { "zh": "套餐", "en": "Plan" },
-        { "zh": "价格", "en": "Price" },
-        { "zh": "容量", "en": "Capacity" },
-        { "zh": "适用团队", "en": "Intended team" }
-      ],
-      "rows": [
-        [
-          { "zh": "基础版", "en": "Basic" },
-          { "zh": "待填写", "en": "TBC" },
-          { "zh": "待填写", "en": "TBC" },
-          { "zh": "试点小组", "en": "Pilot squad" }
-        ],
-        [
-          { "zh": "专业版", "en": "Professional" },
-          { "zh": "待填写", "en": "TBC" },
-          { "zh": "待填写", "en": "TBC" },
-          { "zh": "业务线团队", "en": "Line-of-business team" }
-        ],
-        [
-          { "zh": "企业版", "en": "Enterprise" },
-          { "zh": "待填写", "en": "TBC" },
-          { "zh": "待填写", "en": "TBC" },
-          { "zh": "多域治理组织", "en": "Multi-domain org" }
-        ]
-      ],
-      "note": {
-        "zh": "超额与折扣规则以正式报价单为准；本页仅作结构示意。",
-        "en": "Overage and discount rules follow the formal quote; this page is structural only."
-      }
-    },
-    {
-      "type": "workflow",
-      "id": "workflow",
-      "section": { "zh": "落地与下一步", "en": "Delivery & next" },
-      "title": { "zh": "用一个任务读懂流程", "en": "Read the flow through one task" },
-      "subtitle": {
-        "zh": "可暂停 / 重播；打印与缩略图显示完整步骤",
-        "en": "Pause / replay; print and thumbnails show every step"
-      },
-      "eyebrow": "WORKFLOW",
-      "steps": [
-        {
-          "title": { "zh": "输入任务", "en": "Frame the task" },
-          "body": { "zh": "用客户语言写清目标、约束与成功标准。", "en": "State goal, constraints and success criteria in customer language." }
-        },
-        {
-          "title": { "zh": "编排能力", "en": "Orchestrate" },
-          "body": { "zh": "选择场景模板，挂接必要服务与策略。", "en": "Pick a scenario template; attach required services and policies." }
-        },
-        {
-          "title": { "zh": "执行验证", "en": "Verify" },
-          "body": { "zh": "跑通关键路径，留下可审计结果。", "en": "Run the critical path; keep an auditable result." }
-        },
-        {
-          "title": { "zh": "交付复盘", "en": "Deliver & review" },
-          "body": { "zh": "回到业务结果，确认可复制的下一步。", "en": "Return to the business outcome; lock a reusable next step." }
-        }
-      ],
-      "result": {
-        "zh": "任务 → 编排 → 验证 → 复盘：用一条故事线连接能力与客户价值。",
-        "en": "Task → orchestrate → verify → review: one storyline from capability to value."
-      }
-    },
-    {
       "type": "timeline",
       "id": "timeline",
       "section": { "zh": "落地与下一步", "en": "Delivery & next" },
       "title": { "zh": "四周落地节奏示例", "en": "Sample four-week cadence" },
       "subtitle": {
-        "zh": "按账户实际改写周次；保持 3–5 个里程碑",
+        "zh": "按账户改写周次；保持 3–5 个里程碑",
         "en": "Rewrite weeks per account; keep 3–5 milestones"
       },
       "eyebrow": "CADENCE",
@@ -309,8 +370,8 @@
       "section": { "zh": "落地与下一步", "en": "Delivery & next" },
       "title": { "zh": "会后需要记住的三点", "en": "Three points to remember" },
       "subtitle": {
-        "zh": "共识 / 边界 / 行动 —— 各写一句可执行的话",
-        "en": "Alignment / boundary / action — one executable line each"
+        "zh": "共识 / 边界 / 行动",
+        "en": "Alignment / boundary / action"
       },
       "eyebrow": "NEXT",
       "items": [
@@ -326,10 +387,16 @@
         },
         {
           "tone": "accent",
+          "focus": true,
+          "tag": { "zh": "行动", "en": "Action" },
           "title": { "zh": "下一步", "en": "Next step" },
           "body": { "zh": "责任人、时间点与交付物。", "en": "Owner, date, and deliverable." }
         }
-      ]
+      ],
+      "summary": {
+        "title": { "zh": "收口", "en": "Close" },
+        "body": { "zh": "用可执行的下一步结束，而不是再开一页功能表。", "en": "Close with an executable next step, not another feature wall." }
+      }
     },
     {
       "type": "closing",

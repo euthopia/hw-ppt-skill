@@ -1,7 +1,7 @@
 {
   "id": "project-report-deck",
   "kind": "project-report",
-  "runtimeVersion": "1.5.5",
+  "runtimeVersion": "1.5.6",
   "meta": {
     "purpose": {
       "zh": "项目阶段汇报 / 里程碑复盘",
@@ -16,20 +16,38 @@
   "footer": "HUAWEI CLOUD",
   "chapters": [
     {
-      "label": { "zh": "目标", "en": "Goals" },
-      "section": { "zh": "目标与进展", "en": "Goals & progress" }
+      "label": {
+        "zh": "目标",
+        "en": "Goals"
+      },
+      "section": {
+        "zh": "目标与进展",
+        "en": "Goals & progress"
+      }
     },
     {
-      "label": { "zh": "计划", "en": "Plan" },
-      "section": { "zh": "计划与风险", "en": "Plan & risks" }
+      "label": {
+        "zh": "计划",
+        "en": "Plan"
+      },
+      "section": {
+        "zh": "计划与风险",
+        "en": "Plan & risks"
+      }
     }
   ],
   "slides": [
     {
       "type": "cover",
       "id": "cover",
-      "title": { "zh": "项目阶段汇报", "en": "Project stage report" },
-      "eyebrow": { "zh": "项目汇报", "en": "Project report" },
+      "title": {
+        "zh": "项目阶段汇报",
+        "en": "Project stage report"
+      },
+      "eyebrow": {
+        "zh": "项目汇报",
+        "en": "Project report"
+      },
       "subtitle": {
         "zh": "目标 · 指标 · 里程碑 · 风险 · 下一步",
         "en": "Goals · metrics · milestones · risks · next"
@@ -40,8 +58,14 @@
     {
       "type": "metrics",
       "id": "metrics",
-      "section": { "zh": "目标与进展", "en": "Goals & progress" },
-      "title": { "zh": "阶段关键指标", "en": "Stage metrics" },
+      "section": {
+        "zh": "目标与进展",
+        "en": "Goals & progress"
+      },
+      "title": {
+        "zh": "阶段关键指标",
+        "en": "Stage metrics"
+      },
       "subtitle": {
         "zh": "只放已核实数字；未核实用占位",
         "en": "Verified numbers only; placeholders when unchecked"
@@ -49,27 +73,60 @@
       "eyebrow": "METRICS",
       "metrics": [
         {
-          "value": { "zh": "—", "en": "—" },
-          "label": { "zh": "计划完成率", "en": "Plan completion" },
-          "body": { "zh": "待填写", "en": "To fill" }
+          "value": {
+            "zh": "—",
+            "en": "—"
+          },
+          "label": {
+            "zh": "计划完成率",
+            "en": "Plan completion"
+          },
+          "body": {
+            "zh": "待填写",
+            "en": "To fill"
+          }
         },
         {
-          "value": { "zh": "—", "en": "—" },
-          "label": { "zh": "质量门禁", "en": "Quality gate" },
-          "body": { "zh": "待填写", "en": "To fill" }
+          "value": {
+            "zh": "—",
+            "en": "—"
+          },
+          "label": {
+            "zh": "质量门禁",
+            "en": "Quality gate"
+          },
+          "body": {
+            "zh": "待填写",
+            "en": "To fill"
+          }
         },
         {
-          "value": { "zh": "—", "en": "—" },
-          "label": { "zh": "风险项", "en": "Open risks" },
-          "body": { "zh": "待填写", "en": "To fill" }
+          "value": {
+            "zh": "—",
+            "en": "—"
+          },
+          "label": {
+            "zh": "风险项",
+            "en": "Open risks"
+          },
+          "body": {
+            "zh": "待填写",
+            "en": "To fill"
+          }
         }
       ]
     },
     {
       "type": "timeline",
       "id": "milestones",
-      "section": { "zh": "目标与进展", "en": "Goals & progress" },
-      "title": { "zh": "里程碑路径", "en": "Milestone path" },
+      "section": {
+        "zh": "目标与进展",
+        "en": "Goals & progress"
+      },
+      "title": {
+        "zh": "里程碑路径",
+        "en": "Milestone path"
+      },
       "subtitle": {
         "zh": "已完成 → 当前 → 下一里程碑",
         "en": "Done → current → next milestone"
@@ -77,27 +134,60 @@
       "eyebrow": "TIMELINE",
       "events": [
         {
-          "when": { "zh": "M1", "en": "M1" },
-          "title": { "zh": "已完成", "en": "Completed" },
-          "body": { "zh": "待填写的交付物", "en": "Deliverable to supply" }
+          "when": {
+            "zh": "M1",
+            "en": "M1"
+          },
+          "title": {
+            "zh": "已完成",
+            "en": "Completed"
+          },
+          "body": {
+            "zh": "待填写的交付物",
+            "en": "Deliverable to supply"
+          }
         },
         {
-          "when": { "zh": "M2", "en": "M2" },
-          "title": { "zh": "进行中", "en": "In progress" },
-          "body": { "zh": "待填写的关键工作", "en": "Key work in flight" }
+          "when": {
+            "zh": "M2",
+            "en": "M2"
+          },
+          "title": {
+            "zh": "进行中",
+            "en": "In progress"
+          },
+          "body": {
+            "zh": "待填写的关键工作",
+            "en": "Key work in flight"
+          }
         },
         {
-          "when": { "zh": "M3", "en": "M3" },
-          "title": { "zh": "下一站", "en": "Next" },
-          "body": { "zh": "待填写的目标与日期", "en": "Target and date to supply" }
+          "when": {
+            "zh": "M3",
+            "en": "M3"
+          },
+          "title": {
+            "zh": "下一站",
+            "en": "Next"
+          },
+          "body": {
+            "zh": "待填写的目标与日期",
+            "en": "Target and date to supply"
+          }
         }
       ]
     },
     {
       "type": "workflow",
       "id": "delivery",
-      "section": { "zh": "计划与风险", "en": "Plan & risks" },
-      "title": { "zh": "交付节奏", "en": "Delivery rhythm" },
+      "section": {
+        "zh": "计划与风险",
+        "en": "Plan & risks"
+      },
+      "title": {
+        "zh": "交付节奏",
+        "en": "Delivery rhythm"
+      },
       "subtitle": {
         "zh": "计划 → 执行 → 验证 → 发布",
         "en": "Plan → build → verify → release"
@@ -105,28 +195,58 @@
       "eyebrow": "WORKFLOW",
       "steps": [
         {
-          "title": { "zh": "计划", "en": "Plan" },
-          "body": { "zh": "范围与责任人", "en": "Scope and owners" }
+          "title": {
+            "zh": "计划",
+            "en": "Plan"
+          },
+          "body": {
+            "zh": "范围与责任人",
+            "en": "Scope and owners"
+          }
         },
         {
-          "title": { "zh": "执行", "en": "Build" },
-          "body": { "zh": "关键路径与依赖", "en": "Critical path and dependencies" }
+          "title": {
+            "zh": "执行",
+            "en": "Build"
+          },
+          "body": {
+            "zh": "关键路径与依赖",
+            "en": "Critical path and dependencies"
+          }
         },
         {
-          "title": { "zh": "验证", "en": "Verify" },
-          "body": { "zh": "测试与门禁", "en": "Tests and gates" }
+          "title": {
+            "zh": "验证",
+            "en": "Verify"
+          },
+          "body": {
+            "zh": "测试与门禁",
+            "en": "Tests and gates"
+          }
         },
         {
-          "title": { "zh": "发布", "en": "Release" },
-          "body": { "zh": "上线与回滚准备", "en": "Ship and rollback readiness" }
+          "title": {
+            "zh": "发布",
+            "en": "Release"
+          },
+          "body": {
+            "zh": "上线与回滚准备",
+            "en": "Ship and rollback readiness"
+          }
         }
       ]
     },
     {
       "type": "callouts",
       "id": "risks",
-      "section": { "zh": "计划与风险", "en": "Plan & risks" },
-      "title": { "zh": "风险与决策点", "en": "Risks and decisions" },
+      "section": {
+        "zh": "计划与风险",
+        "en": "Plan & risks"
+      },
+      "title": {
+        "zh": "风险与决策点",
+        "en": "Risks and decisions"
+      },
       "subtitle": {
         "zh": "信息 / 注意 / 行动",
         "en": "Info / caution / action"
@@ -135,58 +255,127 @@
       "items": [
         {
           "tone": "info",
-          "title": { "zh": "依赖", "en": "Dependency" },
-          "body": { "zh": "待填写的外部依赖", "en": "External dependency to supply" }
+          "title": {
+            "zh": "依赖",
+            "en": "Dependency"
+          },
+          "body": {
+            "zh": "待填写的外部依赖",
+            "en": "External dependency to supply"
+          }
         },
         {
           "tone": "warn",
-          "title": { "zh": "风险", "en": "Risk" },
-          "body": { "zh": "已确认的风险边界", "en": "Confirmed risk boundary" }
+          "title": {
+            "zh": "风险",
+            "en": "Risk"
+          },
+          "body": {
+            "zh": "已确认的风险边界",
+            "en": "Confirmed risk boundary"
+          }
         },
         {
           "tone": "accent",
-          "title": { "zh": "需决策", "en": "Decision" },
-          "body": { "zh": "责任人与时间点", "en": "Owner and timing" }
+          "title": {
+            "zh": "需决策",
+            "en": "Decision"
+          },
+          "body": {
+            "zh": "责任人与时间点",
+            "en": "Owner and timing"
+          }
         }
       ]
     },
     {
       "type": "table",
       "id": "actions",
-      "section": { "zh": "计划与风险", "en": "Plan & risks" },
-      "title": { "zh": "下一步行动", "en": "Next actions" },
+      "section": {
+        "zh": "计划与风险",
+        "en": "Plan & risks"
+      },
+      "title": {
+        "zh": "下一步行动",
+        "en": "Next actions"
+      },
       "subtitle": {
         "zh": "事项 · 责任人 · 截止 · 状态",
         "en": "Item · owner · due · status"
       },
       "eyebrow": "ACTIONS",
       "headers": [
-        { "zh": "事项", "en": "Item" },
-        { "zh": "责任人", "en": "Owner" },
-        { "zh": "截止", "en": "Due" },
-        { "zh": "状态", "en": "Status" }
+        {
+          "zh": "事项",
+          "en": "Item"
+        },
+        {
+          "zh": "责任人",
+          "en": "Owner"
+        },
+        {
+          "zh": "截止",
+          "en": "Due"
+        },
+        {
+          "zh": "状态",
+          "en": "Status"
+        }
       ],
       "rows": [
         [
-          { "zh": "待填写", "en": "To fill" },
-          { "zh": "—", "en": "—" },
-          { "zh": "—", "en": "—" },
-          { "zh": "进行中", "en": "In progress" }
+          {
+            "zh": "待填写",
+            "en": "To fill"
+          },
+          {
+            "zh": "—",
+            "en": "—"
+          },
+          {
+            "zh": "—",
+            "en": "—"
+          },
+          {
+            "zh": "进行中",
+            "en": "In progress"
+          }
         ],
         [
-          { "zh": "待填写", "en": "To fill" },
-          { "zh": "—", "en": "—" },
-          { "zh": "—", "en": "—" },
-          { "zh": "未开始", "en": "Not started" }
+          {
+            "zh": "待填写",
+            "en": "To fill"
+          },
+          {
+            "zh": "—",
+            "en": "—"
+          },
+          {
+            "zh": "—",
+            "en": "—"
+          },
+          {
+            "zh": "未开始",
+            "en": "Not started"
+          }
         ]
       ]
     },
     {
       "type": "closing",
       "id": "thank-you",
-      "section": { "zh": "结束", "en": "Closing" },
-      "title": { "zh": "致谢", "en": "Thank You" },
-      "thanks": { "zh": "", "en": "Thank You" },
+      "section": {
+        "zh": "结束",
+        "en": "Closing"
+      },
+      "title": {
+        "zh": "致谢",
+        "en": "Thank You"
+      },
+      "thanks": {
+        "zh": "",
+        "en": "Thank You"
+      },
       "vision": {
         "zh": "把数字世界带入每个人、每个家庭、\n每个组织，构建万物互联的智能世界。",
         "en": "Bring digital to every person, home and organization\nfor a fully connected, intelligent world."
@@ -196,4 +385,3 @@
     }
   ]
 }
-

@@ -247,12 +247,60 @@ def slide_lines(slide: dict, lang: str) -> list[str]:
                 lines.append(pick(panel['body'], lang))
             for b in panel.get('bullets') or []:
                 lines.append(f'  • {pick(b, lang)}')
+    elif kind == 'tree':
+        root = slide.get('root') or {}
+        lines.append(pick(root.get('title'), lang))
+        if root.get('subtitle'):
+            lines.append(pick(root['subtitle'], lang))
+        for i, branch in enumerate(slide.get('branches') or [], 1):
+            tag = pick(branch.get('tag'), lang)
+            head = f'{i:02}. {pick(branch.get("title"), lang)}'
+            if tag:
+                head += f' [{tag}]'
+            lines.append(head)
+            if branch.get('subtitle'):
+                lines.append(pick(branch['subtitle'], lang))
+            if branch.get('detail'):
+                lines.append(pick(branch['detail'], lang))
+    elif kind == 'formula':
+        parts = [pick(p.get('label'), lang) for p in slide.get('parts') or []]
+        if parts:
+            lines.append(' + '.join(parts))
+        for i, item in enumerate(slide.get('items') or [], 1):
+            lines.append(f'{i:02}. {pick(item.get("title"), lang)} — {pick(item.get("body"), lang)}')
+    elif kind == 'split':
+        left = slide.get('left') or {}
+        lines.append(pick(left.get('title'), lang))
+        for group in left.get('groups') or []:
+            items = ', '.join(pick(x, lang) for x in group.get('items') or [])
+            lines.append(f'{pick(group.get("label"), lang)}: {items}')
+        right = slide.get('right') or {}
+        if right.get('note'):
+            lines.append(pick(right['note'], lang))
+        for mark in right.get('marks') or []:
+            lines.append(f'{pick(mark.get("label"), lang)} · {mark.get("status", "")}')
+    elif kind == 'panels':
+        for i, panel in enumerate(slide.get('panels') or [], 1):
+            tag = pick(panel.get('tag'), lang)
+            head = f'{i:02}. {pick(panel.get("title"), lang)}'
+            if tag:
+                head += f' [{tag}]'
+            lines.append(head)
+            if panel.get('body'):
+                lines.append(pick(panel['body'], lang))
+            for b in panel.get('bullets') or []:
+                lines.append(f'  • {pick(b, lang)}')
     elif kind == 'closing':
         return lines
     elif kind == 'custom':
         lines.append(f'Custom fragment: {slide.get("fragment", "")}')
     else:
         lines.append(f'(Unhandled layout: {kind})')
+    summary = slide.get('summary') or {}
+    if isinstance(summary, dict) and summary.get('body'):
+        title = pick(summary.get('title'), lang)
+        body = pick(summary.get('body'), lang)
+        lines.append((f'{title}: {body}' if title else body))
     return [ln for ln in lines if ln and str(ln).strip()]
 
 

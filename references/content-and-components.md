@@ -40,13 +40,17 @@
 | --- | --- | --- |
 | cover | title, eyebrow, subtitle, tagline, background | 产品名称 + 一句话定位；background 可选云山、金沙、原山景 |
 | closing | thanks: {zh,en}, visionLabel, vision: {zh,en}, logo, motion | 纯白致谢页；左侧致谢，右侧中英愿景与较大 Logo；motion 为 fade 或 none |
-| cards | cards: [{title, body}] | 2–4 个价值或能力 |
+| cards | cards: [{title, body, tag?, focus?}] | 2–4 个价值或能力；可选 tag 短标签、focus 强调 |
 | metrics | metrics: [{value, label, body}] | 2–4 个面向客户的指标，写明单位和条件 |
 | architecture | layers: [{label, items: [文字]}] | 3–5 层，每层 1–4 个模块 |
 | comparison | columns: [{kicker, title, summary, bullets}] | 2 列，每列 1–4 项，比较相同维度 |
+| tree | root: {title, subtitle?}, branches: [{title, subtitle?, detail?}] | 2–5 分支路径树；根节点 → 分支 → 细节 |
+| formula | parts: [{label, body?, tag?, focus?}], items?: [{title, body}] | 2–4 组成块（A + B …）+ 可选编号说明 |
+| split | left: {title?, groups: [{label, items[]}]}, right: {headers, rows} 或 marks | 左分类 / 右矩阵或对照表 |
+| panels | panels: [{title, body?, tag?, bullets?, focus?}] | 2–4 运营/看板瓷砖 |
 | table | headers: [文字], rows: [[文字]], note | 2–6 列、1–12 行；可滚动粘性表头；套餐、容量、价格或对照 |
 | timeline | events: [{when, title, body}] | 2–8 个里程碑；销售节奏 / 落地路径 |
-| callouts | items: [{tone, title, body}] | 2–4 个要点；tone 为 info / warn / accent |
+| callouts | items: [{tone, title, body, tag?, focus?}] | 2–4 个要点；tone 为 info / warn / accent；可选 tag / focus |
 | workflow | steps: [{title, body}], result | 3–5 步，自动轻量高亮 |
 | image | image, alt, caption, body | 本地 assets 图片 + 说明；不裁切产品图 |
 | custom | fragment, translations | content/name.html 片段，扩展架构或互动页面；禁止 `<script>`、内联事件与 `javascript:` |
@@ -56,6 +60,8 @@
 | quote | quote, attribution, role? | 客户证言 / 证明页 |
 | tabs | tabs: [{id?, label, body, bullets?}] | 2–5 个页签；一等公民手动切换（自动注入 tabs.js） |
 | before-after | before / after: {label?, title, body?, bullets?} | 静态前后对照；打印与 PPTX 友好（区别于 comparison / tabs） |
+
+可选 **`summary`**：任意 kit 正文页（非 cover/closing）可加 `{ title?, body }`，渲染为页底摘要轨。
 
 可选 `cuts`：命名演示裁剪，例如 `"cuts": { "cio": { "label": {"zh":"CIO精简","en":"CIO cut"}, "hidden": ["price"] } }`，分享链接使用 `?cut=cio`。生成器会校验 `hidden` 中的 slide id 必须存在；未知 id 直接失败，避免静默丢页。
 

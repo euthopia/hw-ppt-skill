@@ -162,7 +162,7 @@ test('ux 1.4 cluster grammar: cover bilingual, rails, quote measure, timeline sc
   assert.match(styles,/\.cover\{[^}]*background:\s*var\(--paper\)/);
   assert.match(css,/kit-agenda::before/);
   assert.match(css,/inset var\(--rail\) 0 0 var\(--red\)/);
-  assert.match(css,/kit-tabs-list button\[aria-selected="true"\][^}]*inset var\(--rail\)/);
+  assert.match(css,/kit-tabs-list button\[aria-selected="true"\][^}]*inset 0 calc\(var\(--rail\) \* -1\) 0 var\(--red\)/);
   assert.match(css,/--measure-quote|var\(--measure-quote\)/);
   assert.match(css,/kit-timeline\{[^}]*max-height:\s*var\(--table-scroll-max\)/);
   assert.match(english,/--measure-quote:\s*42ch/);

@@ -145,9 +145,29 @@ def register_full_slide(kind,css_class,fn):
  register_layout(kind,fn)
  FULL_SLIDE[kind]=css_class
 
+def kit_tag(value):
+ if not value:return ''
+ return f'<span class="kit-tag">{text(value)}</span>'
+
+def kit_summary(slide):
+ summary=slide.get('summary')
+ if not summary:return ''
+ if not isinstance(summary,dict):raise ValueError('summary must be an object with body')
+ body_html=f'<p>{text(summary["body"])}</p>' if summary.get('body') is not None else ''
+ if not body_html:raise ValueError('summary.body is required when summary is set')
+ title_html=f'<strong>{text(summary["title"])}</strong>' if summary.get('title') else ''
+ return f'<aside class="kit-summary">{title_html}{body_html}</aside>'
+
 def layout_cards(slide):
  cards=bounded(slide['cards'],2,4,'cards')
- return '<div class="kit-cards">'+''.join(f'<article class="kit-card"><span class="kit-index">{i+1:02}</span><h3>{text(c["title"])}</h3><p>{text(c["body"])}</p></article>' for i,c in enumerate(cards))+'</div>'
+ parts=[]
+ for i,c in enumerate(cards):
+  focus=' data-focus="true"' if c.get('focus') else ''
+  parts.append(
+   f'<article class="kit-card"{focus}><span class="kit-index">{i+1:02}</span>{kit_tag(c.get("tag"))}'
+   f'<h3>{text(c["title"])}</h3><p>{text(c["body"])}</p></article>'
+  )
+ return '<div class="kit-cards">'+''.join(parts)+'</div>'
 
 def layout_metrics(slide):
  metrics=bounded(slide['metrics'],2,4,'metrics')
@@ -190,9 +210,10 @@ def layout_callouts(slide):
  for i,item in enumerate(items_data):
   tone=item.get('tone','info')
   if tone not in tones:raise ValueError('Callout tone must be info, warn, or accent')
+  focus=' data-focus="true"' if item.get('focus') else ''
   parts.append(
-   f'<article class="kit-callout" data-callout-tone="{tone}"><span class="kit-index">{i+1:02}</span>'
-   f'<h3>{text(item["title"])}</h3><p>{text(item["body"])}</p></article>'
+   f'<article class="kit-callout" data-callout-tone="{tone}"{focus}><span class="kit-index">{i+1:02}</span>'
+   f'{kit_tag(item.get("tag"))}<h3>{text(item["title"])}</h3><p>{text(item["body"])}</p></article>'
   )
  return '<div class="kit-callouts">'+''.join(parts)+'</div>'
 
@@ -315,6 +336,106 @@ def layout_before_after(slide):
   +'</div>'
  )
 
+def layout_tree(slide):
+ root=slide['root']
+ branches=bounded(slide['branches'],2,5,'tree branches')
+ root_sub=f'<p>{text(root["subtitle"])}</p>' if root.get('subtitle') else ''
+ cols=[]
+ for i,branch in enumerate(branches):
+  detail=f'<div class="kit-tree-detail">{text(branch["detail"])}</div>' if branch.get('detail') else ''
+  sub=f'<p class="kit-tree-sub">{text(branch["subtitle"])}</p>' if branch.get('subtitle') else ''
+  cols.append(
+   f'<div class="kit-tree-branch"><article class="kit-tree-node">'
+   f'<span class="kit-index">{i+1:02}</span>{kit_tag(branch.get("tag"))}'
+   f'<h3>{text(branch["title"])}</h3>{sub}</article>{detail}</div>'
+  )
+ return (
+  '<div class="kit-tree">'
+  f'<div class="kit-tree-root"><h3>{text(root["title"])}</h3>{root_sub}</div>'
+  f'<div class="kit-tree-branches">{"".join(cols)}</div></div>'
+ )
+
+def layout_formula(slide):
+ parts=bounded(slide['parts'],2,4,'formula parts')
+ blocks=[]
+ for i,part in enumerate(parts):
+  body=f'<p>{text(part["body"])}</p>' if part.get('body') else ''
+  if i:blocks.append('<span class="kit-formula-op" aria-hidden="true">+</span>')
+  focus=' data-focus="true"' if part.get('focus') else ''
+  blocks.append(
+   f'<article class="kit-formula-part"{focus}>{kit_tag(part.get("tag"))}'
+   f'<h3>{text(part["label"])}</h3>{body}</article>'
+  )
+ items_html=''
+ if slide.get('items'):
+  explainers=bounded(slide['items'],1,4,'formula items')
+  cards=[]
+  for i,item in enumerate(explainers):
+   cards.append(
+    f'<article class="kit-formula-item"><span class="kit-index">{i+1:02}</span>'
+    f'{kit_tag(item.get("tag"))}<h3>{text(item["title"])}</h3><p>{text(item["body"])}</p></article>'
+   )
+  items_html='<div class="kit-formula-items">'+''.join(cards)+'</div>'
+ return f'<div class="kit-formula"><div class="kit-formula-parts">{"".join(blocks)}</div>{items_html}</div>'
+
+def layout_split(slide):
+ left=slide['left']; right=slide['right']
+ groups=bounded(left['groups'],1,4,'split left groups')
+ group_html=[]
+ for i,group in enumerate(groups):
+  entries=bounded(group['items'],1,6,'split group items')
+  group_html.append(
+   f'<div class="kit-split-group"><h4><span class="kit-index">{i+1:02}</span>{text(group["label"])}</h4>'
+   f'<ul>{items(entries,"li")}</ul></div>'
+  )
+ left_html=(
+  f'<aside class="kit-split-left"><div class="kit-split-left-head"><h3>{text(left["title"])}</h3>'
+  f'{kit_tag(left.get("tag"))}</div><div class="kit-split-groups">{"".join(group_html)}</div></aside>'
+ )
+ if right.get('headers') is not None:
+  headers=bounded(right['headers'],2,6,'split right columns')
+  rows=bounded(right.get('rows') or [],1,12,'split right rows')
+  for row in rows:
+   if len(row)!=len(headers):raise ValueError('Every split right row must match the header count')
+  right_html=(
+   '<div class="kit-split-right"><div class="kit-table-scroll"><table class="kit-table"><thead><tr>'
+   +items(headers,'th')+'</tr></thead><tbody>'
+   +''.join('<tr>'+items(row,'td')+'</tr>' for row in rows)+'</tbody></table></div></div>'
+  )
+ elif right.get('marks') is not None:
+  marks=bounded(right['marks'],1,12,'split marks')
+  mark_headers=bounded(right.get('markHeaders') or [{'zh':'项','en':'Item'},{'zh':'状态','en':'Status'}],2,4,'split mark headers')
+  mark_rows=[]
+  for mark in marks:
+   status=mark.get('status','yes')
+   if status not in {'yes','no','unknown'}:raise ValueError('split mark status must be yes, no, or unknown')
+   glyph={'yes':'✓','no':'✗','unknown':'?'}[status]
+   mark_rows.append(
+    f'<tr><td>{text(mark["label"])}</td><td class="kit-split-mark" data-mark="{status}">{glyph}</td></tr>'
+   )
+  right_html=(
+   '<div class="kit-split-right"><div class="kit-table-scroll"><table class="kit-table kit-split-matrix">'
+   '<thead><tr>'+items(mark_headers,'th')+'</tr></thead><tbody>'+''.join(mark_rows)+'</tbody></table></div></div>'
+  )
+ else:
+  raise ValueError('split.right requires headers+rows or marks')
+ return f'<div class="kit-split">{left_html}{right_html}</div>'
+
+def layout_panels(slide):
+ panels=bounded(slide['panels'],2,4,'panels')
+ parts=[]
+ for i,panel in enumerate(panels):
+  focus=' data-focus="true"' if panel.get('focus') else ''
+  body=f'<p>{text(panel["body"])}</p>' if panel.get('body') else ''
+  bullets=''
+  if panel.get('bullets'):
+   bullets='<ul>'+items(bounded(panel['bullets'],1,4,'panel bullets'),'li')+'</ul>'
+  parts.append(
+   f'<article class="kit-panel"{focus}><span class="kit-index">{i+1:02}</span>{kit_tag(panel.get("tag"))}'
+   f'<h3>{text(panel["title"])}</h3>{body}{bullets}</article>'
+  )
+ return '<div class="kit-panels">'+''.join(parts)+'</div>'
+
 def layout_cover(slide):
  backgrounds={'原山景':'assets/mountains.jpg','云山':'assets/yunshan.png','金沙':'assets/jinsha.png'}
  background=slide.get('background','原山景')
@@ -370,6 +491,10 @@ for _kind,_fn in (
  ('quote',layout_quote),
  ('tabs',layout_tabs),
  ('before-after',layout_before_after),
+ ('tree',layout_tree),
+ ('formula',layout_formula),
+ ('split',layout_split),
+ ('panels',layout_panels),
 ):
  register_layout(_kind,_fn)
 
@@ -380,7 +505,7 @@ def body(slide):
  kind=slide['type']
  if kind not in LAYOUTS:raise ValueError('Unknown slide type: '+kind)
  if kind in FULL_SLIDE:raise ValueError('Full-slide layout should not use kit body(): '+kind)
- return LAYOUTS[kind](slide)
+ return LAYOUTS[kind](slide)+kit_summary(slide)
 
 if not re.fullmatch(r'[a-z][a-z0-9-]{2,62}',D['id']):raise ValueError('id must be a unique lowercase project slug, 3–63 characters')
 if not D.get('slides'):raise ValueError('At least one slide is required')

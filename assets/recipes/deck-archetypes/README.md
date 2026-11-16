@@ -4,11 +4,13 @@ Shared layout kit. Choose `deck.kind` (optional) and prefer layouts that fit the
 
 | kind | Starter | Prefer | Use sparingly |
 |------|---------|--------|---------------|
-| `product-briefing` | `blank` | cover, cards, architecture, comparison, pricing, scenarios, closing | dense tables |
-| `status-report` | `status-report` | agenda, metrics, timeline, callouts, table | pricing theater |
-| `design-review` | `design-review` | architecture, before-after, comparison, tabs, callouts | sales pricing |
-| `project-report` | `project-report` | timeline, metrics, table, workflow, callouts | cover splash only |
-| `workshop` | `workshop` | agenda, tabs, workflow, cards, quote | long comparison walls |
+| `product-briefing` | `blank` | cover, **tree**, **formula**, **split**, **panels**, cards (+tag/focus), architecture, comparison, pricing, scenarios, closing | dense tables without a job |
+| `status-report` | `status-report` | agenda, metrics, timeline, callouts, table, **panels** | pricing theater |
+| `design-review` | `design-review` | architecture, before-after, comparison, **tree**, tabs, callouts | sales pricing |
+| `project-report` | `project-report` | timeline, metrics, table, workflow, callouts, **split** | cover splash only |
+| `workshop` | `workshop` | agenda, tabs, workflow, cards, quote, **formula** | long comparison walls |
+
+For briefing density, prefer **tree** (path map), **formula** (A+B structure), **split** (taxonomy + matrix), and **panels** (ops tiles) over stacking more generic cards. Use slide `summary` and card/callout `tag`/`focus` to elevate one signal without a new layout.
 
 HTML remains the interactive system of record. Export editable Office with:
 

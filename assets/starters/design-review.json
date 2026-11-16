@@ -1,7 +1,7 @@
 {
   "id": "design-review-deck",
   "kind": "design-review",
-  "runtimeVersion": "1.5.5",
+  "runtimeVersion": "1.5.6",
   "meta": {
     "purpose": {
       "zh": "架构 / 方案设计评审",
@@ -16,20 +16,38 @@
   "footer": "HUAWEI CLOUD",
   "chapters": [
     {
-      "label": { "zh": "背景", "en": "Context" },
-      "section": { "zh": "背景与目标", "en": "Context & goals" }
+      "label": {
+        "zh": "背景",
+        "en": "Context"
+      },
+      "section": {
+        "zh": "背景与目标",
+        "en": "Context & goals"
+      }
     },
     {
-      "label": { "zh": "方案", "en": "Design" },
-      "section": { "zh": "方案与决策", "en": "Design & decisions" }
+      "label": {
+        "zh": "方案",
+        "en": "Design"
+      },
+      "section": {
+        "zh": "方案与决策",
+        "en": "Design & decisions"
+      }
     }
   ],
   "slides": [
     {
       "type": "cover",
       "id": "cover",
-      "title": { "zh": "方案设计评审", "en": "Design review" },
-      "eyebrow": { "zh": "设计评审", "en": "Design review" },
+      "title": {
+        "zh": "方案设计评审",
+        "en": "Design review"
+      },
+      "eyebrow": {
+        "zh": "设计评审",
+        "en": "Design review"
+      },
       "subtitle": {
         "zh": "背景 · 架构 · 决策 · 待确认项",
         "en": "Context · architecture · decisions · open questions"
@@ -40,8 +58,14 @@
     {
       "type": "cards",
       "id": "context",
-      "section": { "zh": "背景与目标", "en": "Context & goals" },
-      "title": { "zh": "评审背景", "en": "Review context" },
+      "section": {
+        "zh": "背景与目标",
+        "en": "Context & goals"
+      },
+      "title": {
+        "zh": "评审背景",
+        "en": "Review context"
+      },
       "subtitle": {
         "zh": "用三句话对齐问题、边界与成功标准",
         "en": "Align problem, boundary, and success criteria"
@@ -49,24 +73,48 @@
       "eyebrow": "CONTEXT",
       "cards": [
         {
-          "title": { "zh": "要解决的问题", "en": "Problem" },
-          "body": { "zh": "待填写的业务/技术问题", "en": "Business or technical problem to supply" }
+          "title": {
+            "zh": "要解决的问题",
+            "en": "Problem"
+          },
+          "body": {
+            "zh": "待填写的业务/技术问题",
+            "en": "Business or technical problem to supply"
+          }
         },
         {
-          "title": { "zh": "范围边界", "en": "Scope" },
-          "body": { "zh": "本次评审包含与不包含什么", "en": "In and out of scope for this review" }
+          "title": {
+            "zh": "范围边界",
+            "en": "Scope"
+          },
+          "body": {
+            "zh": "本次评审包含与不包含什么",
+            "en": "In and out of scope for this review"
+          }
         },
         {
-          "title": { "zh": "成功标准", "en": "Success" },
-          "body": { "zh": "评审通过需要满足的条件", "en": "What “approved” means" }
+          "title": {
+            "zh": "成功标准",
+            "en": "Success"
+          },
+          "body": {
+            "zh": "评审通过需要满足的条件",
+            "en": "What “approved” means"
+          }
         }
       ]
     },
     {
       "type": "architecture",
       "id": "architecture",
-      "section": { "zh": "方案与决策", "en": "Design & decisions" },
-      "title": { "zh": "目标架构", "en": "Target architecture" },
+      "section": {
+        "zh": "方案与决策",
+        "en": "Design & decisions"
+      },
+      "title": {
+        "zh": "目标架构",
+        "en": "Target architecture"
+      },
       "subtitle": {
         "zh": "三到五层说明协作关系",
         "en": "Three to five layers of collaboration"
@@ -74,24 +122,51 @@
       "eyebrow": "ARCHITECTURE",
       "layers": [
         {
-          "label": { "zh": "体验 / 接入", "en": "Experience / edge" },
+          "label": {
+            "zh": "体验 / 接入",
+            "en": "Experience / edge"
+          },
           "items": [
-            { "zh": "模块一", "en": "Module one" },
-            { "zh": "模块二", "en": "Module two" }
+            {
+              "zh": "模块一",
+              "en": "Module one"
+            },
+            {
+              "zh": "模块二",
+              "en": "Module two"
+            }
           ]
         },
         {
-          "label": { "zh": "服务", "en": "Services" },
+          "label": {
+            "zh": "服务",
+            "en": "Services"
+          },
           "items": [
-            { "zh": "服务一", "en": "Service one" },
-            { "zh": "服务二", "en": "Service two" }
+            {
+              "zh": "服务一",
+              "en": "Service one"
+            },
+            {
+              "zh": "服务二",
+              "en": "Service two"
+            }
           ]
         },
         {
-          "label": { "zh": "数据与平台", "en": "Data & platform" },
+          "label": {
+            "zh": "数据与平台",
+            "en": "Data & platform"
+          },
           "items": [
-            { "zh": "存储", "en": "Storage" },
-            { "zh": "治理", "en": "Governance" }
+            {
+              "zh": "存储",
+              "en": "Storage"
+            },
+            {
+              "zh": "治理",
+              "en": "Governance"
+            }
           ]
         }
       ]
@@ -99,37 +174,79 @@
     {
       "type": "before-after",
       "id": "before-after",
-      "section": { "zh": "方案与决策", "en": "Design & decisions" },
-      "title": { "zh": "现状与目标态", "en": "As-is vs to-be" },
+      "section": {
+        "zh": "方案与决策",
+        "en": "Design & decisions"
+      },
+      "title": {
+        "zh": "现状与目标态",
+        "en": "As-is vs to-be"
+      },
       "subtitle": {
         "zh": "对照差异，而不是堆砌组件名",
         "en": "Contrast the change, not a component dump"
       },
       "eyebrow": "DELTA",
       "before": {
-        "label": { "zh": "现状", "en": "As-is" },
-        "title": { "zh": "当前方式", "en": "Current approach" },
-        "body": { "zh": "待填写的痛点", "en": "Pain to supply" },
+        "label": {
+          "zh": "现状",
+          "en": "As-is"
+        },
+        "title": {
+          "zh": "当前方式",
+          "en": "Current approach"
+        },
+        "body": {
+          "zh": "待填写的痛点",
+          "en": "Pain to supply"
+        },
         "bullets": [
-          { "zh": "痛点一", "en": "Pain one" },
-          { "zh": "痛点二", "en": "Pain two" }
+          {
+            "zh": "痛点一",
+            "en": "Pain one"
+          },
+          {
+            "zh": "痛点二",
+            "en": "Pain two"
+          }
         ]
       },
       "after": {
-        "label": { "zh": "目标", "en": "To-be" },
-        "title": { "zh": "目标方式", "en": "Target approach" },
-        "body": { "zh": "待填写的改进", "en": "Improvement to supply" },
+        "label": {
+          "zh": "目标",
+          "en": "To-be"
+        },
+        "title": {
+          "zh": "目标方式",
+          "en": "Target approach"
+        },
+        "body": {
+          "zh": "待填写的改进",
+          "en": "Improvement to supply"
+        },
         "bullets": [
-          { "zh": "改进一", "en": "Gain one" },
-          { "zh": "改进二", "en": "Gain two" }
+          {
+            "zh": "改进一",
+            "en": "Gain one"
+          },
+          {
+            "zh": "改进二",
+            "en": "Gain two"
+          }
         ]
       }
     },
     {
       "type": "comparison",
       "id": "options",
-      "section": { "zh": "方案与决策", "en": "Design & decisions" },
-      "title": { "zh": "方案取舍", "en": "Option trade-offs" },
+      "section": {
+        "zh": "方案与决策",
+        "en": "Design & decisions"
+      },
+      "title": {
+        "zh": "方案取舍",
+        "en": "Option trade-offs"
+      },
       "subtitle": {
         "zh": "按适用场景、复杂度与风险比较",
         "en": "Compare fit, complexity, and risk"
@@ -137,19 +254,43 @@
       "eyebrow": "OPTIONS",
       "columns": [
         {
-          "title": { "zh": "方案 A", "en": "Option A" },
-          "summary": { "zh": "适用场景待填写", "en": "Fit to supply" },
+          "title": {
+            "zh": "方案 A",
+            "en": "Option A"
+          },
+          "summary": {
+            "zh": "适用场景待填写",
+            "en": "Fit to supply"
+          },
           "bullets": [
-            { "zh": "优点：待填写", "en": "Pros: to fill" },
-            { "zh": "代价：待填写", "en": "Cost: to fill" }
+            {
+              "zh": "优点：待填写",
+              "en": "Pros: to fill"
+            },
+            {
+              "zh": "代价：待填写",
+              "en": "Cost: to fill"
+            }
           ]
         },
         {
-          "title": { "zh": "方案 B", "en": "Option B" },
-          "summary": { "zh": "适用场景待填写", "en": "Fit to supply" },
+          "title": {
+            "zh": "方案 B",
+            "en": "Option B"
+          },
+          "summary": {
+            "zh": "适用场景待填写",
+            "en": "Fit to supply"
+          },
           "bullets": [
-            { "zh": "优点：待填写", "en": "Pros: to fill" },
-            { "zh": "代价：待填写", "en": "Cost: to fill" }
+            {
+              "zh": "优点：待填写",
+              "en": "Pros: to fill"
+            },
+            {
+              "zh": "代价：待填写",
+              "en": "Cost: to fill"
+            }
           ]
         }
       ]
@@ -157,8 +298,14 @@
     {
       "type": "callouts",
       "id": "open-questions",
-      "section": { "zh": "方案与决策", "en": "Design & decisions" },
-      "title": { "zh": "待确认项", "en": "Open questions" },
+      "section": {
+        "zh": "方案与决策",
+        "en": "Design & decisions"
+      },
+      "title": {
+        "zh": "待确认项",
+        "en": "Open questions"
+      },
       "subtitle": {
         "zh": "评审结束前必须对齐的问题",
         "en": "Questions that must be settled before approval"
@@ -167,27 +314,54 @@
       "items": [
         {
           "tone": "info",
-          "title": { "zh": "假设", "en": "Assumption" },
-          "body": { "zh": "需要确认的前提", "en": "Premise to confirm" }
+          "title": {
+            "zh": "假设",
+            "en": "Assumption"
+          },
+          "body": {
+            "zh": "需要确认的前提",
+            "en": "Premise to confirm"
+          }
         },
         {
           "tone": "warn",
-          "title": { "zh": "风险", "en": "Risk" },
-          "body": { "zh": "需要接受或规避的风险", "en": "Risk to accept or mitigate" }
+          "title": {
+            "zh": "风险",
+            "en": "Risk"
+          },
+          "body": {
+            "zh": "需要接受或规避的风险",
+            "en": "Risk to accept or mitigate"
+          }
         },
         {
           "tone": "accent",
-          "title": { "zh": "决策请求", "en": "Decision ask" },
-          "body": { "zh": "需要拍板的事项与建议选项", "en": "Decision and recommended option" }
+          "title": {
+            "zh": "决策请求",
+            "en": "Decision ask"
+          },
+          "body": {
+            "zh": "需要拍板的事项与建议选项",
+            "en": "Decision and recommended option"
+          }
         }
       ]
     },
     {
       "type": "closing",
       "id": "thank-you",
-      "section": { "zh": "结束", "en": "Closing" },
-      "title": { "zh": "致谢", "en": "Thank You" },
-      "thanks": { "zh": "", "en": "Thank You" },
+      "section": {
+        "zh": "结束",
+        "en": "Closing"
+      },
+      "title": {
+        "zh": "致谢",
+        "en": "Thank You"
+      },
+      "thanks": {
+        "zh": "",
+        "en": "Thank You"
+      },
       "vision": {
         "zh": "把数字世界带入每个人、每个家庭、\n每个组织，构建万物互联的智能世界。",
         "en": "Bring digital to every person, home and organization\nfor a fully connected, intelligent world."
@@ -197,4 +371,3 @@
     }
   ]
 }
-

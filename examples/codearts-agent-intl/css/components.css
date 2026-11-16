@@ -27,8 +27,12 @@
 .kit-body h3{font-size:var(--type-card-title);line-height:1.32;margin:0 0 10px;letter-spacing:var(--track-title);color:var(--ink)}
 .kit-body p{font-size:var(--type-body);color:var(--muted);line-height:var(--lh-body);margin:0}
 .kit-index{display:inline-block;color:var(--red);font:600 13px/1.2 "Huawei Sans",Arial,sans-serif;letter-spacing:.1em;margin-bottom:12px;font-variant-numeric:tabular-nums}
+.kit-tag{display:inline-block;margin:0 0 10px;padding:4px 8px;border:1px solid var(--border-warm);background:var(--surface-accent);color:var(--red);font:600 12px/1.25 "Huawei Sans",Arial,sans-serif;letter-spacing:.06em;border-radius:4px}
+.kit-summary{margin-top:16px;padding:14px 18px;border:1px solid var(--border-accent);border-left:var(--rail) solid var(--red);background:linear-gradient(90deg,var(--surface-accent) 0%,var(--paper) 48%);display:grid;gap:6px}
+.kit-summary strong{font-size:var(--type-card-title);color:var(--ink);letter-spacing:var(--track-title)}
+.kit-summary p{margin:0;font-size:var(--type-card-body);color:var(--note-ink);line-height:var(--lh-scan);max-width:54em}
 
-/* ── Cards — indexed pillars; first card is the root signal ── */
+/* ── Cards — indexed pillars; first card / focus is the root signal ── */
 .kit-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(0,1fr));gap:16px;align-items:stretch}
 .kit-card{
   position:relative;
@@ -38,15 +42,17 @@
   border:1px solid var(--line);
   border-top:var(--rail) solid var(--red);
   padding:20px 18px 22px;
+  border-radius:6px;
   box-shadow:none;
 }
-.kit-card:first-child{
+.kit-card:first-child,
+.kit-card[data-focus="true"]{
   background:linear-gradient(180deg,var(--surface-accent) 0%,var(--paper) 42%);
   border-color:var(--border-accent);
   border-top-color:var(--red);
   box-shadow:var(--shadow-soft);
 }
-.kit-card .kit-index{font-size:15px;letter-spacing:.14em;margin-bottom:14px}
+.kit-card .kit-index{font-size:15px;letter-spacing:.14em;margin-bottom:10px}
 .kit-card h3{font-size:var(--type-card-title);margin:0 0 12px}
 .kit-card p{font-size:var(--type-card-body);line-height:var(--lh-body);color:var(--muted);max-width:var(--measure-body);flex:1}
 
@@ -235,13 +241,15 @@
 }
 .kit-callout[data-callout-tone="info"]{border-top-color:var(--compare-neutral);border-left-color:var(--compare-neutral)}
 .kit-callout[data-callout-tone="warn"]{border-top-color:#b7791f;border-left-color:#b7791f;background:#fffaf0}
-.kit-callout[data-callout-tone="accent"]{
+.kit-callout[data-callout-tone="accent"],
+.kit-callout[data-focus="true"]{
   border-top-color:var(--red);
   border-left-color:var(--red);
   border-color:var(--border-accent);
   background:linear-gradient(180deg,var(--surface-accent) 0%,var(--paper) 55%);
   box-shadow:var(--shadow-soft);
 }
+.kit-callout{border-radius:6px}
 .kit-callout .kit-index{margin-bottom:10px}
 .kit-callout h3{font-size:var(--type-card-title);font-weight:600;margin-bottom:10px;letter-spacing:var(--track-title);line-height:1.32;color:var(--ink)}
 .kit-callout p{font-size:var(--type-card-body);line-height:var(--lh-body);color:var(--muted);max-width:var(--measure-body)}
@@ -292,6 +300,89 @@
 .kit-ba-divider::before{content:"";position:absolute;top:12%;bottom:12%;left:50%;width:1px;background:var(--border-warm);transform:translateX(-50%)}
 .kit-ba-divider span{position:relative;z-index:1;display:inline-flex;width:36px;height:36px;align-items:center;justify-content:center;border:1px solid var(--border-warm);background:var(--paper);border-radius:0;font-weight:600}
 
+/* ── Tree — root → branches → detail chips ── */
+.kit-tree{display:grid;gap:18px;padding-top:4px}
+.kit-tree-root{
+  justify-self:center;min-width:min(420px,100%);max-width:560px;text-align:center;
+  padding:16px 28px;border-radius:8px;background:var(--red);color:#fff;
+  box-shadow:var(--shadow-soft);
+}
+.kit-tree-root h3{margin:0;color:#fff;font-size:var(--type-card-title);letter-spacing:var(--track-title)}
+.kit-tree-root p{margin:8px 0 0;color:#ffe8ea;font-size:var(--type-card-body);line-height:var(--lh-scan)}
+.kit-tree-branches{display:grid;grid-template-columns:repeat(auto-fit,minmax(0,1fr));gap:14px;position:relative}
+.kit-tree-branches::before{
+  content:"";position:absolute;left:8%;right:8%;top:-10px;height:10px;
+  border:1px solid var(--line);border-bottom:0;border-radius:8px 8px 0 0;pointer-events:none;
+}
+.kit-tree-branch{display:grid;gap:8px;align-content:start}
+.kit-tree-node{
+  padding:16px 14px 18px;border:1px solid var(--border-accent);border-radius:8px;
+  background:linear-gradient(180deg,#fff7f7 0%,var(--paper) 55%);text-align:center;
+}
+.kit-tree-node .kit-index{margin-bottom:8px}
+.kit-tree-node h3{margin:0 0 6px;font-size:var(--type-card-title)}
+.kit-tree-sub{margin:0;font-size:13px;color:var(--red);letter-spacing:.04em}
+.kit-tree-detail{
+  padding:12px 12px 14px;border:1px solid var(--line);border-radius:8px;
+  background:var(--surface);font-size:var(--type-card-body);line-height:var(--lh-scan);color:var(--muted);text-align:center;
+}
+
+/* ── Formula — A + B structure + explainers ── */
+.kit-formula{display:grid;gap:16px}
+.kit-formula-parts{display:flex;flex-wrap:wrap;align-items:stretch;gap:12px}
+.kit-formula-part{
+  flex:1 1 180px;min-width:0;padding:18px 16px;border:1px solid var(--line);border-radius:8px;
+  background:var(--surface);border-top:var(--rail) solid var(--compare-neutral);
+}
+.kit-formula-part[data-focus="true"]{
+  background:linear-gradient(180deg,var(--surface-accent) 0%,var(--paper) 50%);
+  border-color:var(--border-accent);border-top-color:var(--red);box-shadow:var(--shadow-soft);
+}
+.kit-formula-part h3{margin:0 0 8px;font-size:clamp(22px,2.2vw,30px);line-height:1.2;color:var(--ink)}
+.kit-formula-part p{margin:0;font-size:var(--type-card-body);color:var(--muted)}
+.kit-formula-op{
+  align-self:center;flex:0 0 auto;width:28px;height:28px;display:inline-flex;align-items:center;justify-content:center;
+  border:1px solid var(--border-warm);border-radius:50%;color:var(--red);font:600 18px/1 Arial;background:var(--paper);
+}
+.kit-formula-items{display:grid;grid-template-columns:repeat(auto-fit,minmax(0,1fr));gap:12px}
+.kit-formula-item{padding:16px 14px;border:1px solid var(--line);border-radius:6px;background:var(--paper);min-height:120px}
+.kit-formula-item h3{margin:0 0 8px}
+
+/* ── Split — taxonomy | table/matrix ── */
+.kit-split{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:20px;align-items:stretch}
+.kit-split-left{
+  border:1px solid var(--border-accent);border-radius:8px;background:var(--paper);
+  padding:16px 16px 18px;box-shadow:inset var(--rail) 0 0 var(--red);min-height:320px;
+}
+.kit-split-left-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px}
+.kit-split-left-head h3{margin:0;font-size:var(--type-card-title)}
+.kit-split-groups{display:grid;gap:12px}
+.kit-split-group h4{margin:0 0 8px;display:flex;align-items:center;gap:8px;font-size:var(--type-body);color:var(--ink)}
+.kit-split-group h4 .kit-index{margin:0}
+.kit-split-group ul{margin:0;padding-left:1.1em;font-size:var(--type-card-body);line-height:var(--lh-scan);color:var(--muted)}
+.kit-split-group li+li{margin-top:6px}
+.kit-split-right{min-width:0}
+.kit-split-right .kit-table-scroll{max-height:460px;border-radius:6px}
+.kit-split-mark{font-weight:700;text-align:center;font-variant-numeric:tabular-nums}
+.kit-split-mark[data-mark="yes"]{color:var(--red)}
+.kit-split-mark[data-mark="no"]{color:var(--muted-soft)}
+.kit-split-mark[data-mark="unknown"]{color:#b7791f}
+@media (max-width:900px){.kit-split{grid-template-columns:1fr}}
+
+/* ── Panels — 2–4 dashboard tiles ── */
+.kit-panels{display:grid;grid-template-columns:repeat(auto-fit,minmax(0,1fr));gap:14px;align-items:stretch}
+.kit-panel{
+  min-height:var(--min-card);padding:18px 16px 20px;border:1px solid var(--line);border-radius:8px;
+  background:var(--paper);border-top:var(--rail) solid var(--line);
+}
+.kit-panel[data-focus="true"]{
+  border-color:var(--border-accent);border-top-color:var(--red);
+  background:linear-gradient(180deg,var(--surface-accent) 0%,var(--paper) 48%);box-shadow:var(--shadow-soft);
+}
+.kit-panel h3{margin:0 0 10px}
+.kit-panel ul{margin:10px 0 0;padding-left:1.1em;font-size:var(--type-card-body);line-height:var(--lh-scan);color:var(--ink)}
+.kit-panel li+li{margin-top:6px}
+
 /* ── Pricing mount ── */
 .kit-pricing{margin-top:4px}
 
@@ -305,10 +396,21 @@
  .slide.active .kit-agenda-item:nth-child(3){animation-delay:.24s}
  .slide.active .kit-agenda-item:nth-child(4){animation-delay:.28s}
  .slide.active .kit-agenda-item:nth-child(5){animation-delay:.32s}
- .slide.active .kit-callout,.slide.active .kit-card{animation:kit-enter .42s var(--ease-brief) backwards}
- .slide.active .kit-callout:nth-child(1),.slide.active .kit-card:nth-child(1){animation-delay:.18s}
- .slide.active .kit-callout:nth-child(2),.slide.active .kit-card:nth-child(2){animation-delay:.24s}
- .slide.active .kit-callout:nth-child(3),.slide.active .kit-card:nth-child(3){animation-delay:.3s}
+ .slide.active .kit-callout,.slide.active .kit-card,.slide.active .kit-panel,.slide.active .kit-formula-item{animation:kit-enter .42s var(--ease-brief) backwards}
+ .slide.active .kit-callout:nth-child(1),.slide.active .kit-card:nth-child(1),.slide.active .kit-panel:nth-child(1),.slide.active .kit-formula-item:nth-child(1){animation-delay:.18s}
+ .slide.active .kit-callout:nth-child(2),.slide.active .kit-card:nth-child(2),.slide.active .kit-panel:nth-child(2),.slide.active .kit-formula-item:nth-child(2){animation-delay:.24s}
+ .slide.active .kit-callout:nth-child(3),.slide.active .kit-card:nth-child(3),.slide.active .kit-panel:nth-child(3),.slide.active .kit-formula-item:nth-child(3){animation-delay:.3s}
+ .slide.active .kit-tree-root{animation:kit-enter .36s .16s var(--ease-brief) backwards}
+ .slide.active .kit-tree-branch{animation:kit-enter .38s var(--ease-brief) backwards}
+ .slide.active .kit-tree-branch:nth-child(1){animation-delay:.2s}
+ .slide.active .kit-tree-branch:nth-child(2){animation-delay:.24s}
+ .slide.active .kit-tree-branch:nth-child(3){animation-delay:.28s}
+ .slide.active .kit-tree-branch:nth-child(4){animation-delay:.32s}
+ .slide.active .kit-formula-parts{animation:kit-enter .36s .16s var(--ease-brief) backwards}
+ .slide.active .kit-split-left,.slide.active .kit-split-right{animation:kit-enter .4s var(--ease-brief) backwards}
+ .slide.active .kit-split-left{animation-delay:.16s}
+ .slide.active .kit-split-right{animation-delay:.22s}
+ .slide.active .kit-summary{animation:kit-enter .36s .28s var(--ease-brief) backwards}
  .slide.active .kit-flow article{animation:kit-enter .38s var(--ease-brief) backwards}
  .slide.active .kit-flow article:nth-child(1){animation-delay:.18s}
  .slide.active .kit-flow article:nth-child(2){animation-delay:.22s}
@@ -359,6 +461,14 @@
 .thumbnail-preview .kit-agenda-item,
 .thumbnail-preview .kit-callout,
 .thumbnail-preview .kit-card,
+.thumbnail-preview .kit-panel,
+.thumbnail-preview .kit-formula-item,
+.thumbnail-preview .kit-formula-parts,
+.thumbnail-preview .kit-tree-root,
+.thumbnail-preview .kit-tree-branch,
+.thumbnail-preview .kit-split-left,
+.thumbnail-preview .kit-split-right,
+.thumbnail-preview .kit-summary,
 .thumbnail-preview .kit-flow article,
 .thumbnail-preview .kit-tabs-list,
 .thumbnail-preview .kit-tabs-panels article,
@@ -383,7 +493,8 @@
  .kit-callouts{max-height:none;overflow:visible}
  .kit-before-after{max-height:none}
  .controls{display:none!important}
- .kit-agenda-item,.kit-callout,.kit-card,.kit-flow article,.kit-tabs-list,.kit-tabs-panels article,
+ .kit-agenda-item,.kit-callout,.kit-card,.kit-panel,.kit-formula-item,.kit-formula-parts,.kit-tree-root,.kit-tree-branch,
+ .kit-split-left,.kit-split-right,.kit-summary,.kit-flow article,.kit-tabs-list,.kit-tabs-panels article,
  .kit-metrics article,.kit-layer,.kit-compare article,.kit-quote,.kit-quote-attr,.kit-timeline article,
  .kit-ba-divider,.kit-before-after .kit-ba-before,.kit-before-after .kit-ba-after{animation:none!important}
 }
@@ -400,6 +511,14 @@
  .slide.active .kit-agenda-item,
  .slide.active .kit-callout,
  .slide.active .kit-card,
+ .slide.active .kit-panel,
+ .slide.active .kit-formula-item,
+ .slide.active .kit-formula-parts,
+ .slide.active .kit-tree-root,
+ .slide.active .kit-tree-branch,
+ .slide.active .kit-split-left,
+ .slide.active .kit-split-right,
+ .slide.active .kit-summary,
  .slide.active .kit-flow article,
  .slide.active .kit-tabs-list,
  .slide.active .kit-tabs-panels article,
