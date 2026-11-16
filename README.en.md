@@ -156,7 +156,7 @@ hw-ppt-skill/
 ├── scripts/               init, demo build, audit, runtime sync
 ├── examples/              Full sample decks (CodeArts, MaaS, …)
 ├── assets/
-│   ├── template/          Full presentation project template (runtime 1.5.8)
+│   ├── template/          Full presentation project template (runtime 1.5.9)
 │   ├── starters/          blank · status-report · design-review ·
 │   │                      project-report · workshop · thank-you
 │   └── recipes/           Optional interactive refs + deck-archetypes guide
