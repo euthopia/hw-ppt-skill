@@ -214,11 +214,22 @@ def slide_lines(slide: dict, lang: str) -> list[str]:
         if slide.get('body'):
             lines.append(pick(slide['body'], lang))
     elif kind == 'pricing':
-        for row in slide.get('rows') or []:
-            lines.append(
-                f'{pick(row.get("name"), lang)} · in {pick(row.get("input"), lang)} / '
-                f'cache {pick(row.get("cacheInput"), lang)} / out {pick(row.get("output"), lang)}'
-            )
+        if slide.get('families'):
+            for family in slide.get('families') or []:
+                lines.append(pick(family.get('label'), lang))
+                for card in family.get('cards') or []:
+                    lines.append(
+                        f'  {pick(card.get("name"), lang)} · in {pick(card.get("input"), lang)} / '
+                        f'cache {pick(card.get("cacheInput"), lang)} / out {pick(card.get("output"), lang)}'
+                    )
+        else:
+            for row in slide.get('rows') or []:
+                lines.append(
+                    f'{pick(row.get("name"), lang)} · in {pick(row.get("input"), lang)} / '
+                    f'cache {pick(row.get("cacheInput"), lang)} / out {pick(row.get("output"), lang)}'
+                )
+        if slide.get('note'):
+            lines.append(pick(slide['note'], lang))
     elif kind == 'scenarios':
         for sc in slide.get('scenarios') or []:
             lines.append(f'{pick(sc.get("label"), lang)} — {pick(sc.get("body"), lang)}')
@@ -309,6 +320,66 @@ def slide_lines(slide: dict, lang: str) -> list[str]:
                     )
                 for b in col.get('bullets') or []:
                     lines.append(f'  • {pick(b, lang)}')
+    elif kind == 'stages':
+        for i, stage in enumerate(slide.get('stages') or [], 1):
+            scope = pick(stage.get('scope'), lang)
+            head = f'{i:02}. {pick(stage.get("title"), lang)}'
+            if scope:
+                head = f'{i:02}. {scope} — {pick(stage.get("title"), lang)}'
+            lines.append(head)
+            if stage.get('body'):
+                lines.append(pick(stage['body'], lang))
+            if stage.get('value'):
+                lines.append(pick(stage['value'], lang))
+            for ex in stage.get('examples') or []:
+                lines.append(f'  • {pick(ex, lang)}')
+        if slide.get('foundation'):
+            label = pick(slide.get('foundationLabel'), lang) or 'FOUNDATION'
+            lines.append(f'{label}: {pick(slide.get("foundation"), lang)}')
+    elif kind == 'zones':
+        for side in ('left', 'right'):
+            zone = slide.get(side) or {}
+            lines.append(f'{pick(zone.get("kicker"), lang)} · {pick(zone.get("title"), lang)}'.strip(' ·'))
+            if zone.get('body'):
+                lines.append(pick(zone['body'], lang))
+            for t in zone.get('tags') or []:
+                lines.append(f'  [{pick(t, lang)}]')
+            for item in zone.get('items') or []:
+                lines.append(f'  • {pick(item.get("title"), lang)}')
+            for b in zone.get('bullets') or []:
+                lines.append(f'  • {pick(b, lang)}')
+        bridge = slide.get('bridge') or {}
+        if bridge.get('label') or bridge.get('caption'):
+            lines.append(
+                f'{pick(bridge.get("label"), lang)} — {pick(bridge.get("caption"), lang)}'.strip(' —')
+            )
+        for c in slide.get('checks') or []:
+            lines.append(f'✓ {pick(c, lang)}')
+    elif kind == 'lanes':
+        task = slide.get('task') or {}
+        if task.get('title'):
+            lines.append(pick(task.get('title'), lang))
+        if task.get('body'):
+            lines.append(pick(task['body'], lang))
+        for i, lane in enumerate(slide.get('lanes') or [], 1):
+            lines.append(f'{i:02}. {pick(lane.get("title"), lang)}')
+            if lane.get('body'):
+                lines.append(pick(lane['body'], lang))
+            for b in lane.get('bullets') or []:
+                lines.append(f'  • {pick(b, lang)}')
+    elif kind == 'stack-board':
+        if slide.get('lead'):
+            lines.append(pick(slide['lead'], lang))
+        for layer in slide.get('layers') or []:
+            cell_bits = []
+            for item in layer.get('items') or []:
+                if isinstance(item, dict) and 'title' in item:
+                    cell_bits.append(pick(item.get('title'), lang))
+                else:
+                    cell_bits.append(pick(item, lang))
+            lines.append(f'{pick(layer.get("label"), lang)}: {", ".join(cell_bits)}')
+        for i, val in enumerate(slide.get('values') or [], 1):
+            lines.append(f'{i:02}. {pick(val.get("title"), lang)} — {pick(val.get("body"), lang)}')
     elif kind == 'closing':
         return lines
     elif kind == 'custom':

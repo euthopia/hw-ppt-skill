@@ -1,7 +1,7 @@
 {
   "id": "product-deck-example",
   "kind": "product-briefing",
-  "runtimeVersion": "1.5.7",
+  "runtimeVersion": "1.5.8",
   "meta": {
     "purpose": {
       "zh": "模板示例：企业简报结构与版式",
@@ -886,6 +886,579 @@
           "zh": "现场只切换预设，不改数字；数字在 deck.json 里预先写死。",
           "en": "Switch presets live; keep numbers pre-authored in deck.json."
         }
+      }
+    },
+    {
+      "type": "stages",
+      "id": "evolution",
+      "section": {
+        "zh": "结构总览",
+        "en": "Structure overview"
+      },
+      "title": {
+        "zh": "能力如何从辅助走向自治",
+        "en": "How capability moves from assist to autonomy"
+      },
+      "subtitle": {
+        "zh": "三个阶段讲清成熟度，而不是堆功能名",
+        "en": "Three stages of maturity — not a feature dump"
+      },
+      "eyebrow": "STAGES",
+      "stages": [
+        {
+          "scope": {
+            "zh": "个人效率",
+            "en": "Individual"
+          },
+          "title": {
+            "zh": "辅助建议",
+            "en": "Assisted suggestions"
+          },
+          "body": {
+            "zh": "人决策，系统提示",
+            "en": "People decide; system suggests"
+          },
+          "value": {
+            "zh": "缩短单点任务时间",
+            "en": "Shorter single-task time"
+          },
+          "examples": [
+            {
+              "zh": "问答",
+              "en": "Q&A"
+            },
+            {
+              "zh": "草稿",
+              "en": "Drafts"
+            }
+          ]
+        },
+        {
+          "scope": {
+            "zh": "核心流程",
+            "en": "Core process"
+          },
+          "title": {
+            "zh": "代理执行",
+            "en": "Agentic execution"
+          },
+          "body": {
+            "zh": "系统执行，人审批",
+            "en": "System executes; people approve"
+          },
+          "value": {
+            "zh": "打通端到端步骤",
+            "en": "Connect end-to-end steps"
+          },
+          "focus": true,
+          "tag": {
+            "zh": "关键跃迁",
+            "en": "Key shift"
+          },
+          "examples": [
+            {
+              "zh": "编排",
+              "en": "Orchestration"
+            },
+            {
+              "zh": "校验",
+              "en": "Validation"
+            }
+          ]
+        },
+        {
+          "scope": {
+            "zh": "组织自治",
+            "en": "Org autonomy"
+          },
+          "title": {
+            "zh": "协同运营",
+            "en": "Coordinated operations"
+          },
+          "body": {
+            "zh": "系统协同，人治理",
+            "en": "System coordinates; people govern"
+          },
+          "value": {
+            "zh": "稳定规模化运营",
+            "en": "Stable scaled operations"
+          },
+          "examples": [
+            {
+              "zh": "配额策略",
+              "en": "Quota policy"
+            },
+            {
+              "zh": "审计",
+              "en": "Audit"
+            }
+          ]
+        }
+      ],
+      "foundation": {
+        "zh": "跃迁依赖模型、工具、运行时与治理一并到位。",
+        "en": "The jump needs models, tools, runtime and governance together."
+      },
+      "foundationLabel": "FOUNDATION"
+    },
+    {
+      "type": "zones",
+      "id": "deploy",
+      "section": {
+        "zh": "能力与路径",
+        "en": "Capability & path"
+      },
+      "title": {
+        "zh": "集中训练 · 就近推理",
+        "en": "Train central · Infer near"
+      },
+      "subtitle": {
+        "zh": "双区部署叙事；用检查条收口安全要求",
+        "en": "Dual-zone deployment; close with a security check strip"
+      },
+      "eyebrow": "ZONES",
+      "left": {
+        "kicker": {
+          "zh": "集中训练",
+          "en": "Train central"
+        },
+        "title": {
+          "zh": "共享算力池",
+          "en": "Shared compute pool"
+        },
+        "body": {
+          "zh": "待填写：训练资源与调度口径",
+          "en": "TBC: training resources and scheduling"
+        },
+        "tags": [
+          {
+            "zh": "算力",
+            "en": "Compute"
+          },
+          {
+            "zh": "存储",
+            "en": "Storage"
+          },
+          {
+            "zh": "网络",
+            "en": "Network"
+          }
+        ],
+        "bullets": [
+          {
+            "zh": "统一资源视图",
+            "en": "Unified resource view"
+          },
+          {
+            "zh": "可扩容训练任务",
+            "en": "Scalable training jobs"
+          }
+        ]
+      },
+      "right": {
+        "kicker": {
+          "zh": "就近推理",
+          "en": "Infer near"
+        },
+        "title": {
+          "zh": "区域 / 混合节点",
+          "en": "Regional / hybrid nodes"
+        },
+        "body": {
+          "zh": "待填写：推理落点与数据边界",
+          "en": "TBC: inference placement and data boundary"
+        },
+        "items": [
+          {
+            "title": {
+              "zh": "区域节点",
+              "en": "Regional node"
+            },
+            "body": {
+              "zh": "低时延服务",
+              "en": "Low-latency serving"
+            }
+          },
+          {
+            "title": {
+              "zh": "企业环境",
+              "en": "Enterprise env"
+            },
+            "body": {
+              "zh": "数据不出域",
+              "en": "Data stays local"
+            }
+          }
+        ]
+      },
+      "bridge": {
+        "label": {
+          "zh": "加密协同",
+          "en": "Encrypted handoff"
+        },
+        "caption": {
+          "zh": "模型与服务协同",
+          "en": "Model and service coordination"
+        }
+      },
+      "checks": [
+        {
+          "zh": "物理隔离 / 专属资源",
+          "en": "Physical fencing / dedicated isolation"
+        },
+        {
+          "zh": "网络隔离",
+          "en": "Network isolation"
+        },
+        {
+          "zh": "独立访问控制",
+          "en": "Independent access control"
+        },
+        {
+          "zh": "统一开发面",
+          "en": "Unified development plane"
+        }
+      ],
+      "summary": {
+        "title": {
+          "zh": "选型原则",
+          "en": "Selection rule"
+        },
+        "body": {
+          "zh": "先定数据边界，再定训练/推理落点。",
+          "en": "Fix the data boundary first, then training/inference placement."
+        }
+      }
+    },
+    {
+      "type": "stack-board",
+      "id": "stack",
+      "section": {
+        "zh": "能力与路径",
+        "en": "Capability & path"
+      },
+      "title": {
+        "zh": "产品主栈与客户价值对照",
+        "en": "Product stack mapped to customer value"
+      },
+      "subtitle": {
+        "zh": "左侧分层，右侧价值；大字标题可选",
+        "en": "Layers on the left, values on the right; optional lead word"
+      },
+      "eyebrow": "STACK",
+      "lead": {
+        "zh": "主产品",
+        "en": "Product"
+      },
+      "leadBody": {
+        "zh": "一句话说明它在全栈中的位置",
+        "en": "One line on where it sits in the stack"
+      },
+      "layers": [
+        {
+          "label": {
+            "zh": "应用层",
+            "en": "Application"
+          },
+          "items": [
+            {
+              "zh": "场景 A",
+              "en": "Scenario A"
+            },
+            {
+              "zh": "场景 B",
+              "en": "Scenario B"
+            }
+          ]
+        },
+        {
+          "label": {
+            "zh": "能力层",
+            "en": "Capability"
+          },
+          "items": [
+            {
+              "title": {
+                "zh": "编排",
+                "en": "Orchestration"
+              },
+              "body": {
+                "zh": "待填写",
+                "en": "TBC"
+              }
+            },
+            {
+              "title": {
+                "zh": "工具",
+                "en": "Tools"
+              },
+              "body": {
+                "zh": "待填写",
+                "en": "TBC"
+              }
+            }
+          ]
+        },
+        {
+          "label": {
+            "zh": "模型层",
+            "en": "Model"
+          },
+          "items": [
+            {
+              "zh": "主模型",
+              "en": "Primary model"
+            },
+            {
+              "zh": "备选模型",
+              "en": "Fallback model"
+            }
+          ]
+        },
+        {
+          "label": {
+            "zh": "基础设施",
+            "en": "Infrastructure"
+          },
+          "items": [
+            {
+              "zh": "算力",
+              "en": "Compute"
+            },
+            {
+              "zh": "网络",
+              "en": "Network"
+            }
+          ]
+        }
+      ],
+      "values": [
+        {
+          "title": {
+            "zh": "更快落地",
+            "en": "Faster landing"
+          },
+          "body": {
+            "zh": "待填写的周期收益",
+            "en": "Cycle benefit to supply"
+          },
+          "focus": true,
+          "tag": {
+            "zh": "优先",
+            "en": "Priority"
+          }
+        },
+        {
+          "title": {
+            "zh": "更稳治理",
+            "en": "Stronger governance"
+          },
+          "body": {
+            "zh": "待填写的合规收益",
+            "en": "Compliance benefit to supply"
+          }
+        },
+        {
+          "title": {
+            "zh": "更低切换成本",
+            "en": "Lower switching cost"
+          },
+          "body": {
+            "zh": "待填写的集成收益",
+            "en": "Integration benefit to supply"
+          }
+        }
+      ]
+    },
+    {
+      "type": "lanes",
+      "id": "methods",
+      "section": {
+        "zh": "落地与下一步",
+        "en": "Delivery & next"
+      },
+      "title": {
+        "zh": "同一任务，两种做法",
+        "en": "One task, two approaches"
+      },
+      "subtitle": {
+        "zh": "共享任务条 + 双车道对比",
+        "en": "Shared task bar + dual lanes"
+      },
+      "eyebrow": "LANES",
+      "task": {
+        "label": {
+          "zh": "共享任务",
+          "en": "Shared task"
+        },
+        "title": {
+          "zh": "待填写的客户任务",
+          "en": "Customer task to supply"
+        },
+        "body": {
+          "zh": "用同一验收标准比较两种路径",
+          "en": "Compare both paths against the same acceptance bar"
+        }
+      },
+      "lanes": [
+        {
+          "kicker": {
+            "zh": "探索式",
+            "en": "Exploratory"
+          },
+          "title": {
+            "zh": "快速试错",
+            "en": "Fast iteration"
+          },
+          "body": {
+            "zh": "反馈驱动，适合不确定需求",
+            "en": "Feedback-driven; fit for uncertain requirements"
+          },
+          "bullets": [
+            {
+              "zh": "短循环",
+              "en": "Short loops"
+            },
+            {
+              "zh": "可抛弃原型",
+              "en": "Disposable prototypes"
+            }
+          ]
+        },
+        {
+          "kicker": {
+            "zh": "规格驱动",
+            "en": "Spec-driven"
+          },
+          "title": {
+            "zh": "受控交付",
+            "en": "Controlled delivery"
+          },
+          "body": {
+            "zh": "规格先于实现，适合强验收",
+            "en": "Spec before build; fit for strong acceptance"
+          },
+          "focus": true,
+          "tag": {
+            "zh": "推荐",
+            "en": "Preferred"
+          },
+          "bullets": [
+            {
+              "zh": "可审计",
+              "en": "Auditable"
+            },
+            {
+              "zh": "可回归",
+              "en": "Regression-ready"
+            }
+          ]
+        }
+      ],
+      "summary": {
+        "title": {
+          "zh": "选用",
+          "en": "Choose"
+        },
+        "body": {
+          "zh": "不确定用左车道验证，确定后用右车道固化。",
+          "en": "Use the left lane to explore; lock with the right lane once clear."
+        }
+      }
+    },
+    {
+      "type": "pricing",
+      "id": "pricing-cards",
+      "section": {
+        "zh": "方案与节奏",
+        "en": "Solution & cadence"
+      },
+      "title": {
+        "zh": "套餐卡片总览",
+        "en": "Plan card overview"
+      },
+      "subtitle": {
+        "zh": "按系列分组的卡片价；数字须来自当前项目",
+        "en": "Family card grid; numbers must come from the current project"
+      },
+      "eyebrow": "PLANS",
+      "labels": {
+        "input": {
+          "zh": "输入",
+          "en": "Input"
+        },
+        "cacheInput": {
+          "zh": "缓存输入",
+          "en": "Cached input"
+        },
+        "output": {
+          "zh": "输出",
+          "en": "Output"
+        }
+      },
+      "families": [
+        {
+          "label": {
+            "zh": "系列甲",
+            "en": "Family A"
+          },
+          "cards": [
+            {
+              "name": {
+                "zh": "方案 A1",
+                "en": "Plan A1"
+              },
+              "tag": {
+                "zh": "新品",
+                "en": "New"
+              },
+              "focus": true,
+              "body": {
+                "zh": "待填写定位",
+                "en": "Positioning to supply"
+              },
+              "input": "TBC",
+              "cacheInput": "TBC",
+              "output": "TBC"
+            },
+            {
+              "name": {
+                "zh": "方案 A2",
+                "en": "Plan A2"
+              },
+              "body": {
+                "zh": "待填写定位",
+                "en": "Positioning to supply"
+              },
+              "input": "TBC",
+              "output": "TBC"
+            }
+          ]
+        },
+        {
+          "label": {
+            "zh": "系列乙",
+            "en": "Family B"
+          },
+          "cards": [
+            {
+              "name": {
+                "zh": "方案 B1",
+                "en": "Plan B1"
+              },
+              "body": {
+                "zh": "待填写定位",
+                "en": "Positioning to supply"
+              },
+              "input": "TBC",
+              "output": "TBC"
+            }
+          ]
+        }
+      ],
+      "note": {
+        "zh": "价格与容量以当前项目正式口径为准。",
+        "en": "Prices and capacity follow the current project’s official terms."
       }
     },
     {

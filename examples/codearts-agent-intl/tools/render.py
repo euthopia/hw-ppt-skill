@@ -238,7 +238,41 @@ def layout_custom(slide):
   raise ValueError('Custom fragment may not include <script>, inline event handlers, or javascript: URLs')
  return html_fragment
 
+def layout_pricing_cards(slide):
+ families=bounded(slide['families'],1,4,'pricing families')
+ labels=slide.get('labels',{}) if isinstance(slide.get('labels'),dict) else {}
+ label_input=text(labels.get('input','Input'))
+ label_cache=text(labels.get('cacheInput','Cached input'))
+ label_output=text(labels.get('output','Output'))
+ family_html=[]
+ for family in families:
+  cards=bounded(family['cards'],1,4,'pricing family cards')
+  card_html=[]
+  for card in cards:
+   focus=' data-focus="true"' if card.get('focus') else ''
+   body=f'<p>{text(card["body"])}</p>' if card.get('body') else ''
+   prices=[]
+   if card.get('input') is not None:
+    prices.append(f'<div><span>{label_input}</span><b>{text(card["input"])}</b></div>')
+   if card.get('cacheInput') is not None:
+    prices.append(f'<div><span>{label_cache}</span><b>{text(card["cacheInput"])}</b></div>')
+   if card.get('output') is not None:
+    prices.append(f'<div><span>{label_output}</span><b>{text(card["output"])}</b></div>')
+   price_html=('<div class="kit-price-row">'+''.join(prices)+'</div>') if prices else ''
+   card_html.append(
+    f'<article class="kit-price-card"{focus}>{kit_tag(card.get("tag"))}'
+    f'<h3>{text(card["name"])}</h3>{body}{price_html}</article>'
+   )
+  family_html.append(
+   f'<section class="kit-price-family"><h4 class="kit-price-family-label">{text(family["label"])}</h4>'
+   f'<div class="kit-price-cards">'+''.join(card_html)+'</div></section>'
+  )
+ note=f'<p class="kit-price-note">{text(slide["note"])}</p>' if slide.get('note') else ''
+ return '<div class="kit-pricing kit-pricing-cards">'+''.join(family_html)+note+'</div>'
+
 def layout_pricing(slide):
+ if slide.get('families'):
+  return layout_pricing_cards(slide)
  rows=bounded(slide['rows'],1,8,'pricing rows')
  labels=slide.get('labels',{})
  payload=[]
@@ -480,6 +514,115 @@ def layout_compare_board(slide):
   '<div class="kit-cb-panels">'+''.join(panels)+'</div></div>'
  )
 
+def layout_stages(slide):
+ stages=bounded(slide['stages'],2,4,'stages')
+ parts=[]
+ for i,stage in enumerate(stages):
+  focus=' data-focus="true"' if stage.get('focus') else ''
+  scope=f'<span class="kit-stage-scope">{text(stage["scope"])}</span>' if stage.get('scope') else ''
+  body=f'<p>{text(stage["body"])}</p>' if stage.get('body') else ''
+  value=f'<p class="kit-stage-value">{text(stage["value"])}</p>' if stage.get('value') else ''
+  examples=''
+  if stage.get('examples'):
+   examples='<div class="kit-stage-examples">'+''.join(
+    f'<span>{text(ex)}</span>' for ex in bounded(stage['examples'],1,4,'stage examples')
+   )+'</div>'
+  parts.append(
+   f'<article class="kit-stage"{focus}><span class="kit-index">{i+1:02}</span>{scope}'
+   f'{kit_tag(stage.get("tag"))}<h3>{text(stage["title"])}</h3>{body}{value}{examples}</article>'
+  )
+ foundation=''
+ if slide.get('foundation'):
+  foundation=f'<aside class="kit-stage-foundation"><strong>{text(slide.get("foundationLabel","FOUNDATION"))}</strong><p>{text(slide["foundation"])}</p></aside>'
+ return f'<div class="kit-stages"><div class="kit-stage-row">{"".join(parts)}</div>{foundation}</div>'
+
+def layout_zones(slide):
+ left=slide['left']; right=slide['right']
+ def zone_block(side,zone):
+  tags=''
+  if zone.get('tags'):
+   tags='<div class="kit-zone-tags">'+''.join(f'<span>{text(t)}</span>' for t in bounded(zone['tags'],1,6,'zone tags'))+'</div>'
+  body=f'<p>{text(zone["body"])}</p>' if zone.get('body') else ''
+  items=''
+  if zone.get('items'):
+   cards=[]
+   for item in bounded(zone['items'],1,4,'zone items'):
+    item_body=f'<p>{text(item["body"])}</p>' if item.get('body') else ''
+    cards.append(f'<div class="kit-zone-item"><h4>{text(item["title"])}</h4>{item_body}</div>')
+   items='<div class="kit-zone-items">'+''.join(cards)+'</div>'
+  bullets=''
+  if zone.get('bullets'):
+   bullets='<ul>'+''.join(f'<li>{text(b)}</li>' for b in bounded(zone['bullets'],1,4,'zone bullets'))+'</ul>'
+  kicker=f'<span class="kit-zone-kicker">{text(zone["kicker"])}</span>' if zone.get('kicker') else ''
+  return (
+   f'<article class="kit-zone" data-zone="{side}">{kicker}'
+   f'<h3>{text(zone["title"])}</h3>{body}{tags}{items}{bullets}</article>'
+  )
+ bridge=slide.get('bridge') or {}
+ bridge_html=(
+  f'<div class="kit-zone-bridge"><span class="kit-zone-bridge-label">{text(bridge.get("label","→"))}</span>'
+  + (f'<span class="kit-zone-bridge-caption">{text(bridge["caption"])}</span>' if bridge.get('caption') else '')
+  + '</div>'
+ )
+ checks=''
+ if slide.get('checks'):
+  checks='<ul class="kit-zone-checks">'+''.join(
+   f'<li>{text(c)}</li>' for c in bounded(slide['checks'],2,6,'zone checks')
+  )+'</ul>'
+ return f'<div class="kit-zones"><div class="kit-zone-row">{zone_block("left",left)}{bridge_html}{zone_block("right",right)}</div>{checks}</div>'
+
+def layout_lanes(slide):
+ task=slide.get('task') or {}
+ task_html=''
+ if task.get('title') or task.get('body'):
+  label=f'<span class="kit-lane-task-label">{text(task["label"])}</span>' if task.get('label') else ''
+  title=f'<h3>{text(task["title"])}</h3>' if task.get('title') else ''
+  body=f'<p>{text(task["body"])}</p>' if task.get('body') else ''
+  task_html=f'<aside class="kit-lane-task">{label}{title}{body}</aside>'
+ lanes=bounded(slide['lanes'],2,2,'lanes')
+ lane_html=[]
+ for i,lane in enumerate(lanes):
+  focus=' data-focus="true"' if lane.get('focus') else ''
+  kicker=f'<span class="kit-lane-kicker">{text(lane["kicker"])}</span>' if lane.get('kicker') else ''
+  body=f'<p>{text(lane["body"])}</p>' if lane.get('body') else ''
+  bullets=''
+  if lane.get('bullets'):
+   bullets='<ul>'+''.join(f'<li>{text(b)}</li>' for b in bounded(lane['bullets'],1,5,'lane bullets'))+'</ul>'
+  lane_html.append(
+   f'<article class="kit-lane"{focus}><span class="kit-index">{i+1:02}</span>{kicker}{kit_tag(lane.get("tag"))}'
+   f'<h3>{text(lane["title"])}</h3>{body}{bullets}</article>'
+  )
+ return f'<div class="kit-lanes">{task_html}<div class="kit-lane-row">{"".join(lane_html)}</div></div>'
+
+def layout_stack_board(slide):
+ lead=f'<div class="kit-stack-lead"><span class="kit-stack-word">{text(slide["lead"])}</span>'+(f'<p>{text(slide["leadBody"])}</p>' if slide.get('leadBody') else '')+'</div>' if slide.get('lead') else ''
+ layers=bounded(slide['layers'],2,5,'stack-board layers')
+ layer_html=[]
+ for i,layer in enumerate(layers):
+  cells=[]
+  for item in bounded(layer['items'],1,6,'stack-board layer items'):
+   if isinstance(item,dict) and 'title' in item:
+    sub=f'<span>{text(item["body"])}</span>' if item.get('body') else ''
+    cells.append(f'<div class="kit-stack-cell"><strong>{text(item["title"])}</strong>{sub}</div>')
+   else:
+    cells.append(f'<div class="kit-stack-cell"><strong>{text(item)}</strong></div>')
+  layer_html.append(
+   f'<div class="kit-stack-layer"><h3><span class="kit-index">{i+1:02}</span>{text(layer["label"])}</h3>'
+   f'<div class="kit-stack-cells">{"".join(cells)}</div></div>'
+  )
+ values=''
+ if slide.get('values'):
+  cards=[]
+  for i,val in enumerate(bounded(slide['values'],2,4,'stack-board values')):
+   focus=' data-focus="true"' if val.get('focus') else ''
+   body=f'<p>{text(val["body"])}</p>' if val.get('body') else ''
+   cards.append(
+    f'<article class="kit-stack-value"{focus}><span class="kit-index">{i+1:02}</span>'
+    f'{kit_tag(val.get("tag"))}<h3>{text(val["title"])}</h3>{body}</article>'
+   )
+  values='<div class="kit-stack-values">'+''.join(cards)+'</div>'
+ return f'<div class="kit-stack-board">{lead}<div class="kit-stack-main"><div class="kit-stack-layers">{"".join(layer_html)}</div>{values}</div></div>'
+
 def layout_cover(slide):
  backgrounds={'原山景':'assets/mountains.jpg','云山':'assets/yunshan.png','金沙':'assets/jinsha.png'}
  background=slide.get('background','原山景')
@@ -540,6 +683,10 @@ for _kind,_fn in (
  ('split',layout_split),
  ('panels',layout_panels),
  ('compare-board',layout_compare_board),
+ ('stages',layout_stages),
+ ('zones',layout_zones),
+ ('lanes',layout_lanes),
+ ('stack-board',layout_stack_board),
 ):
  register_layout(_kind,_fn)
 
@@ -605,7 +752,9 @@ needed_scripts=['js/config.js','js/navigation.js','js/presenter-ink.js','js/deck
 needed_styles=['css/styles.css','css/components.css','css/english.css']
 types={s['type'] for s in D['slides']}
 if 'pricing' in types:
- needed_scripts.append('js/pricing-table.js'); needed_scripts.append('js/pricing-boot.js')
+ needs_table=any(s.get('type')=='pricing' and not s.get('families') for s in D['slides'])
+ if needs_table:
+  needed_scripts.append('js/pricing-table.js'); needed_scripts.append('js/pricing-boot.js')
  if 'css/recipes.css' not in needed_styles:needed_styles.append('css/recipes.css')
 if 'scenarios' in types:
  needed_scripts.append('js/scenario-switcher.js')

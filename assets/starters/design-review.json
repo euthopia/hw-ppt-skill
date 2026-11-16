@@ -1,7 +1,7 @@
 {
   "id": "design-review-deck",
   "kind": "design-review",
-  "runtimeVersion": "1.5.7",
+  "runtimeVersion": "1.5.8",
   "meta": {
     "purpose": {
       "zh": "架构 / 方案设计评审",

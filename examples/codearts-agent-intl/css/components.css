@@ -416,6 +416,101 @@
 .thumbnail-preview .kit-cb-nav{display:none}
 .thumbnail-preview .kit-cb-panel,.thumbnail-preview .kit-cb-panels [hidden]{display:block!important}
 
+/* ── Stages — maturity / evolution columns ── */
+.kit-stages{display:grid;gap:14px}
+.kit-stage-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(0,1fr));gap:14px;align-items:stretch}
+.kit-stage{
+  position:relative;min-width:0;padding:18px 16px 20px;
+  border:1px solid var(--line);border-top:var(--rail) solid var(--red);
+  background:var(--paper);border-radius:6px;display:flex;flex-direction:column;
+}
+.kit-stage[data-focus="true"]{background:linear-gradient(180deg,var(--surface-accent) 0%,var(--paper) 42%);border-color:var(--border-accent);box-shadow:var(--shadow-soft)}
+.kit-stage-scope{display:block;margin:0 0 8px;color:var(--muted-soft);font:600 12px/1.3 "Huawei Sans",Arial,sans-serif;letter-spacing:.08em;text-transform:uppercase}
+.kit-stage h3{margin:0 0 8px}
+.kit-stage>p{margin:0 0 10px}
+.kit-stage-value{margin-top:auto!important;padding-top:10px;border-top:1px solid var(--line);color:var(--red)!important;font-weight:600}
+.kit-stage-examples{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.kit-stage-examples span{padding:4px 8px;border:1px solid var(--border-warm);background:var(--surface);font-size:12px;color:var(--muted)}
+.kit-stage-foundation{padding:12px 16px;border:1px solid var(--border-accent);border-left:var(--rail) solid var(--red);background:linear-gradient(90deg,var(--surface-accent) 0%,var(--paper) 50%);display:grid;gap:4px}
+.kit-stage-foundation strong{color:var(--red);font-size:12px;letter-spacing:.1em}
+.kit-stage-foundation p{margin:0;color:var(--note-ink);font-size:var(--type-card-body)}
+
+/* ── Zones — dual deployment theater ── */
+.kit-zones{display:grid;gap:14px}
+.kit-zone-row{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);gap:12px;align-items:stretch}
+.kit-zone{padding:18px 18px 20px;border:1px solid var(--line);background:var(--surface);border-radius:6px;min-width:0}
+.kit-zone[data-zone="left"]{box-shadow:inset 0 var(--rail) 0 var(--compare-neutral)}
+.kit-zone[data-zone="right"]{background:linear-gradient(180deg,var(--surface-accent) 0%,var(--paper) 48%);border-color:var(--border-accent);box-shadow:inset 0 var(--rail) 0 var(--red)}
+.kit-zone-kicker{display:block;margin-bottom:8px;color:var(--red);font:600 12px/1.3 "Huawei Sans",Arial,sans-serif;letter-spacing:.1em}
+.kit-zone h3{margin:0 0 8px}
+.kit-zone>p{margin:0 0 12px}
+.kit-zone-tags{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 12px}
+.kit-zone-tags span{padding:5px 10px;background:var(--paper);border:1px solid var(--line);font-size:12px;color:var(--ink)}
+.kit-zone-items{display:grid;grid-template-columns:repeat(auto-fit,minmax(0,1fr));gap:8px;margin:0 0 10px}
+.kit-zone-item{padding:10px 12px;background:var(--paper);border:1px solid var(--line);border-top:var(--rail) solid var(--red)}
+.kit-zone-item h4{margin:0 0 4px;font-size:var(--type-card-title);line-height:1.3}
+.kit-zone-item p{margin:0;font-size:var(--type-card-body);color:var(--muted)}
+.kit-zone ul{margin:0;padding-left:1.1em;font-size:var(--type-card-body);line-height:var(--lh-scan)}
+.kit-zone-bridge{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;min-width:72px;color:var(--red)}
+.kit-zone-bridge-label{font:600 13px/1.3 "Huawei Sans",Arial,sans-serif;letter-spacing:.04em;text-align:center}
+.kit-zone-bridge-caption{font-size:12px;color:var(--muted);text-align:center;max-width:9em}
+.kit-zone-checks{list-style:none;margin:0;padding:12px 0 0;display:flex;flex-wrap:wrap;gap:10px 22px;border-top:1px solid var(--line)}
+.kit-zone-checks li{position:relative;padding-left:18px;font-size:var(--type-card-body);color:var(--ink)}
+.kit-zone-checks li::before{content:"✓";position:absolute;left:0;color:var(--red);font-weight:700}
+@media (max-width:1100px){
+ .kit-zone-row{grid-template-columns:1fr;gap:10px}
+ .kit-zone-bridge{flex-direction:row;min-width:0;padding:4px 0}
+}
+
+/* ── Lanes — dual process under shared task ── */
+.kit-lanes{display:grid;gap:14px}
+.kit-lane-task{padding:14px 16px;border:1px solid var(--border-accent);border-left:var(--rail) solid var(--red);background:linear-gradient(90deg,var(--surface-accent) 0%,var(--paper) 55%)}
+.kit-lane-task-label{display:block;margin-bottom:6px;color:var(--red);font:600 12px/1.3 "Huawei Sans",Arial,sans-serif;letter-spacing:.1em}
+.kit-lane-task h3{margin:0 0 6px}
+.kit-lane-task p{margin:0;color:var(--muted)}
+.kit-lane-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.kit-lane{padding:18px 16px 20px;border:1px solid var(--line);background:var(--paper);border-top:var(--rail) solid var(--compare-neutral);border-radius:6px;min-width:0}
+.kit-lane[data-focus="true"]{border-top-color:var(--red);border-color:var(--border-accent);background:linear-gradient(180deg,var(--surface-accent) 0%,var(--paper) 45%);box-shadow:var(--shadow-soft)}
+.kit-lane-kicker{display:block;margin-bottom:8px;color:var(--muted-soft);font:600 12px/1.3 "Huawei Sans",Arial,sans-serif;letter-spacing:.08em}
+.kit-lane h3{margin:0 0 8px}
+.kit-lane>p{margin:0 0 10px}
+.kit-lane ul{margin:0;padding-left:1.1em;font-size:var(--type-card-body);line-height:var(--lh-scan)}
+.kit-lane li+li{margin-top:6px}
+
+/* ── Stack board — product stack + values ── */
+.kit-stack-board{display:grid;gap:14px}
+.kit-stack-lead{display:flex;flex-wrap:wrap;align-items:baseline;gap:12px 18px;padding-bottom:4px}
+.kit-stack-word{font:600 clamp(36px,4.2vw,56px)/1.05 "Huawei Sans",Arial,sans-serif;letter-spacing:var(--track-display);color:var(--ink)}
+.kit-stack-lead p{margin:0;max-width:36em;color:var(--muted);font-size:var(--type-card-body)}
+.kit-stack-main{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(240px,.75fr);gap:14px;align-items:start}
+.kit-stack-layers{display:grid;gap:8px}
+.kit-stack-layer{display:grid;grid-template-columns:minmax(120px,24%) minmax(0,1fr);border:1px solid var(--line);background:var(--surface-2);overflow:hidden}
+.kit-stack-layer:first-child{border-color:var(--border-accent);box-shadow:inset var(--rail) 0 0 var(--red);background:linear-gradient(90deg,var(--surface-accent) 0%,var(--surface-2) 40%)}
+.kit-stack-layer h3{margin:0;padding:12px 14px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;background:var(--surface-accent);border-right:1px solid var(--border-warm);font-size:var(--type-layer);line-height:1.3}
+.kit-stack-cells{display:flex;flex-wrap:wrap;gap:8px;padding:10px}
+.kit-stack-cell{flex:1 1 110px;padding:10px 12px;background:var(--paper);border:1px solid var(--line)}
+.kit-stack-cell strong{display:block;font-size:var(--type-layer-cell);color:var(--ink)}
+.kit-stack-cell span{display:block;margin-top:4px;font-size:12px;color:var(--muted);line-height:1.35}
+.kit-stack-values{display:grid;gap:10px}
+.kit-stack-value{padding:16px 14px;border:1px solid var(--line);border-top:var(--rail) solid var(--red);background:var(--paper);border-radius:6px}
+.kit-stack-value[data-focus="true"]{background:linear-gradient(180deg,var(--surface-accent) 0%,var(--paper) 48%);border-color:var(--border-accent);box-shadow:var(--shadow-soft)}
+.kit-stack-value h3{margin:0 0 8px}
+.kit-stack-value p{margin:0;color:var(--muted);font-size:var(--type-card-body)}
+@media (max-width:1100px){.kit-stack-main{grid-template-columns:1fr}}
+
+/* ── Pricing cards grid ── */
+.kit-pricing-cards{display:grid;gap:16px}
+.kit-price-family-label{margin:0 0 10px;font-size:var(--type-card-title);letter-spacing:var(--track-title);color:var(--ink)}
+.kit-price-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(0,1fr));gap:12px}
+.kit-price-card{padding:16px 14px 18px;border:1px solid var(--line);border-top:var(--rail) solid var(--red);background:var(--paper);border-radius:6px;min-width:0}
+.kit-price-card[data-focus="true"]{background:linear-gradient(180deg,var(--surface-accent) 0%,var(--paper) 42%);border-color:var(--border-accent);box-shadow:var(--shadow-soft)}
+.kit-price-card h3{margin:0 0 8px;font-size:var(--type-card-title)}
+.kit-price-card>p{margin:0 0 12px;font-size:var(--type-card-body);color:var(--muted)}
+.kit-price-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(0,1fr));gap:8px;padding-top:10px;border-top:1px solid var(--line)}
+.kit-price-row span{display:block;font-size:11px;letter-spacing:.06em;color:var(--muted-soft);margin-bottom:4px}
+.kit-price-row b{font:600 16px/1.2 "Huawei Sans",Arial,sans-serif;color:var(--ink);font-variant-numeric:tabular-nums}
+.kit-price-note{margin:4px 0 0;font-size:var(--type-card-body);color:var(--muted)}
+
 /* ── Pricing mount ── */
 .kit-pricing{margin-top:4px}
 
@@ -457,6 +552,23 @@
  .slide.active .kit-cb-panel:not([hidden]) .kit-cb-column:nth-child(2){animation-delay:.24s}
  .slide.active .kit-cb-panel:not([hidden]) .kit-cb-column:nth-child(3){animation-delay:.28s}
  .slide.active .kit-cb-panel:not([hidden]) .kit-cb-column:nth-child(4){animation-delay:.32s}
+ .slide.active .kit-stage{animation:kit-enter .4s var(--ease-brief) backwards}
+ .slide.active .kit-stage:nth-child(1){animation-delay:.16s}
+ .slide.active .kit-stage:nth-child(2){animation-delay:.22s}
+ .slide.active .kit-stage:nth-child(3){animation-delay:.28s}
+ .slide.active .kit-stage:nth-child(4){animation-delay:.32s}
+ .slide.active .kit-zone,.slide.active .kit-zone-bridge,.slide.active .kit-lane,.slide.active .kit-lane-task{animation:kit-enter .38s var(--ease-brief) backwards}
+ .slide.active .kit-zone[data-zone="left"]{animation-delay:.16s}
+ .slide.active .kit-zone-bridge{animation-delay:.2s}
+ .slide.active .kit-zone[data-zone="right"]{animation-delay:.24s}
+ .slide.active .kit-lane-task{animation-delay:.14s}
+ .slide.active .kit-lane:nth-child(1){animation-delay:.2s}
+ .slide.active .kit-lane:nth-child(2){animation-delay:.26s}
+ .slide.active .kit-stack-lead,.slide.active .kit-stack-layer,.slide.active .kit-stack-value,.slide.active .kit-price-card{animation:kit-enter .36s var(--ease-brief) backwards}
+ .slide.active .kit-stack-lead{animation-delay:.14s}
+ .slide.active .kit-stack-layer:nth-child(1),.slide.active .kit-stack-value:nth-child(1),.slide.active .kit-price-card:nth-child(1){animation-delay:.18s}
+ .slide.active .kit-stack-layer:nth-child(2),.slide.active .kit-stack-value:nth-child(2),.slide.active .kit-price-card:nth-child(2){animation-delay:.22s}
+ .slide.active .kit-stack-layer:nth-child(3),.slide.active .kit-stack-value:nth-child(3),.slide.active .kit-price-card:nth-child(3){animation-delay:.26s}
  .slide.active .kit-metrics article{animation:kit-enter .4s var(--ease-brief) backwards}
  .slide.active .kit-metrics article:nth-child(1){animation-delay:.18s}
  .slide.active .kit-metrics article:nth-child(2){animation-delay:.22s}
@@ -513,6 +625,15 @@
 .thumbnail-preview .kit-tabs-panels article,
 .thumbnail-preview .kit-cb-nav,
 .thumbnail-preview .kit-cb-column,
+.thumbnail-preview .kit-stage,
+.thumbnail-preview .kit-zone,
+.thumbnail-preview .kit-zone-bridge,
+.thumbnail-preview .kit-lane,
+.thumbnail-preview .kit-lane-task,
+.thumbnail-preview .kit-stack-lead,
+.thumbnail-preview .kit-stack-layer,
+.thumbnail-preview .kit-stack-value,
+.thumbnail-preview .kit-price-card,
 .thumbnail-preview .kit-metrics article,
 .thumbnail-preview .kit-layer,
 .thumbnail-preview .kit-compare article,
@@ -536,7 +657,8 @@
  .controls{display:none!important}
  .kit-agenda-item,.kit-callout,.kit-card,.kit-panel,.kit-formula-item,.kit-formula-parts,.kit-tree-root,.kit-tree-branch,
  .kit-split-left,.kit-split-right,.kit-summary,.kit-flow article,.kit-tabs-list,.kit-tabs-panels article,
- .kit-cb-nav,.kit-cb-column,
+ .kit-cb-nav,.kit-cb-column,.kit-stage,.kit-zone,.kit-zone-bridge,.kit-lane,.kit-lane-task,
+ .kit-stack-lead,.kit-stack-layer,.kit-stack-value,.kit-price-card,
  .kit-metrics article,.kit-layer,.kit-compare article,.kit-quote,.kit-quote-attr,.kit-timeline article,
  .kit-ba-divider,.kit-before-after .kit-ba-before,.kit-before-after .kit-ba-after{animation:none!important}
 }
@@ -566,6 +688,15 @@
  .slide.active .kit-tabs-panels article,
  .slide.active .kit-cb-nav,
  .slide.active .kit-cb-column,
+ .slide.active .kit-stage,
+ .slide.active .kit-zone,
+ .slide.active .kit-zone-bridge,
+ .slide.active .kit-lane,
+ .slide.active .kit-lane-task,
+ .slide.active .kit-stack-lead,
+ .slide.active .kit-stack-layer,
+ .slide.active .kit-stack-value,
+ .slide.active .kit-price-card,
  .slide.active .kit-metrics article,
  .slide.active .kit-layer,
  .slide.active .kit-compare article,

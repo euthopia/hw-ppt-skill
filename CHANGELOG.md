@@ -3,6 +3,22 @@
 All notable changes to the Huawei HTML→PPT deck runtime are documented here.
 Format follows a lightweight Keep-a-Changelog style. HTML remains the system of record; PPTX is Office interop.
 
+## 1.5.8 — 2026-11-16
+
+### Added
+
+- Full composition absorb from boardroom reference grammar (structure only):
+  - **`stages`** — maturity / evolution columns + foundation rail
+  - **`zones`** — dual-zone deployment theater + bridge + check strip
+  - **`lanes`** — shared task + dual process lanes
+  - **`stack-board`** — product stack layers + value column (optional lead word)
+- **`pricing.families`** card-grid mode (SSR) alongside classic `rows` table mode.
+
+### Changed
+
+- Default `blank` teaching arc rewritten around the new compositions; template showcase expanded.
+- Docs / archetype guidance; runtime pin **1.5.8**.
+
 ## 1.5.7 — 2026-11-16
 
 ### Added

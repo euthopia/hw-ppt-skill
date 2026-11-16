@@ -2,7 +2,7 @@
 
 **An Agent Skill for Huawei-branded bilingual HTML→PPT decks.** You supply content; the agent picks a deck archetype, organizes chapters, picks layouts, generates Chinese/English pages, wires light motion, runs layout checks, and builds deliverables — including **editable PPTX** when asked.
 
-Skill **1.5.7** · canvas runtime **1.5.7** · see [CHANGELOG.md](CHANGELOG.md)
+Skill **1.5.8** · canvas runtime **1.5.8** · see [CHANGELOG.md](CHANGELOG.md)
 
 Built for product briefings, weekly/status reports, architecture design reviews, project milestone decks, workshops, comparisons, packaging, customer cases, and live demos.
 
@@ -22,7 +22,7 @@ Built for product briefings, weekly/status reports, architecture design reviews,
 ## Features
 
 - **Brand & layout** — Huawei logo, white stage, red accent `#c7000b`, 16:9 canvas, shared header/footer; Yunshan / Jinsha / mountain covers.
-- **Layout kit** — cover, cards, metrics, architecture, comparison, **tree**, **formula**, **split**, **panels**, **compare-board**, **before-after**, **scrollable tables**, workflow, image, pricing, scenarios, timeline, callouts, **agenda**, **quote**, **tabs**, custom, closing; optional **summary / tag / focus**.
+- **Layout kit** — cover, cards, metrics, architecture, comparison, **tree**, **formula**, **split**, **panels**, **compare-board**, **stages**, **zones**, **lanes**, **stack-board**, **before-after**, **scrollable tables**, workflow, image, pricing (table / **card families**), scenarios, timeline, callouts, **agenda**, **quote**, **tabs**, custom, closing; optional **summary / tag / focus**.
 - **Bilingual** — one-click ZH/EN, English typography sheet, remembered preference, bilingual TOC/controls.
 - **Multi-purpose archetypes** — optional `deck.kind` (`product-briefing` / `status-report` / `design-review` / `project-report` / `workshop`) plus `meta.purpose`; see starters below.
 - **Presenter tools** — keyboard/touch nav, fullscreen, chapter jump, thumbnail TOC, position memory, **presenter notes** (`N` / `?presenter=1`), **laser** (`L`), **marker/eraser** (`P`/`D`/`E`, `⇧E` clears slide), **numbering marks** (`B`, click to stamp 1/2/3…), **hover tool rail** (right edge; parallel to keys), **shortcut cheat sheet** (`?`), **named sales cuts** (`?cut=cio`).
@@ -73,7 +73,7 @@ npm test
 
 | Starter | Contents |
 | --- | --- |
-| `--starter blank` | Product briefing arc: cover → agenda → tree → value cards → formula → split matrix → panels → compare-board → next → thank-you (`kind: product-briefing`) |
+| `--starter blank` | Product briefing arc: cover → agenda → tree → stages → value → zones → stack-board → pricing cards → compare-board → lanes → next → thank-you (`kind: product-briefing`) |
 | `--starter status-report` | Weekly/status: agenda → metrics → timeline → risks → actions → thank-you |
 | `--starter design-review` | Design review: context → architecture → before/after → options → opens → thank-you |
 | `--starter project-report` | Project stage: metrics → milestones → delivery → risks → actions → thank-you |
@@ -156,7 +156,7 @@ hw-ppt-skill/
 ├── scripts/               init, demo build, audit, runtime sync
 ├── examples/              Full sample decks (CodeArts, MaaS, …)
 ├── assets/
-│   ├── template/          Full presentation project template (runtime 1.5.7)
+│   ├── template/          Full presentation project template (runtime 1.5.8)
 │   ├── starters/          blank · status-report · design-review ·
 │   │                      project-report · workshop · thank-you
 │   └── recipes/           Optional interactive refs + deck-archetypes guide

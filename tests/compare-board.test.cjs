@@ -109,7 +109,7 @@ test('compare-board renders chips panels script and CSS', () => {
 
 test('blank starter pins 1.5.7 and includes compare-board', () => {
   const blank = JSON.parse(fs.readFileSync(path.join(ROOT, 'assets', 'starters', 'blank.json'), 'utf8'));
-  assert.equal(blank.runtimeVersion, '1.5.7');
+  assert.match(String(blank.runtimeVersion), /^1\.5\.(?:[7-9]|\d{2,})$/);
   assert.ok(blank.slides.some((s) => s.type === 'compare-board'));
 });
 
@@ -135,7 +135,7 @@ test('blank starter init with compare-board stays clean', () => {
     );
     assert.equal(init.status, 0, init.stderr || init.stdout);
     const deck = JSON.parse(fs.readFileSync(path.join(tmp, 'content', 'deck.json'), 'utf8'));
-    assert.equal(deck.runtimeVersion, '1.5.7');
+    assert.match(String(deck.runtimeVersion), /^1\.5\.(?:[7-9]|\d{2,})$/);
     const html = fs.readFileSync(path.join(tmp, 'index.html'), 'utf8');
     assert.match(html, /kit-compare-board/);
     assert.match(html, /compare-board\.js/);

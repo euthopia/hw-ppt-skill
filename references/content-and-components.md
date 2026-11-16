@@ -49,13 +49,17 @@
 | split | left: {title?, groups: [{label, items[]}]}, right: {headers, rows} 或 marks | 左分类 / 右矩阵或对照表 |
 | panels | panels: [{title, body?, tag?, bullets?, focus?}] | 2–4 运营/看板瓷砖 |
 | compare-board | presets: [{id?, label, columns: [{title, body?, tag?, focus?, metrics?, bullets?}]}] | 2–4 预设芯片切换并排方案列；无现场计算；PPTX 导出第一预设 |
+| stages | stages: [{scope?, title, body?, value?, examples?, tag?, focus?}], foundation? | 2–4 成熟度阶段 + 可选 foundation 轨 |
+| zones | left/right: {kicker?, title, body?, tags?, items?, bullets?}, bridge?, checks? | 双区部署剧场 + 桥接说明 + 检查条 |
+| lanes | task?: {label?, title?, body?}, lanes: [{kicker?, title, body?, bullets?, tag?, focus?}] | 共享任务 + 恰好两车道流程对照 |
+| stack-board | lead?, layers: [{label, items[]}], values? | 左侧产品分层 + 右侧价值列；items 可为文字或 {title,body} |
 | table | headers: [文字], rows: [[文字]], note | 2–6 列、1–12 行；可滚动粘性表头；套餐、容量、价格或对照 |
 | timeline | events: [{when, title, body}] | 2–8 个里程碑；销售节奏 / 落地路径 |
 | callouts | items: [{tone, title, body, tag?, focus?}] | 2–4 个要点；tone 为 info / warn / accent；可选 tag / focus |
 | workflow | steps: [{title, body}], result | 3–5 步，自动轻量高亮 |
 | image | image, alt, caption, body | 本地 assets 图片 + 说明；不裁切产品图 |
 | custom | fragment, translations | content/name.html 片段，扩展架构或互动页面；禁止 `<script>`、内联事件与 `javascript:` |
-| pricing | rows, labels | 一等公民价格表；自动注入 pricing 脚本与 recipes.css |
+| pricing | rows+labels **或** families[{label, cards[{name, body?, tag?, focus?, input?, cacheInput?, output?}]}] | 经典价表（JS）或卡片族网格（SSR）；自动注入 recipes.css |
 | scenarios | scenarios: [{id,label,body,bullets?}] | 一等公民手动场景切换；自动注入 scenario-switcher |
 | agenda | items: [{label, time?}] | 2–8 条议程；可选时长 |
 | quote | quote, attribution, role? | 客户证言 / 证明页 |
