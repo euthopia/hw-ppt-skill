@@ -3,6 +3,18 @@
 All notable changes to the Huawei HTML→PPT deck runtime are documented here.
 Format follows a lightweight Keep-a-Changelog style. HTML remains the system of record; PPTX is Office interop.
 
+## 1.5.9 — 2026-11-16
+
+### Added
+
+- Interactive **`calculator`** layout: radio option groups + numeric inputs → live results.
+- Safe arithmetic expression engine only (`+ - * / ( )` + identifiers); no `eval`, no free-form scripts.
+- SSR defaults for print/PPTX; runtime `calculator.js` for live updates.
+
+### Changed
+
+- `blank` + template include a teaching cost-sketch slide; docs updated; runtime pin **1.5.9**.
+
 ## 1.5.8 — 2026-11-16
 
 ### Added

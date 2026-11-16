@@ -1,7 +1,7 @@
 {
   "id": "workshop-deck",
   "kind": "workshop",
-  "runtimeVersion": "1.5.8",
+  "runtimeVersion": "1.5.9",
   "meta": {
     "purpose": {
       "zh": "工作坊 / 培训引导",

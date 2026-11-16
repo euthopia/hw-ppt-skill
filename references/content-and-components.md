@@ -53,6 +53,7 @@
 | zones | left/right: {kicker?, title, body?, tags?, items?, bullets?}, bridge?, checks? | 双区部署剧场 + 桥接说明 + 检查条 |
 | lanes | task?: {label?, title?, body?}, lanes: [{kicker?, title, body?, bullets?, tag?, focus?}] | 共享任务 + 恰好两车道流程对照 |
 | stack-board | lead?, layers: [{label, items[]}], values? | 左侧产品分层 + 右侧价值列；items 可为文字或 {title,body} |
+| calculator | groups[{label, options[{id,label,vars}]}], inputs[{id,label,default,...}], results[{label,expr,format?,focus?}], currency? | 选项 + 数量的安全算术测算；expr 仅支持 + - * / () 与标识符；PPTX 导出默认值 |
 | table | headers: [文字], rows: [[文字]], note | 2–6 列、1–12 行；可滚动粘性表头；套餐、容量、价格或对照 |
 | timeline | events: [{when, title, body}] | 2–8 个里程碑；销售节奏 / 落地路径 |
 | callouts | items: [{tone, title, body, tag?, focus?}] | 2–4 个要点；tone 为 info / warn / accent；可选 tag / focus |

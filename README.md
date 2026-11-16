@@ -2,7 +2,7 @@
 
 **制作华为风格 HTML→PPT 文稿的 Agent Skill。** 你提供内容，Agent 负责选择文稿类型、组织章节、选择版式、生成中英双语页面、配置轻量动效、检查排版并构建交付文件；需要时导出**可编辑 PPTX**。
 
-当前技能包 **1.5.8**（HTML 运行时 **1.5.8**）。适用于产品简报、周报/状态同步、架构设计评审、项目里程碑汇报、培训工作坊，以及方案对比、套餐说明、业务案例和 Demo。
+当前技能包 **1.5.9**（HTML 运行时 **1.5.9**）。适用于产品简报、周报/状态同步、架构设计评审、项目里程碑汇报、培训工作坊，以及方案对比、套餐说明、业务案例和 Demo。
 
 [在线体验：封面＋空白页](https://huawei-product-slides-demo.leonguo08.workers.dev/) · [致谢页预览图](demo/thank-you-preview.png) · [变更记录](CHANGELOG.md) · [English README](README.en.md)
 
@@ -20,7 +20,7 @@
 ## 功能
 
 - **品牌与排版**：华为 Logo、白底与红色强调 `#c7000b`、16:9 画布、统一页头页脚；可选择云山、金沙和山景封面。
-- **版式套件**：封面、卡片、指标、分层架构、双列对比、**路径树 tree**、**组成公式 formula**、**左右对照 split**、**运营面板 panels**、**方案板 compare-board**、**成熟度 stages**、**双区 zones**、**双车道 lanes**、**主栈 stack-board**、**前后对照 before-after**、**可滚动粘性表头表格**、流程、图片、定价（表 / **卡片族**）、场景、**时间线**、**要点提示**、**议程**、**引用证言**、**页签 tabs**、自定义及致谢页；可选 **summary / tag / focus**。
+- **版式套件**：封面、卡片、指标、分层架构、双列对比、**路径树 tree**、**组成公式 formula**、**左右对照 split**、**运营面板 panels**、**方案板 compare-board**、**测算 calculator**、**成熟度 stages**、**双区 zones**、**双车道 lanes**、**主栈 stack-board**、**前后对照 before-after**、**可滚动粘性表头表格**、流程、图片、定价（表 / **卡片族**）、场景、**时间线**、**要点提示**、**议程**、**引用证言**、**页签 tabs**、自定义及致谢页；可选 **summary / tag / focus**。
 - **中英双语**：一键切换、英文独立样式、语言偏好记忆，支持双语目录和控件。
 - **多文稿类型**：可选 `deck.kind`（`product-briefing` / `status-report` / `design-review` / `project-report` / `workshop`）与 `meta.purpose`；起始模板见下方。
 - **演示工具**：键盘/触控翻页、全屏、章节跳转、缩略图目录、位置记忆、**演示备注**（`N` / `?presenter=1`）、**激光笔**（`L`）、**马克笔/橡皮**（`P`/`D`/`E`，`⇧E` 清本页）、**编号标记**（`B`，点击盖 1/2/3…）、**悬停工具栏**（右侧边缘，与快捷键并行）、**快捷键对照**（`?`）、**命名销售切片**（`?cut=cio`）。
@@ -77,7 +77,7 @@ npm test
 
 | 起始模板 | 内容 |
 | --- | --- |
-| `--starter blank` | 产品简报弧线：封面→议程→路径树→成熟度→价值→双区部署→主栈→套餐卡片→方案板→双车道→下一步→致谢（`kind: product-briefing`） |
+| `--starter blank` | 产品简报弧线：封面→议程→路径树→成熟度→价值→双区部署→主栈→套餐卡片→方案板→测算→双车道→下一步→致谢（`kind: product-briefing`） |
 | `--starter status-report` | 状态周报：议程→指标→时间线→风险→行动表→致谢 |
 | `--starter design-review` | 设计评审：背景→架构→前后对照→取舍→待确认项→致谢 |
 | `--starter project-report` | 项目阶段汇报：指标→里程碑→交付节奏→风险→行动→致谢 |
@@ -186,7 +186,7 @@ hw-ppt-skill/
 ├── scripts/               项目初始化、Demo 构建、运行时同步
 ├── examples/              CodeArts / MaaS 等完整样例稿
 ├── assets/
-│   ├── template/          完整演示项目模板（runtime 1.5.8）
+│   ├── template/          完整演示项目模板（runtime 1.5.9）
 │   ├── starters/          blank · status-report · design-review ·
 │   │                      project-report · workshop · thank-you
 │   └── recipes/           可选交互组件 + deck-archetypes 指南

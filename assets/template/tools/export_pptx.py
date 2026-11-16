@@ -380,6 +380,19 @@ def slide_lines(slide: dict, lang: str) -> list[str]:
             lines.append(f'{pick(layer.get("label"), lang)}: {", ".join(cell_bits)}')
         for i, val in enumerate(slide.get('values') or [], 1):
             lines.append(f'{i:02}. {pick(val.get("title"), lang)} — {pick(val.get("body"), lang)}')
+    elif kind == 'calculator':
+        for group in slide.get('groups') or []:
+            opts = group.get('options') or []
+            first = opts[0] if opts else {}
+            lines.append(f'{pick(group.get("label"), lang)}: {pick(first.get("label"), lang)}')
+        for inp in slide.get('inputs') or []:
+            unit = pick(inp.get('unit'), lang)
+            chunk = f'{pick(inp.get("label"), lang)} = {inp.get("default", 0)}'
+            lines.append(chunk + (f' {unit}' if unit else ''))
+        for res in slide.get('results') or []:
+            lines.append(f'{pick(res.get("label"), lang)} ← {res.get("expr", "")}')
+        if slide.get('note'):
+            lines.append(pick(slide['note'], lang))
     elif kind == 'closing':
         return lines
     elif kind == 'custom':

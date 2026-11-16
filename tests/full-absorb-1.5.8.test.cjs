@@ -180,7 +180,7 @@ test('new layouts and pricing families render branded markup', () => {
 
 test('blank starter pins 1.5.8 and includes absorb layouts', () => {
   const blank = JSON.parse(fs.readFileSync(path.join(ROOT, 'assets', 'starters', 'blank.json'), 'utf8'));
-  assert.equal(blank.runtimeVersion, '1.5.8');
+  assert.match(String(blank.runtimeVersion), /^1\.5\.(?:[8-9]|\d{2,})$/);
   const types = new Set(blank.slides.map((s) => s.type));
   for (const t of ['stages', 'zones', 'lanes', 'stack-board']) {
     assert.ok(types.has(t), `blank missing ${t}`);

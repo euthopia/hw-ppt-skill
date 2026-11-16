@@ -1,7 +1,7 @@
 {
   "id": "product-deck-example",
   "kind": "product-briefing",
-  "runtimeVersion": "1.5.8",
+  "runtimeVersion": "1.5.9",
   "meta": {
     "purpose": {
       "zh": "模板示例：企业简报结构与版式",
@@ -1521,6 +1521,124 @@
           }
         }
       ]
+    },
+    {
+      "type": "calculator",
+      "id": "cost-calc",
+      "section": {
+        "zh": "方案与节奏",
+        "en": "Solution & cadence"
+      },
+      "title": {
+        "zh": "按场景测算示意成本",
+        "en": "Scenario cost sketch"
+      },
+      "subtitle": {
+        "zh": "选项 + 数量 → 合计；无任意脚本表达式",
+        "en": "Options + quantities → total; no arbitrary scripts"
+      },
+      "eyebrow": "CALCULATOR",
+      "currency": "USD",
+      "groups": [
+        {
+          "id": "plan",
+          "label": {
+            "zh": "测算方案",
+            "en": "Calc plan"
+          },
+          "options": [
+            {
+              "id": "standard",
+              "label": {
+                "zh": "测算标准包",
+                "en": "Calc standard"
+              },
+              "vars": {
+                "base": 100,
+                "rate": 12
+              }
+            },
+            {
+              "id": "extended",
+              "label": {
+                "zh": "测算扩展包",
+                "en": "Calc extended"
+              },
+              "vars": {
+                "base": 180,
+                "rate": 18
+              }
+            }
+          ]
+        }
+      ],
+      "inputs": [
+        {
+          "id": "seats",
+          "label": {
+            "zh": "测算席位数",
+            "en": "Calc seats"
+          },
+          "default": 10,
+          "min": 1,
+          "max": 500,
+          "step": 1,
+          "unit": {
+            "zh": "席位单位",
+            "en": "seat units"
+          }
+        },
+        {
+          "id": "months",
+          "label": {
+            "zh": "测算月数",
+            "en": "Calc months"
+          },
+          "default": 3,
+          "min": 1,
+          "max": 36,
+          "step": 1,
+          "unit": {
+            "zh": "月份单位",
+            "en": "month units"
+          }
+        }
+      ],
+      "results": [
+        {
+          "id": "monthly",
+          "label": {
+            "zh": "测算月费用",
+            "en": "Calc monthly"
+          },
+          "expr": "base + seats * rate",
+          "format": "currency"
+        },
+        {
+          "id": "total",
+          "label": {
+            "zh": "测算周期合计",
+            "en": "Calc period total"
+          },
+          "expr": "(base + seats * rate) * months",
+          "format": "currency",
+          "focus": true
+        }
+      ],
+      "note": {
+        "zh": "示意数字仅用于教学；正式报价以当前项目口径为准。",
+        "en": "Sketch numbers for teaching only; official quotes follow the current project."
+      },
+      "summary": {
+        "title": {
+          "zh": "测算用法",
+          "en": "Calc how-to"
+        },
+        "body": {
+          "zh": "现场只改选项与数量；公式在 deck.json 里预先写死。",
+          "en": "Change options and quantities live; keep formulas pre-authored in deck.json."
+        }
+      }
     },
     {
       "type": "callouts",

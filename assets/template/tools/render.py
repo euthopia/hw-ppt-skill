@@ -623,6 +623,144 @@ def layout_stack_board(slide):
   values='<div class="kit-stack-values">'+''.join(cards)+'</div>'
  return f'<div class="kit-stack-board">{lead}<div class="kit-stack-main"><div class="kit-stack-layers">{"".join(layer_html)}</div>{values}</div></div>'
 
+_CALC_IDENT=re.compile(r'^[a-z][a-z0-9_]*$')
+_CALC_TOKEN=re.compile(r'\s*([-+]?(?:\d+(?:\.\d*)?|\.\d+)(?:[eE][-+]?\d+)?|[a-z][a-z0-9_]*|[+\-*/()])\s*')
+
+def calc_safe_eval(expr,env):
+ if not isinstance(expr,str) or not expr.strip():raise ValueError('calculator expr must be a non-empty string')
+ tokens=[]; pos=0
+ while pos<len(expr):
+  m=_CALC_TOKEN.match(expr,pos)
+  if not m:raise ValueError('Invalid calculator expression near: '+expr[pos:pos+12])
+  tokens.append(m.group(1)); pos=m.end()
+ if not tokens:raise ValueError('Empty calculator expression')
+ i=0
+ def peek():return tokens[i] if i<len(tokens) else None
+ def take(expected=None):
+  nonlocal i
+  if i>=len(tokens):raise ValueError('Unexpected end of calculator expression')
+  tok=tokens[i]
+  if expected is not None and tok!=expected:raise ValueError('Expected '+expected+' in calculator expression')
+  i+=1; return tok
+ def parse_expr():
+  value=parse_term()
+  while peek() in ('+','-'):
+   op=take(); rhs=parse_term()
+   value=value+rhs if op=='+' else value-rhs
+  return value
+ def parse_term():
+  value=parse_factor()
+  while peek() in ('*','/'):
+   op=take(); rhs=parse_factor()
+   if op=='*':value=value*rhs
+   else:
+    if rhs==0:raise ValueError('Division by zero in calculator expression')
+    value=value/rhs
+  return value
+ def parse_factor():
+  tok=peek()
+  if tok=='(':
+   take('('); value=parse_expr(); take(')'); return value
+  if tok in ('+','-'):
+   sign=take(); value=parse_factor(); return value if sign=='+' else -value
+  take()
+  if _CALC_IDENT.match(tok):
+   if tok not in env:raise ValueError('Unknown calculator identifier: '+tok)
+   return float(env[tok])
+  return float(tok)
+ value=parse_expr()
+ if i!=len(tokens):raise ValueError('Trailing tokens in calculator expression')
+ return float(value)
+
+def calc_format_value(value,kind='number',currency=''):
+ if kind=='currency':
+  prefix=(currency+' ') if currency else ''
+  return f'{prefix}{value:,.2f}'
+ if abs(value-round(value))<1e-9:return str(int(round(value)))
+ return f'{value:.4g}'
+
+def layout_calculator(slide):
+ groups=bounded(slide.get('groups') or [],1,3,'calculator groups')
+ inputs=bounded(slide.get('inputs') or [],1,4,'calculator inputs')
+ results=bounded(slide['results'],1,4,'calculator results')
+ currency=slide.get('currency') or ''
+ if currency and not isinstance(currency,str):raise ValueError('calculator.currency must be a string')
+ env={}
+ group_html=[]
+ for gi,group in enumerate(groups):
+  gid=group.get('id') or f'group-{gi+1}'
+  if not _CALC_IDENT.match(gid):raise ValueError('calculator group id must be a lowercase identifier')
+  options=bounded(group['options'],2,5,'calculator options')
+  for opt in options:
+   oid=opt.get('id')
+   if not isinstance(oid,str) or not _CALC_IDENT.match(oid):raise ValueError('calculator option id must be a lowercase identifier')
+   vars_map=opt.get('vars') or {}
+   if not isinstance(vars_map,dict) or not vars_map:raise ValueError('calculator option requires vars')
+   for key,val in vars_map.items():
+    if not _CALC_IDENT.match(key):raise ValueError('calculator var id must be a lowercase identifier')
+    if not isinstance(val,(int,float)) or isinstance(val,bool):raise ValueError('calculator vars must be numbers')
+  for key,val in (options[0].get('vars') or {}).items():
+   if key in env:raise ValueError('Duplicate calculator var across groups: '+key)
+   env[key]=float(val)
+  radios=[]
+  for oi,opt in enumerate(options):
+   checked=' checked' if oi==0 else ''
+   radios.append(
+    f'<label class="kit-calc-option"><input type="radio" name="calc-{html.escape(gid,quote=True)}" '
+    f'value="{html.escape(opt["id"],quote=True)}" data-calc-group="{html.escape(gid,quote=True)}" '
+    f'data-calc-vars="{html.escape(json.dumps(opt.get("vars") or {},ensure_ascii=False),quote=True)}"{checked}>'
+    f'<span>{text(opt["label"])}</span></label>'
+   )
+  group_html.append(
+   f'<fieldset class="kit-calc-group" data-calc-group-root="{html.escape(gid,quote=True)}">'
+   f'<legend>{text(group["label"])}</legend><div class="kit-calc-options">{"".join(radios)}</div></fieldset>'
+  )
+ input_html=[]
+ for inp in inputs:
+  iid=inp.get('id')
+  if not isinstance(iid,str) or not _CALC_IDENT.match(iid):raise ValueError('calculator input id must be a lowercase identifier')
+  if iid in env:raise ValueError('calculator input id conflicts with option vars: '+iid)
+  default=inp.get('default',0)
+  if not isinstance(default,(int,float)) or isinstance(default,bool):raise ValueError('calculator input default must be a number')
+  env[iid]=float(default)
+  min_attr=f' min="{inp["min"]}"' if isinstance(inp.get('min'),(int,float)) else ''
+  max_attr=f' max="{inp["max"]}"' if isinstance(inp.get('max'),(int,float)) else ''
+  step_attr=f' step="{inp["step"]}"' if isinstance(inp.get('step'),(int,float)) else ' step="any"'
+  unit=f'<span class="kit-calc-unit">{text(inp["unit"])}</span>' if inp.get('unit') else ''
+  input_html.append(
+   f'<label class="kit-calc-input"><span class="kit-calc-input-label">{text(inp["label"])}</span>'
+   f'<span class="kit-calc-input-control"><input type="number" data-calc-input="{html.escape(iid,quote=True)}" '
+   f'value="{default}"{min_attr}{max_attr}{step_attr}>{unit}</span></label>'
+  )
+ result_html=[]
+ for res in results:
+  rid=res.get('id') or 'result'
+  if not isinstance(rid,str) or not _CALC_IDENT.match(rid):raise ValueError('calculator result id must be a lowercase identifier')
+  expr=res.get('expr')
+  fmt=res.get('format','number')
+  if fmt not in ('number','currency'):raise ValueError('calculator result format must be number or currency')
+  value=calc_safe_eval(expr,env)
+  focus=' data-focus="true"' if res.get('focus') else ''
+  result_html.append(
+   f'<article class="kit-calc-result"{focus} data-calc-result="{html.escape(rid,quote=True)}" '
+   f'data-calc-expr="{html.escape(expr,quote=True)}" data-calc-format="{html.escape(fmt,quote=True)}">'
+   f'<span class="kit-calc-result-label">{text(res["label"])}</span>'
+   f'<strong data-calc-value>{html.escape(calc_format_value(value,fmt,currency),quote=True)}</strong></article>'
+  )
+ note=f'<p class="kit-calc-note">{text(slide["note"])}</p>' if slide.get('note') else ''
+ payload={
+  'currency':currency,
+  'groups':[{'id':g.get('id') or f'group-{i+1}','options':[{'id':o['id'],'vars':o.get('vars') or {}} for o in g['options']]} for i,g in enumerate(groups)],
+  'inputs':[{'id':inp['id'],'default':inp.get('default',0)} for inp in inputs],
+  'results':[{'id':r.get('id') or 'result','expr':r['expr'],'format':r.get('format','number')} for r in results],
+ }
+ return (
+  '<div class="kit-calculator" data-calculator-root data-controller="calculator" '
+  f'data-calculator-config="{html.escape(json.dumps(payload,ensure_ascii=False),quote=True)}">'
+  f'<div class="kit-calc-controls">{"".join(group_html)}<div class="kit-calc-inputs">{"".join(input_html)}</div></div>'
+  f'<div class="kit-calc-results">{"".join(result_html)}</div>{note}</div>'
+ )
+
 def layout_cover(slide):
  backgrounds={'原山景':'assets/mountains.jpg','云山':'assets/yunshan.png','金沙':'assets/jinsha.png'}
  background=slide.get('background','原山景')
@@ -687,6 +825,7 @@ for _kind,_fn in (
  ('zones',layout_zones),
  ('lanes',layout_lanes),
  ('stack-board',layout_stack_board),
+ ('calculator',layout_calculator),
 ):
  register_layout(_kind,_fn)
 
@@ -764,6 +903,9 @@ if 'tabs' in types:
  if 'css/recipes.css' not in needed_styles:needed_styles.append('css/recipes.css')
 if 'compare-board' in types:
  needed_scripts.append('js/compare-board.js')
+ if 'css/recipes.css' not in needed_styles:needed_styles.append('css/recipes.css')
+if 'calculator' in types:
+ needed_scripts.append('js/calculator.js')
  if 'css/recipes.css' not in needed_styles:needed_styles.append('css/recipes.css')
 
 config={'id':D['id'],'chapters':chapters,'runtimeVersion':runtime_version,'cuts':cuts}
